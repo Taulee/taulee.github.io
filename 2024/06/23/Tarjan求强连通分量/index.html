@@ -16,15 +16,15 @@
   <meta name="author" content="TauLee">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+    <meta name="description" content="重温Tarjan, 网上看了许多博客感觉都讲的不清楚. 故传上来自己的笔记, 希望帮到大家. 提到的一些概念可以参考 oi wiki, 代码也是 oi wiki 的, 因为我不认为我能写出比大佬更好的代码了.  强连通分量: 有向图的最大强连通子图 ( 有向图中任意两点可达 )  Tarjan  对每个结点维护:  dfn[x]: 当前节点的 dfs 序.  low[x]: x 向下搜索能到达的最">
 <meta property="og:type" content="article">
-<meta property="og:title" content="helle world">
-<meta property="og:url" content="http://example.com/2024/06/22/hello-world/index.html">
+<meta property="og:title" content="Tarjan 求有向图的强连通分量">
+<meta property="og:url" content="http://example.com/2024/06/23/Tarjan%E6%B1%82%E5%BC%BA%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F/index.html">
 <meta property="og:site_name" content="TauLee&#39;s Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="重温Tarjan, 网上看了许多博客感觉都讲的不清楚. 故传上来自己的笔记, 希望帮到大家. 提到的一些概念可以参考 oi wiki, 代码也是 oi wiki 的, 因为我不认为我能写出比大佬更好的代码了.  强连通分量: 有向图的最大强连通子图 ( 有向图中任意两点可达 )  Tarjan  对每个结点维护:  dfn[x]: 当前节点的 dfs 序.  low[x]: x 向下搜索能到达的最">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-06-22T14:47:25.526Z">
-<meta property="article:modified_time" content="2024-06-22T15:06:10.983Z">
+<meta property="article:published_time" content="2024-06-23T03:11:16.997Z">
+<meta property="article:modified_time" content="2024-06-23T03:15:28.729Z">
 <meta property="article:author" content="TauLee">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>helle world - TauLee&#39;s Blog</title>
+  <title>Tarjan 求有向图的强连通分量 - TauLee&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -213,7 +213,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">helle world</span>
+            <span id="subtitle">Tarjan 求有向图的强连通分量</span>
           
         </div>
 
@@ -229,8 +229,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-06-22 22:47" pubdate>
-          2024年6月22日
+        <time datetime="2024-06-23 11:11" pubdate>
+          2024年6月23日
         </time>
       </span>
     
@@ -241,7 +241,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          18 字
+          674 字
         
       </span>
     
@@ -301,31 +301,77 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">helle world</h1>
+            <h1 id="seo-header">Tarjan 求有向图的强连通分量</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
+                <p>重温Tarjan, 网上看了许多博客感觉都讲的不清楚. 故传上来自己的笔记, 希望帮到大家.</p>
+<p>提到的一些概念可以参考 oi wiki, 代码也是 oi wiki 的, 因为我不认为我能写出比大佬更好的代码了.</p>
+<hr>
+<p><strong>强连通分量:</strong> 有向图的最大强连通子图 ( 有向图中任意两点可达 )</p>
+<ul>
+<li><p><strong>Tarjan</strong></p>
+<ol>
+<li><p>对每个结点维护:</p>
+<ul>
+<li><p><code>dfn[x]</code>: 当前节点的 dfs 序.</p>
+</li>
+<li><p><code>low[x]</code>: x 向下搜索能到达的最小 dfs 序.</p>
+</li>
+</ul>
+</li>
+<li><p>更新 low:</p>
+<ol>
+<li><p><strong>v 未被访问过:</strong> 初始 <code>low[v] = dfn[v]</code>.v 入栈. 回溯时用 low[v] 更新它的 fa 的 low[ ].</p>
+</li>
+<li><p><strong>v 被访问过, 且还在栈中:</strong> 用 dfs[v] 更新 fa 的 low.</p>
+</li>
+<li><p><strong>v 被访问过, 不在栈中:</strong> 说明这是一个 fa 到 v 的单向访问, 跳过.</p>
+</li>
+</ol>
+</li>
+<li><p>获取答案:</p>
+<p>能让 <code>dfn[x] &gt; low[x]</code>, 只有当 X 的子树中某个节点 C 有$\begin {cases}1.一条横向边连接到一棵已遍历过的子树<del>A\2.一条返祖边连接到</del>X<del>的祖先</del>xfa \end{cases}$ .</p>
+<ol>
+<li>横向边: 说明 A 没有连接到 C 的边, 否则在之前 C 就被遍历了, 轮不到 X 来遍历. 就用是否 C 在栈中来排除这个情况, 子树 A 中的所有强连通分量之前已经出栈过了( 看代码的实现 ).</li>
+<li>返祖边: 说明 xfa -&gt; x -&gt; c -&gt; xfa 形成环, 在同一个强连通子图( 我们知道, 强连通图是许多环嵌套成的 ). 而且这个子图的根是 xfa 满足 <code>dfn[xfa] = low[xfa]</code>.</li>
+</ol>
+<p>此时栈中进来过三类节点 :<br>$$<br>\begin {cases}1.<del>在</del>x<del>的子树中\begin {cases}1.</del>属于上述<del>xfa</del>循环的,<del>在同一个强连通子图.\2.</del>不在同一个强连通子图,<del>那递归的讲,</del>在之前就因为属于某个<del>xfa’</del>(在<del>X</del>的子树中),而被踢出栈了.\end{cases}\2. 不在<del>x</del>的子树中(即在已遍历过的子树中),<del>在栈中的位置一定在</del>x~的下面. \end{cases}<br>$$</p>
+<p>故, 回溯时若节点符合 <code>dfn[x] = low[x]</code>, 说明当前节点是它所属连通块的最小节点. 栈里它之上所有点都是一个强连通块.</p>
+</li>
+</ol>
+</li>
+</ul>
+<p><strong>代码:</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">const</span> <span class="hljs-type">int</span> Maxn = <span class="hljs-number">1e5</span> + <span class="hljs-number">10</span>;<br>   <br>   <span class="hljs-type">int</span> dfn[Maxn], low[Maxn], dfncnt, s[Maxn], in_stack[Maxn], tp;<br>   <span class="hljs-type">int</span> scc[Maxn], sc;  <span class="hljs-comment">// 结点 i 所在 SCC 的编号</span><br>   <span class="hljs-type">int</span> sz[Maxn];       <span class="hljs-comment">// 强连通 i 的大小</span><br>   <br>   <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">tarjan</span><span class="hljs-params">(<span class="hljs-type">int</span> u)</span> </span>&#123;<br>       low[u] = dfn[u] = ++dfncnt, s[++tp] = u, in_stack[u] = <span class="hljs-number">1</span>;<br>       <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = head[u]; i; i = eg[i].nex) &#123;<br>           <span class="hljs-type">const</span> <span class="hljs-type">int</span> &amp;v = eg[i].to;<br>           <span class="hljs-keyword">if</span> (!dfn[v]) &#123;<br>               <span class="hljs-built_in">tarjan</span>(v);<br>               low[u] = <span class="hljs-built_in">min</span>(low[u], low[v]);<br>           &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (in_stack[v]) &#123;<br>               low[u] = <span class="hljs-built_in">min</span>(low[u], dfn[v]);<br>           &#125;<br>       &#125;<br>       <span class="hljs-keyword">if</span> (dfn[u] == low[u]) &#123;<br>           ++sc;<br>           <span class="hljs-keyword">while</span> (s[tp] != u) &#123;<br>               scc[s[tp]] = sc;<br>               sz[sc]++;<br>               in_stack[s[tp]] = <span class="hljs-number">0</span>;<br>               --tp;<br>           &#125;<br>           scc[s[tp]] = sc;<br>           sz[sc]++;<br>           in_stack[s[tp]] = <span class="hljs-number">0</span>;<br>           --tp;<br>       &#125;<br>   &#125;<br></code></pre></td></tr></table></figure>
                 
               </div>
             
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>
@@ -336,8 +382,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>helle world</div>
-      <div>http://example.com/2024/06/22/hello-world/</div>
+      <div>Tarjan 求有向图的强连通分量</div>
+      <div>http://example.com/2024/06/23/Tarjan求强连通分量/</div>
     </div>
     <div class="license-meta">
       
@@ -349,13 +395,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年6月22日</div>
+          <div>2024年6月23日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年6月22日</div>
+          <div>2024年6月23日</div>
         </div>
       
       
@@ -386,15 +432,15 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/06/23/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" title="搭建个人静态博客">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">搭建个人静态博客</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2024/06/23/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" title="搭建个人静态博客">
+                        <span class="hidden-mobile">搭建个人静态博客</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
@@ -427,6 +473,43 @@
 
 <div class="category-list">
   
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="算法"
+        id="heading-046a899ee7a6ec88d370211a518c9e80" role="tab" data-toggle="collapse" href="#collapse-046a899ee7a6ec88d370211a518c9e80"
+        aria-expanded="true"
+      >
+        算法
+        <span class="list-group-count">(1)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-046a899ee7a6ec88d370211a518c9e80"
+           role="tabpanel" aria-labelledby="heading-046a899ee7a6ec88d370211a518c9e80">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2024/06/23/Tarjan%E6%B1%82%E5%BC%BA%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F/" title="Tarjan 求有向图的强连通分量"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">Tarjan 求有向图的强连通分量</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
   
 </div>
 
