@@ -24,7 +24,7 @@
 <meta property="og:description" content="用此文记录一下我这个博客的搭建过程. 参考了这篇博客 Blog Step 1: 建一个在本地运行的网站 用的是 Hexo 框架. 基于 node.js 运行. 故先下载 node.js &gt; 下载直达 &lt;  安装 Hexo. 运行 :npm install -g hexo-cli Hexo 将会安装在默认位置. 文档在这 Hexo Doc, 可以的话, 官方文档是好于任何博客的东西.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-06-23T00:36:17.741Z">
-<meta property="article:modified_time" content="2024-06-23T01:16:53.773Z">
+<meta property="article:modified_time" content="2024-06-23T01:29:06.522Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -246,7 +246,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          456 字
+          509 字
         
       </span>
     
@@ -257,7 +257,7 @@
         
         
         
-          4 分钟
+          5 分钟
         
       </span>
     
@@ -316,7 +316,7 @@
 <ol>
 <li><p>新建 Github 仓库, 命名时一定要是 <username>.github.io, 这样就自动识别位 Github Page 的 仓库. 属性为 Public</p>
 </li>
-<li><p>将本地博客文件夹的文件上传到仓库中. 这里要使用到 Git. 傻瓜式安装, 建议学习基本的操作.  </p>
+<li><p>将本地博客文件夹的文件上传到仓库中. 这里要使用到 Git. 建议学习基本的操作, 更多 Git 的问题网上都有, 不赘述. <a target="_blank" rel="noopener" href="https://www.runoob.com/git/git-basic-operations.html">&gt; 看这里 &lt;</a></p>
 </li>
 <li><p>到 _congif.yml 文件中修改 deploy 配置:</p>
 <figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-symbol">deploy:</span><br><span class="hljs-symbol">	type:</span> git <span class="hljs-meta"># git 前有一个空格</span><br><span class="hljs-symbol">	repo:</span> https:<span class="hljs-comment">//github.com/&lt;Username&gt;/&lt;username&gt;.github.io # 就是仓库地址</span><br><span class="hljs-symbol">	branch:</span> master <span class="hljs-meta"># 选择上传的分枝</span><br></code></pre></td></tr></table></figure>
@@ -329,7 +329,10 @@
 </li>
 </ol>
 <p>到此为止, 就成功上线了自己的博客. 在 <code>&lt;username&gt;.github.io</code>.</p>
-<h2 id="Step3-主题配置"><a href="#Step3-主题配置" class="headerlink" title="Step3: 主题配置"></a>Step3: 主题配置</h2><h2 id="Step4-图床"><a href="#Step4-图床" class="headerlink" title="Step4: 图床"></a>Step4: 图床</h2>
+<h2 id="Step3-主题配置"><a href="#Step3-主题配置" class="headerlink" title="Step3: 主题配置"></a>Step3: 主题配置</h2><p>我用的是 fluid 主题. 就因为它好看, 有原生的中文文档. <a target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/">fluid dos</a></p>
+<p>配置文档里讲的很好. </p>
+<p>更多主题: <a target="_blank" rel="noopener" href="https://hexo.io/themes/">官方主题库</a></p>
+<h2 id="Step4-图床"><a href="#Step4-图床" class="headerlink" title="Step4: 图床"></a>Step4: 图床</h2>
                 
               </div>
             
