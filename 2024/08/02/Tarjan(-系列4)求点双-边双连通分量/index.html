@@ -336,7 +336,7 @@
 <p>Tarjan 算法 1</p>
 <ul>
 <li>
-<p>先删掉所有桥 =&gt; <a href="https://blog.csdn.net/qq_72715438/article/details/140436899?spm=1001.2014.3001.5501">Tarjan( 系列2) 在无向图中找割点/桥</a></p>
+<p>先删掉所有桥 =&gt; <a href="/2024/07/17/Tarjan%28-%E7%B3%BB%E5%88%972%29-%E5%9C%A8%E6%97%A0%E5%90%91%E5%9B%BE%E4%B8%AD%E6%89%BE%E5%89%B2%E7%82%B9-%E6%A1%A5/">Tarjan( 系列2) 在无向图中找割点/桥</a></p>
 <p>桥 (-&gt; 删除一条边使两点不连通 ), 故桥两边的点一定不满住边双</p>
 </li>
 <li>
@@ -471,7 +471,7 @@ for (int i = 1; i &lt;= m; i++)
 <p>对于一个点双，它在 DFS 搜索树中 dfn 值最小的点一定是割点或者树根 (原理参照 Tarjan 求割点 )。</p>
 </li>
 </ol>
-<p>故: 一个点是割点时, 它一定是点双分量的根. 如果再往上包含它的父亲, 那它就成为分量内的割点了. 操作类似求有向图的强连通分量, 用一个栈去存点. =&gt; <a href="https://blog.csdn.net/qq_72715438/article/details/139840282?spm=1001.2014.3001.5501">Tarjan( 系列1) 求强连通子图</a></p>
+<p>故: 一个点是割点时, 它一定是点双分量的根. 如果再往上包含它的父亲, 那它就成为分量内的割点了. 操作类似求有向图的强连通分量, 用一个栈去存点. =&gt; <a href="/2024/06/23/Tarjan%E6%B1%82%E5%BC%BA%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F/">Tarjan( 系列1) 求强连通子图</a></p>
 <pre><code class="language-cpp">// AC [https://www.luogu.com.cn/problem/P8435]
 const int Maxn = 5e5 + 10;
 
@@ -527,7 +527,6 @@ signed main()
 }
 </code></pre>
 
-<p class="csdn-source">原文发布于 2024-08-02 19:19:35（CSDN）：<a href="https://blog.csdn.net/qq_72715438/article/details/140878435" rel="external">https://blog.csdn.net/qq_72715438/article/details/140878435</a></p>
 </div>
             
             <hr/>
@@ -538,7 +537,13 @@ signed main()
               
   
 
-  <div class="license-box my-3">
+  <div class="post-metas my-3">
+  <div class="post-meta mr-3 d-flex align-items-center">
+    <i class="iconfont icon-category" aria-hidden="true"></i>
+    <span class="category-chains"><span class="category-chain"><a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B-%E7%AE%97%E6%B3%95/" class="category-chain-item">算法竞赛-算法</a></span></span>
+  </div>
+</div>
+<div class="license-box my-3">
     <div class="license-title">
       <div>Tarjan( 系列4)求点双 / 边双连通分量</div>
       <div><a href="https://taulee.github.io/2024/08/02/Tarjan%28-%E7%B3%BB%E5%88%974%29%E6%B1%82%E7%82%B9%E5%8F%8C-%E8%BE%B9%E5%8F%8C%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F/">https://taulee.github.io/2024/08/02/Tarjan(-系列4)求点双-边双连通分量/</a></div>

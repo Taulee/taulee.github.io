@@ -319,7 +319,7 @@
 <p>Tarjan 是大佬的名字, 大佬一生发明了许多算法, 都叫 Tarjan, 我会渐渐整理出来, 想知道都有啥的话, 可以直接到我文章列表搜索 Tarjan.</p>
 <p>重温Tarjan, 网上看了许多博客感觉都讲的不清楚. 故传上来自己的笔记, 希望帮到大家.</p>
 <hr />
-<p>前置: <a href="https://blog.csdn.net/qq_72715438/article/details/139840282?spm=1001.2014.3001.5501">Tarjan 求有向图中的强连通分量</a></p>
+<p>前置: <a href="/2024/06/23/Tarjan%E6%B1%82%E5%BC%BA%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F/">Tarjan 求有向图中的强连通分量</a></p>
 <p>将有向图中的强连通分量缩成一个点, 权值具题而定.</p>
 <p>在 Tarjan 求得 scc 后, 对于每个点打上同样的 scc, 就可以很容易统计出每个 scc 的出度入度有哪些, 就完成了缩点.</p>
 <p><img src="/img/posts/2024-07-17-140506107/tarjan-scc-condensation-graph.png" alt="Tarjan 强连通分量缩点后的 DAG 示意图" /></p>
@@ -335,7 +335,6 @@ for (int i = 1; i &lt;= n; ++i) {//缩点
 
 </code></pre>
 
-<p class="csdn-source">原文发布于 2024-07-17 21:35:40（CSDN）：<a href="https://blog.csdn.net/qq_72715438/article/details/140506107" rel="external">https://blog.csdn.net/qq_72715438/article/details/140506107</a></p>
 </div>
             
             <hr/>
@@ -346,7 +345,13 @@ for (int i = 1; i &lt;= n; ++i) {//缩点
               
   
 
-  <div class="license-box my-3">
+  <div class="post-metas my-3">
+  <div class="post-meta mr-3 d-flex align-items-center">
+    <i class="iconfont icon-category" aria-hidden="true"></i>
+    <span class="category-chains"><span class="category-chain"><a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B-%E7%AE%97%E6%B3%95/" class="category-chain-item">算法竞赛-算法</a></span></span>
+  </div>
+</div>
+<div class="license-box my-3">
     <div class="license-title">
       <div>Tarjan( 系列3) 有向图中的缩点操作</div>
       <div><a href="https://taulee.github.io/2024/07/17/Tarjan%28-%E7%B3%BB%E5%88%973%29-%E6%9C%89%E5%90%91%E5%9B%BE%E4%B8%AD%E7%9A%84%E7%BC%A9%E7%82%B9%E6%93%8D%E4%BD%9C/">https://taulee.github.io/2024/07/17/Tarjan(-系列3)-有向图中的缩点操作/</a></div>
