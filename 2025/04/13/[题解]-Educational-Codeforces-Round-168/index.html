@@ -16,30 +16,18 @@
   <meta name="author" content="TauLee">
   <meta name="keywords" content="">
   
-    <meta name="description" content="  链接  
- 思路 1 
- 注意到在 $k \in [1,n]$ 可以得到的最高等级分别为: $n,\frac{n}{2},\frac{n}{3}.....\frac{n}{n}
-$ , 总的个数是一个调和级数, $sum=n*\ln n$ , 完全可以处理出每个 k 下, 每一个等级时玩家对应的在哪一段. 
-  vector&amp;lt;vector&amp;lt;pair&amp;lt;int, int&amp;gt;&amp;gt;&amp;gt;f(n + 1); //f[k,{i,j}] 对于 k,升到 i level 需要的最少长度 j.  
- ">
+    <meta name="description" content="链接 思路 1 注意到在 $k \in [1,n]$ 可以得到的最高等级分别为: $n,\frac{n}{2},\frac{n}{3}.....\frac{n}{n} $ , 总的个数是一个调和级数, $sum&#x3D;n*\ln n$ , 完全可以处理出每个 k 下, 每一个等级时玩家对应的在哪一段. vector&lt;vector&lt;pair&lt;int, int&gt;&gt;&gt;f(">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[题解] Educational Codeforces Round 168 (Rated for Div. 2) E - level up">
-<meta property="og:url" content="https://taulee.github.io/2025/04/13/%5B%E9%A2%98%E8%A7%A3%5D-Educational-Codeforces-Round-168/">
+<meta property="og:url" content="https://taulee.github.io/2025/04/13/[%E9%A2%98%E8%A7%A3]-Educational-Codeforces-Round-168/index.html">
 <meta property="og:site_name" content="TauLee&#39;s Blog">
-<meta property="og:description" content="  链接  
- 思路 1 
- 注意到在 $k \in [1,n]$ 可以得到的最高等级分别为: $n,\frac{n}{2},\frac{n}{3}.....\frac{n}{n}
-$ , 总的个数是一个调和级数, $sum=n*\ln n$ , 完全可以处理出每个 k 下, 每一个等级时玩家对应的在哪一段. 
-  vector&amp;lt;vector&amp;lt;pair&amp;lt;int, int&amp;gt;&amp;gt;&amp;gt;f(n + 1); //f[k,{i,j}] 对于 k,升到 i level 需要的最少长度 j.  
- ">
+<meta property="og:description" content="链接 思路 1 注意到在 $k \in [1,n]$ 可以得到的最高等级分别为: $n,\frac{n}{2},\frac{n}{3}.....\frac{n}{n} $ , 总的个数是一个调和级数, $sum&#x3D;n*\ln n$ , 完全可以处理出每个 k 下, 每一个等级时玩家对应的在哪一段. vector&lt;vector&lt;pair&lt;int, int&gt;&gt;&gt;f(">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-04-13T11:47:25.000Z">
-<meta property="article:modified_time" content="2025-04-13T11:47:25.000Z">
+<meta property="article:published_time" content="2025-04-13T11:47:00.000Z">
+<meta property="article:modified_time" content="2025-04-13T11:47:00.000Z">
 <meta property="article:author" content="TauLee">
 <meta name="twitter:card" content="summary_large_image">
   
-  
-    <meta name="referrer" content="no-referrer-when-downgrade">
   
   
   <title>[题解] Educational Codeforces Round 168 (Rated for Div. 2) E - level up - TauLee&#39;s Blog</title>
@@ -80,7 +68,7 @@ $ , 总的个数是一个调和级数, $sum=n*\ln n$ , 完全可以处理出每�
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"taulee.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":55,"cursorChar":"","loop":false,"scope":["home",404]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"C++"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"taulee.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"C++"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -90,33 +78,6 @@ $ , 总的个数是一个调和级数, $sum=n*\ln n$ , 完全可以处理出每�
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
   
-
-  
-
-  
-    <!-- Google tag (gtag.js) -->
-    <script async>
-      if (!Fluid.ctx.dnt) {
-        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
-          window.dataLayer = window.dataLayer || [];
-          function gtag() {
-            dataLayer.push(arguments);
-          }
-          gtag('js', new Date());
-          gtag('config', '');
-        });
-      }
-    </script>
-  
-
-  
-
-  
-
-  
-
-  
-
 
 
   
@@ -223,7 +184,7 @@ $ , 总的个数是一个调和级数, $sum=n*\ln n$ , 完全可以处理出每�
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">[题解] Educational Codeforces Round 168 (Rated for Div. 2) E - level up</span>
+            <span id="subtitle" data-typed-text="[题解] Educational Codeforces Round 168 (Rated for Div. 2) E - level up"></span>
           
         </div>
 
@@ -231,16 +192,11 @@ $ , 总的个数是一个调和级数, $sum=n*\ln n$ , 完全可以处理出每�
           
   <div class="mt-3">
     
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-author" aria-hidden="true"></i>
-        TauLee
-      </span>
-    
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
         <time datetime="2025-04-13 19:47" pubdate>
-          2025年4月13日
+          2025年4月13日 晚上
         </time>
       </span>
     
@@ -250,22 +206,24 @@ $ , 总的个数是一个调和级数, $sum=n*\ln n$ , 完全可以处理出每�
     
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
-        381 字
+        
+          536 字
         
       </span>
     
 
     
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          5 分钟
+        
+      </span>
+    
 
     
-    
-      
-        <span id="busuanzi_container_page_pv" style="display: none">
-          <i class="iconfont icon-eye" aria-hidden="true"></i>
-          <span id="busuanzi_value_page_pv"></span> 次
-        </span>
-        
-      
     
   </div>
 
@@ -314,97 +272,118 @@ $ , 总的个数是一个调和级数, $sum=n*\ln n$ , 完全可以处理出每�
             
             
               <div class="markdown-body">
-<p><a href="https://codeforces.com/contest/1997/problem/E">链接</a></p>
+                
+                
+<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1997/problem/E">链接</a></p>
 <h3>思路 1</h3>
 <p>注意到在 $k \in [1,n]$ 可以得到的最高等级分别为: $n,\frac{n}{2},\frac{n}{3}.....\frac{n}{n}
 $ , 总的个数是一个调和级数, $sum=n*\ln n$ , 完全可以处理出每个 k 下, 每一个等级时玩家对应的在哪一段.</p>
-<p><code>vector&lt;vector&lt;pair&lt;int, int&gt;&gt;&gt;f(n + 1); //f[k,{i,j}] 对于 k,升到 i level 需要的最少长度 j.</code></p>
+<p><code>vector&lt;vector&lt;pair&lt;int, int&gt;&gt;&gt;f(n + 1); //f[k,&#123;i,j&#125;] 对于 k,升到 i level 需要的最少长度 j.</code></p>
 <p>用树状数组实时维护出当前队列内大于等于当前玩家等级的怪物的区间数量( 同权值线段树的用法 ), 注意 check 时要减去在当前位置前的等级高于等于玩家的怪物( <code>now = -ask(l);</code> ):</p>
 <pre><code class="language-cpp">int tr[200010];
-void upd(int x, int val) {
+void upd(int x, int val) &#123;
     for (; x &lt;= n; x += x &amp; -x)tr[x] += val;
-}
-int ask(int x) {
+&#125;
+int ask(int x) &#123;
     int ans = 0;
     for (; x; x -= x &amp; -x)ans += tr[x];
     return ans;
-}
-int select(int l, int k, int &amp;now) {
+&#125;
+int select(int l, int k, int &amp;now) &#123;
     now = -ask(l);
     int x = 0;
-    for (int i = 1 &lt;&lt; (int)log2(n); i; i /= 2) {
-        if (x + i &lt;= n &amp;&amp; now + tr[x + i] &lt;= k) {
+    for (int i = 1 &lt;&lt; (int)log2(n); i; i /= 2) &#123;
+        if (x + i &lt;= n &amp;&amp; now + tr[x + i] &lt;= k) &#123;
             x += i;
             now += tr[x];
-        }
-    }
+        &#125;
+    &#125;
     return x;
-}
+&#125;
 </code></pre>
 <pre><code class="language-cpp">  cin &gt;&gt; n &gt;&gt; q;
   vector&lt;int&gt;a(n + 1);
   vector&lt;vector&lt;int&gt;&gt;pos(200010); // i 的位置
-  for (int i = 1; i &lt;= n; ++i) {
+  for (int i = 1; i &lt;= n; ++i) &#123;
       cin &gt;&gt; a[i];
       upd(i, 1);
       pos[a[i]].emplace_back(i);
-  }
+  &#125;
 
-  vector&lt;vector&lt;pair&lt;int, int&gt;&gt;&gt;f(n + 1); //f[k,{i,j}] 对于 k,升到 i level 需要的最少长度 j.
-  for (int i = 1; i &lt;= n; ++i) {
+  vector&lt;vector&lt;pair&lt;int, int&gt;&gt;&gt;f(n + 1); //f[k,&#123;i,j&#125;] 对于 k,升到 i level 需要的最少长度 j.
+  for (int i = 1; i &lt;= n; ++i) &#123;
       f[i].emplace_back(1, 0);
-  }
+  &#125;
 
-  for (int level = 2; level &lt;= n; ++level) {
-      for (int k = 1; k * (level - 1) &lt;= n; ++k) {
+  for (int level = 2; level &lt;= n; ++level) &#123;
+      for (int k = 1; k * (level - 1) &lt;= n; ++k) &#123;
           int now = 0;
           int p = select(f[k].back().second, k, now);
           if (now &lt; k)p++;
           f[k].emplace_back(level, p);
-      }
-      for (auto c : pos[level - 1]) {
+      &#125;
+      for (auto c : pos[level - 1]) &#123;
           upd(c, -1);
-      }
-  }
+      &#125;
+  &#125;
 </code></pre>
 <p>处理出来 <code>f[]</code> 后, 对于每个输入, 只需要二分对应的 <code>f[a[i]]</code> , 找到玩家达到 $a[i]+1$ 等级的最早位置, 小于 $i$ 的话, 玩家到达 $i$ 时等级就已经大于 $a[i]$ 了, 这个怪就会逃跑.</p>
-<pre><code class="language-cpp"> while (q--) {
+<pre><code class="language-cpp"> while (q--) &#123;
      int i, x;
      cin &gt;&gt; i &gt;&gt; x;
      auto p = upper_bound(f[x].begin(), f[x].end(), pair(a[i], LLONG_MAX));
      string ans;
-     if (p == f[x].end())ans = &quot;Yes&quot;;
-     else {
-         if (p-&gt;second &gt;= i)ans = &quot;Yes&quot;;
-         else ans = &quot;No&quot;;
-     }
+     if (p == f[x].end())ans = "Yes";
+     else &#123;
+         if (p-&gt;second &gt;= i)ans = "Yes";
+         else ans = "No";
+     &#125;
      cout &lt;&lt; ans &lt;&lt; endl;
- }
+ &#125;
 </code></pre>
 <h3>思路 2</h3>
 <p>考虑根号分治.</p>
 <p>待补充…</p>
 
-</div>
+                
+              </div>
             
             <hr/>
             <div>
-              
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B-%E9%A2%98%E8%A7%A3/" class="category-chain-item">算法竞赛-题解</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
 
 
               
   
 
-  <div class="post-metas my-3">
-  <div class="post-meta mr-3 d-flex align-items-center">
-    <i class="iconfont icon-category" aria-hidden="true"></i>
-    <span class="category-chains"><span class="category-chain"><a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B-%E9%A2%98%E8%A7%A3/" class="category-chain-item">算法竞赛-题解</a></span></span>
-  </div>
-</div>
-<div class="license-box my-3">
+  <div class="license-box my-3">
     <div class="license-title">
       <div>[题解] Educational Codeforces Round 168 (Rated for Div. 2) E - level up</div>
-      <div><a href="https://taulee.github.io/2025/04/13/%5B%E9%A2%98%E8%A7%A3%5D-Educational-Codeforces-Round-168/">https://taulee.github.io/2025/04/13/[题解]-Educational-Codeforces-Round-168/</a></div>
+      <div>https://taulee.github.io/2025/04/13/[题解]-Educational-Codeforces-Round-168/</div>
     </div>
     <div class="license-meta">
       
@@ -419,11 +398,6 @@ int select(int l, int k, int &amp;now) {
           <div>2025年4月13日</div>
         </div>
       
-      
-        <div class="license-meta-item license-meta-date">
-          <div>更新于</div>
-          <div>2025年4月13日</div>
-        </div>
       
       
         <div class="license-meta-item">
@@ -445,19 +419,36 @@ int select(int l, int k, int &amp;now) {
     </div>
     <div class="license-icon iconfont"></div>
   </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/04/13/vp-2023-icpc-%E5%90%88%E8%82%A5-%E8%A7%A3%E9%A2%98%E8%A1%A5%E9%A2%98%E8%AE%B0%E5%BD%95-%5BF-E-J-G%5D/" title="vp 2023 icpc 合肥 解题补题记录 [F E J G]">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">vp 2023 icpc 合肥 解题补题记录 [F E J G]</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/09/30/%5B%E9%A2%98%E8%A7%A3%5D-Codeforces-Round-976-(Div.-2)-A-~-E/" title="[题解] Codeforces Round 976 (Div. 2) A ~ E">
+                        <span class="hidden-mobile">[题解] Codeforces Round 976 (Div. 2) A ~ E</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
               
             </div>
 
             
-  
-  
-    <article id="comments" lazyload>
-      
-
-    </article>
-  
-
-
           </article>
         </div>
       </div>
@@ -465,21 +456,6 @@ int select(int l, int k, int &amp;now) {
 
     <div class="side-col d-none d-lg-block col-lg-2">
       
-  <aside class="sidebar category-bar" style="margin-left: -1rem">
-    
-
-
-
-
-
-<div class="category-list">
-  
-  
-</div>
-
-
-  </aside>
-
 
     </div>
   </div>
@@ -581,6 +557,21 @@ int select(int l, int k, int &amp;now) {
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
 
 
 
@@ -685,14 +676,13 @@ int select(int l, int k, int &amp;now) {
 
   <script>Fluid.plugins.imageCaption();</script>
 
-  <script src="/js/math-config.js?v=1"></script>
-  <script defer src="/js/mathjax/tex-svg.js?v=1"></script>
-
   <script  src="/js/local-search.js" ></script>
 
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+  
+<script src="/js/blog-enhancements.js"></script>
 
 
 
@@ -702,6 +692,9 @@ int select(int l, int k, int &amp;now) {
 
 
   
+<script src="/js/math-config.js"></script>
+<script defer src="/js/mathjax/tex-svg.js"></script>
+
 
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>

@@ -16,24 +16,24 @@
   <meta name="author" content="TauLee">
   <meta name="keywords" content="">
   
-    <meta name="description" content=" 以处理求区间第 k 小为例. 
- 先把节点离散化. 用法类似权值线段树. 
- 普通线段树每次插入一个元素 x 时, 途径的 $deep[x]$ 个节点都会加 1, 要查询区间第 k 小时, 就要用树的 $Version_R$ 减去 $Version_{L-1}$ , 得到的就是 l 到 r 区间所有元素的组成的权值线段树, 然后操作就和权值线段树找第 k 小一样了. 可持续化线段树的就用来保存树的不同版本Version. 本质就是前缀和操作, 每个  pre[i]  都是一棵树. 其实如果时间空间允许, 完全可以">
+    <meta name="description" content="以处理求区间第 k 小为例. 先把节点离散化. 用法类似权值线段树. 普通线段树每次插入一个元素 x 时, 途径的 $deep[x]$ 个节点都会加 1, 要查询区间第 k 小时, 就要用树的 $Version_R$ 减去 $Version_{L-1}$ , 得到的就是 l 到 r 区间所有元素的组成的权值线段树, 然后操作就和权值线段树找第 k 小一样了. 可持续化线段树的就用来保存树的不同版">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【主席树】学习笔记">
-<meta property="og:url" content="https://taulee.github.io/2024/07/24/%E3%80%90%E4%B8%BB%E5%B8%AD%E6%A0%91%E3%80%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+<meta property="og:url" content="https://taulee.github.io/2024/07/24/%E3%80%90%E4%B8%BB%E5%B8%AD%E6%A0%91%E3%80%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="TauLee&#39;s Blog">
-<meta property="og:description" content=" 以处理求区间第 k 小为例. 
- 先把节点离散化. 用法类似权值线段树. 
- 普通线段树每次插入一个元素 x 时, 途径的 $deep[x]$ 个节点都会加 1, 要查询区间第 k 小时, 就要用树的 $Version_R$ 减去 $Version_{L-1}$ , 得到的就是 l 到 r 区间所有元素的组成的权值线段树, 然后操作就和权值线段树找第 k 小一样了. 可持续化线段树的就用来保存树的不同版本Version. 本质就是前缀和操作, 每个  pre[i]  都是一棵树. 其实如果时间空间允许, 完全可以">
+<meta property="og:description" content="以处理求区间第 k 小为例. 先把节点离散化. 用法类似权值线段树. 普通线段树每次插入一个元素 x 时, 途径的 $deep[x]$ 个节点都会加 1, 要查询区间第 k 小时, 就要用树的 $Version_R$ 减去 $Version_{L-1}$ , 得到的就是 l 到 r 区间所有元素的组成的权值线段树, 然后操作就和权值线段树找第 k 小一样了. 可持续化线段树的就用来保存树的不同版">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-07-24T09:38:11.000Z">
-<meta property="article:modified_time" content="2024-07-24T09:38:11.000Z">
+<meta property="og:image" content="https://taulee.github.io/img/posts/2024-07-24-140668827/persistent-segment-tree-version-1.png">
+<meta property="og:image" content="https://taulee.github.io/img/posts/2024-07-24-140668827/persistent-segment-tree-version-2.png">
+<meta property="og:image" content="https://taulee.github.io/img/posts/2024-07-24-140668827/persistent-segment-tree-version-3.png">
+<meta property="og:image" content="https://taulee.github.io/img/posts/2024-07-24-140668827/persistent-segment-tree-version-4.png">
+<meta property="og:image" content="https://taulee.github.io/img/posts/2024-07-24-140668827/persistent-segment-tree-query-path.png">
+<meta property="article:published_time" content="2024-07-24T09:38:00.000Z">
+<meta property="article:modified_time" content="2024-07-24T09:38:00.000Z">
 <meta property="article:author" content="TauLee">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://taulee.github.io/img/posts/2024-07-24-140668827/persistent-segment-tree-version-1.png">
   
-  
-    <meta name="referrer" content="no-referrer-when-downgrade">
   
   
   <title>【主席树】学习笔记 - TauLee&#39;s Blog</title>
@@ -74,7 +74,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"taulee.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":55,"cursorChar":"","loop":false,"scope":["home",404]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"C++"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"taulee.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"C++"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -84,33 +84,6 @@
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
   
-
-  
-
-  
-    <!-- Google tag (gtag.js) -->
-    <script async>
-      if (!Fluid.ctx.dnt) {
-        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
-          window.dataLayer = window.dataLayer || [];
-          function gtag() {
-            dataLayer.push(arguments);
-          }
-          gtag('js', new Date());
-          gtag('config', '');
-        });
-      }
-    </script>
-  
-
-  
-
-  
-
-  
-
-  
-
 
 
   
@@ -217,7 +190,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">【主席树】学习笔记</span>
+            <span id="subtitle" data-typed-text="【主席树】学习笔记"></span>
           
         </div>
 
@@ -225,16 +198,11 @@
           
   <div class="mt-3">
     
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-author" aria-hidden="true"></i>
-        TauLee
-      </span>
-    
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
         <time datetime="2024-07-24 17:38" pubdate>
-          2024年7月24日
+          2024年7月24日 下午
         </time>
       </span>
     
@@ -244,22 +212,24 @@
     
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
-        489 字
+        
+          830 字
         
       </span>
     
 
     
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          7 分钟
+        
+      </span>
+    
 
     
-    
-      
-        <span id="busuanzi_container_page_pv" style="display: none">
-          <i class="iconfont icon-eye" aria-hidden="true"></i>
-          <span id="busuanzi_value_page_pv"></span> 次
-        </span>
-        
-      
     
   </div>
 
@@ -308,29 +278,31 @@
             
             
               <div class="markdown-body">
+                
+                
 <p>以处理求区间第 k 小为例.</p>
 <p>先把节点离散化. 用法类似权值线段树.</p>
 <p>普通线段树每次插入一个元素 x 时, 途径的 $deep[x]$ 个节点都会加 1, 要查询区间第 k 小时, 就要用树的 $Version_R$ 减去 $Version_{L-1}$ , 得到的就是 l 到 r 区间所有元素的组成的权值线段树, 然后操作就和权值线段树找第 k 小一样了. 可持续化线段树的就用来保存树的不同版本Version. 本质就是前缀和操作, 每个 <code>pre[i]</code> 都是一棵树. 其实如果时间空间允许, 完全可以每插入一个点, 就把原树复制一份, 执行前缀和的 <code>pre[i]=pre[i-1]+a[i]</code> .</p>
 <ol>
 <li>
 <p>空树(相当于 <code>pre[0]</code> )
-<img src="/img/posts/2024-07-24-140668827/persistent-segment-tree-version-1.png" alt="主席树第一版本的节点结构" /></p>
+<img alt="主席树第一版本的节点结构" src="/img/posts/2024-07-24-140668827/persistent-segment-tree-version-1.png" srcset="/img/loading.gif" lazyload/></p>
 </li>
 <li>
 <p>Version-1(插入数 1 )
-<img src="/img/posts/2024-07-24-140668827/persistent-segment-tree-version-2.png" alt="主席树第二版本的节点结构" /></p>
+<img alt="主席树第二版本的节点结构" src="/img/posts/2024-07-24-140668827/persistent-segment-tree-version-2.png" srcset="/img/loading.gif" lazyload/></p>
 </li>
 <li>
 <p>Version-2(插入数 5 )
-<img src="/img/posts/2024-07-24-140668827/persistent-segment-tree-version-3.png" alt="主席树第三版本的节点结构" /></p>
+<img alt="主席树第三版本的节点结构" src="/img/posts/2024-07-24-140668827/persistent-segment-tree-version-3.png" srcset="/img/loading.gif" lazyload/></p>
 </li>
 <li>
 <p>Version-3( 插入数 2 )
-<img src="/img/posts/2024-07-24-140668827/persistent-segment-tree-version-4.png" alt="主席树第四版本的节点结构" /></p>
+<img alt="主席树第四版本的节点结构" src="/img/posts/2024-07-24-140668827/persistent-segment-tree-version-4.png" srcset="/img/loading.gif" lazyload/></p>
 </li>
 </ol>
 <p>接下来做树的持续化:</p>
-<p><img src="/img/posts/2024-07-24-140668827/persistent-segment-tree-query-path.png" alt="主席树区间查询路径示意图" /></p>
+<p><img alt="主席树区间查询路径示意图" src="/img/posts/2024-07-24-140668827/persistent-segment-tree-query-path.png" srcset="/img/loading.gif" lazyload/></p>
 <p>注意到每次插入一个节点只有对应路径上的 $deep[x]$ 个元素被改变, 而且根是一定会改变的, 我们就可以对每次更改, 执行如上图的更改, 新建 $deep[x]$ 个节点, 并连上未被更改的节点, 且保存这个新根, 注意到, 访问不同的根就相当于访问了不同版本的树.</p>
 <p>这样更改就不能用 <code>rot&lt;&lt;1</code> , <code>rot&lt;&lt;1|1</code> 访问左右儿子了, 要动态开点.</p>
 <pre><code class="language-cpp">//AC https://www.luogu.com.cn/problem/SP3946
@@ -338,51 +310,51 @@ const int Maxn = 100010, LOG = 20;
 //一般我们用20倍空间来保存（防止溢出）
 int tot = 0; // tot就是时间戳（每个节点的编号）
 int ver[Maxn]; // 保存每个版本的根节点编号
-struct node {
+struct node &#123;
     int val, lson, rson;
-} tr[Maxn * LOG];
+&#125; tr[Maxn * LOG];
 
 //建空树
-int build(int l, int r) {
+int build(int l, int r) &#123;
     int rt = ++ tot;
     int mid = l + r &gt;&gt; 1;
-    if (l &lt; r) {
+    if (l &lt; r) &#123;
         tr[rt].lson = build(l, mid);
         tr[rt].rson = build(mid + 1, r);
-    }
+    &#125;
     return rt;
-}
+&#125;
 
 //更新
-int update(int pre/*前一个版本节点*/, int l, int r, int id) {
+int update(int pre/*前一个版本节点*/, int l, int r, int id) &#123;
     int rt = ++ tot;
     tr[rt].val = tr[pre].val + 1; // 新开的链, 链上每个val都加一
-    if (l &lt; r) {
+    if (l &lt; r) &#123;
         int mid = l + r &gt;&gt; 1;
-        if (id &lt;= mid) {
+        if (id &lt;= mid) &#123;
             tr[rt].lson = update(tr[pre].lson, l, mid, id);
             tr[rt].rson = tr[pre].rson;
-        }
-        else {
+        &#125;
+        else &#123;
             tr[rt].rson = update(tr[pre].rson, mid + 1, r, id);
             tr[rt].lson = tr[pre].lson;
-        }
+        &#125;
         //左右儿子断开其中一个形成新的链
-    }
+    &#125;
     return rt;
-}
+&#125;
 
 // 查询操作
-int query(int u, int v, int l, int r, int k) {
+int query(int u, int v, int l, int r, int k) &#123;
     if (l == r) return l;
     int LsonVal = tr[tr[v].lson].val - tr[tr[u].lson].val;
     //两个历史版本的树相减, LsonVal就是左子树的大小
     int mid = l + r &gt;&gt; 1;
     if (LsonVal &gt;= k) return query(tr[u].lson, tr[v].lson, l, mid, k);
     else return query(tr[u].rson, tr[v].rson, mid + 1, r, k - LsonVal);
-}
+&#125;
 
-signed main() {
+signed main() &#123;
     tot = 0;
     //多组输入初始化
     // memset(ver, 0, sizeof ver);
@@ -392,54 +364,73 @@ signed main() {
     int n, q;
     cin &gt;&gt; n &gt;&gt; q;
     vector&lt;int&gt;a(n), b(n);
-    for (int i = 0; i &lt; n; i++) {
+    for (int i = 0; i &lt; n; i++) &#123;
         cin &gt;&gt; a[i];
         b[i] = a[i];
-    }
+    &#125;
 
     // 离散化 a[i]
     sort(b.begin(), b.end());
     int MaxR = unique(b.begin(), b.end()) - b.begin();
-    for (int i = 0; i &lt; n; ++i) {
+    for (int i = 0; i &lt; n; ++i) &#123;
         a[i] = lower_bound(b.begin(), b.end(), a[i]) - b.begin();
-    }
+    &#125;
 
 
     ver[0] = build(0, MaxR); // 初始的空树, 相当于 pre[0], 不能缺
-    for (int i = 0; i &lt; n; i++) {
+    for (int i = 0; i &lt; n; i++) &#123;
         ver[i + 1] = update(ver[i], 0, MaxR, a[i]);
         //ver[i] 不同历史版本
-    }
-    while (q --) {
+    &#125;
+    while (q --) &#123;
         int l, r, x;
         cin &gt;&gt; l &gt;&gt; r &gt;&gt; x;
         int id = query(ver[l - 1], ver[r], 0, MaxR, x);
         cout &lt;&lt; b[id] &lt;&lt; endl;
-    }
-}
+    &#125;
+&#125;
 </code></pre>
-<p>eg: 图片来自 <a href="https://www.cnblogs.com/fallingdust/p/14333402.html">链接</a> 和 oi wiki</p>
+<p>eg: 图片来自 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/fallingdust/p/14333402.html">链接</a> 和 oi wiki</p>
 
-</div>
+                
+              </div>
             
             <hr/>
             <div>
-              
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B-%E7%AE%97%E6%B3%95/" class="category-chain-item">算法竞赛-算法</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
 
 
               
   
 
-  <div class="post-metas my-3">
-  <div class="post-meta mr-3 d-flex align-items-center">
-    <i class="iconfont icon-category" aria-hidden="true"></i>
-    <span class="category-chains"><span class="category-chain"><a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B-%E7%AE%97%E6%B3%95/" class="category-chain-item">算法竞赛-算法</a></span></span>
-  </div>
-</div>
-<div class="license-box my-3">
+  <div class="license-box my-3">
     <div class="license-title">
       <div>【主席树】学习笔记</div>
-      <div><a href="https://taulee.github.io/2024/07/24/%E3%80%90%E4%B8%BB%E5%B8%AD%E6%A0%91%E3%80%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">https://taulee.github.io/2024/07/24/【主席树】学习笔记/</a></div>
+      <div>https://taulee.github.io/2024/07/24/【主席树】学习笔记/</div>
     </div>
     <div class="license-meta">
       
@@ -454,11 +445,6 @@ signed main() {
           <div>2024年7月24日</div>
         </div>
       
-      
-        <div class="license-meta-item license-meta-date">
-          <div>更新于</div>
-          <div>2024年7月24日</div>
-        </div>
       
       
         <div class="license-meta-item">
@@ -480,19 +466,36 @@ signed main() {
     </div>
     <div class="license-icon iconfont"></div>
   </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/07/24/(HDUOJ7452)2024HDU%E6%9A%91%E5%81%87%E5%A4%9A%E6%A0%A12-1008-%E6%88%90%E9%95%BF%EF%BC%8C%E7%94%9F%E5%91%BD%EF%BC%8C%E5%B9%B8%E7%A6%8F-%E9%A2%98%E8%A7%A3/" title="(HDUOJ7452)2024HDU暑假多校2-1008-成长，生命，幸福 题解">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">(HDUOJ7452)2024HDU暑假多校2-1008-成长，生命，幸福 题解</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/07/23/2024%E7%89%9B%E5%AE%A2%E6%9A%91%E5%81%87%E5%A4%9A%E6%A0%A1-A-Bridging-the-Gap-2-%E9%A2%98%E8%A7%A3/" title="2024牛客暑假多校-A-Bridging the Gap 2-题解">
+                        <span class="hidden-mobile">2024牛客暑假多校-A-Bridging the Gap 2-题解</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
               
             </div>
 
             
-  
-  
-    <article id="comments" lazyload>
-      
-
-    </article>
-  
-
-
           </article>
         </div>
       </div>
@@ -500,21 +503,6 @@ signed main() {
 
     <div class="side-col d-none d-lg-block col-lg-2">
       
-  <aside class="sidebar category-bar" style="margin-left: -1rem">
-    
-
-
-
-
-
-<div class="category-list">
-  
-  
-</div>
-
-
-  </aside>
-
 
     </div>
   </div>
@@ -616,6 +604,21 @@ signed main() {
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
 
 
 
@@ -720,14 +723,13 @@ signed main() {
 
   <script>Fluid.plugins.imageCaption();</script>
 
-  <script src="/js/math-config.js?v=1"></script>
-  <script defer src="/js/mathjax/tex-svg.js?v=1"></script>
-
   <script  src="/js/local-search.js" ></script>
 
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+  
+<script src="/js/blog-enhancements.js"></script>
 
 
 
@@ -737,6 +739,9 @@ signed main() {
 
 
   
+<script src="/js/math-config.js"></script>
+<script defer src="/js/mathjax/tex-svg.js"></script>
+
 
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>

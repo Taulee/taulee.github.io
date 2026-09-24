@@ -16,62 +16,18 @@
   <meta name="author" content="TauLee">
   <meta name="keywords" content="">
   
-    <meta name="description" content=" 
- 学习上参考了这篇博客:  pecco的笔记  
- cdq 的主要是想就是: 
- 
- 
- 递归前一半 
- 
- 
- 判断前一半对后一半的影响 
- 
- 
- 递归后一半 
- 
- 
- 但是需要注意，如果偏序关系带等号，对于  完全相等的元素  ，需要捆绑起来一起处理，不然可能会把相等的元素划到左右两个区间去，从而把相等两元素的之间相互的贡献漏掉一半。 
- 1.二维偏序 
- 例: 处理逆序对 
-  //nlog^2n
-ll cdq(int A[], int n)
-{
-    if (n == 1)
-        ret">
+    <meta name="description" content="学习上参考了这篇博客: pecco的笔记 cdq 的主要是想就是:   递归前一半   判断前一半对后一半的影响   递归后一半   但是需要注意，如果偏序关系带等号，对于 完全相等的元素 ，需要捆绑起来一起处理，不然可能会把相等的元素划到左右两个区间去，从而把相等两元素的之间相互的贡献漏掉一半。 1.二维偏序 例: 处理逆序对 &#x2F;&#x2F;nlog^2n ll cdq(int A[], int n)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="cdq 分治处理二维三维偏序问题">
-<meta property="og:url" content="https://taulee.github.io/2024/06/22/cdq-%E5%88%86%E6%B2%BB%E5%A4%84%E7%90%86%E4%BA%8C%E7%BB%B4%E4%B8%89%E7%BB%B4%E5%81%8F%E5%BA%8F%E9%97%AE%E9%A2%98/">
+<meta property="og:url" content="https://taulee.github.io/2024/06/22/cdq-%E5%88%86%E6%B2%BB%E5%A4%84%E7%90%86%E4%BA%8C%E7%BB%B4%E4%B8%89%E7%BB%B4%E5%81%8F%E5%BA%8F%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="TauLee&#39;s Blog">
-<meta property="og:description" content=" 
- 学习上参考了这篇博客:  pecco的笔记  
- cdq 的主要是想就是: 
- 
- 
- 递归前一半 
- 
- 
- 判断前一半对后一半的影响 
- 
- 
- 递归后一半 
- 
- 
- 但是需要注意，如果偏序关系带等号，对于  完全相等的元素  ，需要捆绑起来一起处理，不然可能会把相等的元素划到左右两个区间去，从而把相等两元素的之间相互的贡献漏掉一半。 
- 1.二维偏序 
- 例: 处理逆序对 
-  //nlog^2n
-ll cdq(int A[], int n)
-{
-    if (n == 1)
-        ret">
+<meta property="og:description" content="学习上参考了这篇博客: pecco的笔记 cdq 的主要是想就是:   递归前一半   判断前一半对后一半的影响   递归后一半   但是需要注意，如果偏序关系带等号，对于 完全相等的元素 ，需要捆绑起来一起处理，不然可能会把相等的元素划到左右两个区间去，从而把相等两元素的之间相互的贡献漏掉一半。 1.二维偏序 例: 处理逆序对 &#x2F;&#x2F;nlog^2n ll cdq(int A[], int n)">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-06-22T09:02:26.000Z">
-<meta property="article:modified_time" content="2024-06-22T09:02:26.000Z">
+<meta property="article:published_time" content="2024-06-22T09:02:00.000Z">
+<meta property="article:modified_time" content="2024-06-22T09:02:00.000Z">
 <meta property="article:author" content="TauLee">
 <meta name="twitter:card" content="summary_large_image">
   
-  
-    <meta name="referrer" content="no-referrer-when-downgrade">
   
   
   <title>cdq 分治处理二维三维偏序问题 - TauLee&#39;s Blog</title>
@@ -112,7 +68,7 @@ ll cdq(int A[], int n)
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"taulee.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":55,"cursorChar":"","loop":false,"scope":["home",404]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"C++"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"taulee.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"C++"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -122,33 +78,6 @@ ll cdq(int A[], int n)
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
   
-
-  
-
-  
-    <!-- Google tag (gtag.js) -->
-    <script async>
-      if (!Fluid.ctx.dnt) {
-        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
-          window.dataLayer = window.dataLayer || [];
-          function gtag() {
-            dataLayer.push(arguments);
-          }
-          gtag('js', new Date());
-          gtag('config', '');
-        });
-      }
-    </script>
-  
-
-  
-
-  
-
-  
-
-  
-
 
 
   
@@ -255,7 +184,7 @@ ll cdq(int A[], int n)
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">cdq 分治处理二维三维偏序问题</span>
+            <span id="subtitle" data-typed-text="cdq 分治处理二维三维偏序问题"></span>
           
         </div>
 
@@ -263,16 +192,11 @@ ll cdq(int A[], int n)
           
   <div class="mt-3">
     
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-author" aria-hidden="true"></i>
-        TauLee
-      </span>
-    
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
         <time datetime="2024-06-22 17:02" pubdate>
-          2024年6月22日
+          2024年6月22日 下午
         </time>
       </span>
     
@@ -282,22 +206,24 @@ ll cdq(int A[], int n)
     
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
-        598 字
+        
+          896 字
         
       </span>
     
 
     
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          8 分钟
+        
+      </span>
+    
 
     
-    
-      
-        <span id="busuanzi_container_page_pv" style="display: none">
-          <i class="iconfont icon-eye" aria-hidden="true"></i>
-          <span id="busuanzi_value_page_pv"></span> 次
-        </span>
-        
-      
     
   </div>
 
@@ -346,8 +272,10 @@ ll cdq(int A[], int n)
             
             
               <div class="markdown-body">
-<hr />
-<p>学习上参考了这篇博客: <a href="https://zhuanlan.zhihu.com/p/332996578">pecco的笔记</a></p>
+                
+                
+<hr/>
+<p>学习上参考了这篇博客: <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/332996578">pecco的笔记</a></p>
 <p>cdq 的主要是想就是:</p>
 <ol>
 <li>
@@ -365,59 +293,59 @@ ll cdq(int A[], int n)
 <p>例: 处理逆序对</p>
 <pre><code class="language-c++">//nlog^2n
 ll cdq(int A[], int n)
-{
+&#123;
     if (n == 1)
         return 0;
     int mid = n / 2, i = 0, j = mid;
     ll ans = cdq(A, mid) + cdq(A + mid, n - mid);
     sort(A, A + mid, greater&lt;int&gt;()), sort(A + mid, A + n, greater&lt;int&gt;());
     for (; j &lt; n; ++j)
-    {
+    &#123;
         while (i &lt; mid &amp;&amp; A[i] &gt; A[j])
             i++;
         ans += i;
-    }
+    &#125;
     return ans;
-}
+&#125;
 //nlogn
 ll cdq(int A[], int n)
-{
+&#123;
     static int B[MAXN]; // 暂存归并排序的结果
     if (n == 1)
         return 0;
     int mid = n / 2, i = 0, j = mid, k = 0;
     ll ans = cdq(A, mid) + cdq(A + mid, n - mid);
     for (; j &lt; n; ++j)
-    {
+    &#123;
         while (i &lt; mid &amp;&amp; A[i] &gt; A[j])
             B[k++] = A[i++];
         ans += i, B[k++] = A[j];
-    }
+    &#125;
     while (i &lt; mid)
         B[k++] = A[i++];
     memcpy(A, B, sizeof(int) * k);
     return ans;
-}
+&#125;
 </code></pre>
 <p>注意到, 这个同样可以用树状数组处理.</p>
 <pre><code class="language-c++">signed main()
-{
+&#123;
     int n; cin &gt;&gt; n;
     vector&lt;int&gt;a(n);
-    for (int i = 0; i &lt; n; ++i) {
+    for (int i = 0; i &lt; n; ++i) &#123;
         cin &gt;&gt; a[i];
-    }
+    &#125;
 
 	//离散化 a 数组
 
     int ans = 0;
-    for (int i = 0; i &lt; n; ++i) {
+    for (int i = 0; i &lt; n; ++i) &#123;
         ans += i - ask(a[i]);
         upd(a[i], 1);
-    }
+    &#125;
 
     cout &lt;&lt; ans &lt;&lt; endl;
-}
+&#125;
 </code></pre>
 <h5>3.三维偏序</h5>
 <p>先在外部按 <strong>第一维</strong> 排好序。在函数体内，递归地解决左区间和右区间的子问题，然后对于一个在左区间，一个在右区间的点对，我们分别将左右区间按 <strong>第二维</strong> 排序，第二维用 <strong>双指针</strong> , 第三维用 <strong>树状数组</strong> 解决问题。</p>
@@ -425,43 +353,43 @@ ll cdq(int A[], int n)
 <p>为了节约时间，清空树状数组不使用 <code>memset</code> ，而是原路删除。</p>
 <p>eg: 当然也可以选择 cdq 套 cdq, 而不是 cdq 套树状数组</p>
 <pre><code class="language-c++">//https://www.luogu.com.cn/problem/P3810
-bool cmpa(node x, node y) {
-    if (x.a == y.a) {
+bool cmpa(node x, node y) &#123;
+    if (x.a == y.a) &#123;
         if (x.b == y.b)return x.c &lt; y.c;
         return x.b &lt; y.b;
-    }
+    &#125;
     return x.a &lt; y.a;
-}
-bool cmpb(node x, node y) {
+&#125;
+bool cmpb(node x, node y) &#123;
     if (x.b == y.b)return x.c &lt; y.c;
     return x.b &lt; y.b;
-}
+&#125;
 
 signed main()
-{
+&#123;
     int n, k;
     cin &gt;&gt; n &gt;&gt; k;
     vector&lt;int&gt;num(n, 0);
     vector&lt;node&gt;a, b(n);
-    for (int i = 0; i &lt; n; ++i) {
+    for (int i = 0; i &lt; n; ++i) &#123;
         cin &gt;&gt; b[i].a &gt;&gt; b[i].b &gt;&gt; b[i].c;
         b[i].w = 1;
-    }
+    &#125;
     sort(b.begin(), b.end(), cmpa);
 
     int cnt = 0;//捆绑处理完全相同的元素
-    for (int i = 0; i &lt; n; ++i) {
+    for (int i = 0; i &lt; n; ++i) &#123;
         cnt++;
-        if (b[i].a != b[i + 1].a || b[i].b != b[i + 1].b || b[i].c != b[i + 1].c) {
+        if (b[i].a != b[i + 1].a || b[i].b != b[i + 1].b || b[i].c != b[i + 1].c) &#123;
             a.emplace_back(b[i]);
             a.back().w = cnt;
             a.back().ans = 0;
             cnt = 0;
-        }
-    }
+        &#125;
+    &#125;
     n = a.size();
 
-    auto cdq = [&amp;](auto self, int l, int r) {
+    auto cdq = [&amp;](auto self, int l, int r) &#123;
         if (l == r)return ;
         int mid = (l + r) &gt;&gt; 1;
         self(self, l, mid); self(self, mid + 1, r);
@@ -469,46 +397,65 @@ signed main()
         sort(a.begin() + mid + 1, a.begin() + r + 1, cmpb);
 
         int p1 = l, p2 = mid + 1;
-        for (; p2 &lt;= r; ++p2) {
-            while (p1 &lt;= mid &amp;&amp; a[p1].b &lt;= a[p2].b) {
+        for (; p2 &lt;= r; ++p2) &#123;
+            while (p1 &lt;= mid &amp;&amp; a[p1].b &lt;= a[p2].b) &#123;
                 upd(a[p1].c, a[p1].w);
                 ++p1;
-            }
+            &#125;
             a[p2].ans += ask(a[p2].c);
-        }
+        &#125;
 
-        for (--p1; p1 &gt;= l; --p1) {//这里用原路返回清空 tr,节省时间
+        for (--p1; p1 &gt;= l; --p1) &#123;//这里用原路返回清空 tr,节省时间
             upd(a[p1].c, -a[p1].w);
-        }
-    };
+        &#125;
+    &#125;;
 
     cdq(cdq, 0, n - 1);
 
-    for (int i = 0; i &lt; n; ++i) {num[a[i].ans + a[i].w - 1] += a[i].w;}//统计答案为 i 的元素的个数 num[i]
+    for (int i = 0; i &lt; n; ++i) &#123;num[a[i].ans + a[i].w - 1] += a[i].w;&#125;//统计答案为 i 的元素的个数 num[i]
     for (auto c : num)cout &lt;&lt; c &lt;&lt; endl;
-}
+&#125;
 </code></pre>
 
-</div>
+                
+              </div>
             
             <hr/>
             <div>
-              
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B-%E7%AE%97%E6%B3%95/" class="category-chain-item">算法竞赛-算法</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
 
 
               
   
 
-  <div class="post-metas my-3">
-  <div class="post-meta mr-3 d-flex align-items-center">
-    <i class="iconfont icon-category" aria-hidden="true"></i>
-    <span class="category-chains"><span class="category-chain"><a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B-%E7%AE%97%E6%B3%95/" class="category-chain-item">算法竞赛-算法</a></span></span>
-  </div>
-</div>
-<div class="license-box my-3">
+  <div class="license-box my-3">
     <div class="license-title">
       <div>cdq 分治处理二维三维偏序问题</div>
-      <div><a href="https://taulee.github.io/2024/06/22/cdq-%E5%88%86%E6%B2%BB%E5%A4%84%E7%90%86%E4%BA%8C%E7%BB%B4%E4%B8%89%E7%BB%B4%E5%81%8F%E5%BA%8F%E9%97%AE%E9%A2%98/">https://taulee.github.io/2024/06/22/cdq-分治处理二维三维偏序问题/</a></div>
+      <div>https://taulee.github.io/2024/06/22/cdq-分治处理二维三维偏序问题/</div>
     </div>
     <div class="license-meta">
       
@@ -523,11 +470,6 @@ signed main()
           <div>2024年6月22日</div>
         </div>
       
-      
-        <div class="license-meta-item license-meta-date">
-          <div>更新于</div>
-          <div>2024年6月22日</div>
-        </div>
       
       
         <div class="license-meta-item">
@@ -549,19 +491,30 @@ signed main()
     </div>
     <div class="license-icon iconfont"></div>
   </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/06/23/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" title="搭建个人静态博客">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">搭建个人静态博客</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
               
             </div>
 
             
-  
-  
-    <article id="comments" lazyload>
-      
-
-    </article>
-  
-
-
           </article>
         </div>
       </div>
@@ -569,21 +522,6 @@ signed main()
 
     <div class="side-col d-none d-lg-block col-lg-2">
       
-  <aside class="sidebar category-bar" style="margin-left: -1rem">
-    
-
-
-
-
-
-<div class="category-list">
-  
-  
-</div>
-
-
-  </aside>
-
 
     </div>
   </div>
@@ -685,6 +623,21 @@ signed main()
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
 
 
 
@@ -791,9 +744,11 @@ signed main()
 
   <script  src="/js/local-search.js" ></script>
 
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+  
+<script src="/js/blog-enhancements.js"></script>
 
 
 

@@ -16,42 +16,18 @@
   <meta name="author" content="TauLee">
   <meta name="keywords" content="">
   
-    <meta name="description" content="  原题链接  
- 题意 
- 有一个有重边的无向图, 每次找到它的最小生成树, 并删除生成树的边, 直到不存在最小生成树, 问被每条边在第几次被删除. 
- 思路 
- 考虑用类似 Kruskal算法, 但是是遍历一遍所有边, 同时处理出来所有的生成树. 
- 具体这样做: 
- 
- 
- 如 Kruskal 一样, 把所有边按边权排序, 依次遍历 
- 
- 
- 当遍历到 u, v 两个节点之间的边时, 二分查找他们在第几个生成树中不连通 ( 这里要开许多并查集数组), 加入他们找第 x 个生成树中不连通, 那他们在 x 之后">
+    <meta name="description" content="原题链接 题意 有一个有重边的无向图, 每次找到它的最小生成树, 并删除生成树的边, 直到不存在最小生成树, 问被每条边在第几次被删除. 思路 考虑用类似 Kruskal算法, 但是是遍历一遍所有边, 同时处理出来所有的生成树. 具体这样做:   如 Kruskal 一样, 把所有边按边权排序, 依次遍历   当遍历到 u, v 两个节点之间的边时, 二分查找他们在第几个生成树中不连通 ( 这里">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[题解 hduoj-7522] 2024HDU 暑假多校7 - cats 的最小生成树">
-<meta property="og:url" content="https://taulee.github.io/2024/08/12/%5B%E9%A2%98%E8%A7%A3-hduoj-7522%5D-2024HDU-%E6%9A%91%E5%81%87%E5%A4%9A%E6%A0%A17---cats-%E7%9A%84%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/">
+<meta property="og:url" content="https://taulee.github.io/2024/08/12/[%E9%A2%98%E8%A7%A3-hduoj-7522]-2024HDU-%E6%9A%91%E5%81%87%E5%A4%9A%E6%A0%A17---cats-%E7%9A%84%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/index.html">
 <meta property="og:site_name" content="TauLee&#39;s Blog">
-<meta property="og:description" content="  原题链接  
- 题意 
- 有一个有重边的无向图, 每次找到它的最小生成树, 并删除生成树的边, 直到不存在最小生成树, 问被每条边在第几次被删除. 
- 思路 
- 考虑用类似 Kruskal算法, 但是是遍历一遍所有边, 同时处理出来所有的生成树. 
- 具体这样做: 
- 
- 
- 如 Kruskal 一样, 把所有边按边权排序, 依次遍历 
- 
- 
- 当遍历到 u, v 两个节点之间的边时, 二分查找他们在第几个生成树中不连通 ( 这里要开许多并查集数组), 加入他们找第 x 个生成树中不连通, 那他们在 x 之后">
+<meta property="og:description" content="原题链接 题意 有一个有重边的无向图, 每次找到它的最小生成树, 并删除生成树的边, 直到不存在最小生成树, 问被每条边在第几次被删除. 思路 考虑用类似 Kruskal算法, 但是是遍历一遍所有边, 同时处理出来所有的生成树. 具体这样做:   如 Kruskal 一样, 把所有边按边权排序, 依次遍历   当遍历到 u, v 两个节点之间的边时, 二分查找他们在第几个生成树中不连通 ( 这里">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-08-12T12:27:59.000Z">
-<meta property="article:modified_time" content="2024-08-12T12:27:59.000Z">
+<meta property="article:published_time" content="2024-08-12T12:27:00.000Z">
+<meta property="article:modified_time" content="2024-08-12T12:27:00.000Z">
 <meta property="article:author" content="TauLee">
 <meta name="twitter:card" content="summary_large_image">
   
-  
-    <meta name="referrer" content="no-referrer-when-downgrade">
   
   
   <title>[题解 hduoj-7522] 2024HDU 暑假多校7 - cats 的最小生成树 - TauLee&#39;s Blog</title>
@@ -92,7 +68,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"taulee.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":55,"cursorChar":"","loop":false,"scope":["home",404]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"C++"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"taulee.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"C++"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -102,33 +78,6 @@
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
   
-
-  
-
-  
-    <!-- Google tag (gtag.js) -->
-    <script async>
-      if (!Fluid.ctx.dnt) {
-        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
-          window.dataLayer = window.dataLayer || [];
-          function gtag() {
-            dataLayer.push(arguments);
-          }
-          gtag('js', new Date());
-          gtag('config', '');
-        });
-      }
-    </script>
-  
-
-  
-
-  
-
-  
-
-  
-
 
 
   
@@ -235,7 +184,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">[题解 hduoj-7522] 2024HDU 暑假多校7 - cats 的最小生成树</span>
+            <span id="subtitle" data-typed-text="[题解 hduoj-7522] 2024HDU 暑假多校7 - cats 的最小生成树"></span>
           
         </div>
 
@@ -243,16 +192,11 @@
           
   <div class="mt-3">
     
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-author" aria-hidden="true"></i>
-        TauLee
-      </span>
-    
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
         <time datetime="2024-08-12 20:27" pubdate>
-          2024年8月12日
+          2024年8月12日 晚上
         </time>
       </span>
     
@@ -262,22 +206,24 @@
     
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
-        384 字
+        
+          573 字
         
       </span>
     
 
     
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          5 分钟
+        
+      </span>
+    
 
     
-    
-      
-        <span id="busuanzi_container_page_pv" style="display: none">
-          <i class="iconfont icon-eye" aria-hidden="true"></i>
-          <span id="busuanzi_value_page_pv"></span> 次
-        </span>
-        
-      
     
   </div>
 
@@ -326,7 +272,9 @@
             
             
               <div class="markdown-body">
-<p><a href="https://acm.hdu.edu.cn/showproblem.php?pid=7522">原题链接</a></p>
+                
+                
+<p><a target="_blank" rel="noopener" href="https://acm.hdu.edu.cn/showproblem.php?pid=7522">原题链接</a></p>
 <h3>题意</h3>
 <p>有一个有重边的无向图, 每次找到它的最小生成树, 并删除生成树的边, 直到不存在最小生成树, 问被每条边在第几次被删除.</p>
 <h3>思路</h3>
@@ -349,13 +297,13 @@
 <p>代码:</p>
 <pre><code class="language-cpp">#define int long long
 
-struct node {
+struct node &#123;
     int u, v, w, id, vis;
-    bool operator&lt;(node x)const {
+    bool operator&lt;(node x)const &#123;
         return w &gt; x.w;
-    }
-};
-void solve(int _) {
+    &#125;
+&#125;;
+void solve(int _) &#123;
     int n, m, v, u;
     cin &gt;&gt; n &gt;&gt; m;
     vector&lt;node&gt;eg(m + 1);
@@ -363,83 +311,102 @@ void solve(int _) {
 
     vector&lt;vector&lt;int&gt;&gt;fa;
     fa.emplace_back(vector&lt;int&gt;(n + 1, 0));
-    auto find = [&amp;](auto self, int mid, int x) {
+    auto find = [&amp;](auto self, int mid, int x) &#123;
         if (fa[mid][x] == x)return x;
         return fa[mid][x] = self(self, mid, fa[mid][x]);
-    };
+    &#125;;
 
-    for (int i = 1; i &lt;= m; ++i) {
+    for (int i = 1; i &lt;= m; ++i) &#123;
         cin &gt;&gt; v &gt;&gt; u;
-        eg[i] = {v, u, i, i, 0};
+        eg[i] = &#123;v, u, i, i, 0&#125;;
         q.emplace(eg[i]);
-    }
+    &#125;
 
     vector&lt;int&gt;vis(n + 1, 0);
     int Max = 0;
-    while (!q.empty()) {
+    while (!q.empty()) &#123;
         auto [u, v, w, id, viss] = q.top();
         q.pop();
         if (vis[v] &gt; vis[u])swap(v, u);
         int l = 0, r = vis[v];
-        while (l &lt; r) {
+        while (l &lt; r) &#123;
             int mid = (r + l + 1) / 2;
             if (find(find, mid, v) == find(find, mid, u)) l = mid;
             else r = mid - 1;
-        }
+        &#125;
         r++;
         vis[v] = max(vis[v], r);
         vis[u] = max(vis[u], r);
-        if (r + 1 &gt; fa.size()) {
+        if (r + 1 &gt; fa.size()) &#123;
             fa.emplace_back(vector&lt;int&gt;(n + 1));
             iota(fa[r].begin(), fa[r].end(), 0);
-        }
+        &#125;
         fa[r][find(find, r, v)] = find(find, r, u);
         eg[id].vis = r;
-        Max = max({Max, vis[v], vis[u]});
-    }
+        Max = max(&#123;Max, vis[v], vis[u]&#125;);
+    &#125;
 
     vector&lt;int&gt;cnt(Max + 1, 0);
-    for (int i = 1; i &lt;= m; ++i) {
+    for (int i = 1; i &lt;= m; ++i) &#123;
         cnt[eg[i].vis]++;
         debug(eg[i].vis)
-    }
+    &#125;
 
-    for (int i = 1; i &lt;= m; ++i) {
-        if (cnt[eg[i].vis] &gt;= n - 1)cout &lt;&lt; eg[i].vis &lt;&lt; &quot; \n&quot;[i == m];
-        else cout &lt;&lt; -1 &lt;&lt;  &quot; \n&quot;[i == m];
-    }
-}
+    for (int i = 1; i &lt;= m; ++i) &#123;
+        if (cnt[eg[i].vis] &gt;= n - 1)cout &lt;&lt; eg[i].vis &lt;&lt; " \n"[i == m];
+        else cout &lt;&lt; -1 &lt;&lt;  " \n"[i == m];
+    &#125;
+&#125;
 signed main()
-{
+&#123;
     ios::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
     int _ = 1;
     cin &gt;&gt; _;
-    while (_--) {
+    while (_--) &#123;
         solve(_);
-    }
-}
+    &#125;
+&#125;
 </code></pre>
 
-</div>
+                
+              </div>
             
             <hr/>
             <div>
-              
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B-%E9%A2%98%E8%A7%A3/" class="category-chain-item">算法竞赛-题解</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
 
 
               
   
 
-  <div class="post-metas my-3">
-  <div class="post-meta mr-3 d-flex align-items-center">
-    <i class="iconfont icon-category" aria-hidden="true"></i>
-    <span class="category-chains"><span class="category-chain"><a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B-%E9%A2%98%E8%A7%A3/" class="category-chain-item">算法竞赛-题解</a></span></span>
-  </div>
-</div>
-<div class="license-box my-3">
+  <div class="license-box my-3">
     <div class="license-title">
       <div>[题解 hduoj-7522] 2024HDU 暑假多校7 - cats 的最小生成树</div>
-      <div><a href="https://taulee.github.io/2024/08/12/%5B%E9%A2%98%E8%A7%A3-hduoj-7522%5D-2024HDU-%E6%9A%91%E5%81%87%E5%A4%9A%E6%A0%A17---cats-%E7%9A%84%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/">https://taulee.github.io/2024/08/12/[题解-hduoj-7522]-2024HDU-暑假多校7---cats-的最小生成树/</a></div>
+      <div>https://taulee.github.io/2024/08/12/[题解-hduoj-7522]-2024HDU-暑假多校7---cats-的最小生成树/</div>
     </div>
     <div class="license-meta">
       
@@ -454,11 +421,6 @@ signed main()
           <div>2024年8月12日</div>
         </div>
       
-      
-        <div class="license-meta-item license-meta-date">
-          <div>更新于</div>
-          <div>2024年8月12日</div>
-        </div>
       
       
         <div class="license-meta-item">
@@ -480,19 +442,36 @@ signed main()
     </div>
     <div class="license-icon iconfont"></div>
   </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/08/12/%5B%E9%A2%98%E8%A7%A3-hduoj-7521%5D-2024HDU-%E6%9A%91%E5%81%87%E5%A4%9A%E6%A0%A17---cats-%E7%9A%84%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88/" title="[题解 hduoj-7521] 2024HDU 暑假多校7 - cats 的二分答案">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">[题解 hduoj-7521] 2024HDU 暑假多校7 - cats 的二分答案</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/08/03/%E6%A0%91%E4%B8%8A%E5%90%AF%E5%8F%91%E5%BC%8F%E5%90%88%E5%B9%B6(dsu-on-tree)/" title="树上启发式合并(dsu on tree)">
+                        <span class="hidden-mobile">树上启发式合并(dsu on tree)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
               
             </div>
 
             
-  
-  
-    <article id="comments" lazyload>
-      
-
-    </article>
-  
-
-
           </article>
         </div>
       </div>
@@ -500,21 +479,6 @@ signed main()
 
     <div class="side-col d-none d-lg-block col-lg-2">
       
-  <aside class="sidebar category-bar" style="margin-left: -1rem">
-    
-
-
-
-
-
-<div class="category-list">
-  
-  
-</div>
-
-
-  </aside>
-
 
     </div>
   </div>
@@ -616,6 +580,21 @@ signed main()
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
 
 
 
@@ -722,9 +701,11 @@ signed main()
 
   <script  src="/js/local-search.js" ></script>
 
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+  
+<script src="/js/blog-enhancements.js"></script>
 
 
 

@@ -16,48 +16,20 @@
   <meta name="author" content="TauLee">
   <meta name="keywords" content="">
   
-    <meta name="description" content="  A. Find Minimum Operations  
- 签到. 
-  void solve() {
-    int n, k;
-    cin &amp;gt;&amp;gt; n &amp;gt;&amp;gt; k;
-    if (k == 1) {
-        cout &amp;lt;&amp;lt; n &amp;lt;&amp;lt; endl;
-        return;
-    }
-    int ans = 0;
-    while (n) {
-        ans += n % k;
-        n /= k;
-    }
-    c">
+    <meta name="description" content="A. Find Minimum Operations 签到. void solve() &#123;     int n, k;     cin &gt;&gt; n &gt;&gt; k;     if (k &#x3D;&#x3D; 1) &#123;         cout &lt;&lt; n &lt;&lt; endl;         return;     &#125;     int ans &#x3D;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[题解] Codeforces Round 976 (Div. 2) A ~ E">
-<meta property="og:url" content="https://taulee.github.io/2024/09/30/%5B%E9%A2%98%E8%A7%A3%5D-Codeforces-Round-976-%28Div.-2%29-A-~-E/">
+<meta property="og:url" content="https://taulee.github.io/2024/09/30/[%E9%A2%98%E8%A7%A3]-Codeforces-Round-976-(Div.-2)-A-~-E/index.html">
 <meta property="og:site_name" content="TauLee&#39;s Blog">
-<meta property="og:description" content="  A. Find Minimum Operations  
- 签到. 
-  void solve() {
-    int n, k;
-    cin &amp;gt;&amp;gt; n &amp;gt;&amp;gt; k;
-    if (k == 1) {
-        cout &amp;lt;&amp;lt; n &amp;lt;&amp;lt; endl;
-        return;
-    }
-    int ans = 0;
-    while (n) {
-        ans += n % k;
-        n /= k;
-    }
-    c">
+<meta property="og:description" content="A. Find Minimum Operations 签到. void solve() &#123;     int n, k;     cin &gt;&gt; n &gt;&gt; k;     if (k &#x3D;&#x3D; 1) &#123;         cout &lt;&lt; n &lt;&lt; endl;         return;     &#125;     int ans &#x3D;">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-09-29T18:30:17.000Z">
-<meta property="article:modified_time" content="2024-09-29T18:30:17.000Z">
+<meta property="og:image" content="https://taulee.github.io/img/posts/2024-09-30-142646680/codeforces-976-bit-operation-example.jpeg">
+<meta property="article:published_time" content="2024-09-29T18:30:00.000Z">
+<meta property="article:modified_time" content="2024-09-29T18:30:00.000Z">
 <meta property="article:author" content="TauLee">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://taulee.github.io/img/posts/2024-09-30-142646680/codeforces-976-bit-operation-example.jpeg">
   
-  
-    <meta name="referrer" content="no-referrer-when-downgrade">
   
   
   <title>[题解] Codeforces Round 976 (Div. 2) A ~ E - TauLee&#39;s Blog</title>
@@ -98,7 +70,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"taulee.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":55,"cursorChar":"","loop":false,"scope":["home",404]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"C++"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"taulee.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"C++"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -108,33 +80,6 @@
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
   
-
-  
-
-  
-    <!-- Google tag (gtag.js) -->
-    <script async>
-      if (!Fluid.ctx.dnt) {
-        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
-          window.dataLayer = window.dataLayer || [];
-          function gtag() {
-            dataLayer.push(arguments);
-          }
-          gtag('js', new Date());
-          gtag('config', '');
-        });
-      }
-    </script>
-  
-
-  
-
-  
-
-  
-
-  
-
 
 
   
@@ -241,7 +186,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">[题解] Codeforces Round 976 (Div. 2) A ~ E</span>
+            <span id="subtitle" data-typed-text="[题解] Codeforces Round 976 (Div. 2) A ~ E"></span>
           
         </div>
 
@@ -249,16 +194,11 @@
           
   <div class="mt-3">
     
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-author" aria-hidden="true"></i>
-        TauLee
-      </span>
-    
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
         <time datetime="2024-09-30 02:30" pubdate>
-          2024年9月30日
+          2024年9月30日 凌晨
         </time>
       </span>
     
@@ -268,22 +208,24 @@
     
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
-        1078 字
+        
+          1.3k 字
         
       </span>
     
 
     
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          11 分钟
+        
+      </span>
+    
 
     
-    
-      
-        <span id="busuanzi_container_page_pv" style="display: none">
-          <i class="iconfont icon-eye" aria-hidden="true"></i>
-          <span id="busuanzi_value_page_pv"></span> 次
-        </span>
-        
-      
     
   </div>
 
@@ -332,22 +274,24 @@
             
             
               <div class="markdown-body">
+                
+                
 <p><strong>A. Find Minimum Operations</strong></p>
 <p>签到.</p>
-<pre><code class="language-cpp">void solve() {
+<pre><code class="language-cpp">void solve() &#123;
     int n, k;
     cin &gt;&gt; n &gt;&gt; k;
-    if (k == 1) {
+    if (k == 1) &#123;
         cout &lt;&lt; n &lt;&lt; endl;
         return;
-    }
+    &#125;
     int ans = 0;
-    while (n) {
+    while (n) &#123;
         ans += n % k;
         n /= k;
-    }
+    &#125;
     cout &lt;&lt; ans &lt;&lt; endl;
-}
+&#125;
 </code></pre>
 <p><strong>B. Brightness Begins</strong></p>
 <p>打表发现, 翻转完后的序列为: 011011110111111011111111. 每组 $3,5,7,9...$ 个数.</p>
@@ -356,109 +300,109 @@
 <pre><code class="language-cpp">#define int long long
 #define i128 __int128
 
-i128 f(i128 x) { // 求 x 组前缀中 1 的个数
+i128 f(i128 x) &#123; // 求 x 组前缀中 1 的个数
     return ((2 * x + 1) + 3) * x / 2 - x;
-}
-i128 ff(i128 x) { // 求 x 组前缀中0和1的个数
+&#125;
+i128 ff(i128 x) &#123; // 求 x 组前缀中0和1的个数
     return ((2 * x + 1) + 3) * x / 2;
-}
-int solve(int _) {
+&#125;
+int solve(int _) &#123;
     int k; cin &gt;&gt; k;
 
     i128 l = 0, r = 1e9;
-    while (l &lt; r) {
+    while (l &lt; r) &#123;
         int mid = (l + r + 1) &gt;&gt; 1;
         if (f(mid) &gt; k)r = mid - 1;
         else if (f(mid) &lt; k)l = mid;
         else return ff(mid);
-    }
+    &#125;
 
     return ff(l) + k - f(l) + 1;
-}
+&#125;
 </code></pre>
 <p><strong>C. Bitwise Balancing</strong></p>
 <p>先列出 a, b, c, d 每 bit 位的运算结果:</p>
 <p>eg; fk, 赛时这个表画错了, 半天才发现
-<img src="/img/posts/2024-09-30-142646680/codeforces-976-bit-operation-example.jpeg" alt="Codeforces 976 位运算样例" /></p>
+<img alt="Codeforces 976 位运算样例" src="/img/posts/2024-09-30-142646680/codeforces-976-bit-operation-example.jpeg" srcset="/img/loading.gif" lazyload/></p>
 <p>发现, 运算结果不会有负数. 于是每位就自能顾得上自己, 只需要按位检查, 一旦有一位满足不了, 就输出 -1.</p>
 <pre><code class="language-cpp">#define int long long
 
-bool aa(int x, int i) {return (x &gt;&gt; i) &amp; 1;}
-int solve(int _) {
+bool aa(int x, int i) &#123;return (x &gt;&gt; i) &amp; 1;&#125;
+int solve(int _) &#123;
     int a, b, c, d;
     cin &gt;&gt; b &gt;&gt; c &gt;&gt; d;
     a = 0;
-    for (int i = 0; i &lt; 61; ++i) {
-        if (aa(b, i)) {
-            if (aa(c, i)) { //11
-                if (!aa(d, i)) {
+    for (int i = 0; i &lt; 61; ++i) &#123;
+        if (aa(b, i)) &#123;
+            if (aa(c, i)) &#123; //11
+                if (!aa(d, i)) &#123;
                     a += 1ll &lt;&lt; i;;
-                }
-            }
-            else { // 10
-                if (aa(d, i)) {
+                &#125;
+            &#125;
+            else &#123; // 10
+                if (aa(d, i)) &#123;
                     a += 1ll &lt;&lt; i;
-                }
-                else {
+                &#125;
+                else &#123;
                     return -1;
-                }
-            }
-        }
-        else {
-            if (aa(c, i)) { // 01
-                if (aa(d, i)) {
+                &#125;
+            &#125;
+        &#125;
+        else &#123;
+            if (aa(c, i)) &#123; // 01
+                if (aa(d, i)) &#123;
                     return -1;
-                }
-            }
-            else { // 00
-                if (aa(d, i)) {
+                &#125;
+            &#125;
+            else &#123; // 00
+                if (aa(d, i)) &#123;
                     a += 1ll &lt;&lt; i;
-                }
-            }
-        }
-    }
+                &#125;
+            &#125;
+        &#125;
+    &#125;
     return a;
-}
+&#125;
 </code></pre>
 <p><strong>D. Connect the Dots</strong></p>
 <p>首先考虑用并查集维护两个点的连通块所属关系. 但是操作太多, 会 tle.</p>
 <p>d 最大为 10, 于是对于 a[i], 考虑继承前 10 个节点往后跳跃的情况, 更新到 a[i] 上, 同时继承过来的跳跃次数减一. 这样每个点只用往前跳跃最多 10 次.</p>
 <pre><code class="language-cpp">int n, m, a, d, k, fa[200010], ma[200010][15];
-int find(int x) {
+int find(int x) &#123;
     if (fa[x] == x)return x;
     return fa[x] = find(fa[x]); //并查集路径压缩
-}
-int solve(int _) {
+&#125;
+int solve(int _) &#123;
     cin &gt;&gt; n &gt;&gt; m;
-    for (int i = 1; i &lt;= n; ++i) {
+    for (int i = 1; i &lt;= n; ++i) &#123;
         fa[i] = i;
-        for (int j = 1; j &lt;= 10; ++j) {
+        for (int j = 1; j &lt;= 10; ++j) &#123;
             ma[i][j] = 0;
-        }
-    }
+        &#125;
+    &#125;
 
-    for (int i = 1; i &lt;= m; ++i) {
+    for (int i = 1; i &lt;= m; ++i) &#123;
         cin &gt;&gt; a &gt;&gt; d &gt;&gt; k;
         ma[a][d] = max(ma[a][d], k);
-    }
+    &#125;
 
-    for (int i = 1; i &lt;= n; ++i) {
-        for (int j = 1; j &lt;= 10; ++j) {
+    for (int i = 1; i &lt;= n; ++i) &#123;
+        for (int j = 1; j &lt;= 10; ++j) &#123;
             if (i - j &lt; 1)break;
             if (ma[i - j][j])fa[find(i)] = find(i - j); //从前面跳过来, 更新一下并查集
-        }
-        for (int j = 1; j &lt;= 10; ++j) {
+        &#125;
+        for (int j = 1; j &lt;= 10; ++j) &#123;
             if (ma[i][j] &gt; 1 &amp;&amp; i + j &lt;= n)ma[i + j][j] = max(ma[i + j][j], ma[i][j] - 1); //继承全面没跳跃完的 k
-        }
-    }
+        &#125;
+    &#125;
 
     set&lt;int&gt;se;
-    for (int i = 1; i &lt;= n; ++i) {
+    for (int i = 1; i &lt;= n; ++i) &#123;
         se.emplace(find(i));
-    }
+    &#125;
 
     return se.size();
-}
+&#125;
 </code></pre>
 <p><strong>E. Expected Power</strong></p>
 <p>状压DP.</p>
@@ -469,120 +413,120 @@ int solve(int _) {
 <pre><code class="language-cpp">//------取模机------//
 using i64 = long long;
 template&lt;class T&gt;
-constexpr T power(T a, i64 b) {
-    T res {1};
-    for (; b; b /= 2, a *= a) {
-        if (b % 2) {
+constexpr T power(T a, i64 b) &#123;
+    T res &#123;1&#125;;
+    for (; b; b /= 2, a *= a) &#123;
+        if (b % 2) &#123;
             res *= a;
-        }
-    }
+        &#125;
+    &#125;
     return res;
-} // 快速幂
+&#125; // 快速幂
 
-constexpr i64 mul(i64 a, i64 b, i64 p) {
+constexpr i64 mul(i64 a, i64 b, i64 p) &#123;
     i64 res = a * b - i64(1.L * a * b / p) * p;
     res %= p;
-    if (res &lt; 0) {
+    if (res &lt; 0) &#123;
         res += p;
-    }
+    &#125;
     return res;
-} // 取模乘
+&#125; // 取模乘
 
 template&lt;i64 P&gt;
-struct MInt {
+struct MInt &#123;
     i64 x;
-    constexpr MInt() : x {0} {}
-    constexpr MInt(i64 x) : x {norm(x % getMod())} {}
+    constexpr MInt() : x &#123;0&#125; &#123;&#125;
+    constexpr MInt(i64 x) : x &#123;norm(x % getMod())&#125; &#123;&#125;
 
     static i64 Mod;
-    constexpr static i64 getMod() {
-        if (P &gt; 0) {
+    constexpr static i64 getMod() &#123;
+        if (P &gt; 0) &#123;
             return P;
-        } else {
+        &#125; else &#123;
             return Mod;
-        }
-    }
-    constexpr static void setMod(i64 Mod_) {
+        &#125;
+    &#125;
+    constexpr static void setMod(i64 Mod_) &#123;
         Mod = Mod_;
-    }//只有P&lt;=0, setMod才生效
-    constexpr i64 norm(i64 x) const {
-        if (x &lt; 0) {
+    &#125;//只有P&lt;=0, setMod才生效
+    constexpr i64 norm(i64 x) const &#123;
+        if (x &lt; 0) &#123;
             x += getMod();
-        }
-        if (x &gt;= getMod()) {
+        &#125;
+        if (x &gt;= getMod()) &#123;
             x -= getMod();
-        }
+        &#125;
         return x;
-    }
-    constexpr i64 val() const {
+    &#125;
+    constexpr i64 val() const &#123;
         return x;
-    }
-    constexpr MInt operator-() const {
+    &#125;
+    constexpr MInt operator-() const &#123;
         MInt res;
         res.x = norm(getMod() - x);
         return res;
-    }
-    constexpr MInt inv() const {
+    &#125;
+    constexpr MInt inv() const &#123;
         return power(*this, getMod() - 2);
-    }
-    constexpr MInt &amp;operator*=(MInt rhs) &amp; {
-        if (getMod() &lt; (1ULL &lt;&lt; 31)) {
+    &#125;
+    constexpr MInt &amp;operator*=(MInt rhs) &amp; &#123;
+        if (getMod() &lt; (1ULL &lt;&lt; 31)) &#123;
             x = x * rhs.x % int(getMod());
-        } else {
+        &#125; else &#123;
             x = mul(x, rhs.x, getMod());
-        }
+        &#125;
         return *this;
-    }
-    constexpr MInt &amp;operator+=(MInt rhs) &amp; {
+    &#125;
+    constexpr MInt &amp;operator+=(MInt rhs) &amp; &#123;
         x = norm(x + rhs.x);
         return *this;
-    }
-    constexpr MInt &amp;operator-=(MInt rhs) &amp; {
+    &#125;
+    constexpr MInt &amp;operator-=(MInt rhs) &amp; &#123;
         x = norm(x - rhs.x);
         return *this;
-    }
-    constexpr MInt &amp;operator/=(MInt rhs) &amp; {
+    &#125;
+    constexpr MInt &amp;operator/=(MInt rhs) &amp; &#123;
         return *this *= rhs.inv();
-    }
-    friend constexpr MInt operator*(MInt lhs, MInt rhs) {
+    &#125;
+    friend constexpr MInt operator*(MInt lhs, MInt rhs) &#123;
         MInt res = lhs;
         res *= rhs;
         return res;
-    }
-    friend constexpr MInt operator+(MInt lhs, MInt rhs) {
+    &#125;
+    friend constexpr MInt operator+(MInt lhs, MInt rhs) &#123;
         MInt res = lhs;
         res += rhs;
         return res;
-    }
-    friend constexpr MInt operator-(MInt lhs, MInt rhs) {
+    &#125;
+    friend constexpr MInt operator-(MInt lhs, MInt rhs) &#123;
         MInt res = lhs;
         res -= rhs;
         return res;
-    }
-    friend constexpr MInt operator/(MInt lhs, MInt rhs) {
+    &#125;
+    friend constexpr MInt operator/(MInt lhs, MInt rhs) &#123;
         MInt res = lhs;
         res /= rhs;
         return res;
-    }
-    friend constexpr std::istream &amp;operator&gt;&gt;(std::istream &amp;is, MInt &amp;a) {
+    &#125;
+    friend constexpr std::istream &amp;operator&gt;&gt;(std::istream &amp;is, MInt &amp;a) &#123;
         i64 v;
         is &gt;&gt; v;
         a = MInt(v);
         return is;
-    }
-    friend constexpr std::ostream &amp;operator&lt;&lt;(std::ostream &amp;os, const MInt &amp;a) {
+    &#125;
+    friend constexpr std::ostream &amp;operator&lt;&lt;(std::ostream &amp;os, const MInt &amp;a) &#123;
         return os &lt;&lt; a.val();
-    }
-    friend constexpr bool operator==(MInt lhs, MInt rhs) {
+    &#125;
+    friend constexpr bool operator==(MInt lhs, MInt rhs) &#123;
         return lhs.val() == rhs.val();
-    }
-    friend constexpr bool operator!=(MInt lhs, MInt rhs) {
+    &#125;
+    friend constexpr bool operator!=(MInt lhs, MInt rhs) &#123;
         return lhs.val() != rhs.val();
-    }
-    friend constexpr bool operator&lt;(MInt lhs, MInt rhs) {
+    &#125;
+    friend constexpr bool operator&lt;(MInt lhs, MInt rhs) &#123;
         return lhs.val() &lt; rhs.val();
-    }
-};
+    &#125;
+&#125;;
 
 template&lt;&gt;
 i64 MInt&lt;0&gt;::Mod = 1e9 + 7; //只有P&lt;=0, Mod才生效
@@ -593,54 +537,73 @@ using Z = MInt&lt;P&gt;;
 
 i64 n, a[200010];
 Z dp[2][1024], p[200010];
-int solve(int _) {
+int solve(int _) &#123;
     cin &gt;&gt; n;
     for (int i = 1; i &lt;= n; ++i) cin &gt;&gt; a[i];
-    for (int i = 1; i &lt;= n; ++i) {cin &gt;&gt; p[i]; p[i] /= 1e4;}
+    for (int i = 1; i &lt;= n; ++i) &#123;cin &gt;&gt; p[i]; p[i] /= 1e4;&#125;
     Z ans = 0;
     dp[0][0] = 1;
-    for (int i = 1; i &lt; 1024; ++i) {
+    for (int i = 1; i &lt; 1024; ++i) &#123;
         dp[0][i] = 0;
-    }
+    &#125;
 
-    for (int i = 1; i &lt;= n; ++i) {
+    for (int i = 1; i &lt;= n; ++i) &#123;
         int tis = i % 2;
         int last = tis ^ 1;
         for (int j = 0; j &lt; 1024; ++j) dp[tis][j] = 0;
-        for (int j = 0; j &lt; 1024; ++j) {
+        for (int j = 0; j &lt; 1024; ++j) &#123;
             dp[tis][j ^ a[i]] += dp[last][j] * p[i];
             dp[tis][j] += dp[last][j] * (1 - p[i]);
-        }
-    }
+        &#125;
+    &#125;
 
-    for (int i = 0; i &lt; 1024; ++i) {
+    for (int i = 0; i &lt; 1024; ++i) &#123;
         ans += dp[n % 2][i] * i * i;
-    }
+    &#125;
 
     return ans.val();
-}
+&#125;
 </code></pre>
 
-</div>
+                
+              </div>
             
             <hr/>
             <div>
-              
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B-%E9%A2%98%E8%A7%A3/" class="category-chain-item">算法竞赛-题解</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
 
 
               
   
 
-  <div class="post-metas my-3">
-  <div class="post-meta mr-3 d-flex align-items-center">
-    <i class="iconfont icon-category" aria-hidden="true"></i>
-    <span class="category-chains"><span class="category-chain"><a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B-%E9%A2%98%E8%A7%A3/" class="category-chain-item">算法竞赛-题解</a></span></span>
-  </div>
-</div>
-<div class="license-box my-3">
+  <div class="license-box my-3">
     <div class="license-title">
       <div>[题解] Codeforces Round 976 (Div. 2) A ~ E</div>
-      <div><a href="https://taulee.github.io/2024/09/30/%5B%E9%A2%98%E8%A7%A3%5D-Codeforces-Round-976-%28Div.-2%29-A-~-E/">https://taulee.github.io/2024/09/30/[题解]-Codeforces-Round-976-(Div.-2)-A-~-E/</a></div>
+      <div>https://taulee.github.io/2024/09/30/[题解]-Codeforces-Round-976-(Div.-2)-A-~-E/</div>
     </div>
     <div class="license-meta">
       
@@ -655,11 +618,6 @@ int solve(int _) {
           <div>2024年9月30日</div>
         </div>
       
-      
-        <div class="license-meta-item license-meta-date">
-          <div>更新于</div>
-          <div>2024年9月30日</div>
-        </div>
       
       
         <div class="license-meta-item">
@@ -681,19 +639,36 @@ int solve(int _) {
     </div>
     <div class="license-icon iconfont"></div>
   </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/04/13/%5B%E9%A2%98%E8%A7%A3%5D-Educational-Codeforces-Round-168/" title="[题解] Educational Codeforces Round 168 (Rated for Div. 2) E - level up">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">[题解] Educational Codeforces Round 168 (Rated for Div. 2) E - level up</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/09/29/%E3%80%90%E9%A2%98%E8%A7%A3%E3%80%91Codeforces-Round-975-(Div.-2)-A~E/" title="【题解】Codeforces Round 975 (Div. 2) A~E">
+                        <span class="hidden-mobile">【题解】Codeforces Round 975 (Div. 2) A~E</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
               
             </div>
 
             
-  
-  
-    <article id="comments" lazyload>
-      
-
-    </article>
-  
-
-
           </article>
         </div>
       </div>
@@ -701,21 +676,6 @@ int solve(int _) {
 
     <div class="side-col d-none d-lg-block col-lg-2">
       
-  <aside class="sidebar category-bar" style="margin-left: -1rem">
-    
-
-
-
-
-
-<div class="category-list">
-  
-  
-</div>
-
-
-  </aside>
-
 
     </div>
   </div>
@@ -817,6 +777,21 @@ int solve(int _) {
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
 
 
 
@@ -921,14 +896,13 @@ int solve(int _) {
 
   <script>Fluid.plugins.imageCaption();</script>
 
-  <script src="/js/math-config.js?v=1"></script>
-  <script defer src="/js/mathjax/tex-svg.js?v=1"></script>
-
   <script  src="/js/local-search.js" ></script>
 
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+  
+<script src="/js/blog-enhancements.js"></script>
 
 
 
@@ -938,6 +912,9 @@ int solve(int _) {
 
 
   
+<script src="/js/math-config.js"></script>
+<script defer src="/js/mathjax/tex-svg.js"></script>
+
 
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>

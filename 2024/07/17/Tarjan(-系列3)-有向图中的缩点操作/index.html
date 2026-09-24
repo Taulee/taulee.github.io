@@ -16,32 +16,20 @@
   <meta name="author" content="TauLee">
   <meta name="keywords" content="">
   
-    <meta name="description" content=" Tarjan 是大佬的名字, 大佬一生发明了许多算法, 都叫 Tarjan, 我会渐渐整理出来, 想知道都有啥的话, 可以直接到我文章列表搜索 Tarjan. 
- 重温Tarjan, 网上看了许多博客感觉都讲的不清楚. 故传上来自己的笔记, 希望帮到大家. 
- 
- 前置:  Tarjan 求有向图中的强连通分量  
- 将有向图中的强连通分量缩成一个点, 权值具题而定. 
- 在 Tarjan 求得 scc 后, 对于每个点打上同样的 scc, 就可以很容易统计出每个 scc 的出度入度有哪些, 就完成了缩点. 
- ">
+    <meta name="description" content="Tarjan 是大佬的名字, 大佬一生发明了许多算法, 都叫 Tarjan, 我会渐渐整理出来, 想知道都有啥的话, 可以直接到我文章列表搜索 Tarjan. 重温Tarjan, 网上看了许多博客感觉都讲的不清楚. 故传上来自己的笔记, 希望帮到大家.  前置: Tarjan 求有向图中的强连通分量 将有向图中的强连通分量缩成一个点, 权值具题而定. 在 Tarjan 求得 scc 后, 对于每">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tarjan( 系列3) 有向图中的缩点操作">
-<meta property="og:url" content="https://taulee.github.io/2024/07/17/Tarjan%28-%E7%B3%BB%E5%88%973%29-%E6%9C%89%E5%90%91%E5%9B%BE%E4%B8%AD%E7%9A%84%E7%BC%A9%E7%82%B9%E6%93%8D%E4%BD%9C/">
+<meta property="og:url" content="https://taulee.github.io/2024/07/17/Tarjan(-%E7%B3%BB%E5%88%973)-%E6%9C%89%E5%90%91%E5%9B%BE%E4%B8%AD%E7%9A%84%E7%BC%A9%E7%82%B9%E6%93%8D%E4%BD%9C/index.html">
 <meta property="og:site_name" content="TauLee&#39;s Blog">
-<meta property="og:description" content=" Tarjan 是大佬的名字, 大佬一生发明了许多算法, 都叫 Tarjan, 我会渐渐整理出来, 想知道都有啥的话, 可以直接到我文章列表搜索 Tarjan. 
- 重温Tarjan, 网上看了许多博客感觉都讲的不清楚. 故传上来自己的笔记, 希望帮到大家. 
- 
- 前置:  Tarjan 求有向图中的强连通分量  
- 将有向图中的强连通分量缩成一个点, 权值具题而定. 
- 在 Tarjan 求得 scc 后, 对于每个点打上同样的 scc, 就可以很容易统计出每个 scc 的出度入度有哪些, 就完成了缩点. 
- ">
+<meta property="og:description" content="Tarjan 是大佬的名字, 大佬一生发明了许多算法, 都叫 Tarjan, 我会渐渐整理出来, 想知道都有啥的话, 可以直接到我文章列表搜索 Tarjan. 重温Tarjan, 网上看了许多博客感觉都讲的不清楚. 故传上来自己的笔记, 希望帮到大家.  前置: Tarjan 求有向图中的强连通分量 将有向图中的强连通分量缩成一个点, 权值具题而定. 在 Tarjan 求得 scc 后, 对于每">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-07-17T13:35:40.000Z">
-<meta property="article:modified_time" content="2024-07-17T13:35:40.000Z">
+<meta property="og:image" content="https://taulee.github.io/img/posts/2024-07-17-140506107/tarjan-scc-condensation-graph.png">
+<meta property="article:published_time" content="2024-07-17T13:35:00.000Z">
+<meta property="article:modified_time" content="2024-07-17T13:35:00.000Z">
 <meta property="article:author" content="TauLee">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://taulee.github.io/img/posts/2024-07-17-140506107/tarjan-scc-condensation-graph.png">
   
-  
-    <meta name="referrer" content="no-referrer-when-downgrade">
   
   
   <title>Tarjan( 系列3) 有向图中的缩点操作 - TauLee&#39;s Blog</title>
@@ -82,7 +70,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"taulee.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":55,"cursorChar":"","loop":false,"scope":["home",404]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"C++"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"taulee.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"C++"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -92,33 +80,6 @@
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
   
-
-  
-
-  
-    <!-- Google tag (gtag.js) -->
-    <script async>
-      if (!Fluid.ctx.dnt) {
-        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
-          window.dataLayer = window.dataLayer || [];
-          function gtag() {
-            dataLayer.push(arguments);
-          }
-          gtag('js', new Date());
-          gtag('config', '');
-        });
-      }
-    </script>
-  
-
-  
-
-  
-
-  
-
-  
-
 
 
   
@@ -225,7 +186,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">Tarjan( 系列3) 有向图中的缩点操作</span>
+            <span id="subtitle" data-typed-text="Tarjan( 系列3) 有向图中的缩点操作"></span>
           
         </div>
 
@@ -233,16 +194,11 @@
           
   <div class="mt-3">
     
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-author" aria-hidden="true"></i>
-        TauLee
-      </span>
-    
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
         <time datetime="2024-07-17 21:35" pubdate>
-          2024年7月17日
+          2024年7月17日 晚上
         </time>
       </span>
     
@@ -252,22 +208,24 @@
     
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
-        93 字
+        
+          219 字
         
       </span>
     
 
     
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          2 分钟
+        
+      </span>
+    
 
     
-    
-      
-        <span id="busuanzi_container_page_pv" style="display: none">
-          <i class="iconfont icon-eye" aria-hidden="true"></i>
-          <span id="busuanzi_value_page_pv"></span> 次
-        </span>
-        
-      
     
   </div>
 
@@ -316,45 +274,66 @@
             
             
               <div class="markdown-body">
+                
+                
 <p>Tarjan 是大佬的名字, 大佬一生发明了许多算法, 都叫 Tarjan, 我会渐渐整理出来, 想知道都有啥的话, 可以直接到我文章列表搜索 Tarjan.</p>
 <p>重温Tarjan, 网上看了许多博客感觉都讲的不清楚. 故传上来自己的笔记, 希望帮到大家.</p>
-<hr />
+<hr/>
 <p>前置: <a href="/2024/06/23/Tarjan%E6%B1%82%E5%BC%BA%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F/">Tarjan 求有向图中的强连通分量</a></p>
 <p>将有向图中的强连通分量缩成一个点, 权值具题而定.</p>
 <p>在 Tarjan 求得 scc 后, 对于每个点打上同样的 scc, 就可以很容易统计出每个 scc 的出度入度有哪些, 就完成了缩点.</p>
-<p><img src="/img/posts/2024-07-17-140506107/tarjan-scc-condensation-graph.png" alt="Tarjan 强连通分量缩点后的 DAG 示意图" /></p>
+<p><img alt="Tarjan 强连通分量缩点后的 DAG 示意图" src="/img/posts/2024-07-17-140506107/tarjan-scc-condensation-graph.png" srcset="/img/loading.gif" lazyload/></p>
 <pre><code class="language-cpp">vector&lt;int&gt;w(cntscc + 1, 0);
 vector&lt;vector&lt;int&gt;&gt;egscc(cntscc + 1);
-for (int i = 1; i &lt;= n; ++i) {//缩点
+for (int i = 1; i &lt;= n; ++i) &#123;//缩点
     w[scc[i]]++;
-    for (auto c : eg[i]) {
+    for (auto c : eg[i]) &#123;
         if (scc[i] == scc[c])continue;//同一个联通量内continue
         egscc[scc[i]].emplace_back(scc[c]);
-    }
-}
+    &#125;
+&#125;
 
 </code></pre>
 
-</div>
+                
+              </div>
             
             <hr/>
             <div>
-              
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B-%E7%AE%97%E6%B3%95/" class="category-chain-item">算法竞赛-算法</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
 
 
               
   
 
-  <div class="post-metas my-3">
-  <div class="post-meta mr-3 d-flex align-items-center">
-    <i class="iconfont icon-category" aria-hidden="true"></i>
-    <span class="category-chains"><span class="category-chain"><a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B-%E7%AE%97%E6%B3%95/" class="category-chain-item">算法竞赛-算法</a></span></span>
-  </div>
-</div>
-<div class="license-box my-3">
+  <div class="license-box my-3">
     <div class="license-title">
       <div>Tarjan( 系列3) 有向图中的缩点操作</div>
-      <div><a href="https://taulee.github.io/2024/07/17/Tarjan%28-%E7%B3%BB%E5%88%973%29-%E6%9C%89%E5%90%91%E5%9B%BE%E4%B8%AD%E7%9A%84%E7%BC%A9%E7%82%B9%E6%93%8D%E4%BD%9C/">https://taulee.github.io/2024/07/17/Tarjan(-系列3)-有向图中的缩点操作/</a></div>
+      <div>https://taulee.github.io/2024/07/17/Tarjan(-系列3)-有向图中的缩点操作/</div>
     </div>
     <div class="license-meta">
       
@@ -369,11 +348,6 @@ for (int i = 1; i &lt;= n; ++i) {//缩点
           <div>2024年7月17日</div>
         </div>
       
-      
-        <div class="license-meta-item license-meta-date">
-          <div>更新于</div>
-          <div>2024年7月17日</div>
-        </div>
       
       
         <div class="license-meta-item">
@@ -395,19 +369,36 @@ for (int i = 1; i &lt;= n; ++i) {//缩点
     </div>
     <div class="license-icon iconfont"></div>
   </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/07/19/%E7%89%9B%E5%AE%A2-2024-%E6%9A%91%E5%81%87%E8%AE%AD%E7%BB%83%E8%90%A5,-D--XOR-of-Suffix-Sums-%E9%A2%98%E8%A7%A3/" title="牛客 2024 暑假训练营, D- XOR of Suffix Sums 题解">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">牛客 2024 暑假训练营, D- XOR of Suffix Sums 题解</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/07/17/Tarjan(-%E7%B3%BB%E5%88%972)-%E5%9C%A8%E6%97%A0%E5%90%91%E5%9B%BE%E4%B8%AD%E6%89%BE%E5%89%B2%E7%82%B9-%E6%A1%A5/" title="Tarjan( 系列2) 在无向图中找割点/桥">
+                        <span class="hidden-mobile">Tarjan( 系列2) 在无向图中找割点/桥</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
               
             </div>
 
             
-  
-  
-    <article id="comments" lazyload>
-      
-
-    </article>
-  
-
-
           </article>
         </div>
       </div>
@@ -415,21 +406,6 @@ for (int i = 1; i &lt;= n; ++i) {//缩点
 
     <div class="side-col d-none d-lg-block col-lg-2">
       
-  <aside class="sidebar category-bar" style="margin-left: -1rem">
-    
-
-
-
-
-
-<div class="category-list">
-  
-  
-</div>
-
-
-  </aside>
-
 
     </div>
   </div>
@@ -531,6 +507,21 @@ for (int i = 1; i &lt;= n; ++i) {//缩点
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
 
 
 
@@ -637,9 +628,11 @@ for (int i = 1; i &lt;= n; ++i) {//缩点
 
   <script  src="/js/local-search.js" ></script>
 
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+  
+<script src="/js/blog-enhancements.js"></script>
 
 
 

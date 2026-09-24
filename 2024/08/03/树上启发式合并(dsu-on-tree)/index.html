@@ -16,28 +16,18 @@
   <meta name="author" content="TauLee">
   <meta name="keywords" content="">
   
-    <meta name="description" content=" upd: 文尾更新了一个更好的讲解, 但英文 
- 当要维护树中所有以  每个节点为根的子树  的某个值, 而且  以 rot 为根的树  的值可以从  以 rot 的 son 为根的子树  转移过来. 
- eg =&amp;gt;  U41492 树上数颜色  . 
- 此时如果每往上传递子树的贡献时, 都暴力枚举子树中所有点, 复杂度就到了 $n^2$ . 
- 不妨这样做: 每往上传递子树的贡献时, 其他 ( 轻子树 )的仍旧暴力枚举所有点来计算贡献. 最大的那个子树 ( 重子树) 留到最后一个跑 dfs, 此时跑出来的">
+    <meta name="description" content="upd: 文尾更新了一个更好的讲解, 但英文 当要维护树中所有以 每个节点为根的子树 的某个值, 而且 以 rot 为根的树 的值可以从 以 rot 的 son 为根的子树 转移过来. eg &#x3D;&gt; U41492 树上数颜色 . 此时如果每往上传递子树的贡献时, 都暴力枚举子树中所有点, 复杂度就到了 $n^2$ . 不妨这样做: 每往上传递子树的贡献时, 其他 ( 轻子树 )的仍旧暴力枚举">
 <meta property="og:type" content="article">
 <meta property="og:title" content="树上启发式合并(dsu on tree)">
-<meta property="og:url" content="https://taulee.github.io/2024/08/03/%E6%A0%91%E4%B8%8A%E5%90%AF%E5%8F%91%E5%BC%8F%E5%90%88%E5%B9%B6%28dsu-on-tree%29/">
+<meta property="og:url" content="https://taulee.github.io/2024/08/03/%E6%A0%91%E4%B8%8A%E5%90%AF%E5%8F%91%E5%BC%8F%E5%90%88%E5%B9%B6(dsu-on-tree)/index.html">
 <meta property="og:site_name" content="TauLee&#39;s Blog">
-<meta property="og:description" content=" upd: 文尾更新了一个更好的讲解, 但英文 
- 当要维护树中所有以  每个节点为根的子树  的某个值, 而且  以 rot 为根的树  的值可以从  以 rot 的 son 为根的子树  转移过来. 
- eg =&amp;gt;  U41492 树上数颜色  . 
- 此时如果每往上传递子树的贡献时, 都暴力枚举子树中所有点, 复杂度就到了 $n^2$ . 
- 不妨这样做: 每往上传递子树的贡献时, 其他 ( 轻子树 )的仍旧暴力枚举所有点来计算贡献. 最大的那个子树 ( 重子树) 留到最后一个跑 dfs, 此时跑出来的">
+<meta property="og:description" content="upd: 文尾更新了一个更好的讲解, 但英文 当要维护树中所有以 每个节点为根的子树 的某个值, 而且 以 rot 为根的树 的值可以从 以 rot 的 son 为根的子树 转移过来. eg &#x3D;&gt; U41492 树上数颜色 . 此时如果每往上传递子树的贡献时, 都暴力枚举子树中所有点, 复杂度就到了 $n^2$ . 不妨这样做: 每往上传递子树的贡献时, 其他 ( 轻子树 )的仍旧暴力枚举">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-08-03T08:15:19.000Z">
-<meta property="article:modified_time" content="2024-08-03T08:15:19.000Z">
+<meta property="article:published_time" content="2024-08-03T08:15:00.000Z">
+<meta property="article:modified_time" content="2024-08-03T08:15:00.000Z">
 <meta property="article:author" content="TauLee">
 <meta name="twitter:card" content="summary_large_image">
   
-  
-    <meta name="referrer" content="no-referrer-when-downgrade">
   
   
   <title>树上启发式合并(dsu on tree) - TauLee&#39;s Blog</title>
@@ -78,7 +68,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"taulee.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":55,"cursorChar":"","loop":false,"scope":["home",404]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"C++"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"taulee.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"C++"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -88,33 +78,6 @@
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
   
-
-  
-
-  
-    <!-- Google tag (gtag.js) -->
-    <script async>
-      if (!Fluid.ctx.dnt) {
-        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
-          window.dataLayer = window.dataLayer || [];
-          function gtag() {
-            dataLayer.push(arguments);
-          }
-          gtag('js', new Date());
-          gtag('config', '');
-        });
-      }
-    </script>
-  
-
-  
-
-  
-
-  
-
-  
-
 
 
   
@@ -221,7 +184,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">树上启发式合并(dsu on tree)</span>
+            <span id="subtitle" data-typed-text="树上启发式合并(dsu on tree)"></span>
           
         </div>
 
@@ -229,16 +192,11 @@
           
   <div class="mt-3">
     
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-author" aria-hidden="true"></i>
-        TauLee
-      </span>
-    
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
         <time datetime="2024-08-03 16:15" pubdate>
-          2024年8月3日
+          2024年8月3日 下午
         </time>
       </span>
     
@@ -248,22 +206,24 @@
     
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
-        775 字
+        
+          1.3k 字
         
       </span>
     
 
     
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          11 分钟
+        
+      </span>
+    
 
     
-    
-      
-        <span id="busuanzi_container_page_pv" style="display: none">
-          <i class="iconfont icon-eye" aria-hidden="true"></i>
-          <span id="busuanzi_value_page_pv"></span> 次
-        </span>
-        
-      
     
   </div>
 
@@ -312,32 +272,34 @@
             
             
               <div class="markdown-body">
+                
+                
 <p>upd: 文尾更新了一个更好的讲解, 但英文</p>
 <p>当要维护树中所有以 <strong>每个节点为根的子树</strong> 的某个值, 而且 <strong>以 rot 为根的树</strong> 的值可以从 <strong>以 rot 的 son 为根的子树</strong> 转移过来.</p>
-<p>eg =&gt; <a href="https://www.luogu.com.cn/problem/U41492">U41492 树上数颜色</a> .</p>
+<p>eg =&gt; <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/U41492">U41492 树上数颜色</a> .</p>
 <p>此时如果每往上传递子树的贡献时, 都暴力枚举子树中所有点, 复杂度就到了 $n^2$ .</p>
 <p>不妨这样做: 每往上传递子树的贡献时, 其他 ( 轻子树 )的仍旧暴力枚举所有点来计算贡献. 最大的那个子树 ( 重子树) 留到最后一个跑 dfs, 此时跑出来的结果不再动他, 直接往上回溯, 就传承给了上一级. 形象地说, 就是所有轻子树合并到了重子树上, 作为 fa 的子树的贡献.</p>
 <p>可以证明这样的复杂度是 $nlogn$ . 见代码.</p>
 <pre><code class="language-cpp">https://www.luogu.com.cn/problem/U41492
-void dfs(int x, int fa) {
-    for (auto c : eg[x]) {
+void dfs(int x, int fa) &#123;
+    for (auto c : eg[x]) &#123;
         if (c == fa)continue;
         if (c == son[x])continue;
         dfs(c, x); // dfs 跑完所有轻子树内部的答案
         clear(c, x); //注意: 跑完后我们要清空这个轻子树的贡献, 不能影响计算其他轻子树内的贡献.
-    }
+    &#125;
     if (son[x]) // 计算重子树的答案, 不去clear, 直接保留, 这样就传给了上一层.
         dfs(son[x], x);
 
-    for (auto c : eg[x]) { // 暴力计算所有轻子树的贡献
+    for (auto c : eg[x]) &#123; // 暴力计算所有轻子树的贡献
         if (c == fa)continue;
         if (c == son[x])continue;
         add(c, x);
-    }
+    &#125;
     if (!num[clo[x]])sum++; // 根节点本身
     num[clo[x]]++;
     ans[x] = sum;
-}
+&#125;
 </code></pre>
 <p>就是说: 遍历所有子树的贡献时, 由于换一根子树dfs之前就要清除之前子树的贡献, 我们可以选择一个子树作为最后跑 dfs 的, 这样他就是不用清除的, 就可以节省复杂度.</p>
 <p>全部代码:</p>
@@ -349,76 +311,76 @@ vector&lt;int&gt;eg[Maxn];
 int n, v, u, sum = 0;
 int clo[Maxn], num[Maxn], son[Maxn], ans[Maxn];
 
-int get_son(int x, int fa) {
+int get_son(int x, int fa) &#123;
     int Max = 0, pos = 0, sum = 1;
-    for (auto c : eg[x]) {
+    for (auto c : eg[x]) &#123;
         if (c == fa)continue;
         int tp = get_son(c, x);
         sum += tp;
         if (tp &gt; Max)Max = tp, pos = c;
-    }
+    &#125;
     if (pos)son[x] = pos;
     return sum;
-}
-void clear(int x, int fa) {
+&#125;
+void clear(int x, int fa) &#123;
     num[clo[x]]--;
     if (!num[clo[x]])sum--;
-    for (auto c : eg[x]) {
+    for (auto c : eg[x]) &#123;
         if (c == fa)continue;
         clear(c, x);
-    }
-}
-void add(int x, int fa) {
+    &#125;
+&#125;
+void add(int x, int fa) &#123;
     if (!num[clo[x]])sum++;
     num[clo[x]]++;
-    for (auto c : eg[x]) {
+    for (auto c : eg[x]) &#123;
         if (c == fa)continue;
         add(c, x);
-    }
-}
-void dfs(int x, int fa) {
-    for (auto c : eg[x]) {
+    &#125;
+&#125;
+void dfs(int x, int fa) &#123;
+    for (auto c : eg[x]) &#123;
         if (c == fa)continue;
         if (c == son[x])continue;
         dfs(c, x);
         clear(c, x);
-    }
+    &#125;
     if (son[x])
         dfs(son[x], x);
 
-    for (auto c : eg[x]) {
+    for (auto c : eg[x]) &#123;
         if (c == fa)continue;
         if (c == son[x])continue;
         add(c, x);
-    }
+    &#125;
     if (!num[clo[x]])sum++;
     num[clo[x]]++;
     ans[x] = sum;
-}
+&#125;
 signed main()
-{
+&#123;
     ios::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
     cin &gt;&gt; n;
-    for (int i = 1; i &lt; n; ++i) {
+    for (int i = 1; i &lt; n; ++i) &#123;
         cin &gt;&gt; v &gt;&gt; u;
         eg[v].emplace_back(u);
         eg[u].emplace_back(v);
-    }
-    for (int i = 1; i &lt;= n; ++i) {
+    &#125;
+    for (int i = 1; i &lt;= n; ++i) &#123;
         cin &gt;&gt; clo[i];
-    }
+    &#125;
 
     get_son(1, 1);
     dfs(1, 1);
 
     int m; cin &gt;&gt; m;
-    for (int i = 1; i &lt;= m; ++i) {
+    for (int i = 1; i &lt;= m; ++i) &#123;
         cin &gt;&gt; v;
         cout &lt;&lt; ans[v] &lt;&lt; endl;
-    }
-}
+    &#125;
+&#125;
 </code></pre>
-<p>另一题: <a href="https://codeforces.com/problemset/problem/600/E">E. Lomsat gelral</a> , 直接看代码:</p>
+<p>另一题: <a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/600/E">E. Lomsat gelral</a> , 直接看代码:</p>
 <pre><code class="language-cpp">vector&lt;int&gt;edge[N];//邻接表存边
 int son[N], sz[N]; //每个点的重儿子   每个点子树大小
 int c[N];//每个节点的颜色
@@ -426,107 +388,126 @@ int num[N];//每种颜色的数量
 ll ans[N];//存每个点答案
 ll sum = 0; //存当前对应答案
 int maxn = 0; //存对应最大值
-void get_son(int x, int pre) { //预处理获取每个点的重儿子
+void get_son(int x, int pre) &#123; //预处理获取每个点的重儿子
     sz[x] = 1;
-    for (int i = 0; i &lt; edge[x].size(); i++) {
+    for (int i = 0; i &lt; edge[x].size(); i++) &#123;
         int tmp = edge[x][i];
-        if (tmp == pre) {
+        if (tmp == pre) &#123;
             continue;
-        }
+        &#125;
         get_son(tmp, x);
         sz[x] += sz[tmp];
-        if (sz[tmp] &gt; sz[son[x]]) { //子树最大的为重儿子
+        if (sz[tmp] &gt; sz[son[x]]) &#123; //子树最大的为重儿子
             son[x] = tmp;
-        }
-    }
-}
-void add(int x, int pre, int dep) { //更新除重儿子外的点（轻儿子+父亲）
+        &#125;
+    &#125;
+&#125;
+void add(int x, int pre, int dep) &#123; //更新除重儿子外的点（轻儿子+父亲）
     num[c[x]]++;//更新
-    if (num[c[x]] &gt; maxn) { //最大值被更新了
+    if (num[c[x]] &gt; maxn) &#123; //最大值被更新了
         maxn = num[c[x]];
         sum = c[x];
-    }
-    else if (num[c[x]] == maxn) { //出现相同的最大值
+    &#125;
+    else if (num[c[x]] == maxn) &#123; //出现相同的最大值
         sum += c[x];
-    }
-    for (int i = 0; i &lt; edge[x].size(); i++) {
+    &#125;
+    for (int i = 0; i &lt; edge[x].size(); i++) &#123;
         int tmp = edge[x][i];
-        if (tmp == pre || dep == 1 &amp;&amp; tmp == son[x]) { //第一层的重儿子在dfs中更新过且未被清空，所以这里跳过
+        if (tmp == pre || dep == 1 &amp;&amp; tmp == son[x]) &#123; //第一层的重儿子在dfs中更新过且未被清空，所以这里跳过
             continue;
-        }
+        &#125;
         add(tmp, x, dep + 1);
-    }
-}
-void clear(int x, int pre) {
+    &#125;
+&#125;
+void clear(int x, int pre) &#123;
     num[c[x]]--;
-    for (int i = 0; i &lt; edge[x].size(); i++) {
+    for (int i = 0; i &lt; edge[x].size(); i++) &#123;
         int tmp = edge[x][i];
-        if (tmp == pre) {
+        if (tmp == pre) &#123;
             continue;
-        }
+        &#125;
         clear(tmp, x);
-    }
-}
-void dfs(int x, int pre) { //当前dfs处理以x为根的答案
-    for (int i = 0; i &lt; edge[x].size(); i++) {
+    &#125;
+&#125;
+void dfs(int x, int pre) &#123; //当前dfs处理以x为根的答案
+    for (int i = 0; i &lt; edge[x].size(); i++) &#123;
         int tmp = edge[x][i];
-        if (tmp == pre || tmp == son[x]) { //先跳过重儿子，留到最后处理
+        if (tmp == pre || tmp == son[x]) &#123; //先跳过重儿子，留到最后处理
             continue;
-        }
+        &#125;
         dfs(tmp, x); //处理x的轻儿子
         clear(tmp, x); //将处理x轻儿子中标记过的点清空防止干扰其他儿子的求解
         maxn = sum = 0; //有清空操作，要把这两个重置
-    }
-    if (son[x]) {
+    &#125;
+    if (son[x]) &#123;
         dfs(son[x], x); //重儿子最后判断，不需要清空了
-    }
+    &#125;
     add(x, pre, 1); //将除重儿子外的点（轻儿子+父亲）重新更新进来
     ans[x] = sum;
-}
-int main() {
+&#125;
+int main() &#123;
     ios::sync_with_stdio(false); cin.tie(0); cout.tie(0); //同步流
     int n;
     cin &gt;&gt; n;
-    for (int i = 1; i &lt;= n; i++) {
+    for (int i = 1; i &lt;= n; i++) &#123;
         cin &gt;&gt; c[i];
-    }
-    for (int i = 1; i &lt; n; i++) {
+    &#125;
+    for (int i = 1; i &lt; n; i++) &#123;
         int u, v;
         cin &gt;&gt; u &gt;&gt; v;
         edge[u].push_back(v);
         edge[v].push_back(u);
-    }
+    &#125;
     get_son(1, 0); //预处理
     dfs(1, 0); //dfs搜答案
-    for (int i = 1; i &lt;= n; i++) {
-        cout &lt;&lt; ans[i] &lt;&lt; &quot; &quot;;
-    }
+    for (int i = 1; i &lt;= n; i++) &#123;
+        cout &lt;&lt; ans[i] &lt;&lt; " ";
+    &#125;
     return 0;
-}
+&#125;
 </code></pre>
 <p>最后分享一个帖子, 里面有更多好讲解,好题
-<a href="https://codeforces.com/blog/entry/67696">[Explanation] dsu on trees (small to large)</a></p>
+<a target="_blank" rel="noopener" href="https://codeforces.com/blog/entry/67696">[Explanation] dsu on trees (small to large)</a></p>
 
-</div>
+                
+              </div>
             
             <hr/>
             <div>
-              
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B-%E7%AE%97%E6%B3%95/" class="category-chain-item">算法竞赛-算法</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
 
 
               
   
 
-  <div class="post-metas my-3">
-  <div class="post-meta mr-3 d-flex align-items-center">
-    <i class="iconfont icon-category" aria-hidden="true"></i>
-    <span class="category-chains"><span class="category-chain"><a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B-%E7%AE%97%E6%B3%95/" class="category-chain-item">算法竞赛-算法</a></span></span>
-  </div>
-</div>
-<div class="license-box my-3">
+  <div class="license-box my-3">
     <div class="license-title">
       <div>树上启发式合并(dsu on tree)</div>
-      <div><a href="https://taulee.github.io/2024/08/03/%E6%A0%91%E4%B8%8A%E5%90%AF%E5%8F%91%E5%BC%8F%E5%90%88%E5%B9%B6%28dsu-on-tree%29/">https://taulee.github.io/2024/08/03/树上启发式合并(dsu-on-tree)/</a></div>
+      <div>https://taulee.github.io/2024/08/03/树上启发式合并(dsu-on-tree)/</div>
     </div>
     <div class="license-meta">
       
@@ -541,11 +522,6 @@ int main() {
           <div>2024年8月3日</div>
         </div>
       
-      
-        <div class="license-meta-item license-meta-date">
-          <div>更新于</div>
-          <div>2024年8月3日</div>
-        </div>
       
       
         <div class="license-meta-item">
@@ -567,19 +543,36 @@ int main() {
     </div>
     <div class="license-icon iconfont"></div>
   </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/08/12/%5B%E9%A2%98%E8%A7%A3-hduoj-7522%5D-2024HDU-%E6%9A%91%E5%81%87%E5%A4%9A%E6%A0%A17---cats-%E7%9A%84%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/" title="[题解 hduoj-7522] 2024HDU 暑假多校7 - cats 的最小生成树">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">[题解 hduoj-7522] 2024HDU 暑假多校7 - cats 的最小生成树</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/08/02/Tarjan(-%E7%B3%BB%E5%88%974)%E6%B1%82%E7%82%B9%E5%8F%8C-%E8%BE%B9%E5%8F%8C%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F/" title="Tarjan( 系列4)求点双 / 边双连通分量">
+                        <span class="hidden-mobile">Tarjan( 系列4)求点双 / 边双连通分量</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
               
             </div>
 
             
-  
-  
-    <article id="comments" lazyload>
-      
-
-    </article>
-  
-
-
           </article>
         </div>
       </div>
@@ -587,21 +580,6 @@ int main() {
 
     <div class="side-col d-none d-lg-block col-lg-2">
       
-  <aside class="sidebar category-bar" style="margin-left: -1rem">
-    
-
-
-
-
-
-<div class="category-list">
-  
-  
-</div>
-
-
-  </aside>
-
 
     </div>
   </div>
@@ -703,6 +681,21 @@ int main() {
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
 
 
 
@@ -807,14 +800,13 @@ int main() {
 
   <script>Fluid.plugins.imageCaption();</script>
 
-  <script src="/js/math-config.js?v=1"></script>
-  <script defer src="/js/mathjax/tex-svg.js?v=1"></script>
-
   <script  src="/js/local-search.js" ></script>
 
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+  
+<script src="/js/blog-enhancements.js"></script>
 
 
 
@@ -824,6 +816,9 @@ int main() {
 
 
   
+<script src="/js/math-config.js"></script>
+<script defer src="/js/mathjax/tex-svg.js"></script>
+
 
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>

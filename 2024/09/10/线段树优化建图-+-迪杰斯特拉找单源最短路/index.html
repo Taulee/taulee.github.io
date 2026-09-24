@@ -16,60 +16,22 @@
   <meta name="author" content="TauLee">
   <meta name="keywords" content="">
   
-    <meta name="description" content=" 线段树优化建图通常用于处理: 
- 
- 
- 给出一个点的区间, 都与某个点有单向边. 
- 
- 
- 给出一个点, 于一个连续区间都有单向边. 
- 
- 
- 注意到, 如果暴力建图, 会达到 $n^2$ 个边, 显然无法接受. 
- 考虑用到线段树来维护区间, 那么我们就要维护两个东西. 
- 对于线段树的一个节点node{l, r}: 
- 
- 
- 哪个节点到 l 到 r 节点都有单向边… 
- 
- 
- 节点 l 到 r 到哪个节点有单向边. 
- 
- 
- 先看 1, 我们可以用一个点连到线段树的节点 node {l, r} 来">
+    <meta name="description" content="线段树优化建图通常用于处理:   给出一个点的区间, 都与某个点有单向边.   给出一个点, 于一个连续区间都有单向边.   注意到, 如果暴力建图, 会达到 $n^2$ 个边, 显然无法接受. 考虑用到线段树来维护区间, 那么我们就要维护两个东西. 对于线段树的一个节点node{l, r}:   哪个节点到 l 到 r 节点都有单向边…   节点 l 到 r 到哪个节点有单向边.   先看 1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="线段树优化建图 + 迪杰斯特拉找单源最短路">
-<meta property="og:url" content="https://taulee.github.io/2024/09/10/%E7%BA%BF%E6%AE%B5%E6%A0%91%E4%BC%98%E5%8C%96%E5%BB%BA%E5%9B%BE-%2B-%E8%BF%AA%E6%9D%B0%E6%96%AF%E7%89%B9%E6%8B%89%E6%89%BE%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF/">
+<meta property="og:url" content="https://taulee.github.io/2024/09/10/%E7%BA%BF%E6%AE%B5%E6%A0%91%E4%BC%98%E5%8C%96%E5%BB%BA%E5%9B%BE-+-%E8%BF%AA%E6%9D%B0%E6%96%AF%E7%89%B9%E6%8B%89%E6%89%BE%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF/index.html">
 <meta property="og:site_name" content="TauLee&#39;s Blog">
-<meta property="og:description" content=" 线段树优化建图通常用于处理: 
- 
- 
- 给出一个点的区间, 都与某个点有单向边. 
- 
- 
- 给出一个点, 于一个连续区间都有单向边. 
- 
- 
- 注意到, 如果暴力建图, 会达到 $n^2$ 个边, 显然无法接受. 
- 考虑用到线段树来维护区间, 那么我们就要维护两个东西. 
- 对于线段树的一个节点node{l, r}: 
- 
- 
- 哪个节点到 l 到 r 节点都有单向边… 
- 
- 
- 节点 l 到 r 到哪个节点有单向边. 
- 
- 
- 先看 1, 我们可以用一个点连到线段树的节点 node {l, r} 来">
+<meta property="og:description" content="线段树优化建图通常用于处理:   给出一个点的区间, 都与某个点有单向边.   给出一个点, 于一个连续区间都有单向边.   注意到, 如果暴力建图, 会达到 $n^2$ 个边, 显然无法接受. 考虑用到线段树来维护区间, 那么我们就要维护两个东西. 对于线段树的一个节点node{l, r}:   哪个节点到 l 到 r 节点都有单向边…   节点 l 到 r 到哪个节点有单向边.   先看 1">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-09-10T12:27:07.000Z">
-<meta property="article:modified_time" content="2024-09-10T12:27:07.000Z">
+<meta property="og:image" content="https://taulee.github.io/img/posts/2024-09-10-142108171/segment-tree-graph-range-edges-1.webp">
+<meta property="og:image" content="https://taulee.github.io/img/posts/2024-09-10-142108171/segment-tree-graph-range-edges-2.webp">
+<meta property="og:image" content="https://taulee.github.io/img/posts/2024-09-10-142108171/segment-tree-graph-shortest-path.webp">
+<meta property="article:published_time" content="2024-09-10T12:27:00.000Z">
+<meta property="article:modified_time" content="2024-09-10T12:27:00.000Z">
 <meta property="article:author" content="TauLee">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://taulee.github.io/img/posts/2024-09-10-142108171/segment-tree-graph-range-edges-1.webp">
   
-  
-    <meta name="referrer" content="no-referrer-when-downgrade">
   
   
   <title>线段树优化建图 + 迪杰斯特拉找单源最短路 - TauLee&#39;s Blog</title>
@@ -110,7 +72,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"taulee.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":55,"cursorChar":"","loop":false,"scope":["home",404]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"C++"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"taulee.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"C++"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -120,33 +82,6 @@
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
   
-
-  
-
-  
-    <!-- Google tag (gtag.js) -->
-    <script async>
-      if (!Fluid.ctx.dnt) {
-        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
-          window.dataLayer = window.dataLayer || [];
-          function gtag() {
-            dataLayer.push(arguments);
-          }
-          gtag('js', new Date());
-          gtag('config', '');
-        });
-      }
-    </script>
-  
-
-  
-
-  
-
-  
-
-  
-
 
 
   
@@ -253,7 +188,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">线段树优化建图 + 迪杰斯特拉找单源最短路</span>
+            <span id="subtitle" data-typed-text="线段树优化建图 + 迪杰斯特拉找单源最短路"></span>
           
         </div>
 
@@ -261,16 +196,11 @@
           
   <div class="mt-3">
     
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-author" aria-hidden="true"></i>
-        TauLee
-      </span>
-    
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
         <time datetime="2024-09-10 20:27" pubdate>
-          2024年9月10日
+          2024年9月10日 晚上
         </time>
       </span>
     
@@ -280,22 +210,24 @@
     
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
-        677 字
+        
+          1.3k 字
         
       </span>
     
 
     
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          11 分钟
+        
+      </span>
+    
 
     
-    
-      
-        <span id="busuanzi_container_page_pv" style="display: none">
-          <i class="iconfont icon-eye" aria-hidden="true"></i>
-          <span id="busuanzi_value_page_pv"></span> 次
-        </span>
-        
-      
     
   </div>
 
@@ -344,6 +276,8 @@
             
             
               <div class="markdown-body">
+                
+                
 <p>线段树优化建图通常用于处理:</p>
 <ol>
 <li>
@@ -366,9 +300,9 @@
 </ol>
 <p>先看 1, 我们可以用一个点连到线段树的节点 node {l, r} 来表示这个点到 {l, r} 各有一条单向边(橙色). 此时显然: 大区间向被包含的小区间可以有权值为 0 的单向边(绿色). 因为一个点可以到上面的大区间, 一定可以到达被包含的小区间的任意一个点.</p>
 <p>注意到, 由有向边组成的路径能到达第 i 个叶子节点, 也就等价于能到达节点 i. 于是, 叶子节点就是未建树前的实际节点.</p>
-<p><img src="/img/posts/2024-09-10-142108171/segment-tree-graph-range-edges-1.webp" alt="线段树优化建图的区间连边示意图一" /></p>
+<p><img alt="线段树优化建图的区间连边示意图一" src="/img/posts/2024-09-10-142108171/segment-tree-graph-range-edges-1.webp" srcset="/img/loading.gif" lazyload/></p>
 <p>对于 2, 一切同理, 有树:</p>
-<p><img src="/img/posts/2024-09-10-142108171/segment-tree-graph-range-edges-2.webp" alt="线段树优化建图的区间连边示意图二" /></p>
+<p><img alt="线段树优化建图的区间连边示意图二" src="/img/posts/2024-09-10-142108171/segment-tree-graph-range-edges-2.webp" srcset="/img/loading.gif" lazyload/></p>
 <p>显然, 这两个树是不共存的, 不能公用一个树. 就要用一定形式把这两个树连到一起. 于是…</p>
 <p>按照如下建边:</p>
 <ol>
@@ -398,12 +332,12 @@
 <p>这样就可以把暴力的每次要建 O(r-l) 条边, 优化到建 O(logr-l) 条边</p>
 <p>建完图后直接把第一颗树的叶子节点当作原先的节点正常使用即可.</p>
 <p>如果要实现类似线段树的 lazy 优化也是可以的. 即到达了这个线段树节点, 就是可以到这个节点所代表的区间内的所有点.</p>
-<p><img src="/img/posts/2024-09-10-142108171/segment-tree-graph-shortest-path.webp" alt="线段树优化建图的最短路示意图" /></p>
-<p>以题目 <a href="https://codeforces.com/problemset/problem/786/B">786B - Legacy</a> 为例, 要求线段树建完图后的单源最短路, 直接看代码:</p>
+<p><img alt="线段树优化建图的最短路示意图" src="/img/posts/2024-09-10-142108171/segment-tree-graph-shortest-path.webp" srcset="/img/loading.gif" lazyload/></p>
+<p>以题目 <a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/786/B">786B - Legacy</a> 为例, 要求线段树建完图后的单源最短路, 直接看代码:</p>
 <pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
 using namespace std;
 #ifdef LOCAL
-#include &quot;D:\Users\TauLee\OneDrive\Mine\c++\debug.h&quot;
+#include "D:\Users\TauLee\OneDrive\Mine\c++\debug.h"
 #else
 #define debug(...) 42;
 #define endl '\n'
@@ -415,20 +349,20 @@ using namespace std;
 #define pii pair&lt;int,int&gt;
 const int Maxn = 1e5 + 10;
 
-struct node {
+struct node &#123;
     int l, r;
-} tr[Maxn &lt;&lt; 3];
+&#125; tr[Maxn &lt;&lt; 3];
 const int D = Maxn &lt;&lt; 2; // tr 偏移 D 作为第二棵树.
 int leaf[Maxn]; // 每个节点对应的叶子节点;
 vector&lt;pii&gt;eg[Maxn &lt;&lt; 3]; // 树上的虚拟边
 
-void build(int rt/*=1*/, int l, int r) {
+void build(int rt/*=1*/, int l, int r) &#123;
     tr[rt].l = l;
     tr[rt].r = r;
-    if (l == r) {
+    if (l == r) &#123;
         leaf[l] = rt;
         return ;
-    }
+    &#125;
     eg[rt].emplace_back(pii(rt &lt;&lt; 1, 0));
     eg[rt].emplace_back(pii(rt &lt;&lt; 1 | 1, 0)); // 建立第一棵树的边
     eg[(rt &lt;&lt; 1) + D].emplace_back(pii(rt + D, 0));
@@ -436,105 +370,124 @@ void build(int rt/*=1*/, int l, int r) {
     int mid = (r + l) &gt;&gt; 1;
     build(rt &lt;&lt; 1, l, mid);
     build(rt &lt;&lt; 1 | 1, mid + 1, r);
-}
+&#125;
 
-void init(int &amp;n) { // 初始化
+void init(int &amp;n) &#123; // 初始化
     build(1, 1, n); // 建立树边
-    for (int i = 1; i &lt;= n; ++i) { // 建立两棵树叶子之间的边
+    for (int i = 1; i &lt;= n; ++i) &#123; // 建立两棵树叶子之间的边
         eg[leaf[i] + D].emplace_back(pii(leaf[i], 0));
         eg[leaf[i]].emplace_back(pii(leaf[i] + D, 0));
-    }
-}
+    &#125;
+&#125;
 
-void addeg(int u, int v, int w) {
+void addeg(int u, int v, int w) &#123;
     eg[leaf[u]].emplace_back(pii(leaf[v], w));
-}
-void addeg(int rt/*=1*/, int v, int l, int r, int w, int opt) {
+&#125;
+void addeg(int rt/*=1*/, int v, int l, int r, int w, int opt) &#123;
     // opt==0, 点连区间
     // opt==1, 区间连点
     if (l &gt; tr[rt].r || r &lt; tr[rt].l)return;
-    if (l &lt;= tr[rt].l &amp;&amp; tr[rt].r &lt;= r) {
+    if (l &lt;= tr[rt].l &amp;&amp; tr[rt].r &lt;= r) &#123;
         if (opt)
             eg[rt + D].emplace_back(pii(leaf[v], w));
         else
             eg[leaf[v] + D].emplace_back(pii(rt, w));
         return;
-    }
+    &#125;
     addeg(rt &lt;&lt; 1, v, l, r, w, opt);
     addeg(rt &lt;&lt; 1 | 1, v, l, r, w, opt);
-}
+&#125;
 //----线段树优化建图----//
 
 int n, q, s, opt, v, u, w, l, r, dist[Maxn &lt;&lt; 3];
 signed main()
-{
+&#123;
     ios::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
     cin &gt;&gt; n &gt;&gt; q &gt;&gt; s;
     init(n);
-    for (int i = 1; i &lt;= q; ++i) {
+    for (int i = 1; i &lt;= q; ++i) &#123;
         cin &gt;&gt; opt;
-        if (opt == 1) {
+        if (opt == 1) &#123;
             cin &gt;&gt; v &gt;&gt; u &gt;&gt; w;
             addeg(v, u, w);
-        }
-        else if (opt == 2) {
+        &#125;
+        else if (opt == 2) &#123;
             cin &gt;&gt; v &gt;&gt; l &gt;&gt; r &gt;&gt; w;
             addeg(1, v, l, r, w, 0);
-        }
-        else {
+        &#125;
+        else &#123;
             cin &gt;&gt; v &gt;&gt; l &gt;&gt; r &gt;&gt; w;
             addeg(1, v, l, r, w, 1);
-        }
-    }
+        &#125;
+    &#125;
 
     priority_queue&lt;pii, vector&lt;pii&gt;, greater&lt;pii&gt; &gt;q;
     debug(s)
-    for (int i = 1; i &lt; (Maxn &lt;&lt; 3); ++i) {
+    for (int i = 1; i &lt; (Maxn &lt;&lt; 3); ++i) &#123;
         dist[i] = LLONG_MAX;
-    }
+    &#125;
     dist[leaf[s]] = 0;
     q.emplace(pii(0, leaf[s])); // 权值, 终点反过来
-    while (!q.empty()) {
+    while (!q.empty()) &#123;
         auto [w, s] = q.top();
         q.pop();
         if (dist[s] &lt; w)continue;
-        for (auto [t, ww] : eg[s]) {
-            if (w + ww &lt; dist[t]) {
+        for (auto [t, ww] : eg[s]) &#123;
+            if (w + ww &lt; dist[t]) &#123;
                 dist[t] = w + ww;
                 q.emplace(pii(dist[t], t));
-            }
-        }
-    }
+            &#125;
+        &#125;
+    &#125;
 
-    for (int i = 1; i &lt;= n; ++i) {
-        if (dist[leaf[i]] == LLONG_MAX)cout &lt;&lt; -1 &lt;&lt; &quot; &quot;;
-        else cout &lt;&lt; dist[leaf[i]] &lt;&lt; &quot; &quot;;
-    }
+    for (int i = 1; i &lt;= n; ++i) &#123;
+        if (dist[leaf[i]] == LLONG_MAX)cout &lt;&lt; -1 &lt;&lt; " ";
+        else cout &lt;&lt; dist[leaf[i]] &lt;&lt; " ";
+    &#125;
     cout &lt;&lt; endl;
-}
+&#125;
 </code></pre>
-<p>图片来自 <a href="https://www.cnblogs.com/tzcwk/p/13474034.html">博客</a> , 懒癌, 懒着画图, 而且他讲的也很不错.</p>
+<p>图片来自 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/tzcwk/p/13474034.html">博客</a> , 懒癌, 懒着画图, 而且他讲的也很不错.</p>
 
-</div>
+                
+              </div>
             
             <hr/>
             <div>
-              
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B-%E7%AE%97%E6%B3%95/" class="category-chain-item">算法竞赛-算法</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
 
 
               
   
 
-  <div class="post-metas my-3">
-  <div class="post-meta mr-3 d-flex align-items-center">
-    <i class="iconfont icon-category" aria-hidden="true"></i>
-    <span class="category-chains"><span class="category-chain"><a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B-%E7%AE%97%E6%B3%95/" class="category-chain-item">算法竞赛-算法</a></span></span>
-  </div>
-</div>
-<div class="license-box my-3">
+  <div class="license-box my-3">
     <div class="license-title">
       <div>线段树优化建图 + 迪杰斯特拉找单源最短路</div>
-      <div><a href="https://taulee.github.io/2024/09/10/%E7%BA%BF%E6%AE%B5%E6%A0%91%E4%BC%98%E5%8C%96%E5%BB%BA%E5%9B%BE-%2B-%E8%BF%AA%E6%9D%B0%E6%96%AF%E7%89%B9%E6%8B%89%E6%89%BE%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF/">https://taulee.github.io/2024/09/10/线段树优化建图-+-迪杰斯特拉找单源最短路/</a></div>
+      <div>https://taulee.github.io/2024/09/10/线段树优化建图-+-迪杰斯特拉找单源最短路/</div>
     </div>
     <div class="license-meta">
       
@@ -549,11 +502,6 @@ signed main()
           <div>2024年9月10日</div>
         </div>
       
-      
-        <div class="license-meta-item license-meta-date">
-          <div>更新于</div>
-          <div>2024年9月10日</div>
-        </div>
       
       
         <div class="license-meta-item">
@@ -575,19 +523,36 @@ signed main()
     </div>
     <div class="license-icon iconfont"></div>
   </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/09/29/%E3%80%90%E9%A2%98%E8%A7%A3%E3%80%91Codeforces-Round-975-(Div.-2)-A~E/" title="【题解】Codeforces Round 975 (Div. 2) A~E">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【题解】Codeforces Round 975 (Div. 2) A~E</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/08/12/%5B%E9%A2%98%E8%A7%A3-hduoj-7521%5D-2024HDU-%E6%9A%91%E5%81%87%E5%A4%9A%E6%A0%A17---cats-%E7%9A%84%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88/" title="[题解 hduoj-7521] 2024HDU 暑假多校7 - cats 的二分答案">
+                        <span class="hidden-mobile">[题解 hduoj-7521] 2024HDU 暑假多校7 - cats 的二分答案</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
               
             </div>
 
             
-  
-  
-    <article id="comments" lazyload>
-      
-
-    </article>
-  
-
-
           </article>
         </div>
       </div>
@@ -595,21 +560,6 @@ signed main()
 
     <div class="side-col d-none d-lg-block col-lg-2">
       
-  <aside class="sidebar category-bar" style="margin-left: -1rem">
-    
-
-
-
-
-
-<div class="category-list">
-  
-  
-</div>
-
-
-  </aside>
-
 
     </div>
   </div>
@@ -711,6 +661,21 @@ signed main()
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
 
 
 
@@ -815,14 +780,13 @@ signed main()
 
   <script>Fluid.plugins.imageCaption();</script>
 
-  <script src="/js/math-config.js?v=1"></script>
-  <script defer src="/js/mathjax/tex-svg.js?v=1"></script>
-
   <script  src="/js/local-search.js" ></script>
 
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+  
+<script src="/js/blog-enhancements.js"></script>
 
 
 
@@ -832,6 +796,9 @@ signed main()
 
 
   
+<script src="/js/math-config.js"></script>
+<script defer src="/js/mathjax/tex-svg.js"></script>
+
 
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>

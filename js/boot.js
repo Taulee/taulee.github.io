@@ -18,19 +18,5 @@ Fluid.boot.refresh = function() {
 };
 
 document.addEventListener('DOMContentLoaded', function() {
-  // Recent Hexo output can leave fenced code as plain <code> elements with
-  // language-* classes. Highlight those locally; older pages already contain
-  // Highlight.js markup and are left untouched.
-  Fluid.utils.createScript('/js/highlight.min.js', function() {
-    if (!window.hljs) {
-      return;
-    }
-    document.querySelectorAll('pre code[class*="language-"]').forEach(function(code) {
-      if (!code.classList.contains('hljs')) {
-        window.hljs.highlightElement(code);
-      }
-    });
-  });
-
   Fluid.boot.registerEvents();
 });

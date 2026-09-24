@@ -16,40 +16,18 @@
   <meta name="author" content="TauLee">
   <meta name="keywords" content="">
   
-    <meta name="description" content="  A. Max Plus Size  
- 分别假设答案为取第偶数位的最大值和取第奇数位的最大值两种情况, 取更优解. 
- 取偶数位的最大值时, 把所有其他都偶数位都取上. 奇数同理. 
- code: 
-  int solve(int _) {
-    int n;
-    cin &amp;gt;&amp;gt; n;
-    vector&amp;lt;int&amp;gt;a(n + 1);
-    int Maxj = 0, Maxo = 0;
-    for (int i = 1; i &amp;lt;= n; ++i) {
-        c">
+    <meta name="description" content="A. Max Plus Size 分别假设答案为取第偶数位的最大值和取第奇数位的最大值两种情况, 取更优解. 取偶数位的最大值时, 把所有其他都偶数位都取上. 奇数同理. code: int solve(int _) &#123;     int n;     cin &gt;&gt; n;     vector&lt;int&gt;a(n + 1);     int Maxj &#x3D; 0, Max">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【题解】Codeforces Round 975 (Div. 2) A~E">
-<meta property="og:url" content="https://taulee.github.io/2024/09/29/%E3%80%90%E9%A2%98%E8%A7%A3%E3%80%91Codeforces-Round-975-%28Div.-2%29-A~E/">
+<meta property="og:url" content="https://taulee.github.io/2024/09/29/%E3%80%90%E9%A2%98%E8%A7%A3%E3%80%91Codeforces-Round-975-(Div.-2)-A~E/index.html">
 <meta property="og:site_name" content="TauLee&#39;s Blog">
-<meta property="og:description" content="  A. Max Plus Size  
- 分别假设答案为取第偶数位的最大值和取第奇数位的最大值两种情况, 取更优解. 
- 取偶数位的最大值时, 把所有其他都偶数位都取上. 奇数同理. 
- code: 
-  int solve(int _) {
-    int n;
-    cin &amp;gt;&amp;gt; n;
-    vector&amp;lt;int&amp;gt;a(n + 1);
-    int Maxj = 0, Maxo = 0;
-    for (int i = 1; i &amp;lt;= n; ++i) {
-        c">
+<meta property="og:description" content="A. Max Plus Size 分别假设答案为取第偶数位的最大值和取第奇数位的最大值两种情况, 取更优解. 取偶数位的最大值时, 把所有其他都偶数位都取上. 奇数同理. code: int solve(int _) &#123;     int n;     cin &gt;&gt; n;     vector&lt;int&gt;a(n + 1);     int Maxj &#x3D; 0, Max">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-09-29T08:54:37.000Z">
-<meta property="article:modified_time" content="2024-09-29T08:54:37.000Z">
+<meta property="article:published_time" content="2024-09-29T08:54:00.000Z">
+<meta property="article:modified_time" content="2024-09-29T08:54:00.000Z">
 <meta property="article:author" content="TauLee">
 <meta name="twitter:card" content="summary_large_image">
   
-  
-    <meta name="referrer" content="no-referrer-when-downgrade">
   
   
   <title>【题解】Codeforces Round 975 (Div. 2) A~E - TauLee&#39;s Blog</title>
@@ -90,7 +68,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"taulee.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":55,"cursorChar":"","loop":false,"scope":["home",404]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"C++"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"taulee.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"C++"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -100,33 +78,6 @@
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
   
-
-  
-
-  
-    <!-- Google tag (gtag.js) -->
-    <script async>
-      if (!Fluid.ctx.dnt) {
-        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
-          window.dataLayer = window.dataLayer || [];
-          function gtag() {
-            dataLayer.push(arguments);
-          }
-          gtag('js', new Date());
-          gtag('config', '');
-        });
-      }
-    </script>
-  
-
-  
-
-  
-
-  
-
-  
-
 
 
   
@@ -233,7 +184,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">【题解】Codeforces Round 975 (Div. 2) A~E</span>
+            <span id="subtitle" data-typed-text="【题解】Codeforces Round 975 (Div. 2) A~E"></span>
           
         </div>
 
@@ -241,16 +192,11 @@
           
   <div class="mt-3">
     
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-author" aria-hidden="true"></i>
-        TauLee
-      </span>
-    
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
         <time datetime="2024-09-29 16:54" pubdate>
-          2024年9月29日
+          2024年9月29日 下午
         </time>
       </span>
     
@@ -260,22 +206,24 @@
     
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
-        937 字
+        
+          1.4k 字
         
       </span>
     
 
     
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          12 分钟
+        
+      </span>
+    
 
     
-    
-      
-        <span id="busuanzi_container_page_pv" style="display: none">
-          <i class="iconfont icon-eye" aria-hidden="true"></i>
-          <span id="busuanzi_value_page_pv"></span> 次
-        </span>
-        
-      
     
   </div>
 
@@ -324,26 +272,28 @@
             
             
               <div class="markdown-body">
+                
+                
 <p><strong>A. Max Plus Size</strong></p>
 <p>分别假设答案为取第偶数位的最大值和取第奇数位的最大值两种情况, 取更优解.</p>
 <p>取偶数位的最大值时, 把所有其他都偶数位都取上. 奇数同理.</p>
 <p>code:</p>
-<pre><code class="language-cpp">int solve(int _) {
+<pre><code class="language-cpp">int solve(int _) &#123;
     int n;
     cin &gt;&gt; n;
     vector&lt;int&gt;a(n + 1);
     int Maxj = 0, Maxo = 0;
-    for (int i = 1; i &lt;= n; ++i) {
+    for (int i = 1; i &lt;= n; ++i) &#123;
         cin &gt;&gt; a[i];
         if (i % 2)Maxj = max(Maxj, a[i]);
         else Maxo = max(Maxo, a[i]);
-    }
+    &#125;
     int ans2 = n / 2;
     int ans1 = n / 2 + n % 2;
 
 
     return max(ans1 + Maxj, ans2 + Maxo);
-}
+&#125;
 </code></pre>
 <p><strong>B. All Pairs Segments</strong></p>
 <p>先把输入的 a数组sort 一下.</p>
@@ -362,30 +312,30 @@
 <p>注意, a[n] 是一个特例.</p>
 <p>code:</p>
 <pre><code class="language-cpp">#define int long long
-void solve(int _) {
+void solve(int _) &#123;
     int n, q;
     cin &gt;&gt; n &gt;&gt; q;
     vector&lt;int&gt;a(n + 1);
-    for (int i = 1; i &lt;= n; ++i) {
+    for (int i = 1; i &lt;= n; ++i) &#123;
         cin &gt;&gt; a[i];
-    }
+    &#125;
     map&lt;int, int&gt;ma;
     sort(1 + a.begin(), a.end());
     int now = 0;
-    for (int i = 1; i &lt;= n; ++i) {
+    for (int i = 1; i &lt;= n; ++i) &#123;
         now += n - i;
         ma[now]++;
         now -= i - 1;
         if (i != n)
             ma[now] += a[i + 1] - a[i] - 1;
-    }
+    &#125;
 
-    while (q--) {
+    while (q--) &#123;
         cin &gt;&gt; n;
-        cout &lt;&lt; ma[n] &lt;&lt; &quot; &quot;;
-    }
+        cout &lt;&lt; ma[n] &lt;&lt; " ";
+    &#125;
     cout &lt;&lt; endl;
-}
+&#125;
 </code></pre>
 <p><strong>C. Cards Partition</strong></p>
 <p>**	答案没有二分性**, fk, 赛时写了一个小时的二分.</p>
@@ -405,26 +355,26 @@ void solve(int _) {
 <p>code:</p>
 <pre><code class="language-cpp">#define int long long
 #define i128 __int128
-int solve(int _) {
+int solve(int _) &#123;
     int n, k;
     cin &gt;&gt; n &gt;&gt; k;
     vector&lt;int&gt;a(n + 1);
     i128 sum = 0;
     int Max = 0;
-    for (int i = 1; i &lt;= n; ++i) {
+    for (int i = 1; i &lt;= n; ++i) &#123;
         cin &gt;&gt; a[i];
         Max = max(Max, a[i]);
         sum += a[i];
-    }
+    &#125;
     sort(1 + a.begin(), a.end());
 
     int ans = 0;
-    for (int i = 1; i &lt;= n; ++i) {
+    for (int i = 1; i &lt;= n; ++i) &#123;
         i128 clm = max(Max, sum / i + !!(sum % i));
         if (clm * i - sum &lt;= k)ans = i;
-    }
+    &#125;
     return ans;
-}
+&#125;
 </code></pre>
 <p><strong>D. Speedbreaker</strong></p>
 <p>注意到: 所有小于 $t$ 的数都包含在一个长度不大于 $t$ 的区间内时, 对于这个区间, 一定有解 ( 可以从这个区间的最小值开始往两边扩散, 哪边吉往哪边去).</p>
@@ -432,42 +382,42 @@ int solve(int _) {
 <p>对于所有区间求并集即可. 注意到如果数组中没有小于等于 t 的数, 那它对应的区间就是全部.</p>
 <p>code:</p>
 <pre><code class="language-cpp">int n, a[200010];
-int solve(int _) {
+int solve(int _) &#123;
     cin &gt;&gt; n;
-    for (int i = 1; i &lt;= n; ++i) {
+    for (int i = 1; i &lt;= n; ++i) &#123;
         cin &gt;&gt; a[i];
-    }
+    &#125;
 
     vector&lt;pair&lt;int, int&gt;&gt;tle(n + 1);
-    tle[n] = {1, n};
+    tle[n] = &#123;1, n&#125;;
 
-    for (int i = n - 1; i &gt;= 1; --i) {
+    for (int i = n - 1; i &gt;= 1; --i) &#123;
         auto [l, r] = tle[i + 1];
         while (l &lt;= r &amp;&amp; a[l] &gt; i)l++;
         while (r &gt;= l &amp;&amp; a[r] &gt; i)r--;
-        tle[i] = {l, r};
+        tle[i] = &#123;l, r&#125;;
         if (r - l + 1 &gt; i)return 0;
-    }
+    &#125;
 
     vector&lt;int&gt;pre(n + 2, 0);
     int cnt = 0;
-    for (int i = 1; i &lt;= n; ++i) {
+    for (int i = 1; i &lt;= n; ++i) &#123;
         auto [l, r] = tle[i];
-        if (l &lt;= r) {
+        if (l &lt;= r) &#123;
             cnt++;
             int ll = min(l, max(1, r - i + 1));
             int rr = max(r, min(n, l + i - 1));
             pre[ll]++;
             pre[rr + 1]--;
-        }
-    }
+        &#125;
+    &#125;
     int ans = 0;
-    for (int i = 1; i &lt;= n; ++i) {
+    for (int i = 1; i &lt;= n; ++i) &#123;
         pre[i] += pre[i - 1];
         if (pre[i] == cnt)ans++;
-    }
+    &#125;
     return ans;
-}
+&#125;
 </code></pre>
 <p><strong>E. Tree Pruning</strong></p>
 <p>所有叶子与根的距离 &lt;=&gt; 保留所有 $deep$ 相同的节点. 于是可以对这个树跑一个层次bfs, 对每层的答案取 $min$ .</p>
@@ -490,106 +440,125 @@ int n, v, u;
 int dep[Maxn], son[Maxn], ans[Maxn], fa[Maxn], Maxdep[Maxn];
 vector&lt;int&gt;eg[Maxn];
 set&lt;int&gt;se;
-void getdep(int x, int deep) {
+void getdep(int x, int deep) &#123;
     dep[x] = deep;
     Maxdep[x] = deep;
-    for (auto c : eg[x]) {
+    for (auto c : eg[x]) &#123;
         if (c == fa[x])continue;
         fa[c] = x;
         getdep(c, deep + 1);
         Maxdep[x] = max(Maxdep[x], Maxdep[c]);
-    }
-}
-int getson(int x) {
+    &#125;
+&#125;
+int getson(int x) &#123;
     son[x] = 0;
-    for (auto c : eg[x]) {
+    for (auto c : eg[x]) &#123;
         if (c == fa[x])continue;
         son[x] += getson(c);
-    }
+    &#125;
     return son[x] + 1;
-}
-int done(int x, int fromdep) {
+&#125;
+int done(int x, int fromdep) &#123;
     if (x == 1)return 0;
     if (fromdep &lt; Maxdep[x])return 0;
     if (se.count(id(x, fa[x])))return 0;
     se.emplace(id(x, fa[x]));
     return done(fa[x], fromdep) + 1;
-}
-int solve(int _) {
+&#125;
+int solve(int _) &#123;
     cin &gt;&gt; n;
     se.clear();
-    for (int i = 1; i &lt;= n; ++i) {
+    for (int i = 1; i &lt;= n; ++i) &#123;
         eg[i].clear();
         Maxdep[i] = 0;
-    }
-    for (int i = 1; i &lt; n; ++i) {
+    &#125;
+    for (int i = 1; i &lt; n; ++i) &#123;
         cin &gt;&gt; v &gt;&gt; u;
         eg[u].emplace_back(v);
         eg[v].emplace_back(u);
-    }
+    &#125;
 
     int ans = n - 1;
 
     getdep(1, 1);
     getson(1);
-    for (int i = 1; i &lt;= n; ++i) {
+    for (int i = 1; i &lt;= n; ++i) &#123;
         debug(i, fa[i], son[i])
-    }
+    &#125;
 
     int last = 1, now = 0, ended = 0, pre_ended = 0;
     deque&lt;int&gt;q;
     q.emplace_back(1);
-    while (!q.empty()) {
+    while (!q.empty()) &#123;
         int tis = q.front();
         q.pop_front();
 
-        if (dep[tis] != last) { // 上一层删除完了,
+        if (dep[tis] != last) &#123; // 上一层删除完了,
             ans = min(ans, ended + now);
             debug(last, ended, now)
             now = 0;
             ended += pre_ended;
             pre_ended = 0;
             last = dep[tis];
-        }
+        &#125;
 
         now += son[tis];
-        if (eg[tis].size() == 1) {
+        if (eg[tis].size() == 1) &#123;
             int tp = done(tis, dep[tis]);
             debug(tis, tp);
             pre_ended += tp;
-        }
+        &#125;
 
-        for (auto c : eg[tis]) {
+        for (auto c : eg[tis]) &#123;
             if (fa[tis] == c)continue;
             q.emplace_back(c);
-        }
-    }
+        &#125;
+    &#125;
     ans = min(ans, ended + now);
 
     return ans;
-}
+&#125;
 </code></pre>
 
-</div>
+                
+              </div>
             
             <hr/>
             <div>
-              
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B-%E9%A2%98%E8%A7%A3/" class="category-chain-item">算法竞赛-题解</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
 
 
               
   
 
-  <div class="post-metas my-3">
-  <div class="post-meta mr-3 d-flex align-items-center">
-    <i class="iconfont icon-category" aria-hidden="true"></i>
-    <span class="category-chains"><span class="category-chain"><a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B-%E9%A2%98%E8%A7%A3/" class="category-chain-item">算法竞赛-题解</a></span></span>
-  </div>
-</div>
-<div class="license-box my-3">
+  <div class="license-box my-3">
     <div class="license-title">
       <div>【题解】Codeforces Round 975 (Div. 2) A~E</div>
-      <div><a href="https://taulee.github.io/2024/09/29/%E3%80%90%E9%A2%98%E8%A7%A3%E3%80%91Codeforces-Round-975-%28Div.-2%29-A~E/">https://taulee.github.io/2024/09/29/【题解】Codeforces-Round-975-(Div.-2)-A~E/</a></div>
+      <div>https://taulee.github.io/2024/09/29/【题解】Codeforces-Round-975-(Div.-2)-A~E/</div>
     </div>
     <div class="license-meta">
       
@@ -604,11 +573,6 @@ int solve(int _) {
           <div>2024年9月29日</div>
         </div>
       
-      
-        <div class="license-meta-item license-meta-date">
-          <div>更新于</div>
-          <div>2024年9月29日</div>
-        </div>
       
       
         <div class="license-meta-item">
@@ -630,19 +594,36 @@ int solve(int _) {
     </div>
     <div class="license-icon iconfont"></div>
   </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/09/30/%5B%E9%A2%98%E8%A7%A3%5D-Codeforces-Round-976-(Div.-2)-A-~-E/" title="[题解] Codeforces Round 976 (Div. 2) A ~ E">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">[题解] Codeforces Round 976 (Div. 2) A ~ E</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/09/10/%E7%BA%BF%E6%AE%B5%E6%A0%91%E4%BC%98%E5%8C%96%E5%BB%BA%E5%9B%BE-+-%E8%BF%AA%E6%9D%B0%E6%96%AF%E7%89%B9%E6%8B%89%E6%89%BE%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF/" title="线段树优化建图 + 迪杰斯特拉找单源最短路">
+                        <span class="hidden-mobile">线段树优化建图 + 迪杰斯特拉找单源最短路</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
               
             </div>
 
             
-  
-  
-    <article id="comments" lazyload>
-      
-
-    </article>
-  
-
-
           </article>
         </div>
       </div>
@@ -650,21 +631,6 @@ int solve(int _) {
 
     <div class="side-col d-none d-lg-block col-lg-2">
       
-  <aside class="sidebar category-bar" style="margin-left: -1rem">
-    
-
-
-
-
-
-<div class="category-list">
-  
-  
-</div>
-
-
-  </aside>
-
 
     </div>
   </div>
@@ -766,6 +732,21 @@ int solve(int _) {
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
 
 
 
@@ -870,14 +851,13 @@ int solve(int _) {
 
   <script>Fluid.plugins.imageCaption();</script>
 
-  <script src="/js/math-config.js?v=1"></script>
-  <script defer src="/js/mathjax/tex-svg.js?v=1"></script>
-
   <script  src="/js/local-search.js" ></script>
 
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+  
+<script src="/js/blog-enhancements.js"></script>
 
 
 
@@ -887,6 +867,9 @@ int solve(int _) {
 
 
   
+<script src="/js/math-config.js"></script>
+<script defer src="/js/mathjax/tex-svg.js"></script>
+
 
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
