@@ -16,12 +16,12 @@
   <meta name="author" content="TauLee">
   <meta name="keywords" content="">
   
-    <meta name="description" content="原题链接 题意 有一个有重边的无向图, 每次找到它的最小生成树, 并删除生成树的边, 直到不存在最小生成树, 问被每条边在第几次被删除. 思路 考虑用类似 Kruskal算法, 但是是遍历一遍所有边, 同时处理出来所有的生成树. 具体这样做:   如 Kruskal 一样, 把所有边按边权排序, 依次遍历   当遍历到 u, v 两个节点之间的边时, 二分查找他们在第几个生成树中不连通 ( 这里">
+    <meta name="description" content="原题链接 题意有一个有重边的无向图, 每次找到它的最小生成树, 并删除生成树的边, 直到不存在最小生成树, 问被每条边在第几次被删除. 思路考虑用类似 Kruskal算法, 但是是遍历一遍所有边, 同时处理出来所有的生成树. 具体这样做:  如 Kruskal 一样, 把所有边按边权排序, 依次遍历  当遍历到 u, v 两个节点之间的边时, 二分查找他们在第几个生成树中不连通 ( 这里要开许多并">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[题解 hduoj-7522] 2024HDU 暑假多校7 - cats 的最小生成树">
 <meta property="og:url" content="https://taulee.github.io/2024/08/12/[%E9%A2%98%E8%A7%A3-hduoj-7522]-2024HDU-%E6%9A%91%E5%81%87%E5%A4%9A%E6%A0%A17---cats-%E7%9A%84%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/index.html">
 <meta property="og:site_name" content="TauLee&#39;s Blog">
-<meta property="og:description" content="原题链接 题意 有一个有重边的无向图, 每次找到它的最小生成树, 并删除生成树的边, 直到不存在最小生成树, 问被每条边在第几次被删除. 思路 考虑用类似 Kruskal算法, 但是是遍历一遍所有边, 同时处理出来所有的生成树. 具体这样做:   如 Kruskal 一样, 把所有边按边权排序, 依次遍历   当遍历到 u, v 两个节点之间的边时, 二分查找他们在第几个生成树中不连通 ( 这里">
+<meta property="og:description" content="原题链接 题意有一个有重边的无向图, 每次找到它的最小生成树, 并删除生成树的边, 直到不存在最小生成树, 问被每条边在第几次被删除. 思路考虑用类似 Kruskal算法, 但是是遍历一遍所有边, 同时处理出来所有的生成树. 具体这样做:  如 Kruskal 一样, 把所有边按边权排序, 依次遍历  当遍历到 u, v 两个节点之间的边时, 二分查找他们在第几个生成树中不连通 ( 这里要开许多并">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-08-12T12:27:00.000Z">
 <meta property="article:modified_time" content="2024-08-12T12:27:00.000Z">
@@ -207,7 +207,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          573 字
+          577 字
         
       </span>
     
@@ -273,100 +273,92 @@
             
               <div class="markdown-body">
                 
-                
-<p><a target="_blank" rel="noopener" href="https://acm.hdu.edu.cn/showproblem.php?pid=7522">原题链接</a></p>
-<h3>题意</h3>
-<p>有一个有重边的无向图, 每次找到它的最小生成树, 并删除生成树的边, 直到不存在最小生成树, 问被每条边在第几次被删除.</p>
-<h3>思路</h3>
-<p>考虑用类似 Kruskal算法, 但是是遍历一遍所有边, 同时处理出来所有的生成树.</p>
+                <p><a target="_blank" rel="noopener" href="https://acm.hdu.edu.cn/showproblem.php?pid=7522">原题链接</a></p>
+<h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><p>有一个有重边的无向图, 每次找到它的最小生成树, 并删除生成树的边, 直到不存在最小生成树, 问被每条边在第几次被删除.</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>考虑用类似 Kruskal算法, 但是是遍历一遍所有边, 同时处理出来所有的生成树.</p>
 <p>具体这样做:</p>
 <ol>
-<li>
-<p>如 Kruskal 一样, 把所有边按边权排序, 依次遍历</p>
+<li><p>如 Kruskal 一样, 把所有边按边权排序, 依次遍历</p>
 </li>
-<li>
-<p>当遍历到 u, v 两个节点之间的边时, 二分查找他们在第几个生成树中不连通 ( 这里要开许多并查集数组), 加入他们找第 x 个生成树中不连通, 那他们在 x 之后的生成树中一定不连通.</p>
+<li><p>当遍历到 u, v 两个节点之间的边时, 二分查找他们在第几个生成树中不连通 ( 这里要开许多并查集数组), 加入他们找第 x 个生成树中不连通, 那他们在 x 之后的生成树中一定不连通.</p>
 </li>
-<li>
-<p>找到后, 就把这条边加入这个生成树中, 给这条边打上标记.</p>
+<li><p>找到后, 就把这条边加入这个生成树中, 给这条边打上标记.</p>
 </li>
-<li>
-<p>最后统计每个生成树有多少条边, 有 n-1 条时, 这个生成树就是合法的. 输出生成树的所有边.</p>
+<li><p>最后统计每个生成树有多少条边, 有 n-1 条时, 这个生成树就是合法的. 输出生成树的所有边.</p>
 </li>
 </ol>
 <p>代码:</p>
-<pre><code class="language-cpp">#define int long long
+<div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> int long long</span>
 
-struct node &#123;
-    int u, v, w, id, vis;
-    bool operator&lt;(node x)const &#123;
-        return w &gt; x.w;
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">node</span> &#123;
+    <span class="hljs-type">int</span> u, v, w, id, vis;
+    <span class="hljs-type">bool</span> <span class="hljs-keyword">operator</span>&lt;(node x)<span class="hljs-type">const</span> &#123;
+        <span class="hljs-keyword">return</span> w &gt; x.w;
     &#125;
 &#125;;
-void solve(int _) &#123;
-    int n, m, v, u;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">solve</span><span class="hljs-params">(<span class="hljs-type">int</span> _)</span> </span>&#123;
+    <span class="hljs-type">int</span> n, m, v, u;
     cin &gt;&gt; n &gt;&gt; m;
-    vector&lt;node&gt;eg(m + 1);
+    vector&lt;node&gt;<span class="hljs-built_in">eg</span>(m + <span class="hljs-number">1</span>);
     priority_queue&lt;node&gt;q;
 
-    vector&lt;vector&lt;int&gt;&gt;fa;
-    fa.emplace_back(vector&lt;int&gt;(n + 1, 0));
-    auto find = [&amp;](auto self, int mid, int x) &#123;
-        if (fa[mid][x] == x)return x;
-        return fa[mid][x] = self(self, mid, fa[mid][x]);
+    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;fa;
+    fa.<span class="hljs-built_in">emplace_back</span>(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(n + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>));
+    <span class="hljs-keyword">auto</span> find = [&amp;](<span class="hljs-keyword">auto</span> self, <span class="hljs-type">int</span> mid, <span class="hljs-type">int</span> x) &#123;
+        <span class="hljs-keyword">if</span> (fa[mid][x] == x)<span class="hljs-keyword">return</span> x;
+        <span class="hljs-keyword">return</span> fa[mid][x] = <span class="hljs-built_in">self</span>(self, mid, fa[mid][x]);
     &#125;;
 
-    for (int i = 1; i &lt;= m; ++i) &#123;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; ++i) &#123;
         cin &gt;&gt; v &gt;&gt; u;
-        eg[i] = &#123;v, u, i, i, 0&#125;;
-        q.emplace(eg[i]);
+        eg[i] = &#123;v, u, i, i, <span class="hljs-number">0</span>&#125;;
+        q.<span class="hljs-built_in">emplace</span>(eg[i]);
     &#125;
 
-    vector&lt;int&gt;vis(n + 1, 0);
-    int Max = 0;
-    while (!q.empty()) &#123;
-        auto [u, v, w, id, viss] = q.top();
-        q.pop();
-        if (vis[v] &gt; vis[u])swap(v, u);
-        int l = 0, r = vis[v];
-        while (l &lt; r) &#123;
-            int mid = (r + l + 1) / 2;
-            if (find(find, mid, v) == find(find, mid, u)) l = mid;
-            else r = mid - 1;
+    vector&lt;<span class="hljs-type">int</span>&gt;<span class="hljs-built_in">vis</span>(n + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>);
+    <span class="hljs-type">int</span> Max = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span> (!q.<span class="hljs-built_in">empty</span>()) &#123;
+        <span class="hljs-keyword">auto</span> [u, v, w, id, viss] = q.<span class="hljs-built_in">top</span>();
+        q.<span class="hljs-built_in">pop</span>();
+        <span class="hljs-keyword">if</span> (vis[v] &gt; vis[u])<span class="hljs-built_in">swap</span>(v, u);
+        <span class="hljs-type">int</span> l = <span class="hljs-number">0</span>, r = vis[v];
+        <span class="hljs-keyword">while</span> (l &lt; r) &#123;
+            <span class="hljs-type">int</span> mid = (r + l + <span class="hljs-number">1</span>) / <span class="hljs-number">2</span>;
+            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">find</span>(find, mid, v) == <span class="hljs-built_in">find</span>(find, mid, u)) l = mid;
+            <span class="hljs-keyword">else</span> r = mid - <span class="hljs-number">1</span>;
         &#125;
         r++;
-        vis[v] = max(vis[v], r);
-        vis[u] = max(vis[u], r);
-        if (r + 1 &gt; fa.size()) &#123;
-            fa.emplace_back(vector&lt;int&gt;(n + 1));
-            iota(fa[r].begin(), fa[r].end(), 0);
+        vis[v] = <span class="hljs-built_in">max</span>(vis[v], r);
+        vis[u] = <span class="hljs-built_in">max</span>(vis[u], r);
+        <span class="hljs-keyword">if</span> (r + <span class="hljs-number">1</span> &gt; fa.<span class="hljs-built_in">size</span>()) &#123;
+            fa.<span class="hljs-built_in">emplace_back</span>(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(n + <span class="hljs-number">1</span>));
+            <span class="hljs-built_in">iota</span>(fa[r].<span class="hljs-built_in">begin</span>(), fa[r].<span class="hljs-built_in">end</span>(), <span class="hljs-number">0</span>);
         &#125;
-        fa[r][find(find, r, v)] = find(find, r, u);
+        fa[r][<span class="hljs-built_in">find</span>(find, r, v)] = <span class="hljs-built_in">find</span>(find, r, u);
         eg[id].vis = r;
-        Max = max(&#123;Max, vis[v], vis[u]&#125;);
+        Max = <span class="hljs-built_in">max</span>(&#123;Max, vis[v], vis[u]&#125;);
     &#125;
 
-    vector&lt;int&gt;cnt(Max + 1, 0);
-    for (int i = 1; i &lt;= m; ++i) &#123;
+    vector&lt;<span class="hljs-type">int</span>&gt;<span class="hljs-built_in">cnt</span>(Max + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; ++i) &#123;
         cnt[eg[i].vis]++;
-        debug(eg[i].vis)
+        <span class="hljs-built_in">debug</span>(eg[i].vis)
     &#125;
 
-    for (int i = 1; i &lt;= m; ++i) &#123;
-        if (cnt[eg[i].vis] &gt;= n - 1)cout &lt;&lt; eg[i].vis &lt;&lt; " \n"[i == m];
-        else cout &lt;&lt; -1 &lt;&lt;  " \n"[i == m];
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; ++i) &#123;
+        <span class="hljs-keyword">if</span> (cnt[eg[i].vis] &gt;= n - <span class="hljs-number">1</span>)cout &lt;&lt; eg[i].vis &lt;&lt; <span class="hljs-string">&quot; \n&quot;</span>[i == m];
+        <span class="hljs-keyword">else</span> cout &lt;&lt; <span class="hljs-number">-1</span> &lt;&lt;  <span class="hljs-string">&quot; \n&quot;</span>[i == m];
     &#125;
 &#125;
-signed main()
-&#123;
-    ios::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
-    int _ = 1;
+<span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+    ios::<span class="hljs-built_in">sync_with_stdio</span>(<span class="hljs-literal">false</span>); cin.<span class="hljs-built_in">tie</span>(<span class="hljs-literal">nullptr</span>); cout.<span class="hljs-built_in">tie</span>(<span class="hljs-literal">nullptr</span>);
+    <span class="hljs-type">int</span> _ = <span class="hljs-number">1</span>;
     cin &gt;&gt; _;
-    while (_--) &#123;
-        solve(_);
+    <span class="hljs-keyword">while</span> (_--) &#123;
+        <span class="hljs-built_in">solve</span>(_);
     &#125;
-&#125;
-</code></pre>
+&#125;</code></pre></div>
 
                 
               </div>
@@ -702,10 +694,6 @@ signed main()
   <script  src="/js/local-search.js" ></script>
 
 
-
-
-  
-<script src="/js/blog-enhancements.js"></script>
 
 
 

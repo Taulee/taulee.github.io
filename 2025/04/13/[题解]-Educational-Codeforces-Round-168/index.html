@@ -16,12 +16,12 @@
   <meta name="author" content="TauLee">
   <meta name="keywords" content="">
   
-    <meta name="description" content="链接 思路 1 注意到在 $k \in [1,n]$ 可以得到的最高等级分别为: $n,\frac{n}{2},\frac{n}{3}.....\frac{n}{n} $ , 总的个数是一个调和级数, $sum&#x3D;n*\ln n$ , 完全可以处理出每个 k 下, 每一个等级时玩家对应的在哪一段. vector&lt;vector&lt;pair&lt;int, int&gt;&gt;&gt;f(">
+    <meta name="description" content="链接 思路 1注意到在 $k \in [1,n]$ 可以得到的最高等级分别为: $n,\frac{n}{2},\frac{n}{3}.....\frac{n}{n} $ , 总的个数是一个调和级数, $sum&#x3D;n*\ln n$ , 完全可以处理出每个 k 下, 每一个等级时玩家对应的在哪一段.  vector&lt;vector&lt;pair&lt;int, int&gt;&gt;&gt;f(n">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[题解] Educational Codeforces Round 168 (Rated for Div. 2) E - level up">
 <meta property="og:url" content="https://taulee.github.io/2025/04/13/[%E9%A2%98%E8%A7%A3]-Educational-Codeforces-Round-168/index.html">
 <meta property="og:site_name" content="TauLee&#39;s Blog">
-<meta property="og:description" content="链接 思路 1 注意到在 $k \in [1,n]$ 可以得到的最高等级分别为: $n,\frac{n}{2},\frac{n}{3}.....\frac{n}{n} $ , 总的个数是一个调和级数, $sum&#x3D;n*\ln n$ , 完全可以处理出每个 k 下, 每一个等级时玩家对应的在哪一段. vector&lt;vector&lt;pair&lt;int, int&gt;&gt;&gt;f(">
+<meta property="og:description" content="链接 思路 1注意到在 $k \in [1,n]$ 可以得到的最高等级分别为: $n,\frac{n}{2},\frac{n}{3}.....\frac{n}{n} $ , 总的个数是一个调和级数, $sum&#x3D;n*\ln n$ , 完全可以处理出每个 k 下, 每一个等级时玩家对应的在哪一段.  vector&lt;vector&lt;pair&lt;int, int&gt;&gt;&gt;f(n">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-04-13T11:47:00.000Z">
 <meta property="article:modified_time" content="2025-04-13T11:47:00.000Z">
@@ -207,7 +207,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          536 字
+          542 字
         
       </span>
     
@@ -273,76 +273,73 @@
             
               <div class="markdown-body">
                 
-                
-<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1997/problem/E">链接</a></p>
-<h3>思路 1</h3>
-<p>注意到在 $k \in [1,n]$ 可以得到的最高等级分别为: $n,\frac{n}{2},\frac{n}{3}.....\frac{n}{n}
-$ , 总的个数是一个调和级数, $sum=n*\ln n$ , 完全可以处理出每个 k 下, 每一个等级时玩家对应的在哪一段.</p>
+                <p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1997/problem/E">链接</a></p>
+<h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路 1"></a>思路 1</h3><p>注意到在 $k \in [1,n]$ 可以得到的最高等级分别为: $n,\frac{n}{2},\frac{n}{3}.....\frac{n}{n} $ , 总的个数是一个调和级数, $sum=n*\ln n$ , 完全可以处理出每个 k 下, 每一个等级时玩家对应的在哪一段.</p>
+
 <p><code>vector&lt;vector&lt;pair&lt;int, int&gt;&gt;&gt;f(n + 1); //f[k,&#123;i,j&#125;] 对于 k,升到 i level 需要的最少长度 j.</code></p>
 <p>用树状数组实时维护出当前队列内大于等于当前玩家等级的怪物的区间数量( 同权值线段树的用法 ), 注意 check 时要减去在当前位置前的等级高于等于玩家的怪物( <code>now = -ask(l);</code> ):</p>
-<pre><code class="language-cpp">int tr[200010];
-void upd(int x, int val) &#123;
-    for (; x &lt;= n; x += x &amp; -x)tr[x] += val;
+<div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-type">int</span> tr[<span class="hljs-number">200010</span>];
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">upd</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> val)</span> </span>&#123;
+    <span class="hljs-keyword">for</span> (; x &lt;= n; x += x &amp; -x)tr[x] += val;
 &#125;
-int ask(int x) &#123;
-    int ans = 0;
-    for (; x; x -= x &amp; -x)ans += tr[x];
-    return ans;
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">ask</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>&#123;
+    <span class="hljs-type">int</span> ans = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (; x; x -= x &amp; -x)ans += tr[x];
+    <span class="hljs-keyword">return</span> ans;
 &#125;
-int select(int l, int k, int &amp;now) &#123;
-    now = -ask(l);
-    int x = 0;
-    for (int i = 1 &lt;&lt; (int)log2(n); i; i /= 2) &#123;
-        if (x + i &lt;= n &amp;&amp; now + tr[x + i] &lt;= k) &#123;
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">select</span><span class="hljs-params">(<span class="hljs-type">int</span> l, <span class="hljs-type">int</span> k, <span class="hljs-type">int</span> &amp;now)</span> </span>&#123;
+    now = -<span class="hljs-built_in">ask</span>(l);
+    <span class="hljs-type">int</span> x = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span> &lt;&lt; (<span class="hljs-type">int</span>)<span class="hljs-built_in">log2</span>(n); i; i /= <span class="hljs-number">2</span>) &#123;
+        <span class="hljs-keyword">if</span> (x + i &lt;= n &amp;&amp; now + tr[x + i] &lt;= k) &#123;
             x += i;
             now += tr[x];
         &#125;
     &#125;
-    return x;
+    <span class="hljs-keyword">return</span> x;
+&#125;</code></pre></div>
+
+<div class="code-wrapper"><pre><code class="hljs cpp">cin &gt;&gt; n &gt;&gt; q;
+vector&lt;<span class="hljs-type">int</span>&gt;<span class="hljs-built_in">a</span>(n + <span class="hljs-number">1</span>);
+vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;<span class="hljs-built_in">pos</span>(<span class="hljs-number">200010</span>); <span class="hljs-comment">// i 的位置</span>
+<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) &#123;
+    cin &gt;&gt; a[i];
+    <span class="hljs-built_in">upd</span>(i, <span class="hljs-number">1</span>);
+    pos[a[i]].<span class="hljs-built_in">emplace_back</span>(i);
 &#125;
-</code></pre>
-<pre><code class="language-cpp">  cin &gt;&gt; n &gt;&gt; q;
-  vector&lt;int&gt;a(n + 1);
-  vector&lt;vector&lt;int&gt;&gt;pos(200010); // i 的位置
-  for (int i = 1; i &lt;= n; ++i) &#123;
-      cin &gt;&gt; a[i];
-      upd(i, 1);
-      pos[a[i]].emplace_back(i);
-  &#125;
 
-  vector&lt;vector&lt;pair&lt;int, int&gt;&gt;&gt;f(n + 1); //f[k,&#123;i,j&#125;] 对于 k,升到 i level 需要的最少长度 j.
-  for (int i = 1; i &lt;= n; ++i) &#123;
-      f[i].emplace_back(1, 0);
-  &#125;
+vector&lt;vector&lt;pair&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt;&gt;&gt;<span class="hljs-built_in">f</span>(n + <span class="hljs-number">1</span>); <span class="hljs-comment">//f[k,&#123;i,j&#125;] 对于 k,升到 i level 需要的最少长度 j.</span>
+<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) &#123;
+    f[i].<span class="hljs-built_in">emplace_back</span>(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>);
+&#125;
 
-  for (int level = 2; level &lt;= n; ++level) &#123;
-      for (int k = 1; k * (level - 1) &lt;= n; ++k) &#123;
-          int now = 0;
-          int p = select(f[k].back().second, k, now);
-          if (now &lt; k)p++;
-          f[k].emplace_back(level, p);
-      &#125;
-      for (auto c : pos[level - 1]) &#123;
-          upd(c, -1);
-      &#125;
-  &#125;
-</code></pre>
+<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> level = <span class="hljs-number">2</span>; level &lt;= n; ++level) &#123;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> k = <span class="hljs-number">1</span>; k * (level - <span class="hljs-number">1</span>) &lt;= n; ++k) &#123;
+        <span class="hljs-type">int</span> now = <span class="hljs-number">0</span>;
+        <span class="hljs-type">int</span> p = <span class="hljs-built_in">select</span>(f[k].<span class="hljs-built_in">back</span>().second, k, now);
+        <span class="hljs-keyword">if</span> (now &lt; k)p++;
+        f[k].<span class="hljs-built_in">emplace_back</span>(level, p);
+    &#125;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> c : pos[level - <span class="hljs-number">1</span>]) &#123;
+        <span class="hljs-built_in">upd</span>(c, <span class="hljs-number">-1</span>);
+    &#125;
+&#125;</code></pre></div>
+
 <p>处理出来 <code>f[]</code> 后, 对于每个输入, 只需要二分对应的 <code>f[a[i]]</code> , 找到玩家达到 $a[i]+1$ 等级的最早位置, 小于 $i$ 的话, 玩家到达 $i$ 时等级就已经大于 $a[i]$ 了, 这个怪就会逃跑.</p>
-<pre><code class="language-cpp"> while (q--) &#123;
-     int i, x;
-     cin &gt;&gt; i &gt;&gt; x;
-     auto p = upper_bound(f[x].begin(), f[x].end(), pair(a[i], LLONG_MAX));
-     string ans;
-     if (p == f[x].end())ans = "Yes";
-     else &#123;
-         if (p-&gt;second &gt;= i)ans = "Yes";
-         else ans = "No";
-     &#125;
-     cout &lt;&lt; ans &lt;&lt; endl;
- &#125;
-</code></pre>
-<h3>思路 2</h3>
-<p>考虑根号分治.</p>
+<div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-keyword">while</span> (q--) &#123;
+    <span class="hljs-type">int</span> i, x;
+    cin &gt;&gt; i &gt;&gt; x;
+    <span class="hljs-keyword">auto</span> p = <span class="hljs-built_in">upper_bound</span>(f[x].<span class="hljs-built_in">begin</span>(), f[x].<span class="hljs-built_in">end</span>(), <span class="hljs-built_in">pair</span>(a[i], LLONG_MAX));
+    string ans;
+    <span class="hljs-keyword">if</span> (p == f[x].<span class="hljs-built_in">end</span>())ans = <span class="hljs-string">&quot;Yes&quot;</span>;
+    <span class="hljs-keyword">else</span> &#123;
+        <span class="hljs-keyword">if</span> (p-&gt;second &gt;= i)ans = <span class="hljs-string">&quot;Yes&quot;</span>;
+        <span class="hljs-keyword">else</span> ans = <span class="hljs-string">&quot;No&quot;</span>;
+    &#125;
+    cout &lt;&lt; ans &lt;&lt; endl;
+&#125;</code></pre></div>
+
+<h3 id="思路-2"><a href="#思路-2" class="headerlink" title="思路 2"></a>思路 2</h3><p>考虑根号分治.</p>
 <p>待补充…</p>
 
                 
@@ -679,10 +676,6 @@ int select(int l, int k, int &amp;now) &#123;
   <script  src="/js/local-search.js" ></script>
 
 
-
-
-  
-<script src="/js/blog-enhancements.js"></script>
 
 
 

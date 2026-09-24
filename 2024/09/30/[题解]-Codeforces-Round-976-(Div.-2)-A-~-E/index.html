@@ -16,12 +16,12 @@
   <meta name="author" content="TauLee">
   <meta name="keywords" content="">
   
-    <meta name="description" content="A. Find Minimum Operations 签到. void solve() &#123;     int n, k;     cin &gt;&gt; n &gt;&gt; k;     if (k &#x3D;&#x3D; 1) &#123;         cout &lt;&lt; n &lt;&lt; endl;         return;     &#125;     int ans &#x3D;">
+    <meta name="description" content="A. Find Minimum Operations 签到. void solve() &#123;     int n, k;     cin &gt;&gt; n &gt;&gt; k;     if (k &#x3D;&#x3D; 1) &#123;         cout &lt;&lt; n &lt;&lt; endl;         return;     &#125;     int ans &#x3D; 0">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[题解] Codeforces Round 976 (Div. 2) A ~ E">
 <meta property="og:url" content="https://taulee.github.io/2024/09/30/[%E9%A2%98%E8%A7%A3]-Codeforces-Round-976-(Div.-2)-A-~-E/index.html">
 <meta property="og:site_name" content="TauLee&#39;s Blog">
-<meta property="og:description" content="A. Find Minimum Operations 签到. void solve() &#123;     int n, k;     cin &gt;&gt; n &gt;&gt; k;     if (k &#x3D;&#x3D; 1) &#123;         cout &lt;&lt; n &lt;&lt; endl;         return;     &#125;     int ans &#x3D;">
+<meta property="og:description" content="A. Find Minimum Operations 签到. void solve() &#123;     int n, k;     cin &gt;&gt; n &gt;&gt; k;     if (k &#x3D;&#x3D; 1) &#123;         cout &lt;&lt; n &lt;&lt; endl;         return;     &#125;     int ans &#x3D; 0">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://taulee.github.io/img/posts/2024-09-30-142646680/codeforces-976-bit-operation-example.jpeg">
 <meta property="article:published_time" content="2024-09-29T18:30:00.000Z">
@@ -275,295 +275,292 @@
             
               <div class="markdown-body">
                 
-                
-<p><strong>A. Find Minimum Operations</strong></p>
+                <p><strong>A. Find Minimum Operations</strong></p>
 <p>签到.</p>
-<pre><code class="language-cpp">void solve() &#123;
-    int n, k;
+<div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">solve</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-type">int</span> n, k;
     cin &gt;&gt; n &gt;&gt; k;
-    if (k == 1) &#123;
+    <span class="hljs-keyword">if</span> (k == <span class="hljs-number">1</span>) &#123;
         cout &lt;&lt; n &lt;&lt; endl;
-        return;
+        <span class="hljs-keyword">return</span>;
     &#125;
-    int ans = 0;
-    while (n) &#123;
+    <span class="hljs-type">int</span> ans = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span> (n) &#123;
         ans += n % k;
         n /= k;
     &#125;
     cout &lt;&lt; ans &lt;&lt; endl;
-&#125;
-</code></pre>
+&#125;</code></pre></div>
+
 <p><strong>B. Brightness Begins</strong></p>
 <p>打表发现, 翻转完后的序列为: 011011110111111011111111. 每组 $3,5,7,9...$ 个数.</p>
 <p>直接用等差数列公式求出前缀中 $1$ 的个数, 二分check答案</p>
 <p>(赛时代码, 也不知道炸不炸 ll, 反正无脑套 __int128)</p>
-<pre><code class="language-cpp">#define int long long
-#define i128 __int128
+<div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> int long long</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> i128 __int128</span>
 
-i128 f(i128 x) &#123; // 求 x 组前缀中 1 的个数
-    return ((2 * x + 1) + 3) * x / 2 - x;
+<span class="hljs-function">i128 <span class="hljs-title">f</span><span class="hljs-params">(i128 x)</span> </span>&#123; <span class="hljs-comment">// 求 x 组前缀中 1 的个数</span>
+    <span class="hljs-keyword">return</span> ((<span class="hljs-number">2</span> * x + <span class="hljs-number">1</span>) + <span class="hljs-number">3</span>) * x / <span class="hljs-number">2</span> - x;
 &#125;
-i128 ff(i128 x) &#123; // 求 x 组前缀中0和1的个数
-    return ((2 * x + 1) + 3) * x / 2;
+<span class="hljs-function">i128 <span class="hljs-title">ff</span><span class="hljs-params">(i128 x)</span> </span>&#123; <span class="hljs-comment">// 求 x 组前缀中0和1的个数</span>
+    <span class="hljs-keyword">return</span> ((<span class="hljs-number">2</span> * x + <span class="hljs-number">1</span>) + <span class="hljs-number">3</span>) * x / <span class="hljs-number">2</span>;
 &#125;
-int solve(int _) &#123;
-    int k; cin &gt;&gt; k;
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">solve</span><span class="hljs-params">(<span class="hljs-type">int</span> _)</span> </span>&#123;
+    <span class="hljs-type">int</span> k; cin &gt;&gt; k;
 
-    i128 l = 0, r = 1e9;
-    while (l &lt; r) &#123;
-        int mid = (l + r + 1) &gt;&gt; 1;
-        if (f(mid) &gt; k)r = mid - 1;
-        else if (f(mid) &lt; k)l = mid;
-        else return ff(mid);
+    i128 l = <span class="hljs-number">0</span>, r = <span class="hljs-number">1e9</span>;
+    <span class="hljs-keyword">while</span> (l &lt; r) &#123;
+        <span class="hljs-type">int</span> mid = (l + r + <span class="hljs-number">1</span>) &gt;&gt; <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">f</span>(mid) &gt; k)r = mid - <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-built_in">f</span>(mid) &lt; k)l = mid;
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-built_in">ff</span>(mid);
     &#125;
 
-    return ff(l) + k - f(l) + 1;
-&#125;
-</code></pre>
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">ff</span>(l) + k - <span class="hljs-built_in">f</span>(l) + <span class="hljs-number">1</span>;
+&#125;</code></pre></div>
+
 <p><strong>C. Bitwise Balancing</strong></p>
 <p>先列出 a, b, c, d 每 bit 位的运算结果:</p>
-<p>eg; fk, 赛时这个表画错了, 半天才发现
-<img alt="Codeforces 976 位运算样例" src="/img/posts/2024-09-30-142646680/codeforces-976-bit-operation-example.jpeg" srcset="/img/loading.gif" lazyload/></p>
+<p>eg; fk, 赛时这个表画错了, 半天才发现 <img src="/img/posts/2024-09-30-142646680/codeforces-976-bit-operation-example.jpeg" srcset="/img/loading.gif" lazyload alt="Codeforces 976 位运算样例"></p>
 <p>发现, 运算结果不会有负数. 于是每位就自能顾得上自己, 只需要按位检查, 一旦有一位满足不了, 就输出 -1.</p>
-<pre><code class="language-cpp">#define int long long
+<div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> int long long</span>
 
-bool aa(int x, int i) &#123;return (x &gt;&gt; i) &amp; 1;&#125;
-int solve(int _) &#123;
-    int a, b, c, d;
+<span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">aa</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> i)</span> </span>&#123;<span class="hljs-keyword">return</span> (x &gt;&gt; i) &amp; <span class="hljs-number">1</span>;&#125;
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">solve</span><span class="hljs-params">(<span class="hljs-type">int</span> _)</span> </span>&#123;
+    <span class="hljs-type">int</span> a, b, c, d;
     cin &gt;&gt; b &gt;&gt; c &gt;&gt; d;
-    a = 0;
-    for (int i = 0; i &lt; 61; ++i) &#123;
-        if (aa(b, i)) &#123;
-            if (aa(c, i)) &#123; //11
-                if (!aa(d, i)) &#123;
-                    a += 1ll &lt;&lt; i;;
+    a = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">61</span>; ++i) &#123;
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">aa</span>(b, i)) &#123;
+            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">aa</span>(c, i)) &#123; <span class="hljs-comment">//11</span>
+                <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">aa</span>(d, i)) &#123;
+                    a += <span class="hljs-number">1ll</span> &lt;&lt; i;;
                 &#125;
             &#125;
-            else &#123; // 10
-                if (aa(d, i)) &#123;
-                    a += 1ll &lt;&lt; i;
+            <span class="hljs-keyword">else</span> &#123; <span class="hljs-comment">// 10</span>
+                <span class="hljs-keyword">if</span> (<span class="hljs-built_in">aa</span>(d, i)) &#123;
+                    a += <span class="hljs-number">1ll</span> &lt;&lt; i;
                 &#125;
-                else &#123;
-                    return -1;
+                <span class="hljs-keyword">else</span> &#123;
+                    <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
                 &#125;
             &#125;
         &#125;
-        else &#123;
-            if (aa(c, i)) &#123; // 01
-                if (aa(d, i)) &#123;
-                    return -1;
+        <span class="hljs-keyword">else</span> &#123;
+            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">aa</span>(c, i)) &#123; <span class="hljs-comment">// 01</span>
+                <span class="hljs-keyword">if</span> (<span class="hljs-built_in">aa</span>(d, i)) &#123;
+                    <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
                 &#125;
             &#125;
-            else &#123; // 00
-                if (aa(d, i)) &#123;
-                    a += 1ll &lt;&lt; i;
+            <span class="hljs-keyword">else</span> &#123; <span class="hljs-comment">// 00</span>
+                <span class="hljs-keyword">if</span> (<span class="hljs-built_in">aa</span>(d, i)) &#123;
+                    a += <span class="hljs-number">1ll</span> &lt;&lt; i;
                 &#125;
             &#125;
         &#125;
     &#125;
-    return a;
-&#125;
-</code></pre>
+    <span class="hljs-keyword">return</span> a;
+&#125;</code></pre></div>
+
 <p><strong>D. Connect the Dots</strong></p>
 <p>首先考虑用并查集维护两个点的连通块所属关系. 但是操作太多, 会 tle.</p>
 <p>d 最大为 10, 于是对于 a[i], 考虑继承前 10 个节点往后跳跃的情况, 更新到 a[i] 上, 同时继承过来的跳跃次数减一. 这样每个点只用往前跳跃最多 10 次.</p>
-<pre><code class="language-cpp">int n, m, a, d, k, fa[200010], ma[200010][15];
-int find(int x) &#123;
-    if (fa[x] == x)return x;
-    return fa[x] = find(fa[x]); //并查集路径压缩
+<div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-type">int</span> n, m, a, d, k, fa[<span class="hljs-number">200010</span>], ma[<span class="hljs-number">200010</span>][<span class="hljs-number">15</span>];
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>&#123;
+    <span class="hljs-keyword">if</span> (fa[x] == x)<span class="hljs-keyword">return</span> x;
+    <span class="hljs-keyword">return</span> fa[x] = <span class="hljs-built_in">find</span>(fa[x]); <span class="hljs-comment">//并查集路径压缩</span>
 &#125;
-int solve(int _) &#123;
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">solve</span><span class="hljs-params">(<span class="hljs-type">int</span> _)</span> </span>&#123;
     cin &gt;&gt; n &gt;&gt; m;
-    for (int i = 1; i &lt;= n; ++i) &#123;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) &#123;
         fa[i] = i;
-        for (int j = 1; j &lt;= 10; ++j) &#123;
-            ma[i][j] = 0;
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= <span class="hljs-number">10</span>; ++j) &#123;
+            ma[i][j] = <span class="hljs-number">0</span>;
         &#125;
     &#125;
 
-    for (int i = 1; i &lt;= m; ++i) &#123;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; ++i) &#123;
         cin &gt;&gt; a &gt;&gt; d &gt;&gt; k;
-        ma[a][d] = max(ma[a][d], k);
+        ma[a][d] = <span class="hljs-built_in">max</span>(ma[a][d], k);
     &#125;
 
-    for (int i = 1; i &lt;= n; ++i) &#123;
-        for (int j = 1; j &lt;= 10; ++j) &#123;
-            if (i - j &lt; 1)break;
-            if (ma[i - j][j])fa[find(i)] = find(i - j); //从前面跳过来, 更新一下并查集
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) &#123;
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= <span class="hljs-number">10</span>; ++j) &#123;
+            <span class="hljs-keyword">if</span> (i - j &lt; <span class="hljs-number">1</span>)<span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">if</span> (ma[i - j][j])fa[<span class="hljs-built_in">find</span>(i)] = <span class="hljs-built_in">find</span>(i - j); <span class="hljs-comment">//从前面跳过来, 更新一下并查集</span>
         &#125;
-        for (int j = 1; j &lt;= 10; ++j) &#123;
-            if (ma[i][j] &gt; 1 &amp;&amp; i + j &lt;= n)ma[i + j][j] = max(ma[i + j][j], ma[i][j] - 1); //继承全面没跳跃完的 k
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= <span class="hljs-number">10</span>; ++j) &#123;
+            <span class="hljs-keyword">if</span> (ma[i][j] &gt; <span class="hljs-number">1</span> &amp;&amp; i + j &lt;= n)ma[i + j][j] = <span class="hljs-built_in">max</span>(ma[i + j][j], ma[i][j] - <span class="hljs-number">1</span>); <span class="hljs-comment">//继承全面没跳跃完的 k</span>
         &#125;
     &#125;
 
-    set&lt;int&gt;se;
-    for (int i = 1; i &lt;= n; ++i) &#123;
-        se.emplace(find(i));
+    set&lt;<span class="hljs-type">int</span>&gt;se;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) &#123;
+        se.<span class="hljs-built_in">emplace</span>(<span class="hljs-built_in">find</span>(i));
     &#125;
 
-    return se.size();
-&#125;
-</code></pre>
+    <span class="hljs-keyword">return</span> se.<span class="hljs-built_in">size</span>();
+&#125;</code></pre></div>
+
 <p><strong>E. Expected Power</strong></p>
 <p>状压DP.</p>
 <p>a 最大为 1023. 故所有数的异或结果最多 0~1023, 共 1024 种状态.</p>
 <p><code> dp[i][j]</code> 表示前 i 位选取某些异或到一起答案是 j 的概率. 就很好转移了. 见代码. 记得滚动数组优化一下空间.</p>
 <p>eg: jiangly 的取模机真好用 ! !</p>
 <p>eg: 赛后过题真痛苦, 就差几分钟…</p>
-<pre><code class="language-cpp">//------取模机------//
-using i64 = long long;
-template&lt;class T&gt;
-constexpr T power(T a, i64 b) &#123;
-    T res &#123;1&#125;;
-    for (; b; b /= 2, a *= a) &#123;
-        if (b % 2) &#123;
+<div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-comment">//------取模机------//</span>
+<span class="hljs-keyword">using</span> i64 = <span class="hljs-type">long</span> <span class="hljs-type">long</span>;
+<span class="hljs-function"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">class</span> T&gt;</span>
+<span class="hljs-function"><span class="hljs-keyword">constexpr</span> T <span class="hljs-title">power</span><span class="hljs-params">(T a, i64 b)</span> </span>&#123;
+    T res &#123;<span class="hljs-number">1</span>&#125;;
+    <span class="hljs-keyword">for</span> (; b; b /= <span class="hljs-number">2</span>, a *= a) &#123;
+        <span class="hljs-keyword">if</span> (b % <span class="hljs-number">2</span>) &#123;
             res *= a;
         &#125;
     &#125;
-    return res;
-&#125; // 快速幂
+    <span class="hljs-keyword">return</span> res;
+&#125; <span class="hljs-comment">// 快速幂</span>
 
-constexpr i64 mul(i64 a, i64 b, i64 p) &#123;
-    i64 res = a * b - i64(1.L * a * b / p) * p;
+<span class="hljs-function"><span class="hljs-keyword">constexpr</span> i64 <span class="hljs-title">mul</span><span class="hljs-params">(i64 a, i64 b, i64 p)</span> </span>&#123;
+    i64 res = a * b - <span class="hljs-built_in">i64</span>(<span class="hljs-number">1.L</span> * a * b / p) * p;
     res %= p;
-    if (res &lt; 0) &#123;
+    <span class="hljs-keyword">if</span> (res &lt; <span class="hljs-number">0</span>) &#123;
         res += p;
     &#125;
-    return res;
-&#125; // 取模乘
+    <span class="hljs-keyword">return</span> res;
+&#125; <span class="hljs-comment">// 取模乘</span>
 
-template&lt;i64 P&gt;
-struct MInt &#123;
+<span class="hljs-keyword">template</span>&lt;i64 P&gt;
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">MInt</span> &#123;
     i64 x;
-    constexpr MInt() : x &#123;0&#125; &#123;&#125;
-    constexpr MInt(i64 x) : x &#123;norm(x % getMod())&#125; &#123;&#125;
+    <span class="hljs-function"><span class="hljs-keyword">constexpr</span> <span class="hljs-title">MInt</span><span class="hljs-params">()</span> : x &#123;</span><span class="hljs-number">0</span>&#125; &#123;&#125;
+    <span class="hljs-function"><span class="hljs-keyword">constexpr</span> <span class="hljs-title">MInt</span><span class="hljs-params">(i64 x)</span> : x &#123;</span><span class="hljs-built_in">norm</span>(x % <span class="hljs-built_in">getMod</span>())&#125; &#123;&#125;
 
-    static i64 Mod;
-    constexpr static i64 getMod() &#123;
-        if (P &gt; 0) &#123;
-            return P;
-        &#125; else &#123;
-            return Mod;
+    <span class="hljs-type">static</span> i64 Mod;
+    <span class="hljs-function"><span class="hljs-keyword">constexpr</span> <span class="hljs-type">static</span> i64 <span class="hljs-title">getMod</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (P &gt; <span class="hljs-number">0</span>) &#123;
+            <span class="hljs-keyword">return</span> P;
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            <span class="hljs-keyword">return</span> Mod;
         &#125;
     &#125;
-    constexpr static void setMod(i64 Mod_) &#123;
+    <span class="hljs-function"><span class="hljs-keyword">constexpr</span> <span class="hljs-type">static</span> <span class="hljs-type">void</span> <span class="hljs-title">setMod</span><span class="hljs-params">(i64 Mod_)</span> </span>&#123;
         Mod = Mod_;
-    &#125;//只有P&lt;=0, setMod才生效
-    constexpr i64 norm(i64 x) const &#123;
-        if (x &lt; 0) &#123;
-            x += getMod();
+    &#125;<span class="hljs-comment">//只有P&lt;=0, setMod才生效</span>
+    <span class="hljs-function"><span class="hljs-keyword">constexpr</span> i64 <span class="hljs-title">norm</span><span class="hljs-params">(i64 x)</span> <span class="hljs-type">const</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (x &lt; <span class="hljs-number">0</span>) &#123;
+            x += <span class="hljs-built_in">getMod</span>();
         &#125;
-        if (x &gt;= getMod()) &#123;
-            x -= getMod();
+        <span class="hljs-keyword">if</span> (x &gt;= <span class="hljs-built_in">getMod</span>()) &#123;
+            x -= <span class="hljs-built_in">getMod</span>();
         &#125;
-        return x;
+        <span class="hljs-keyword">return</span> x;
     &#125;
-    constexpr i64 val() const &#123;
-        return x;
+    <span class="hljs-function"><span class="hljs-keyword">constexpr</span> i64 <span class="hljs-title">val</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span>&#123;
+        <span class="hljs-keyword">return</span> x;
     &#125;
-    constexpr MInt operator-() const &#123;
+    <span class="hljs-keyword">constexpr</span> MInt <span class="hljs-keyword">operator</span>-() <span class="hljs-type">const</span> &#123;
         MInt res;
-        res.x = norm(getMod() - x);
-        return res;
+        res.x = <span class="hljs-built_in">norm</span>(<span class="hljs-built_in">getMod</span>() - x);
+        <span class="hljs-keyword">return</span> res;
     &#125;
-    constexpr MInt inv() const &#123;
-        return power(*this, getMod() - 2);
+    <span class="hljs-function"><span class="hljs-keyword">constexpr</span> MInt <span class="hljs-title">inv</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">power</span>(*<span class="hljs-keyword">this</span>, <span class="hljs-built_in">getMod</span>() - <span class="hljs-number">2</span>);
     &#125;
-    constexpr MInt &amp;operator*=(MInt rhs) &amp; &#123;
-        if (getMod() &lt; (1ULL &lt;&lt; 31)) &#123;
-            x = x * rhs.x % int(getMod());
-        &#125; else &#123;
-            x = mul(x, rhs.x, getMod());
+    <span class="hljs-keyword">constexpr</span> MInt &amp;<span class="hljs-keyword">operator</span>*=(MInt rhs) &amp; &#123;
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">getMod</span>() &lt; (<span class="hljs-number">1ULL</span> &lt;&lt; <span class="hljs-number">31</span>)) &#123;
+            x = x * rhs.x % <span class="hljs-built_in">int</span>(<span class="hljs-built_in">getMod</span>());
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            x = <span class="hljs-built_in">mul</span>(x, rhs.x, <span class="hljs-built_in">getMod</span>());
         &#125;
-        return *this;
+        <span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;
     &#125;
-    constexpr MInt &amp;operator+=(MInt rhs) &amp; &#123;
-        x = norm(x + rhs.x);
-        return *this;
+    <span class="hljs-keyword">constexpr</span> MInt &amp;<span class="hljs-keyword">operator</span>+=(MInt rhs) &amp; &#123;
+        x = <span class="hljs-built_in">norm</span>(x + rhs.x);
+        <span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;
     &#125;
-    constexpr MInt &amp;operator-=(MInt rhs) &amp; &#123;
-        x = norm(x - rhs.x);
-        return *this;
+    <span class="hljs-keyword">constexpr</span> MInt &amp;<span class="hljs-keyword">operator</span>-=(MInt rhs) &amp; &#123;
+        x = <span class="hljs-built_in">norm</span>(x - rhs.x);
+        <span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;
     &#125;
-    constexpr MInt &amp;operator/=(MInt rhs) &amp; &#123;
-        return *this *= rhs.inv();
+    <span class="hljs-keyword">constexpr</span> MInt &amp;<span class="hljs-keyword">operator</span>/=(MInt rhs) &amp; &#123;
+        <span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span> *= rhs.<span class="hljs-built_in">inv</span>();
     &#125;
-    friend constexpr MInt operator*(MInt lhs, MInt rhs) &#123;
+    <span class="hljs-keyword">friend</span> <span class="hljs-keyword">constexpr</span> MInt <span class="hljs-keyword">operator</span>*(MInt lhs, MInt rhs) &#123;
         MInt res = lhs;
         res *= rhs;
-        return res;
+        <span class="hljs-keyword">return</span> res;
     &#125;
-    friend constexpr MInt operator+(MInt lhs, MInt rhs) &#123;
+    <span class="hljs-keyword">friend</span> <span class="hljs-keyword">constexpr</span> MInt <span class="hljs-keyword">operator</span>+(MInt lhs, MInt rhs) &#123;
         MInt res = lhs;
         res += rhs;
-        return res;
+        <span class="hljs-keyword">return</span> res;
     &#125;
-    friend constexpr MInt operator-(MInt lhs, MInt rhs) &#123;
+    <span class="hljs-keyword">friend</span> <span class="hljs-keyword">constexpr</span> MInt <span class="hljs-keyword">operator</span>-(MInt lhs, MInt rhs) &#123;
         MInt res = lhs;
         res -= rhs;
-        return res;
+        <span class="hljs-keyword">return</span> res;
     &#125;
-    friend constexpr MInt operator/(MInt lhs, MInt rhs) &#123;
+    <span class="hljs-keyword">friend</span> <span class="hljs-keyword">constexpr</span> MInt <span class="hljs-keyword">operator</span>/(MInt lhs, MInt rhs) &#123;
         MInt res = lhs;
         res /= rhs;
-        return res;
+        <span class="hljs-keyword">return</span> res;
     &#125;
-    friend constexpr std::istream &amp;operator&gt;&gt;(std::istream &amp;is, MInt &amp;a) &#123;
+    <span class="hljs-keyword">friend</span> <span class="hljs-keyword">constexpr</span> std::istream &amp;<span class="hljs-keyword">operator</span>&gt;&gt;(std::istream &amp;is, MInt &amp;a) &#123;
         i64 v;
         is &gt;&gt; v;
-        a = MInt(v);
-        return is;
+        a = <span class="hljs-built_in">MInt</span>(v);
+        <span class="hljs-keyword">return</span> is;
     &#125;
-    friend constexpr std::ostream &amp;operator&lt;&lt;(std::ostream &amp;os, const MInt &amp;a) &#123;
-        return os &lt;&lt; a.val();
+    <span class="hljs-keyword">friend</span> <span class="hljs-keyword">constexpr</span> std::ostream &amp;<span class="hljs-keyword">operator</span>&lt;&lt;(std::ostream &amp;os, <span class="hljs-type">const</span> MInt &amp;a) &#123;
+        <span class="hljs-keyword">return</span> os &lt;&lt; a.<span class="hljs-built_in">val</span>();
     &#125;
-    friend constexpr bool operator==(MInt lhs, MInt rhs) &#123;
-        return lhs.val() == rhs.val();
+    <span class="hljs-keyword">friend</span> <span class="hljs-keyword">constexpr</span> <span class="hljs-type">bool</span> <span class="hljs-keyword">operator</span>==(MInt lhs, MInt rhs) &#123;
+        <span class="hljs-keyword">return</span> lhs.<span class="hljs-built_in">val</span>() == rhs.<span class="hljs-built_in">val</span>();
     &#125;
-    friend constexpr bool operator!=(MInt lhs, MInt rhs) &#123;
-        return lhs.val() != rhs.val();
+    <span class="hljs-keyword">friend</span> <span class="hljs-keyword">constexpr</span> <span class="hljs-type">bool</span> <span class="hljs-keyword">operator</span>!=(MInt lhs, MInt rhs) &#123;
+        <span class="hljs-keyword">return</span> lhs.<span class="hljs-built_in">val</span>() != rhs.<span class="hljs-built_in">val</span>();
     &#125;
-    friend constexpr bool operator&lt;(MInt lhs, MInt rhs) &#123;
-        return lhs.val() &lt; rhs.val();
+    <span class="hljs-keyword">friend</span> <span class="hljs-keyword">constexpr</span> <span class="hljs-type">bool</span> <span class="hljs-keyword">operator</span>&lt;(MInt lhs, MInt rhs) &#123;
+        <span class="hljs-keyword">return</span> lhs.<span class="hljs-built_in">val</span>() &lt; rhs.<span class="hljs-built_in">val</span>();
     &#125;
 &#125;;
 
-template&lt;&gt;
-i64 MInt&lt;0&gt;::Mod = 1e9 + 7; //只有P&lt;=0, Mod才生效
+<span class="hljs-keyword">template</span>&lt;&gt;
+i64 MInt&lt;<span class="hljs-number">0</span>&gt;::Mod = <span class="hljs-number">1e9</span> + <span class="hljs-number">7</span>; <span class="hljs-comment">//只有P&lt;=0, Mod才生效</span>
 
-constexpr int P = 1e9 + 7; //在这设置要用的模数
-using Z = MInt&lt;P&gt;;
-//------取模机------//
+<span class="hljs-keyword">constexpr</span> <span class="hljs-type">int</span> P = <span class="hljs-number">1e9</span> + <span class="hljs-number">7</span>; <span class="hljs-comment">//在这设置要用的模数</span>
+<span class="hljs-keyword">using</span> Z = MInt&lt;P&gt;;
+<span class="hljs-comment">//------取模机------//</span>
 
-i64 n, a[200010];
-Z dp[2][1024], p[200010];
-int solve(int _) &#123;
+i64 n, a[<span class="hljs-number">200010</span>];
+Z dp[<span class="hljs-number">2</span>][<span class="hljs-number">1024</span>], p[<span class="hljs-number">200010</span>];
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">solve</span><span class="hljs-params">(<span class="hljs-type">int</span> _)</span> </span>&#123;
     cin &gt;&gt; n;
-    for (int i = 1; i &lt;= n; ++i) cin &gt;&gt; a[i];
-    for (int i = 1; i &lt;= n; ++i) &#123;cin &gt;&gt; p[i]; p[i] /= 1e4;&#125;
-    Z ans = 0;
-    dp[0][0] = 1;
-    for (int i = 1; i &lt; 1024; ++i) &#123;
-        dp[0][i] = 0;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) cin &gt;&gt; a[i];
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) &#123;cin &gt;&gt; p[i]; p[i] /= <span class="hljs-number">1e4</span>;&#125;
+    Z ans = <span class="hljs-number">0</span>;
+    dp[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; <span class="hljs-number">1024</span>; ++i) &#123;
+        dp[<span class="hljs-number">0</span>][i] = <span class="hljs-number">0</span>;
     &#125;
 
-    for (int i = 1; i &lt;= n; ++i) &#123;
-        int tis = i % 2;
-        int last = tis ^ 1;
-        for (int j = 0; j &lt; 1024; ++j) dp[tis][j] = 0;
-        for (int j = 0; j &lt; 1024; ++j) &#123;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) &#123;
+        <span class="hljs-type">int</span> tis = i % <span class="hljs-number">2</span>;
+        <span class="hljs-type">int</span> last = tis ^ <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">1024</span>; ++j) dp[tis][j] = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">1024</span>; ++j) &#123;
             dp[tis][j ^ a[i]] += dp[last][j] * p[i];
-            dp[tis][j] += dp[last][j] * (1 - p[i]);
+            dp[tis][j] += dp[last][j] * (<span class="hljs-number">1</span> - p[i]);
         &#125;
     &#125;
 
-    for (int i = 0; i &lt; 1024; ++i) &#123;
-        ans += dp[n % 2][i] * i * i;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">1024</span>; ++i) &#123;
+        ans += dp[n % <span class="hljs-number">2</span>][i] * i * i;
     &#125;
 
-    return ans.val();
-&#125;
-</code></pre>
+    <span class="hljs-keyword">return</span> ans.<span class="hljs-built_in">val</span>();
+&#125;</code></pre></div>
 
                 
               </div>
@@ -899,10 +896,6 @@ int solve(int _) &#123;
   <script  src="/js/local-search.js" ></script>
 
 
-
-
-  
-<script src="/js/blog-enhancements.js"></script>
 
 
 

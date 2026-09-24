@@ -16,12 +16,12 @@
   <meta name="author" content="TauLee">
   <meta name="keywords" content="">
   
-    <meta name="description" content="题意: 对每个独立的 $c_i$ , 可以选择用任意 $(a_j,b_j)$ 操作一次, 贡献加 2.但是 $c_i$ 减去 $a_j-b_j$ , $c_i$ 不能变成小于 0.且操作前要保证 $c_i&gt;&#x3D;a_i$ 才可以进行操作. 解法: 预处理+DP   预处理出来所有 $dif_i&#x3D;a_i-b_i$ .   注意到 $a$ 最大才 $1e6$ , 完全可以维护出来 $1$ ~ $1">
+    <meta name="description" content="题意: 对每个独立的 $c_i$ , 可以选择用任意 $(a_j,b_j)$ 操作一次, 贡献加 2.但是 $c_i$ 减去 $a_j-b_j$ , $c_i$ 不能变成小于 0.且操作前要保证 $c_i&gt;&#x3D;a_i$ 才可以进行操作. 解法: 预处理+DP  预处理出来所有 $dif_i&#x3D;a_i-b_i$ .  注意到 $a$ 最大才 $1e6$ , 完全可以维护出来 $">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Educational Codeforces Round 167 , D Smithing Skill 题解">
 <meta property="og:url" content="https://taulee.github.io/2024/07/15/Educational-Codeforces-Round-167-,-D-Smithing-Skill-%E9%A2%98%E8%A7%A3/index.html">
 <meta property="og:site_name" content="TauLee&#39;s Blog">
-<meta property="og:description" content="题意: 对每个独立的 $c_i$ , 可以选择用任意 $(a_j,b_j)$ 操作一次, 贡献加 2.但是 $c_i$ 减去 $a_j-b_j$ , $c_i$ 不能变成小于 0.且操作前要保证 $c_i&gt;&#x3D;a_i$ 才可以进行操作. 解法: 预处理+DP   预处理出来所有 $dif_i&#x3D;a_i-b_i$ .   注意到 $a$ 最大才 $1e6$ , 完全可以维护出来 $1$ ~ $1">
+<meta property="og:description" content="题意: 对每个独立的 $c_i$ , 可以选择用任意 $(a_j,b_j)$ 操作一次, 贡献加 2.但是 $c_i$ 减去 $a_j-b_j$ , $c_i$ 不能变成小于 0.且操作前要保证 $c_i&gt;&#x3D;a_i$ 才可以进行操作. 解法: 预处理+DP  预处理出来所有 $dif_i&#x3D;a_i-b_i$ .  注意到 $a$ 最大才 $1e6$ , 完全可以维护出来 $">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-15T02:40:00.000Z">
 <meta property="article:modified_time" content="2024-07-15T02:40:00.000Z">
@@ -207,7 +207,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          489 字
+          492 字
         
       </span>
     
@@ -273,67 +273,62 @@
             
               <div class="markdown-body">
                 
-                
-<p><strong>题意:</strong></p>
-<p>对每个独立的 $c_i$ , 可以选择用任意 $(a_j,b_j)$ 操作一次, 贡献加 2.但是 $c_i$ 减去 $a_j-b_j$ , $c_i$ 不能变成小于 0.且操作前要保证 $c_i&gt;=a_i$ 才可以进行操作.</p>
+                <p><strong>题意:</strong></p>
+<p>对每个独立的 $c_i$ , 可以选择用任意 $(a_j,b_j)$ 操作一次, 贡献加 2.但是 $c_i$ 减去 $a_j-b_j$ , $c_i$ 不能变成小于 0.且操作前要保证 $c_i&gt;&#x3D;a_i$ 才可以进行操作.</p>
 <p><strong>解法:</strong></p>
 <p>预处理+DP</p>
 <ol>
-<li>
-<p>预处理出来所有 $dif_i=a_i-b_i$ .</p>
+<li><p>预处理出来所有 $dif_i&#x3D;a_i-b_i$ .</p>
 </li>
-<li>
-<p>注意到 $a$ 最大才 $1e6$ , 完全可以维护出来 $1$ ~ $1e6$ 每个 $a$ 值对应的 $dif$ , 输入没有给这个 $a$ 就暂记为 INT_MAX. 这里用 <code>f[i]</code> 表示 $a=i$ 时的 $dif$ ( <code>f[i]</code> 是一个长度为 1e6 的数组).</p>
+<li><p>注意到 $a$ 最大才 $1e6$ , 完全可以维护出来 $1$ ~ $1e6$ 每个 $a$ 值对应的 $dif$ , 输入没有给这个 $a$ 就暂记为 INT_MAX. 这里用 <code>f[i]</code> 表示 $a&#x3D;i$ 时的 $dif$ ( <code>f[i]</code> 是一个长度为 1e6 的数组).</p>
 </li>
-<li>
-<p>可以考虑对于所有 $i&lt;j$ , 若 $f[i]&lt;f[j]$ , 肯定选择用 $f[i]$ 来操作 $c_i$ , 因为 $f[i]$ 不但每次操作损失的 dif 更小, 而且门槛 $i(输入给的a_i)$ 也更小. 那就用 <code>f[i=min(f[i-1],f[i])</code> 来维护这个东西.</p>
+<li><p>可以考虑对于所有 $i&lt;j$ , 若 $f[i]&lt;f[j]$ , 肯定选择用 $f[i]$ 来操作 $c_i$ , 因为 $f[i]$ 不但每次操作损失的 dif 更小, 而且门槛 $i(输入给的a_i)$ 也更小. 那就用 <code>f[i=min(f[i-1],f[i])</code> 来维护这个东西.</p>
 </li>
 </ol>
 <p>接下来就是DP部分:</p>
 <p><code>dp[i]</code> 表示 c 恰好为 i 时可以通过操作获得的利益. 转移方程就为 <code>dp[i]=dp[i-f[i]]+1</code> .因为 c 在他的原数值操作一次就减了一个 dif. 由预处理的第 3 步知道, c 变小了, 下面一定是一个更优或相同的 dif.所以每个位置的dif 就用一次.</p>
 <p>更多实现看代码:</p>
-<pre><code class="language-cpp">#define int long long
+<div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> int long long</span>
 
-signed main()
-&#123;
-    ios::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
-    int n, m, b, c, mx = 0;
+<span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+    ios::<span class="hljs-built_in">sync_with_stdio</span>(<span class="hljs-literal">false</span>); cin.<span class="hljs-built_in">tie</span>(<span class="hljs-literal">nullptr</span>); cout.<span class="hljs-built_in">tie</span>(<span class="hljs-literal">nullptr</span>);
+    <span class="hljs-type">int</span> n, m, b, c, mx = <span class="hljs-number">0</span>;
     cin &gt;&gt; n &gt;&gt; m;
-    vector&lt;int&gt;a(n);
-    for (int i = 0; i &lt; n; ++i) &#123;
+    vector&lt;<span class="hljs-type">int</span>&gt;<span class="hljs-built_in">a</span>(n);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i) &#123;
         cin &gt;&gt; a[i];
-        mx = max(mx, a[i]);
+        mx = <span class="hljs-built_in">max</span>(mx, a[i]);
     &#125;
-    vector&lt;int&gt;f(mx + 1, INT_MAX);
-    for (int i = 0; i &lt; n; ++i) &#123;
+    vector&lt;<span class="hljs-type">int</span>&gt;<span class="hljs-built_in">f</span>(mx + <span class="hljs-number">1</span>, INT_MAX);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i) &#123;
         cin &gt;&gt; b;
-        f[a[i]] = min(f[a[i]], a[i] - b);
+        f[a[i]] = <span class="hljs-built_in">min</span>(f[a[i]], a[i] - b);
     &#125;
 
-    for (int i = 1; i &lt;= mx; ++i) &#123;
-        f[i] = min(f[i - 1], f[i]);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= mx; ++i) &#123;
+        f[i] = <span class="hljs-built_in">min</span>(f[i - <span class="hljs-number">1</span>], f[i]);
     &#125;
 
-    vector&lt;int&gt;dp(mx + 1, 0);
-    for (int i = 1; i &lt;= mx; ++i) &#123;
-        if (f[i] &lt;= i)
-            dp[i] = dp[i - f[i]] + 1;
+    vector&lt;<span class="hljs-type">int</span>&gt;<span class="hljs-built_in">dp</span>(mx + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= mx; ++i) &#123;
+        <span class="hljs-keyword">if</span> (f[i] &lt;= i)
+            dp[i] = dp[i - f[i]] + <span class="hljs-number">1</span>;
     &#125;
 
-    int ans = 0;
-    for (int i = 0; i &lt; m; ++i) &#123;
+    <span class="hljs-type">int</span> ans = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; m; ++i) &#123;
         cin &gt;&gt; c;
-        if (c &gt; mx) &#123;
-            int t = (c - mx) / f[mx] + 1;
+        <span class="hljs-keyword">if</span> (c &gt; mx) &#123;
+            <span class="hljs-type">int</span> t = (c - mx) / f[mx] + <span class="hljs-number">1</span>;
             ans += t;
             c -= t * f[mx];
         &#125;
         ans += dp[c];
     &#125;
 
-    cout &lt;&lt; ans * 2 &lt;&lt; endl;
-&#125;
-</code></pre>
+    cout &lt;&lt; ans * <span class="hljs-number">2</span> &lt;&lt; endl;
+&#125;</code></pre></div>
 
                 
               </div>
@@ -669,10 +664,6 @@ signed main()
   <script  src="/js/local-search.js" ></script>
 
 
-
-
-  
-<script src="/js/blog-enhancements.js"></script>
 
 
 

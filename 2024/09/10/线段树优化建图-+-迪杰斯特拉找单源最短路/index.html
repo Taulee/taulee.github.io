@@ -16,12 +16,12 @@
   <meta name="author" content="TauLee">
   <meta name="keywords" content="">
   
-    <meta name="description" content="线段树优化建图通常用于处理:   给出一个点的区间, 都与某个点有单向边.   给出一个点, 于一个连续区间都有单向边.   注意到, 如果暴力建图, 会达到 $n^2$ 个边, 显然无法接受. 考虑用到线段树来维护区间, 那么我们就要维护两个东西. 对于线段树的一个节点node{l, r}:   哪个节点到 l 到 r 节点都有单向边…   节点 l 到 r 到哪个节点有单向边.   先看 1">
+    <meta name="description" content="线段树优化建图通常用于处理:  给出一个点的区间, 都与某个点有单向边.  给出一个点, 于一个连续区间都有单向边.   注意到, 如果暴力建图, 会达到 $n^2$ 个边, 显然无法接受. 考虑用到线段树来维护区间, 那么我们就要维护两个东西. 对于线段树的一个节点node{l, r}:  哪个节点到 l 到 r 节点都有单向边…  节点 l 到 r 到哪个节点有单向边.   先看 1, 我们可">
 <meta property="og:type" content="article">
 <meta property="og:title" content="线段树优化建图 + 迪杰斯特拉找单源最短路">
 <meta property="og:url" content="https://taulee.github.io/2024/09/10/%E7%BA%BF%E6%AE%B5%E6%A0%91%E4%BC%98%E5%8C%96%E5%BB%BA%E5%9B%BE-+-%E8%BF%AA%E6%9D%B0%E6%96%AF%E7%89%B9%E6%8B%89%E6%89%BE%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF/index.html">
 <meta property="og:site_name" content="TauLee&#39;s Blog">
-<meta property="og:description" content="线段树优化建图通常用于处理:   给出一个点的区间, 都与某个点有单向边.   给出一个点, 于一个连续区间都有单向边.   注意到, 如果暴力建图, 会达到 $n^2$ 个边, 显然无法接受. 考虑用到线段树来维护区间, 那么我们就要维护两个东西. 对于线段树的一个节点node{l, r}:   哪个节点到 l 到 r 节点都有单向边…   节点 l 到 r 到哪个节点有单向边.   先看 1">
+<meta property="og:description" content="线段树优化建图通常用于处理:  给出一个点的区间, 都与某个点有单向边.  给出一个点, 于一个连续区间都有单向边.   注意到, 如果暴力建图, 会达到 $n^2$ 个边, 显然无法接受. 考虑用到线段树来维护区间, 那么我们就要维护两个东西. 对于线段树的一个节点node{l, r}:  哪个节点到 l 到 r 节点都有单向边…  节点 l 到 r 到哪个节点有单向边.   先看 1, 我们可">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://taulee.github.io/img/posts/2024-09-10-142108171/segment-tree-graph-range-edges-1.webp">
 <meta property="og:image" content="https://taulee.github.io/img/posts/2024-09-10-142108171/segment-tree-graph-range-edges-2.webp">
@@ -277,176 +277,165 @@
             
               <div class="markdown-body">
                 
-                
-<p>线段树优化建图通常用于处理:</p>
+                <p>线段树优化建图通常用于处理:</p>
 <ol>
-<li>
-<p>给出一个点的区间, 都与某个点有单向边.</p>
+<li><p>给出一个点的区间, 都与某个点有单向边.</p>
 </li>
-<li>
-<p>给出一个点, 于一个连续区间都有单向边.</p>
+<li><p>给出一个点, 于一个连续区间都有单向边.</p>
 </li>
 </ol>
 <p>注意到, 如果暴力建图, 会达到 $n^2$ 个边, 显然无法接受.</p>
 <p>考虑用到线段树来维护区间, 那么我们就要维护两个东西.</p>
 <p>对于线段树的一个节点node{l, r}:</p>
 <ol>
-<li>
-<p>哪个节点到 l 到 r 节点都有单向边…</p>
+<li><p>哪个节点到 l 到 r 节点都有单向边…</p>
 </li>
-<li>
-<p>节点 l 到 r 到哪个节点有单向边.</p>
+<li><p>节点 l 到 r 到哪个节点有单向边.</p>
 </li>
 </ol>
 <p>先看 1, 我们可以用一个点连到线段树的节点 node {l, r} 来表示这个点到 {l, r} 各有一条单向边(橙色). 此时显然: 大区间向被包含的小区间可以有权值为 0 的单向边(绿色). 因为一个点可以到上面的大区间, 一定可以到达被包含的小区间的任意一个点.</p>
 <p>注意到, 由有向边组成的路径能到达第 i 个叶子节点, 也就等价于能到达节点 i. 于是, 叶子节点就是未建树前的实际节点.</p>
-<p><img alt="线段树优化建图的区间连边示意图一" src="/img/posts/2024-09-10-142108171/segment-tree-graph-range-edges-1.webp" srcset="/img/loading.gif" lazyload/></p>
+<p><img src="/img/posts/2024-09-10-142108171/segment-tree-graph-range-edges-1.webp" srcset="/img/loading.gif" lazyload alt="线段树优化建图的区间连边示意图一"></p>
 <p>对于 2, 一切同理, 有树:</p>
-<p><img alt="线段树优化建图的区间连边示意图二" src="/img/posts/2024-09-10-142108171/segment-tree-graph-range-edges-2.webp" srcset="/img/loading.gif" lazyload/></p>
+<p><img src="/img/posts/2024-09-10-142108171/segment-tree-graph-range-edges-2.webp" srcset="/img/loading.gif" lazyload alt="线段树优化建图的区间连边示意图二"></p>
 <p>显然, 这两个树是不共存的, 不能公用一个树. 就要用一定形式把这两个树连到一起. 于是…</p>
 <p>按照如下建边:</p>
 <ol>
-<li>
-<p>双向连接两个树的叶子节点, 边权为 0 (二者等价).</p>
+<li><p>双向连接两个树的叶子节点, 边权为 0 (二者等价).</p>
 </li>
-<li>
-<p>单向连接树边, 边权为 0 :</p>
+<li><p>单向连接树边, 边权为 0 :</p>
 <ol>
-<li>
-<p>树 1 表示一个点向一个区间有单向边, 那这个点向更小的被包含的区间一定有边.</p>
+<li><p>树 1 表示一个点向一个区间有单向边, 那这个点向更小的被包含的区间一定有边.</p>
 </li>
-<li>
-<p>树 2 表示一个区间向一个点有单向边, 那被包含的更小区间一定也向这个点有单向边.</p>
+<li><p>树 2 表示一个区间向一个点有单向边, 那被包含的更小区间一定也向这个点有单向边.</p>
 </li>
 </ol>
 </li>
-<li>
-<p>有一个点到一个区间的单向边:</p>
+<li><p>有一个点到一个区间的单向边:</p>
 <p>从树 2 的对应叶子向到树 1 的对应区间连边 ( 橙色 ).</p>
 </li>
-<li>
-<p>有一个区间到一个点的单向边:</p>
+<li><p>有一个区间到一个点的单向边:</p>
 <p>从树 2 的对应区间向树 1 的对应叶子连边 ( 粉色 ).</p>
 </li>
 </ol>
 <p>这样就可以把暴力的每次要建 O(r-l) 条边, 优化到建 O(logr-l) 条边</p>
 <p>建完图后直接把第一颗树的叶子节点当作原先的节点正常使用即可.</p>
 <p>如果要实现类似线段树的 lazy 优化也是可以的. 即到达了这个线段树节点, 就是可以到这个节点所代表的区间内的所有点.</p>
-<p><img alt="线段树优化建图的最短路示意图" src="/img/posts/2024-09-10-142108171/segment-tree-graph-shortest-path.webp" srcset="/img/loading.gif" lazyload/></p>
+<p><img src="/img/posts/2024-09-10-142108171/segment-tree-graph-shortest-path.webp" srcset="/img/loading.gif" lazyload alt="线段树优化建图的最短路示意图"></p>
 <p>以题目 <a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/786/B">786B - Legacy</a> 为例, 要求线段树建完图后的单源最短路, 直接看代码:</p>
-<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-#ifdef LOCAL
-#include "D:\Users\TauLee\OneDrive\Mine\c++\debug.h"
-#else
-#define debug(...) 42;
-#define endl '\n'
-#endif
+<div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+<span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> LOCAL</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;D:\Users\TauLee\OneDrive\Mine\c++\debug.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">else</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> debug(...) 42;</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> endl <span class="hljs-string">&#x27;\n&#x27;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">endif</span></span>
 
-#define int long long
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> int long long</span>
 
-//----线段树优化建图----//
-#define pii pair&lt;int,int&gt;
-const int Maxn = 1e5 + 10;
+<span class="hljs-comment">//----线段树优化建图----//</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> pii pair&lt;int,int&gt;</span>
+<span class="hljs-type">const</span> <span class="hljs-type">int</span> Maxn = <span class="hljs-number">1e5</span> + <span class="hljs-number">10</span>;
 
-struct node &#123;
-    int l, r;
-&#125; tr[Maxn &lt;&lt; 3];
-const int D = Maxn &lt;&lt; 2; // tr 偏移 D 作为第二棵树.
-int leaf[Maxn]; // 每个节点对应的叶子节点;
-vector&lt;pii&gt;eg[Maxn &lt;&lt; 3]; // 树上的虚拟边
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">node</span> &#123;
+    <span class="hljs-type">int</span> l, r;
+&#125; tr[Maxn &lt;&lt; <span class="hljs-number">3</span>];
+<span class="hljs-type">const</span> <span class="hljs-type">int</span> D = Maxn &lt;&lt; <span class="hljs-number">2</span>; <span class="hljs-comment">// tr 偏移 D 作为第二棵树.</span>
+<span class="hljs-type">int</span> leaf[Maxn]; <span class="hljs-comment">// 每个节点对应的叶子节点;</span>
+vector&lt;pii&gt;eg[Maxn &lt;&lt; <span class="hljs-number">3</span>]; <span class="hljs-comment">// 树上的虚拟边</span>
 
-void build(int rt/*=1*/, int l, int r) &#123;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">build</span><span class="hljs-params">(<span class="hljs-type">int</span> rt<span class="hljs-comment">/*=1*/</span>, <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span> </span>&#123;
     tr[rt].l = l;
     tr[rt].r = r;
-    if (l == r) &#123;
+    <span class="hljs-keyword">if</span> (l == r) &#123;
         leaf[l] = rt;
-        return ;
+        <span class="hljs-keyword">return</span> ;
     &#125;
-    eg[rt].emplace_back(pii(rt &lt;&lt; 1, 0));
-    eg[rt].emplace_back(pii(rt &lt;&lt; 1 | 1, 0)); // 建立第一棵树的边
-    eg[(rt &lt;&lt; 1) + D].emplace_back(pii(rt + D, 0));
-    eg[(rt &lt;&lt; 1 | 1) + D].emplace_back(pii(rt + D, 0)); // 建立第二棵树的边
-    int mid = (r + l) &gt;&gt; 1;
-    build(rt &lt;&lt; 1, l, mid);
-    build(rt &lt;&lt; 1 | 1, mid + 1, r);
+    eg[rt].<span class="hljs-built_in">emplace_back</span>(<span class="hljs-built_in">pii</span>(rt &lt;&lt; <span class="hljs-number">1</span>, <span class="hljs-number">0</span>));
+    eg[rt].<span class="hljs-built_in">emplace_back</span>(<span class="hljs-built_in">pii</span>(rt &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, <span class="hljs-number">0</span>)); <span class="hljs-comment">// 建立第一棵树的边</span>
+    eg[(rt &lt;&lt; <span class="hljs-number">1</span>) + D].<span class="hljs-built_in">emplace_back</span>(<span class="hljs-built_in">pii</span>(rt + D, <span class="hljs-number">0</span>));
+    eg[(rt &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>) + D].<span class="hljs-built_in">emplace_back</span>(<span class="hljs-built_in">pii</span>(rt + D, <span class="hljs-number">0</span>)); <span class="hljs-comment">// 建立第二棵树的边</span>
+    <span class="hljs-type">int</span> mid = (r + l) &gt;&gt; <span class="hljs-number">1</span>;
+    <span class="hljs-built_in">build</span>(rt &lt;&lt; <span class="hljs-number">1</span>, l, mid);
+    <span class="hljs-built_in">build</span>(rt &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, mid + <span class="hljs-number">1</span>, r);
 &#125;
 
-void init(int &amp;n) &#123; // 初始化
-    build(1, 1, n); // 建立树边
-    for (int i = 1; i &lt;= n; ++i) &#123; // 建立两棵树叶子之间的边
-        eg[leaf[i] + D].emplace_back(pii(leaf[i], 0));
-        eg[leaf[i]].emplace_back(pii(leaf[i] + D, 0));
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">init</span><span class="hljs-params">(<span class="hljs-type">int</span> &amp;n)</span> </span>&#123; <span class="hljs-comment">// 初始化</span>
+    <span class="hljs-built_in">build</span>(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, n); <span class="hljs-comment">// 建立树边</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) &#123; <span class="hljs-comment">// 建立两棵树叶子之间的边</span>
+        eg[leaf[i] + D].<span class="hljs-built_in">emplace_back</span>(<span class="hljs-built_in">pii</span>(leaf[i], <span class="hljs-number">0</span>));
+        eg[leaf[i]].<span class="hljs-built_in">emplace_back</span>(<span class="hljs-built_in">pii</span>(leaf[i] + D, <span class="hljs-number">0</span>));
     &#125;
 &#125;
 
-void addeg(int u, int v, int w) &#123;
-    eg[leaf[u]].emplace_back(pii(leaf[v], w));
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">addeg</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> v, <span class="hljs-type">int</span> w)</span> </span>&#123;
+    eg[leaf[u]].<span class="hljs-built_in">emplace_back</span>(<span class="hljs-built_in">pii</span>(leaf[v], w));
 &#125;
-void addeg(int rt/*=1*/, int v, int l, int r, int w, int opt) &#123;
-    // opt==0, 点连区间
-    // opt==1, 区间连点
-    if (l &gt; tr[rt].r || r &lt; tr[rt].l)return;
-    if (l &lt;= tr[rt].l &amp;&amp; tr[rt].r &lt;= r) &#123;
-        if (opt)
-            eg[rt + D].emplace_back(pii(leaf[v], w));
-        else
-            eg[leaf[v] + D].emplace_back(pii(rt, w));
-        return;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">addeg</span><span class="hljs-params">(<span class="hljs-type">int</span> rt<span class="hljs-comment">/*=1*/</span>, <span class="hljs-type">int</span> v, <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r, <span class="hljs-type">int</span> w, <span class="hljs-type">int</span> opt)</span> </span>&#123;
+    <span class="hljs-comment">// opt==0, 点连区间</span>
+    <span class="hljs-comment">// opt==1, 区间连点</span>
+    <span class="hljs-keyword">if</span> (l &gt; tr[rt].r || r &lt; tr[rt].l)<span class="hljs-keyword">return</span>;
+    <span class="hljs-keyword">if</span> (l &lt;= tr[rt].l &amp;&amp; tr[rt].r &lt;= r) &#123;
+        <span class="hljs-keyword">if</span> (opt)
+            eg[rt + D].<span class="hljs-built_in">emplace_back</span>(<span class="hljs-built_in">pii</span>(leaf[v], w));
+        <span class="hljs-keyword">else</span>
+            eg[leaf[v] + D].<span class="hljs-built_in">emplace_back</span>(<span class="hljs-built_in">pii</span>(rt, w));
+        <span class="hljs-keyword">return</span>;
     &#125;
-    addeg(rt &lt;&lt; 1, v, l, r, w, opt);
-    addeg(rt &lt;&lt; 1 | 1, v, l, r, w, opt);
+    <span class="hljs-built_in">addeg</span>(rt &lt;&lt; <span class="hljs-number">1</span>, v, l, r, w, opt);
+    <span class="hljs-built_in">addeg</span>(rt &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, v, l, r, w, opt);
 &#125;
-//----线段树优化建图----//
+<span class="hljs-comment">//----线段树优化建图----//</span>
 
-int n, q, s, opt, v, u, w, l, r, dist[Maxn &lt;&lt; 3];
-signed main()
-&#123;
-    ios::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+<span class="hljs-type">int</span> n, q, s, opt, v, u, w, l, r, dist[Maxn &lt;&lt; <span class="hljs-number">3</span>];
+<span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+    ios::<span class="hljs-built_in">sync_with_stdio</span>(<span class="hljs-literal">false</span>); cin.<span class="hljs-built_in">tie</span>(<span class="hljs-literal">nullptr</span>); cout.<span class="hljs-built_in">tie</span>(<span class="hljs-literal">nullptr</span>);
     cin &gt;&gt; n &gt;&gt; q &gt;&gt; s;
-    init(n);
-    for (int i = 1; i &lt;= q; ++i) &#123;
+    <span class="hljs-built_in">init</span>(n);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= q; ++i) &#123;
         cin &gt;&gt; opt;
-        if (opt == 1) &#123;
+        <span class="hljs-keyword">if</span> (opt == <span class="hljs-number">1</span>) &#123;
             cin &gt;&gt; v &gt;&gt; u &gt;&gt; w;
-            addeg(v, u, w);
+            <span class="hljs-built_in">addeg</span>(v, u, w);
         &#125;
-        else if (opt == 2) &#123;
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (opt == <span class="hljs-number">2</span>) &#123;
             cin &gt;&gt; v &gt;&gt; l &gt;&gt; r &gt;&gt; w;
-            addeg(1, v, l, r, w, 0);
+            <span class="hljs-built_in">addeg</span>(<span class="hljs-number">1</span>, v, l, r, w, <span class="hljs-number">0</span>);
         &#125;
-        else &#123;
+        <span class="hljs-keyword">else</span> &#123;
             cin &gt;&gt; v &gt;&gt; l &gt;&gt; r &gt;&gt; w;
-            addeg(1, v, l, r, w, 1);
+            <span class="hljs-built_in">addeg</span>(<span class="hljs-number">1</span>, v, l, r, w, <span class="hljs-number">1</span>);
         &#125;
     &#125;
 
     priority_queue&lt;pii, vector&lt;pii&gt;, greater&lt;pii&gt; &gt;q;
-    debug(s)
-    for (int i = 1; i &lt; (Maxn &lt;&lt; 3); ++i) &#123;
+    <span class="hljs-built_in">debug</span>(s)
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; (Maxn &lt;&lt; <span class="hljs-number">3</span>); ++i) &#123;
         dist[i] = LLONG_MAX;
     &#125;
-    dist[leaf[s]] = 0;
-    q.emplace(pii(0, leaf[s])); // 权值, 终点反过来
-    while (!q.empty()) &#123;
-        auto [w, s] = q.top();
-        q.pop();
-        if (dist[s] &lt; w)continue;
-        for (auto [t, ww] : eg[s]) &#123;
-            if (w + ww &lt; dist[t]) &#123;
+    dist[leaf[s]] = <span class="hljs-number">0</span>;
+    q.<span class="hljs-built_in">emplace</span>(<span class="hljs-built_in">pii</span>(<span class="hljs-number">0</span>, leaf[s])); <span class="hljs-comment">// 权值, 终点反过来</span>
+    <span class="hljs-keyword">while</span> (!q.<span class="hljs-built_in">empty</span>()) &#123;
+        <span class="hljs-keyword">auto</span> [w, s] = q.<span class="hljs-built_in">top</span>();
+        q.<span class="hljs-built_in">pop</span>();
+        <span class="hljs-keyword">if</span> (dist[s] &lt; w)<span class="hljs-keyword">continue</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> [t, ww] : eg[s]) &#123;
+            <span class="hljs-keyword">if</span> (w + ww &lt; dist[t]) &#123;
                 dist[t] = w + ww;
-                q.emplace(pii(dist[t], t));
+                q.<span class="hljs-built_in">emplace</span>(<span class="hljs-built_in">pii</span>(dist[t], t));
             &#125;
         &#125;
     &#125;
 
-    for (int i = 1; i &lt;= n; ++i) &#123;
-        if (dist[leaf[i]] == LLONG_MAX)cout &lt;&lt; -1 &lt;&lt; " ";
-        else cout &lt;&lt; dist[leaf[i]] &lt;&lt; " ";
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) &#123;
+        <span class="hljs-keyword">if</span> (dist[leaf[i]] == LLONG_MAX)cout &lt;&lt; <span class="hljs-number">-1</span> &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;
+        <span class="hljs-keyword">else</span> cout &lt;&lt; dist[leaf[i]] &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;
     &#125;
     cout &lt;&lt; endl;
-&#125;
-</code></pre>
+&#125;</code></pre></div>
+
 <p>图片来自 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/tzcwk/p/13474034.html">博客</a> , 懒癌, 懒着画图, 而且他讲的也很不错.</p>
 
                 
@@ -783,10 +772,6 @@ signed main()
   <script  src="/js/local-search.js" ></script>
 
 
-
-
-  
-<script src="/js/blog-enhancements.js"></script>
 
 
 

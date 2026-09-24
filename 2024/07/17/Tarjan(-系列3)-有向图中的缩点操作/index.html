@@ -16,12 +16,12 @@
   <meta name="author" content="TauLee">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Tarjan 是大佬的名字, 大佬一生发明了许多算法, 都叫 Tarjan, 我会渐渐整理出来, 想知道都有啥的话, 可以直接到我文章列表搜索 Tarjan. 重温Tarjan, 网上看了许多博客感觉都讲的不清楚. 故传上来自己的笔记, 希望帮到大家.  前置: Tarjan 求有向图中的强连通分量 将有向图中的强连通分量缩成一个点, 权值具题而定. 在 Tarjan 求得 scc 后, 对于每">
+    <meta name="description" content="Tarjan 是大佬的名字, 大佬一生发明了许多算法, 都叫 Tarjan, 我会渐渐整理出来, 想知道都有啥的话, 可以直接到我文章列表搜索 Tarjan. 重温Tarjan, 网上看了许多博客感觉都讲的不清楚. 故传上来自己的笔记, 希望帮到大家.  前置: Tarjan 求有向图中的强连通分量 将有向图中的强连通分量缩成一个点, 权值具题而定. 在 Tarjan 求得 scc 后, 对于每个">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tarjan( 系列3) 有向图中的缩点操作">
 <meta property="og:url" content="https://taulee.github.io/2024/07/17/Tarjan(-%E7%B3%BB%E5%88%973)-%E6%9C%89%E5%90%91%E5%9B%BE%E4%B8%AD%E7%9A%84%E7%BC%A9%E7%82%B9%E6%93%8D%E4%BD%9C/index.html">
 <meta property="og:site_name" content="TauLee&#39;s Blog">
-<meta property="og:description" content="Tarjan 是大佬的名字, 大佬一生发明了许多算法, 都叫 Tarjan, 我会渐渐整理出来, 想知道都有啥的话, 可以直接到我文章列表搜索 Tarjan. 重温Tarjan, 网上看了许多博客感觉都讲的不清楚. 故传上来自己的笔记, 希望帮到大家.  前置: Tarjan 求有向图中的强连通分量 将有向图中的强连通分量缩成一个点, 权值具题而定. 在 Tarjan 求得 scc 后, 对于每">
+<meta property="og:description" content="Tarjan 是大佬的名字, 大佬一生发明了许多算法, 都叫 Tarjan, 我会渐渐整理出来, 想知道都有啥的话, 可以直接到我文章列表搜索 Tarjan. 重温Tarjan, 网上看了许多博客感觉都讲的不清楚. 故传上来自己的笔记, 希望帮到大家.  前置: Tarjan 求有向图中的强连通分量 将有向图中的强连通分量缩成一个点, 权值具题而定. 在 Tarjan 求得 scc 后, 对于每个">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://taulee.github.io/img/posts/2024-07-17-140506107/tarjan-scc-condensation-graph.png">
 <meta property="article:published_time" content="2024-07-17T13:35:00.000Z">
@@ -275,25 +275,22 @@
             
               <div class="markdown-body">
                 
-                
-<p>Tarjan 是大佬的名字, 大佬一生发明了许多算法, 都叫 Tarjan, 我会渐渐整理出来, 想知道都有啥的话, 可以直接到我文章列表搜索 Tarjan.</p>
+                <p>Tarjan 是大佬的名字, 大佬一生发明了许多算法, 都叫 Tarjan, 我会渐渐整理出来, 想知道都有啥的话, 可以直接到我文章列表搜索 Tarjan.</p>
 <p>重温Tarjan, 网上看了许多博客感觉都讲的不清楚. 故传上来自己的笔记, 希望帮到大家.</p>
-<hr/>
+<hr>
 <p>前置: <a href="/2024/06/23/Tarjan%E6%B1%82%E5%BC%BA%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F/">Tarjan 求有向图中的强连通分量</a></p>
 <p>将有向图中的强连通分量缩成一个点, 权值具题而定.</p>
 <p>在 Tarjan 求得 scc 后, 对于每个点打上同样的 scc, 就可以很容易统计出每个 scc 的出度入度有哪些, 就完成了缩点.</p>
-<p><img alt="Tarjan 强连通分量缩点后的 DAG 示意图" src="/img/posts/2024-07-17-140506107/tarjan-scc-condensation-graph.png" srcset="/img/loading.gif" lazyload/></p>
-<pre><code class="language-cpp">vector&lt;int&gt;w(cntscc + 1, 0);
-vector&lt;vector&lt;int&gt;&gt;egscc(cntscc + 1);
-for (int i = 1; i &lt;= n; ++i) &#123;//缩点
+<p><img src="/img/posts/2024-07-17-140506107/tarjan-scc-condensation-graph.png" srcset="/img/loading.gif" lazyload alt="Tarjan 强连通分量缩点后的 DAG 示意图"></p>
+<div class="code-wrapper"><pre><code class="hljs cpp">vector&lt;<span class="hljs-type">int</span>&gt;<span class="hljs-built_in">w</span>(cntscc + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>);
+vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;<span class="hljs-built_in">egscc</span>(cntscc + <span class="hljs-number">1</span>);
+<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) &#123;<span class="hljs-comment">//缩点</span>
     w[scc[i]]++;
-    for (auto c : eg[i]) &#123;
-        if (scc[i] == scc[c])continue;//同一个联通量内continue
-        egscc[scc[i]].emplace_back(scc[c]);
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> c : eg[i]) &#123;
+        <span class="hljs-keyword">if</span> (scc[i] == scc[c])<span class="hljs-keyword">continue</span>;<span class="hljs-comment">//同一个联通量内continue</span>
+        egscc[scc[i]].<span class="hljs-built_in">emplace_back</span>(scc[c]);
     &#125;
-&#125;
-
-</code></pre>
+&#125;</code></pre></div>
 
                 
               </div>
@@ -629,10 +626,6 @@ for (int i = 1; i &lt;= n; ++i) &#123;//缩点
   <script  src="/js/local-search.js" ></script>
 
 
-
-
-  
-<script src="/js/blog-enhancements.js"></script>
 
 
 

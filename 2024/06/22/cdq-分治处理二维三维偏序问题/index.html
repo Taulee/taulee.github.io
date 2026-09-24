@@ -16,12 +16,12 @@
   <meta name="author" content="TauLee">
   <meta name="keywords" content="">
   
-    <meta name="description" content="学习上参考了这篇博客: pecco的笔记 cdq 的主要是想就是:   递归前一半   判断前一半对后一半的影响   递归后一半   但是需要注意，如果偏序关系带等号，对于 完全相等的元素 ，需要捆绑起来一起处理，不然可能会把相等的元素划到左右两个区间去，从而把相等两元素的之间相互的贡献漏掉一半。 1.二维偏序 例: 处理逆序对 &#x2F;&#x2F;nlog^2n ll cdq(int A[], int n)">
+    <meta name="description" content="学习上参考了这篇博客: pecco的笔记 cdq 的主要是想就是:  递归前一半  判断前一半对后一半的影响  递归后一半   但是需要注意，如果偏序关系带等号，对于 完全相等的元素 ，需要捆绑起来一起处理，不然可能会把相等的元素划到左右两个区间去，从而把相等两元素的之间相互的贡献漏掉一半。 1.二维偏序例: 处理逆序对 &#x2F;&#x2F;nlog^2n ll cdq(int A[], int n) &amp;#12">
 <meta property="og:type" content="article">
 <meta property="og:title" content="cdq 分治处理二维三维偏序问题">
 <meta property="og:url" content="https://taulee.github.io/2024/06/22/cdq-%E5%88%86%E6%B2%BB%E5%A4%84%E7%90%86%E4%BA%8C%E7%BB%B4%E4%B8%89%E7%BB%B4%E5%81%8F%E5%BA%8F%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="TauLee&#39;s Blog">
-<meta property="og:description" content="学习上参考了这篇博客: pecco的笔记 cdq 的主要是想就是:   递归前一半   判断前一半对后一半的影响   递归后一半   但是需要注意，如果偏序关系带等号，对于 完全相等的元素 ，需要捆绑起来一起处理，不然可能会把相等的元素划到左右两个区间去，从而把相等两元素的之间相互的贡献漏掉一半。 1.二维偏序 例: 处理逆序对 &#x2F;&#x2F;nlog^2n ll cdq(int A[], int n)">
+<meta property="og:description" content="学习上参考了这篇博客: pecco的笔记 cdq 的主要是想就是:  递归前一半  判断前一半对后一半的影响  递归后一半   但是需要注意，如果偏序关系带等号，对于 完全相等的元素 ，需要捆绑起来一起处理，不然可能会把相等的元素划到左右两个区间去，从而把相等两元素的之间相互的贡献漏掉一半。 1.二维偏序例: 处理逆序对 &#x2F;&#x2F;nlog^2n ll cdq(int A[], int n) &amp;#12">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-06-22T09:02:00.000Z">
 <meta property="article:modified_time" content="2024-06-22T09:02:00.000Z">
@@ -273,149 +273,142 @@
             
               <div class="markdown-body">
                 
-                
-<hr/>
+                <hr>
 <p>学习上参考了这篇博客: <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/332996578">pecco的笔记</a></p>
 <p>cdq 的主要是想就是:</p>
 <ol>
-<li>
-<p>递归前一半</p>
+<li><p>递归前一半</p>
 </li>
-<li>
-<p>判断前一半对后一半的影响</p>
+<li><p>判断前一半对后一半的影响</p>
 </li>
-<li>
-<p>递归后一半</p>
+<li><p>递归后一半</p>
 </li>
 </ol>
 <p>但是需要注意，如果偏序关系带等号，对于 <strong>完全相等的元素</strong> ，需要捆绑起来一起处理，不然可能会把相等的元素划到左右两个区间去，从而把相等两元素的之间相互的贡献漏掉一半。</p>
-<h5>1.二维偏序</h5>
-<p>例: 处理逆序对</p>
-<pre><code class="language-c++">//nlog^2n
-ll cdq(int A[], int n)
-&#123;
-    if (n == 1)
-        return 0;
-    int mid = n / 2, i = 0, j = mid;
-    ll ans = cdq(A, mid) + cdq(A + mid, n - mid);
-    sort(A, A + mid, greater&lt;int&gt;()), sort(A + mid, A + n, greater&lt;int&gt;());
-    for (; j &lt; n; ++j)
+<h5 id="1-二维偏序"><a href="#1-二维偏序" class="headerlink" title="1.二维偏序"></a>1.二维偏序</h5><p>例: 处理逆序对</p>
+<div class="code-wrapper"><pre><code class="hljs c++"><span class="hljs-comment">//nlog^2n</span>
+<span class="hljs-function">ll <span class="hljs-title">cdq</span><span class="hljs-params">(<span class="hljs-type">int</span> A[], <span class="hljs-type">int</span> n)</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">1</span>)
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    <span class="hljs-type">int</span> mid = n / <span class="hljs-number">2</span>, i = <span class="hljs-number">0</span>, j = mid;
+    ll ans = <span class="hljs-built_in">cdq</span>(A, mid) + <span class="hljs-built_in">cdq</span>(A + mid, n - mid);
+    <span class="hljs-built_in">sort</span>(A, A + mid, <span class="hljs-built_in">greater</span>&lt;<span class="hljs-type">int</span>&gt;()), <span class="hljs-built_in">sort</span>(A + mid, A + n, <span class="hljs-built_in">greater</span>&lt;<span class="hljs-type">int</span>&gt;());
+    <span class="hljs-keyword">for</span> (; j &lt; n; ++j)
     &#123;
-        while (i &lt; mid &amp;&amp; A[i] &gt; A[j])
+        <span class="hljs-keyword">while</span> (i &lt; mid &amp;&amp; A[i] &gt; A[j])
             i++;
         ans += i;
     &#125;
-    return ans;
+    <span class="hljs-keyword">return</span> ans;
 &#125;
-//nlogn
-ll cdq(int A[], int n)
-&#123;
-    static int B[MAXN]; // 暂存归并排序的结果
-    if (n == 1)
-        return 0;
-    int mid = n / 2, i = 0, j = mid, k = 0;
-    ll ans = cdq(A, mid) + cdq(A + mid, n - mid);
-    for (; j &lt; n; ++j)
+<span class="hljs-comment">//nlogn</span>
+<span class="hljs-function">ll <span class="hljs-title">cdq</span><span class="hljs-params">(<span class="hljs-type">int</span> A[], <span class="hljs-type">int</span> n)</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-type">static</span> <span class="hljs-type">int</span> B[MAXN]; <span class="hljs-comment">// 暂存归并排序的结果</span>
+    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">1</span>)
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    <span class="hljs-type">int</span> mid = n / <span class="hljs-number">2</span>, i = <span class="hljs-number">0</span>, j = mid, k = <span class="hljs-number">0</span>;
+    ll ans = <span class="hljs-built_in">cdq</span>(A, mid) + <span class="hljs-built_in">cdq</span>(A + mid, n - mid);
+    <span class="hljs-keyword">for</span> (; j &lt; n; ++j)
     &#123;
-        while (i &lt; mid &amp;&amp; A[i] &gt; A[j])
+        <span class="hljs-keyword">while</span> (i &lt; mid &amp;&amp; A[i] &gt; A[j])
             B[k++] = A[i++];
         ans += i, B[k++] = A[j];
     &#125;
-    while (i &lt; mid)
+    <span class="hljs-keyword">while</span> (i &lt; mid)
         B[k++] = A[i++];
-    memcpy(A, B, sizeof(int) * k);
-    return ans;
-&#125;
-</code></pre>
+    <span class="hljs-built_in">memcpy</span>(A, B, <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">int</span>) * k);
+    <span class="hljs-keyword">return</span> ans;
+&#125;</code></pre></div>
+
 <p>注意到, 这个同样可以用树状数组处理.</p>
-<pre><code class="language-c++">signed main()
-&#123;
-    int n; cin &gt;&gt; n;
-    vector&lt;int&gt;a(n);
-    for (int i = 0; i &lt; n; ++i) &#123;
+<div class="code-wrapper"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-type">int</span> n; cin &gt;&gt; n;
+    vector&lt;<span class="hljs-type">int</span>&gt;<span class="hljs-built_in">a</span>(n);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i) &#123;
         cin &gt;&gt; a[i];
     &#125;
 
-	//离散化 a 数组
+    <span class="hljs-comment">//离散化 a 数组</span>
 
-    int ans = 0;
-    for (int i = 0; i &lt; n; ++i) &#123;
-        ans += i - ask(a[i]);
-        upd(a[i], 1);
+    <span class="hljs-type">int</span> ans = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i) &#123;
+        ans += i - <span class="hljs-built_in">ask</span>(a[i]);
+        <span class="hljs-built_in">upd</span>(a[i], <span class="hljs-number">1</span>);
     &#125;
 
     cout &lt;&lt; ans &lt;&lt; endl;
-&#125;
-</code></pre>
-<h5>3.三维偏序</h5>
-<p>先在外部按 <strong>第一维</strong> 排好序。在函数体内，递归地解决左区间和右区间的子问题，然后对于一个在左区间，一个在右区间的点对，我们分别将左右区间按 <strong>第二维</strong> 排序，第二维用 <strong>双指针</strong> , 第三维用 <strong>树状数组</strong> 解决问题。</p>
+&#125;</code></pre></div>
+
+<h5 id="3-三维偏序"><a href="#3-三维偏序" class="headerlink" title="3.三维偏序"></a>3.三维偏序</h5><p>先在外部按 <strong>第一维</strong> 排好序。在函数体内，递归地解决左区间和右区间的子问题，然后对于一个在左区间，一个在右区间的点对，我们分别将左右区间按 <strong>第二维</strong> 排序，第二维用 <strong>双指针</strong> , 第三维用 <strong>树状数组</strong> 解决问题。</p>
 <p>具体地，对于右区间的每个点，我们遍历左区间，把第二维符合要求的点的 <strong>第三维</strong> 塞入 <strong>树状数组</strong> ，然后查询第三维也符合要求的点的数目(即上树状数组求逆序对方法)。</p>
 <p>为了节约时间，清空树状数组不使用 <code>memset</code> ，而是原路删除。</p>
 <p>eg: 当然也可以选择 cdq 套 cdq, 而不是 cdq 套树状数组</p>
-<pre><code class="language-c++">//https://www.luogu.com.cn/problem/P3810
-bool cmpa(node x, node y) &#123;
-    if (x.a == y.a) &#123;
-        if (x.b == y.b)return x.c &lt; y.c;
-        return x.b &lt; y.b;
+<div class="code-wrapper"><pre><code class="hljs c++"><span class="hljs-comment">//https://www.luogu.com.cn/problem/P3810</span>
+<span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">cmpa</span><span class="hljs-params">(node x, node y)</span> </span>&#123;
+    <span class="hljs-keyword">if</span> (x.a == y.a) &#123;
+        <span class="hljs-keyword">if</span> (x.b == y.b)<span class="hljs-keyword">return</span> x.c &lt; y.c;
+        <span class="hljs-keyword">return</span> x.b &lt; y.b;
     &#125;
-    return x.a &lt; y.a;
+    <span class="hljs-keyword">return</span> x.a &lt; y.a;
 &#125;
-bool cmpb(node x, node y) &#123;
-    if (x.b == y.b)return x.c &lt; y.c;
-    return x.b &lt; y.b;
+<span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">cmpb</span><span class="hljs-params">(node x, node y)</span> </span>&#123;
+    <span class="hljs-keyword">if</span> (x.b == y.b)<span class="hljs-keyword">return</span> x.c &lt; y.c;
+    <span class="hljs-keyword">return</span> x.b &lt; y.b;
 &#125;
 
-signed main()
-&#123;
-    int n, k;
+<span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-type">int</span> n, k;
     cin &gt;&gt; n &gt;&gt; k;
-    vector&lt;int&gt;num(n, 0);
-    vector&lt;node&gt;a, b(n);
-    for (int i = 0; i &lt; n; ++i) &#123;
+    vector&lt;<span class="hljs-type">int</span>&gt;<span class="hljs-built_in">num</span>(n, <span class="hljs-number">0</span>);
+    vector&lt;node&gt;a, <span class="hljs-built_in">b</span>(n);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i) &#123;
         cin &gt;&gt; b[i].a &gt;&gt; b[i].b &gt;&gt; b[i].c;
-        b[i].w = 1;
+        b[i].w = <span class="hljs-number">1</span>;
     &#125;
-    sort(b.begin(), b.end(), cmpa);
+    <span class="hljs-built_in">sort</span>(b.<span class="hljs-built_in">begin</span>(), b.<span class="hljs-built_in">end</span>(), cmpa);
 
-    int cnt = 0;//捆绑处理完全相同的元素
-    for (int i = 0; i &lt; n; ++i) &#123;
+    <span class="hljs-type">int</span> cnt = <span class="hljs-number">0</span>;<span class="hljs-comment">//捆绑处理完全相同的元素</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i) &#123;
         cnt++;
-        if (b[i].a != b[i + 1].a || b[i].b != b[i + 1].b || b[i].c != b[i + 1].c) &#123;
-            a.emplace_back(b[i]);
-            a.back().w = cnt;
-            a.back().ans = 0;
-            cnt = 0;
+        <span class="hljs-keyword">if</span> (b[i].a != b[i + <span class="hljs-number">1</span>].a || b[i].b != b[i + <span class="hljs-number">1</span>].b || b[i].c != b[i + <span class="hljs-number">1</span>].c) &#123;
+            a.<span class="hljs-built_in">emplace_back</span>(b[i]);
+            a.<span class="hljs-built_in">back</span>().w = cnt;
+            a.<span class="hljs-built_in">back</span>().ans = <span class="hljs-number">0</span>;
+            cnt = <span class="hljs-number">0</span>;
         &#125;
     &#125;
-    n = a.size();
+    n = a.<span class="hljs-built_in">size</span>();
 
-    auto cdq = [&amp;](auto self, int l, int r) &#123;
-        if (l == r)return ;
-        int mid = (l + r) &gt;&gt; 1;
-        self(self, l, mid); self(self, mid + 1, r);
-        sort(a.begin() + l, a.begin() + mid + 1, cmpb);
-        sort(a.begin() + mid + 1, a.begin() + r + 1, cmpb);
+    <span class="hljs-keyword">auto</span> cdq = [&amp;](<span class="hljs-keyword">auto</span> self, <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r) &#123;
+        <span class="hljs-keyword">if</span> (l == r)<span class="hljs-keyword">return</span> ;
+        <span class="hljs-type">int</span> mid = (l + r) &gt;&gt; <span class="hljs-number">1</span>;
+        <span class="hljs-built_in">self</span>(self, l, mid); <span class="hljs-built_in">self</span>(self, mid + <span class="hljs-number">1</span>, r);
+        <span class="hljs-built_in">sort</span>(a.<span class="hljs-built_in">begin</span>() + l, a.<span class="hljs-built_in">begin</span>() + mid + <span class="hljs-number">1</span>, cmpb);
+        <span class="hljs-built_in">sort</span>(a.<span class="hljs-built_in">begin</span>() + mid + <span class="hljs-number">1</span>, a.<span class="hljs-built_in">begin</span>() + r + <span class="hljs-number">1</span>, cmpb);
 
-        int p1 = l, p2 = mid + 1;
-        for (; p2 &lt;= r; ++p2) &#123;
-            while (p1 &lt;= mid &amp;&amp; a[p1].b &lt;= a[p2].b) &#123;
-                upd(a[p1].c, a[p1].w);
+        <span class="hljs-type">int</span> p1 = l, p2 = mid + <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">for</span> (; p2 &lt;= r; ++p2) &#123;
+            <span class="hljs-keyword">while</span> (p1 &lt;= mid &amp;&amp; a[p1].b &lt;= a[p2].b) &#123;
+                <span class="hljs-built_in">upd</span>(a[p1].c, a[p1].w);
                 ++p1;
             &#125;
-            a[p2].ans += ask(a[p2].c);
+            a[p2].ans += <span class="hljs-built_in">ask</span>(a[p2].c);
         &#125;
 
-        for (--p1; p1 &gt;= l; --p1) &#123;//这里用原路返回清空 tr,节省时间
-            upd(a[p1].c, -a[p1].w);
+        <span class="hljs-keyword">for</span> (--p1; p1 &gt;= l; --p1) &#123;<span class="hljs-comment">//这里用原路返回清空 tr,节省时间</span>
+            <span class="hljs-built_in">upd</span>(a[p1].c, -a[p1].w);
         &#125;
     &#125;;
 
-    cdq(cdq, 0, n - 1);
+    <span class="hljs-built_in">cdq</span>(cdq, <span class="hljs-number">0</span>, n - <span class="hljs-number">1</span>);
 
-    for (int i = 0; i &lt; n; ++i) &#123;num[a[i].ans + a[i].w - 1] += a[i].w;&#125;//统计答案为 i 的元素的个数 num[i]
-    for (auto c : num)cout &lt;&lt; c &lt;&lt; endl;
-&#125;
-</code></pre>
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i) &#123;num[a[i].ans + a[i].w - <span class="hljs-number">1</span>] += a[i].w;&#125;<span class="hljs-comment">//统计答案为 i 的元素的个数 num[i]</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> c : num)cout &lt;&lt; c &lt;&lt; endl;
+&#125;</code></pre></div>
 
                 
               </div>
@@ -745,10 +738,6 @@ signed main()
   <script  src="/js/local-search.js" ></script>
 
 
-
-
-  
-<script src="/js/blog-enhancements.js"></script>
 
 
 

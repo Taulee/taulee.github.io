@@ -273,103 +273,99 @@
             
               <div class="markdown-body">
                 
-                
-<p><a target="_blank" rel="noopener" href="https://acm.hdu.edu.cn/showproblem.php?pid=7452">原题链接</a></p>
+                <p><a target="_blank" rel="noopener" href="https://acm.hdu.edu.cn/showproblem.php?pid=7452">原题链接</a></p>
 <p>首先可以知道如果一个点在最后答案的路径里, 对其进行成长后, 多的那些点也全部会在答案的路径上的. 我们可以通过总是选择断开原来图中就有的边, 而让路径在新生长的这个圈中绕一圈来做到. 也就是说, 如果一个点在答案的路径上, 那么它成长 M 次后的总点数就是他的贡献.</p>
 <p>考虑如何快速算出成⻓后的点数, 可以发现, 在进行一次成⻓后的树度数最大为3, 对于一个 2 度点, 成⻓一次变为 2 个 2 度点, 对于一个 3 度点, 成⻓一次边为 2 个 2 度点和 1 个 3 度点,对于一个 d 度点, 成⻓一次为 2 个 2 度点和 $d-2$ 个 3 度点. 最后推出一个度数为 x 的点成长 m 次后会变成 $(x-1)*(2^m-1)+1$ 个点.(补题时总是不想计算这些推理的, 所有我没推这玩意 )</p>
 <p>接下来就考虑用这个式子作为每个点的权值, 来计算树中的最长路( 权值和最大的路径 ).</p>
 <ol>
 <li>当 m 很小时, 运算结果不会超过 $1e9+7$ , 我们可以直接计算出每个点的贡献来找最长路, 代码用的是找树的直径的 DP 算法, 也可以两遍 dfs 做, 详细讲解看 oi wiki.</li>
 </ol>
-<pre><code class="language-cpp"> int Max = 0;//要的答案
- vector&lt;int&gt;ans(n + 1, 0); // 子树中从子树的根到某个叶子的最长路
- auto dfs = [&amp;](auto self, int x, int fa) -&gt;void &#123;
-     for (auto c : eg[x]) &#123;
-         if (c == fa)continue;
-         self(self, c, x);
-         Max = max(Max, ans[x] + ans[c] + (du[x] - 1) * (ksm(2, m) - 1) + 1);
-         ans[x] = max(ans[x], ans[c]);
-     &#125;
-     ans[x] += (du[x] - 1) * (ksm(2, m) - 1) + 1;
- &#125;;
- dfs(dfs, 1, 1);
- return Max;
-</code></pre>
-<ol>
-<li>当 m 很大时, 由于取模, 求得的结果就不具备可比大小的性质了.
-但是观察 $w=(x-1)*(2^m-1)+1$ 这个式子, 会发现: 当 $m&gt;20$ 时, $2^m$ 为 1e6 级别, 而后面的 1 在对所有点的贡献提取公因式后最大不会超过点的个数 1e5.
-也就是说: 度数 x 每增大 1, 后面的常数变再大也影响不到最终答案是不是 Max. 就可以用 $(2^m-1)$ 的系数 =&gt; (路径的度数和减去路径的点数) 为第一关键字, 点的个数(也就是公式中常数 1 的个数 ) 为第二关键字, 作为权值, 就最长路, 最后再算答案. 为什么 m 较小时不可以这样做呢? 因为 Max 的度数和比较小者大 1,但较小者可能由很多点组成, 也就是最后的常数非常大, $2^m-1&lt;n$ 时, 不能保证结果不会被影响.</li>
-</ol>
-<p>eg: 第一关键字的"减去路径的点数"不能拿掉, 因为它使得第一关键字的大小受点的个数影响, 而有相同度数和的路径可能具有不用的点个数.</p>
-<p>全部代码:</p>
-<pre><code class="language-cpp">#define int long long
-const int M = 1e9 + 7;
-int ksm(int a, int n) &#123;
-    int ans = 1;
-    while (n) &#123;
-        if (n % 2)ans = ans * a % M;
-        a = a * a % M;
-        n /= 2;
+<div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-type">int</span> Max = <span class="hljs-number">0</span>;<span class="hljs-comment">//要的答案</span>
+vector&lt;<span class="hljs-type">int</span>&gt;<span class="hljs-built_in">ans</span>(n + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>); <span class="hljs-comment">// 子树中从子树的根到某个叶子的最长路</span>
+<span class="hljs-keyword">auto</span> dfs = [&amp;](<span class="hljs-keyword">auto</span> self, <span class="hljs-type">int</span> x, <span class="hljs-type">int</span> fa) -&gt;<span class="hljs-type">void</span> &#123;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> c : eg[x]) &#123;
+        <span class="hljs-keyword">if</span> (c == fa)<span class="hljs-keyword">continue</span>;
+        <span class="hljs-built_in">self</span>(self, c, x);
+        Max = <span class="hljs-built_in">max</span>(Max, ans[x] + ans[c] + (du[x] - <span class="hljs-number">1</span>) * (<span class="hljs-built_in">ksm</span>(<span class="hljs-number">2</span>, m) - <span class="hljs-number">1</span>) + <span class="hljs-number">1</span>);
+        ans[x] = <span class="hljs-built_in">max</span>(ans[x], ans[c]);
     &#125;
-    return ans;
+    ans[x] += (du[x] - <span class="hljs-number">1</span>) * (<span class="hljs-built_in">ksm</span>(<span class="hljs-number">2</span>, m) - <span class="hljs-number">1</span>) + <span class="hljs-number">1</span>;
+&#125;;
+<span class="hljs-built_in">dfs</span>(dfs, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>);
+<span class="hljs-keyword">return</span> Max;</code></pre></div>
+
+<ol>
+<li>当 m 很大时, 由于取模, 求得的结果就不具备可比大小的性质了. 但是观察 $w&#x3D;(x-1)*(2^m-1)+1$ 这个式子, 会发现: 当 $m&gt;20$ 时, $2^m$ 为 1e6 级别, 而后面的 1 在对所有点的贡献提取公因式后最大不会超过点的个数 1e5. 也就是说: 度数 x 每增大 1, 后面的常数变再大也影响不到最终答案是不是 Max. 就可以用 $(2^m-1)$ 的系数 &#x3D;&gt; (路径的度数和减去路径的点数) 为第一关键字, 点的个数(也就是公式中常数 1 的个数 ) 为第二关键字, 作为权值, 就最长路, 最后再算答案. 为什么 m 较小时不可以这样做呢? 因为 Max 的度数和比较小者大 1,但较小者可能由很多点组成, 也就是最后的常数非常大, $2^m-1&lt;n$ 时, 不能保证结果不会被影响.</li>
+</ol>
+<p>eg: 第一关键字的&quot;减去路径的点数&quot;不能拿掉, 因为它使得第一关键字的大小受点的个数影响, 而有相同度数和的路径可能具有不用的点个数.</p>
+<p>全部代码:</p>
+<div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> int long long</span>
+<span class="hljs-type">const</span> <span class="hljs-type">int</span> M = <span class="hljs-number">1e9</span> + <span class="hljs-number">7</span>;
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">ksm</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> n)</span> </span>&#123;
+    <span class="hljs-type">int</span> ans = <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">while</span> (n) &#123;
+        <span class="hljs-keyword">if</span> (n % <span class="hljs-number">2</span>)ans = ans * a % M;
+        a = a * a % M;
+        n /= <span class="hljs-number">2</span>;
+    &#125;
+    <span class="hljs-keyword">return</span> ans;
 &#125;
 
-int solve(int _) &#123;
-    int n, m, v, u;
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">solve</span><span class="hljs-params">(<span class="hljs-type">int</span> _)</span> </span>&#123;
+    <span class="hljs-type">int</span> n, m, v, u;
     cin &gt;&gt; n &gt;&gt; m;
-    vector&lt;int&gt;du(n + 1, 0);
-    vector&lt;vector&lt;int&gt;&gt;eg(n + 1);
-    for (int i = 1; i &lt; n; ++i) &#123;
+    vector&lt;<span class="hljs-type">int</span>&gt;<span class="hljs-built_in">du</span>(n + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>);
+    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;<span class="hljs-built_in">eg</span>(n + <span class="hljs-number">1</span>);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; n; ++i) &#123;
         cin &gt;&gt; v &gt;&gt; u;
-        eg[u].emplace_back(v);
-        eg[v].emplace_back(u);
+        eg[u].<span class="hljs-built_in">emplace_back</span>(v);
+        eg[v].<span class="hljs-built_in">emplace_back</span>(u);
         du[u]++;
         du[v]++;
     &#125;
-    if (m &lt; 20) &#123;
-        int Max = 0; //一位度数-数量, 二维数量
-        vector&lt;int&gt;ans(n + 1, 0);
-        auto dfs = [&amp;](auto self, int x, int fa) -&gt;void &#123;
-            for (auto c : eg[x]) &#123;
-                if (c == fa)continue;
-                self(self, c, x);
-                Max = max(Max, ans[x] + ans[c] + (du[x] - 1) * (ksm(2, m) - 1) + 1);
-                ans[x] = max(ans[x], ans[c]);
+    <span class="hljs-keyword">if</span> (m &lt; <span class="hljs-number">20</span>) &#123;
+        <span class="hljs-type">int</span> Max = <span class="hljs-number">0</span>; <span class="hljs-comment">//一位度数-数量, 二维数量</span>
+        vector&lt;<span class="hljs-type">int</span>&gt;<span class="hljs-built_in">ans</span>(n + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>);
+        <span class="hljs-keyword">auto</span> dfs = [&amp;](<span class="hljs-keyword">auto</span> self, <span class="hljs-type">int</span> x, <span class="hljs-type">int</span> fa) -&gt;<span class="hljs-type">void</span> &#123;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> c : eg[x]) &#123;
+                <span class="hljs-keyword">if</span> (c == fa)<span class="hljs-keyword">continue</span>;
+                <span class="hljs-built_in">self</span>(self, c, x);
+                Max = <span class="hljs-built_in">max</span>(Max, ans[x] + ans[c] + (du[x] - <span class="hljs-number">1</span>) * (<span class="hljs-built_in">ksm</span>(<span class="hljs-number">2</span>, m) - <span class="hljs-number">1</span>) + <span class="hljs-number">1</span>);
+                ans[x] = <span class="hljs-built_in">max</span>(ans[x], ans[c]);
             &#125;
-            ans[x] += (du[x] - 1) * (ksm(2, m) - 1) + 1;
+            ans[x] += (du[x] - <span class="hljs-number">1</span>) * (<span class="hljs-built_in">ksm</span>(<span class="hljs-number">2</span>, m) - <span class="hljs-number">1</span>) + <span class="hljs-number">1</span>;
         &#125;;
-        dfs(dfs, 1, 1);
-        return Max;
+        <span class="hljs-built_in">dfs</span>(dfs, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>);
+        <span class="hljs-keyword">return</span> Max;
     &#125;
-    else &#123;
-        pair&lt;int, int&gt;Max;//一位度数-数量, 二维数量
-        vector&lt;pair&lt;int, int&gt;&gt;dep(n + 1, &#123;0, 0&#125;);
-        auto dfs = [&amp;](auto self, int x, int fa) -&gt; pair&lt;int, int&gt; &#123;
-            for (auto c : eg[x]) &#123;
-                if (c == fa)continue;
-                auto tp = self(self, c, x);
-                Max = max(Max, &#123;dep[x].first + tp.first + du[x] - 1, dep[x].second + 1 + tp.second&#125;);
-                dep[x] = max(dep[x], tp);
+    <span class="hljs-keyword">else</span> &#123;
+        pair&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt;Max;<span class="hljs-comment">//一位度数-数量, 二维数量</span>
+        vector&lt;pair&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt;&gt;<span class="hljs-built_in">dep</span>(n + <span class="hljs-number">1</span>, &#123;<span class="hljs-number">0</span>, <span class="hljs-number">0</span>&#125;);
+        <span class="hljs-keyword">auto</span> dfs = [&amp;](<span class="hljs-keyword">auto</span> self, <span class="hljs-type">int</span> x, <span class="hljs-type">int</span> fa) -&gt; pair&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt; &#123;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> c : eg[x]) &#123;
+                <span class="hljs-keyword">if</span> (c == fa)<span class="hljs-keyword">continue</span>;
+                <span class="hljs-keyword">auto</span> tp = <span class="hljs-built_in">self</span>(self, c, x);
+                Max = <span class="hljs-built_in">max</span>(Max, &#123;dep[x].first + tp.first + du[x] - <span class="hljs-number">1</span>, dep[x].second + <span class="hljs-number">1</span> + tp.second&#125;);
+                dep[x] = <span class="hljs-built_in">max</span>(dep[x], tp);
             &#125;
-            dep[x].first += du[x] - 1;
+            dep[x].first += du[x] - <span class="hljs-number">1</span>;
             dep[x].second++;
-            return dep[x];
+            <span class="hljs-keyword">return</span> dep[x];
         &#125;;
-        dfs(dfs, 1, 1);
-        return (Max.first * (ksm(2, m) - 1 + M) % M + Max.second) % M;
+        <span class="hljs-built_in">dfs</span>(dfs, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>);
+        <span class="hljs-keyword">return</span> (Max.first * (<span class="hljs-built_in">ksm</span>(<span class="hljs-number">2</span>, m) - <span class="hljs-number">1</span> + M) % M + Max.second) % M;
     &#125;
 &#125;
-signed main()
-&#123;
-    // freopen("input.txt", "r", stdin);
-    ios::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
-    int _ = 1;
+<span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+    <span class="hljs-comment">// freopen(&quot;input.txt&quot;, &quot;r&quot;, stdin);</span>
+    ios::<span class="hljs-built_in">sync_with_stdio</span>(<span class="hljs-literal">false</span>); cin.<span class="hljs-built_in">tie</span>(<span class="hljs-literal">nullptr</span>); cout.<span class="hljs-built_in">tie</span>(<span class="hljs-literal">nullptr</span>);
+    <span class="hljs-type">int</span> _ = <span class="hljs-number">1</span>;
     cin &gt;&gt; _;
-    while (_--) &#123;
-        cout &lt;&lt; solve(_) &lt;&lt; endl;
+    <span class="hljs-keyword">while</span> (_--) &#123;
+        cout &lt;&lt; <span class="hljs-built_in">solve</span>(_) &lt;&lt; endl;
     &#125;
-&#125;
-</code></pre>
+&#125;</code></pre></div>
 
                 
               </div>
@@ -705,10 +701,6 @@ signed main()
   <script  src="/js/local-search.js" ></script>
 
 
-
-
-  
-<script src="/js/blog-enhancements.js"></script>
 
 
 

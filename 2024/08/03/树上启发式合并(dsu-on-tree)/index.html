@@ -16,12 +16,12 @@
   <meta name="author" content="TauLee">
   <meta name="keywords" content="">
   
-    <meta name="description" content="upd: 文尾更新了一个更好的讲解, 但英文 当要维护树中所有以 每个节点为根的子树 的某个值, 而且 以 rot 为根的树 的值可以从 以 rot 的 son 为根的子树 转移过来. eg &#x3D;&gt; U41492 树上数颜色 . 此时如果每往上传递子树的贡献时, 都暴力枚举子树中所有点, 复杂度就到了 $n^2$ . 不妨这样做: 每往上传递子树的贡献时, 其他 ( 轻子树 )的仍旧暴力枚举">
+    <meta name="description" content="upd: 文尾更新了一个更好的讲解, 但英文 当要维护树中所有以 每个节点为根的子树 的某个值, 而且 以 rot 为根的树 的值可以从 以 rot 的 son 为根的子树 转移过来. eg &#x3D;&gt; U41492 树上数颜色 . 此时如果每往上传递子树的贡献时, 都暴力枚举子树中所有点, 复杂度就到了 $n^2$ . 不妨这样做: 每往上传递子树的贡献时, 其他 ( 轻子树 )的仍旧">
 <meta property="og:type" content="article">
 <meta property="og:title" content="树上启发式合并(dsu on tree)">
 <meta property="og:url" content="https://taulee.github.io/2024/08/03/%E6%A0%91%E4%B8%8A%E5%90%AF%E5%8F%91%E5%BC%8F%E5%90%88%E5%B9%B6(dsu-on-tree)/index.html">
 <meta property="og:site_name" content="TauLee&#39;s Blog">
-<meta property="og:description" content="upd: 文尾更新了一个更好的讲解, 但英文 当要维护树中所有以 每个节点为根的子树 的某个值, 而且 以 rot 为根的树 的值可以从 以 rot 的 son 为根的子树 转移过来. eg &#x3D;&gt; U41492 树上数颜色 . 此时如果每往上传递子树的贡献时, 都暴力枚举子树中所有点, 复杂度就到了 $n^2$ . 不妨这样做: 每往上传递子树的贡献时, 其他 ( 轻子树 )的仍旧暴力枚举">
+<meta property="og:description" content="upd: 文尾更新了一个更好的讲解, 但英文 当要维护树中所有以 每个节点为根的子树 的某个值, 而且 以 rot 为根的树 的值可以从 以 rot 的 son 为根的子树 转移过来. eg &#x3D;&gt; U41492 树上数颜色 . 此时如果每往上传递子树的贡献时, 都暴力枚举子树中所有点, 复杂度就到了 $n^2$ . 不妨这样做: 每往上传递子树的贡献时, 其他 ( 轻子树 )的仍旧">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-08-03T08:15:00.000Z">
 <meta property="article:modified_time" content="2024-08-03T08:15:00.000Z">
@@ -273,201 +273,199 @@
             
               <div class="markdown-body">
                 
-                
-<p>upd: 文尾更新了一个更好的讲解, 但英文</p>
+                <p>upd: 文尾更新了一个更好的讲解, 但英文</p>
 <p>当要维护树中所有以 <strong>每个节点为根的子树</strong> 的某个值, 而且 <strong>以 rot 为根的树</strong> 的值可以从 <strong>以 rot 的 son 为根的子树</strong> 转移过来.</p>
-<p>eg =&gt; <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/U41492">U41492 树上数颜色</a> .</p>
+<p>eg &#x3D;&gt; <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/U41492">U41492 树上数颜色</a> .</p>
 <p>此时如果每往上传递子树的贡献时, 都暴力枚举子树中所有点, 复杂度就到了 $n^2$ .</p>
 <p>不妨这样做: 每往上传递子树的贡献时, 其他 ( 轻子树 )的仍旧暴力枚举所有点来计算贡献. 最大的那个子树 ( 重子树) 留到最后一个跑 dfs, 此时跑出来的结果不再动他, 直接往上回溯, 就传承给了上一级. 形象地说, 就是所有轻子树合并到了重子树上, 作为 fa 的子树的贡献.</p>
 <p>可以证明这样的复杂度是 $nlogn$ . 见代码.</p>
-<pre><code class="language-cpp">https://www.luogu.com.cn/problem/U41492
-void dfs(int x, int fa) &#123;
-    for (auto c : eg[x]) &#123;
-        if (c == fa)continue;
-        if (c == son[x])continue;
-        dfs(c, x); // dfs 跑完所有轻子树内部的答案
-        clear(c, x); //注意: 跑完后我们要清空这个轻子树的贡献, 不能影响计算其他轻子树内的贡献.
+<div class="code-wrapper"><pre><code class="hljs cpp">https:<span class="hljs-comment">//www.luogu.com.cn/problem/U41492</span>
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> fa)</span> </span>&#123;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> c : eg[x]) &#123;
+        <span class="hljs-keyword">if</span> (c == fa)<span class="hljs-keyword">continue</span>;
+        <span class="hljs-keyword">if</span> (c == son[x])<span class="hljs-keyword">continue</span>;
+        <span class="hljs-built_in">dfs</span>(c, x); <span class="hljs-comment">// dfs 跑完所有轻子树内部的答案</span>
+        <span class="hljs-built_in">clear</span>(c, x); <span class="hljs-comment">//注意: 跑完后我们要清空这个轻子树的贡献, 不能影响计算其他轻子树内的贡献.</span>
     &#125;
-    if (son[x]) // 计算重子树的答案, 不去clear, 直接保留, 这样就传给了上一层.
-        dfs(son[x], x);
+    <span class="hljs-keyword">if</span> (son[x]) <span class="hljs-comment">// 计算重子树的答案, 不去clear, 直接保留, 这样就传给了上一层.</span>
+        <span class="hljs-built_in">dfs</span>(son[x], x);
 
-    for (auto c : eg[x]) &#123; // 暴力计算所有轻子树的贡献
-        if (c == fa)continue;
-        if (c == son[x])continue;
-        add(c, x);
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> c : eg[x]) &#123; <span class="hljs-comment">// 暴力计算所有轻子树的贡献</span>
+        <span class="hljs-keyword">if</span> (c == fa)<span class="hljs-keyword">continue</span>;
+        <span class="hljs-keyword">if</span> (c == son[x])<span class="hljs-keyword">continue</span>;
+        <span class="hljs-built_in">add</span>(c, x);
     &#125;
-    if (!num[clo[x]])sum++; // 根节点本身
+    <span class="hljs-keyword">if</span> (!num[clo[x]])sum++; <span class="hljs-comment">// 根节点本身</span>
     num[clo[x]]++;
     ans[x] = sum;
-&#125;
-</code></pre>
+&#125;</code></pre></div>
+
 <p>就是说: 遍历所有子树的贡献时, 由于换一根子树dfs之前就要清除之前子树的贡献, 我们可以选择一个子树作为最后跑 dfs 的, 这样他就是不用清除的, 就可以节省复杂度.</p>
 <p>全部代码:</p>
-<pre><code class="language-cpp">//AC https://www.luogu.com.cn/problem/U41492
-#define int long long
-const int Maxn = 1e5 + 10;
+<div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-comment">//AC https://www.luogu.com.cn/problem/U41492</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> int long long</span>
+<span class="hljs-type">const</span> <span class="hljs-type">int</span> Maxn = <span class="hljs-number">1e5</span> + <span class="hljs-number">10</span>;
 
-vector&lt;int&gt;eg[Maxn];
-int n, v, u, sum = 0;
-int clo[Maxn], num[Maxn], son[Maxn], ans[Maxn];
+vector&lt;<span class="hljs-type">int</span>&gt;eg[Maxn];
+<span class="hljs-type">int</span> n, v, u, sum = <span class="hljs-number">0</span>;
+<span class="hljs-type">int</span> clo[Maxn], num[Maxn], son[Maxn], ans[Maxn];
 
-int get_son(int x, int fa) &#123;
-    int Max = 0, pos = 0, sum = 1;
-    for (auto c : eg[x]) &#123;
-        if (c == fa)continue;
-        int tp = get_son(c, x);
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">get_son</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> fa)</span> </span>&#123;
+    <span class="hljs-type">int</span> Max = <span class="hljs-number">0</span>, pos = <span class="hljs-number">0</span>, sum = <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> c : eg[x]) &#123;
+        <span class="hljs-keyword">if</span> (c == fa)<span class="hljs-keyword">continue</span>;
+        <span class="hljs-type">int</span> tp = <span class="hljs-built_in">get_son</span>(c, x);
         sum += tp;
-        if (tp &gt; Max)Max = tp, pos = c;
+        <span class="hljs-keyword">if</span> (tp &gt; Max)Max = tp, pos = c;
     &#125;
-    if (pos)son[x] = pos;
-    return sum;
+    <span class="hljs-keyword">if</span> (pos)son[x] = pos;
+    <span class="hljs-keyword">return</span> sum;
 &#125;
-void clear(int x, int fa) &#123;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">clear</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> fa)</span> </span>&#123;
     num[clo[x]]--;
-    if (!num[clo[x]])sum--;
-    for (auto c : eg[x]) &#123;
-        if (c == fa)continue;
-        clear(c, x);
+    <span class="hljs-keyword">if</span> (!num[clo[x]])sum--;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> c : eg[x]) &#123;
+        <span class="hljs-keyword">if</span> (c == fa)<span class="hljs-keyword">continue</span>;
+        <span class="hljs-built_in">clear</span>(c, x);
     &#125;
 &#125;
-void add(int x, int fa) &#123;
-    if (!num[clo[x]])sum++;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> fa)</span> </span>&#123;
+    <span class="hljs-keyword">if</span> (!num[clo[x]])sum++;
     num[clo[x]]++;
-    for (auto c : eg[x]) &#123;
-        if (c == fa)continue;
-        add(c, x);
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> c : eg[x]) &#123;
+        <span class="hljs-keyword">if</span> (c == fa)<span class="hljs-keyword">continue</span>;
+        <span class="hljs-built_in">add</span>(c, x);
     &#125;
 &#125;
-void dfs(int x, int fa) &#123;
-    for (auto c : eg[x]) &#123;
-        if (c == fa)continue;
-        if (c == son[x])continue;
-        dfs(c, x);
-        clear(c, x);
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> fa)</span> </span>&#123;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> c : eg[x]) &#123;
+        <span class="hljs-keyword">if</span> (c == fa)<span class="hljs-keyword">continue</span>;
+        <span class="hljs-keyword">if</span> (c == son[x])<span class="hljs-keyword">continue</span>;
+        <span class="hljs-built_in">dfs</span>(c, x);
+        <span class="hljs-built_in">clear</span>(c, x);
     &#125;
-    if (son[x])
-        dfs(son[x], x);
+    <span class="hljs-keyword">if</span> (son[x])
+        <span class="hljs-built_in">dfs</span>(son[x], x);
 
-    for (auto c : eg[x]) &#123;
-        if (c == fa)continue;
-        if (c == son[x])continue;
-        add(c, x);
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> c : eg[x]) &#123;
+        <span class="hljs-keyword">if</span> (c == fa)<span class="hljs-keyword">continue</span>;
+        <span class="hljs-keyword">if</span> (c == son[x])<span class="hljs-keyword">continue</span>;
+        <span class="hljs-built_in">add</span>(c, x);
     &#125;
-    if (!num[clo[x]])sum++;
+    <span class="hljs-keyword">if</span> (!num[clo[x]])sum++;
     num[clo[x]]++;
     ans[x] = sum;
 &#125;
-signed main()
-&#123;
-    ios::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+<span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+    ios::<span class="hljs-built_in">sync_with_stdio</span>(<span class="hljs-literal">false</span>); cin.<span class="hljs-built_in">tie</span>(<span class="hljs-literal">nullptr</span>); cout.<span class="hljs-built_in">tie</span>(<span class="hljs-literal">nullptr</span>);
     cin &gt;&gt; n;
-    for (int i = 1; i &lt; n; ++i) &#123;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; n; ++i) &#123;
         cin &gt;&gt; v &gt;&gt; u;
-        eg[v].emplace_back(u);
-        eg[u].emplace_back(v);
+        eg[v].<span class="hljs-built_in">emplace_back</span>(u);
+        eg[u].<span class="hljs-built_in">emplace_back</span>(v);
     &#125;
-    for (int i = 1; i &lt;= n; ++i) &#123;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) &#123;
         cin &gt;&gt; clo[i];
     &#125;
 
-    get_son(1, 1);
-    dfs(1, 1);
+    <span class="hljs-built_in">get_son</span>(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>);
+    <span class="hljs-built_in">dfs</span>(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>);
 
-    int m; cin &gt;&gt; m;
-    for (int i = 1; i &lt;= m; ++i) &#123;
+    <span class="hljs-type">int</span> m; cin &gt;&gt; m;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; ++i) &#123;
         cin &gt;&gt; v;
         cout &lt;&lt; ans[v] &lt;&lt; endl;
     &#125;
-&#125;
-</code></pre>
+&#125;</code></pre></div>
+
 <p>另一题: <a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/600/E">E. Lomsat gelral</a> , 直接看代码:</p>
-<pre><code class="language-cpp">vector&lt;int&gt;edge[N];//邻接表存边
-int son[N], sz[N]; //每个点的重儿子   每个点子树大小
-int c[N];//每个节点的颜色
-int num[N];//每种颜色的数量
-ll ans[N];//存每个点答案
-ll sum = 0; //存当前对应答案
-int maxn = 0; //存对应最大值
-void get_son(int x, int pre) &#123; //预处理获取每个点的重儿子
-    sz[x] = 1;
-    for (int i = 0; i &lt; edge[x].size(); i++) &#123;
-        int tmp = edge[x][i];
-        if (tmp == pre) &#123;
-            continue;
+<div class="code-wrapper"><pre><code class="hljs cpp">vector&lt;<span class="hljs-type">int</span>&gt;edge[N];<span class="hljs-comment">//邻接表存边</span>
+<span class="hljs-type">int</span> son[N], sz[N]; <span class="hljs-comment">//每个点的重儿子   每个点子树大小</span>
+<span class="hljs-type">int</span> c[N];<span class="hljs-comment">//每个节点的颜色</span>
+<span class="hljs-type">int</span> num[N];<span class="hljs-comment">//每种颜色的数量</span>
+ll ans[N];<span class="hljs-comment">//存每个点答案</span>
+ll sum = <span class="hljs-number">0</span>; <span class="hljs-comment">//存当前对应答案</span>
+<span class="hljs-type">int</span> maxn = <span class="hljs-number">0</span>; <span class="hljs-comment">//存对应最大值</span>
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">get_son</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> pre)</span> </span>&#123; <span class="hljs-comment">//预处理获取每个点的重儿子</span>
+    sz[x] = <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; edge[x].<span class="hljs-built_in">size</span>(); i++) &#123;
+        <span class="hljs-type">int</span> tmp = edge[x][i];
+        <span class="hljs-keyword">if</span> (tmp == pre) &#123;
+            <span class="hljs-keyword">continue</span>;
         &#125;
-        get_son(tmp, x);
+        <span class="hljs-built_in">get_son</span>(tmp, x);
         sz[x] += sz[tmp];
-        if (sz[tmp] &gt; sz[son[x]]) &#123; //子树最大的为重儿子
+        <span class="hljs-keyword">if</span> (sz[tmp] &gt; sz[son[x]]) &#123; <span class="hljs-comment">//子树最大的为重儿子</span>
             son[x] = tmp;
         &#125;
     &#125;
 &#125;
-void add(int x, int pre, int dep) &#123; //更新除重儿子外的点（轻儿子+父亲）
-    num[c[x]]++;//更新
-    if (num[c[x]] &gt; maxn) &#123; //最大值被更新了
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> pre, <span class="hljs-type">int</span> dep)</span> </span>&#123; <span class="hljs-comment">//更新除重儿子外的点（轻儿子+父亲）</span>
+    num[c[x]]++;<span class="hljs-comment">//更新</span>
+    <span class="hljs-keyword">if</span> (num[c[x]] &gt; maxn) &#123; <span class="hljs-comment">//最大值被更新了</span>
         maxn = num[c[x]];
         sum = c[x];
     &#125;
-    else if (num[c[x]] == maxn) &#123; //出现相同的最大值
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (num[c[x]] == maxn) &#123; <span class="hljs-comment">//出现相同的最大值</span>
         sum += c[x];
     &#125;
-    for (int i = 0; i &lt; edge[x].size(); i++) &#123;
-        int tmp = edge[x][i];
-        if (tmp == pre || dep == 1 &amp;&amp; tmp == son[x]) &#123; //第一层的重儿子在dfs中更新过且未被清空，所以这里跳过
-            continue;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; edge[x].<span class="hljs-built_in">size</span>(); i++) &#123;
+        <span class="hljs-type">int</span> tmp = edge[x][i];
+        <span class="hljs-keyword">if</span> (tmp == pre || dep == <span class="hljs-number">1</span> &amp;&amp; tmp == son[x]) &#123; <span class="hljs-comment">//第一层的重儿子在dfs中更新过且未被清空，所以这里跳过</span>
+            <span class="hljs-keyword">continue</span>;
         &#125;
-        add(tmp, x, dep + 1);
+        <span class="hljs-built_in">add</span>(tmp, x, dep + <span class="hljs-number">1</span>);
     &#125;
 &#125;
-void clear(int x, int pre) &#123;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">clear</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> pre)</span> </span>&#123;
     num[c[x]]--;
-    for (int i = 0; i &lt; edge[x].size(); i++) &#123;
-        int tmp = edge[x][i];
-        if (tmp == pre) &#123;
-            continue;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; edge[x].<span class="hljs-built_in">size</span>(); i++) &#123;
+        <span class="hljs-type">int</span> tmp = edge[x][i];
+        <span class="hljs-keyword">if</span> (tmp == pre) &#123;
+            <span class="hljs-keyword">continue</span>;
         &#125;
-        clear(tmp, x);
+        <span class="hljs-built_in">clear</span>(tmp, x);
     &#125;
 &#125;
-void dfs(int x, int pre) &#123; //当前dfs处理以x为根的答案
-    for (int i = 0; i &lt; edge[x].size(); i++) &#123;
-        int tmp = edge[x][i];
-        if (tmp == pre || tmp == son[x]) &#123; //先跳过重儿子，留到最后处理
-            continue;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> pre)</span> </span>&#123; <span class="hljs-comment">//当前dfs处理以x为根的答案</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; edge[x].<span class="hljs-built_in">size</span>(); i++) &#123;
+        <span class="hljs-type">int</span> tmp = edge[x][i];
+        <span class="hljs-keyword">if</span> (tmp == pre || tmp == son[x]) &#123; <span class="hljs-comment">//先跳过重儿子，留到最后处理</span>
+            <span class="hljs-keyword">continue</span>;
         &#125;
-        dfs(tmp, x); //处理x的轻儿子
-        clear(tmp, x); //将处理x轻儿子中标记过的点清空防止干扰其他儿子的求解
-        maxn = sum = 0; //有清空操作，要把这两个重置
+        <span class="hljs-built_in">dfs</span>(tmp, x); <span class="hljs-comment">//处理x的轻儿子</span>
+        <span class="hljs-built_in">clear</span>(tmp, x); <span class="hljs-comment">//将处理x轻儿子中标记过的点清空防止干扰其他儿子的求解</span>
+        maxn = sum = <span class="hljs-number">0</span>; <span class="hljs-comment">//有清空操作，要把这两个重置</span>
     &#125;
-    if (son[x]) &#123;
-        dfs(son[x], x); //重儿子最后判断，不需要清空了
+    <span class="hljs-keyword">if</span> (son[x]) &#123;
+        <span class="hljs-built_in">dfs</span>(son[x], x); <span class="hljs-comment">//重儿子最后判断，不需要清空了</span>
     &#125;
-    add(x, pre, 1); //将除重儿子外的点（轻儿子+父亲）重新更新进来
+    <span class="hljs-built_in">add</span>(x, pre, <span class="hljs-number">1</span>); <span class="hljs-comment">//将除重儿子外的点（轻儿子+父亲）重新更新进来</span>
     ans[x] = sum;
 &#125;
-int main() &#123;
-    ios::sync_with_stdio(false); cin.tie(0); cout.tie(0); //同步流
-    int n;
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+    ios::<span class="hljs-built_in">sync_with_stdio</span>(<span class="hljs-literal">false</span>); cin.<span class="hljs-built_in">tie</span>(<span class="hljs-number">0</span>); cout.<span class="hljs-built_in">tie</span>(<span class="hljs-number">0</span>); <span class="hljs-comment">//同步流</span>
+    <span class="hljs-type">int</span> n;
     cin &gt;&gt; n;
-    for (int i = 1; i &lt;= n; i++) &#123;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;
         cin &gt;&gt; c[i];
     &#125;
-    for (int i = 1; i &lt; n; i++) &#123;
-        int u, v;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; n; i++) &#123;
+        <span class="hljs-type">int</span> u, v;
         cin &gt;&gt; u &gt;&gt; v;
-        edge[u].push_back(v);
-        edge[v].push_back(u);
+        edge[u].<span class="hljs-built_in">push_back</span>(v);
+        edge[v].<span class="hljs-built_in">push_back</span>(u);
     &#125;
-    get_son(1, 0); //预处理
-    dfs(1, 0); //dfs搜答案
-    for (int i = 1; i &lt;= n; i++) &#123;
-        cout &lt;&lt; ans[i] &lt;&lt; " ";
+    <span class="hljs-built_in">get_son</span>(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>); <span class="hljs-comment">//预处理</span>
+    <span class="hljs-built_in">dfs</span>(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>); <span class="hljs-comment">//dfs搜答案</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;
+        cout &lt;&lt; ans[i] &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;
     &#125;
-    return 0;
-&#125;
-</code></pre>
-<p>最后分享一个帖子, 里面有更多好讲解,好题
-<a target="_blank" rel="noopener" href="https://codeforces.com/blog/entry/67696">[Explanation] dsu on trees (small to large)</a></p>
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre></div>
+
+<p>最后分享一个帖子, 里面有更多好讲解,好题 <a target="_blank" rel="noopener" href="https://codeforces.com/blog/entry/67696">[Explanation] dsu on trees (small to large)</a></p>
 
                 
               </div>
@@ -803,10 +801,6 @@ int main() &#123;
   <script  src="/js/local-search.js" ></script>
 
 
-
-
-  
-<script src="/js/blog-enhancements.js"></script>
 
 
 

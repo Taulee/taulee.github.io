@@ -16,12 +16,12 @@
   <meta name="author" content="TauLee">
   <meta name="keywords" content="">
   
-    <meta name="description" content="原题链接 题意 给你一个数组a 和数组 b, 每次操作可以任选一个 $a_i$ , 获得收益为 $a_i$ 的大小, 但此后的要执行 $a_i-&#x3D;b_i$ . 问执行 k 次后最大收益是多少. k 最大为 $1e9$ . 思路   第一想法就是优先队列模拟 k 次操作, 但发现 k 很大, 铁定 tle.   注意到当某个 $a[i]-xb[i]$ (x 为 a[i] 被选择的次数 ) 被选择时">
+    <meta name="description" content="原题链接 题意给你一个数组a 和数组 b, 每次操作可以任选一个 $a_i$ , 获得收益为 $a_i$ 的大小, 但此后的要执行 $a_i-&#x3D;b_i$ . 问执行 k 次后最大收益是多少. k 最大为 $1e9$ . 思路 第一想法就是优先队列模拟 k 次操作, 但发现 k 很大, 铁定 tle.  注意到当某个 $a[i]-xb[i]$ (x 为 a[i] 被选择的次数 ) 被选择时">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【题解】Codeforces Round 962 (Div. 3) F-Bomb">
 <meta property="og:url" content="https://taulee.github.io/2024/07/27/%E3%80%90%E9%A2%98%E8%A7%A3%E3%80%91Codeforces-Round-962-(Div.-3)-F-Bomb/index.html">
 <meta property="og:site_name" content="TauLee&#39;s Blog">
-<meta property="og:description" content="原题链接 题意 给你一个数组a 和数组 b, 每次操作可以任选一个 $a_i$ , 获得收益为 $a_i$ 的大小, 但此后的要执行 $a_i-&#x3D;b_i$ . 问执行 k 次后最大收益是多少. k 最大为 $1e9$ . 思路   第一想法就是优先队列模拟 k 次操作, 但发现 k 很大, 铁定 tle.   注意到当某个 $a[i]-xb[i]$ (x 为 a[i] 被选择的次数 ) 被选择时">
+<meta property="og:description" content="原题链接 题意给你一个数组a 和数组 b, 每次操作可以任选一个 $a_i$ , 获得收益为 $a_i$ 的大小, 但此后的要执行 $a_i-&#x3D;b_i$ . 问执行 k 次后最大收益是多少. k 最大为 $1e9$ . 思路 第一想法就是优先队列模拟 k 次操作, 但发现 k 很大, 铁定 tle.  注意到当某个 $a[i]-xb[i]$ (x 为 a[i] 被选择的次数 ) 被选择时">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-27T03:14:00.000Z">
 <meta property="article:modified_time" content="2024-07-27T03:14:00.000Z">
@@ -207,7 +207,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          442 字
+          444 字
         
       </span>
     
@@ -273,69 +273,61 @@
             
               <div class="markdown-body">
                 
-                
-<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1996/problem/F">原题链接</a></p>
-<h3>题意</h3>
-<p>给你一个数组a 和数组 b, 每次操作可以任选一个 $a_i$ , 获得收益为 $a_i$ 的大小, 但此后的要执行 $a_i-=b_i$ . 问执行 k 次后最大收益是多少. k 最大为 $1e9$ .</p>
-<h3>思路</h3>
-<ul>
-<li>
-<p>第一想法就是优先队列模拟 k 次操作, 但发现 k 很大, 铁定 tle.</p>
+                <p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1996/problem/F">原题链接</a></p>
+<h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><p>给你一个数组a 和数组 b, 每次操作可以任选一个 $a_i$ , 获得收益为 $a_i$ 的大小, 但此后的要执行 $a_i-&#x3D;b_i$ . 问执行 k 次后最大收益是多少. k 最大为 $1e9$ .</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ul>
+<li><p>第一想法就是优先队列模拟 k 次操作, 但发现 k 很大, 铁定 tle.</p>
 </li>
-<li>
-<p>注意到当某个 $a[i]-xb[i]$ (x 为 a[i] 被选择的次数 ) 被选择时, 所有在优先队列做法中比它大的数一定都被选过了, 假如 $val=a[i]-xb[i]$ 是我最后一次操作选择的数. 那么我所有之前选择的数都不会小于 val.</p>
+<li><p>注意到当某个 $a[i]-xb[i]$ (x 为 a[i] 被选择的次数 ) 被选择时, 所有在优先队列做法中比它大的数一定都被选过了, 假如 $val&#x3D;a[i]-xb[i]$ 是我最后一次操作选择的数. 那么我所有之前选择的数都不会小于 val.</p>
 </li>
-<li>
-<p>对于一个 $a_i$ , 知道它会被选择的最小可能值, 就能算出来对他操作了多少次. <code>max(0, (a[i] - val) / b[i] + (a[i] &gt;= val ? 1 : 0))</code> .</p>
+<li><p>对于一个 $a_i$ , 知道它会被选择的最小可能值, 就能算出来对他操作了多少次. <code>max(0, (a[i] - val) / b[i] + (a[i] &gt;= val ? 1 : 0))</code> .</p>
 </li>
-<li>
-<p>我们就可以二分检查所有可能的 val, 去 check 它所对应的操作次数 times, 找到最小的 val 使 $times&lt;k$ , 可知 val 之上的所有都是被取的, 剩下的 $k-times$ 次, 显然都是取 val 的.</p>
+<li><p>我们就可以二分检查所有可能的 val, 去 check 它所对应的操作次数 times, 找到最小的 val 使 $times&lt;k$ , 可知 val 之上的所有都是被取的, 剩下的 $k-times$ 次, 显然都是取 val 的.</p>
 </li>
 </ul>
 <p>代码:</p>
-<pre><code class="language-cpp">#define int long long
+<div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> int long long</span>
 
-int solve(int _) &#123;
-    int n, k;
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">solve</span><span class="hljs-params">(<span class="hljs-type">int</span> _)</span> </span>&#123;
+    <span class="hljs-type">int</span> n, k;
     cin &gt;&gt; n &gt;&gt; k;
-    vector&lt;int&gt;a(n), b(n);
-    for (int i = 0; i &lt; n; ++i) &#123;
+    vector&lt;<span class="hljs-type">int</span>&gt;<span class="hljs-built_in">a</span>(n), <span class="hljs-built_in">b</span>(n);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i) &#123;
         cin &gt;&gt; a[i];
     &#125;
-    for (int i = 0; i &lt; n; ++i) &#123;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i) &#123;
         cin &gt;&gt; b[i];
     &#125;
 
-    auto check = [&amp;](int x) -&gt; bool &#123;
-        int num = 0;
-        for (int i = 0; i &lt; n; ++i) &#123;
-            num += max(0ll, (a[i] - x) / b[i] + (a[i] &gt;= x ? 1 : 0));
+    <span class="hljs-keyword">auto</span> check = [&amp;](<span class="hljs-type">int</span> x) -&gt; <span class="hljs-type">bool</span> &#123;
+        <span class="hljs-type">int</span> num = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i) &#123;
+            num += <span class="hljs-built_in">max</span>(<span class="hljs-number">0ll</span>, (a[i] - x) / b[i] + (a[i] &gt;= x ? <span class="hljs-number">1</span> : <span class="hljs-number">0</span>));
         &#125;
-        if (num &gt;= k)return true;
-        return false;
+        <span class="hljs-keyword">if</span> (num &gt;= k)<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
     &#125;;
 
-    int l = 0, r = 1e18;
-    while (l &lt; r) &#123;
-        int mid = (r + l + 1) &gt;&gt; 1;
-        if (check(mid)) &#123;
+    <span class="hljs-type">int</span> l = <span class="hljs-number">0</span>, r = <span class="hljs-number">1e18</span>;
+    <span class="hljs-keyword">while</span> (l &lt; r) &#123;
+        <span class="hljs-type">int</span> mid = (r + l + <span class="hljs-number">1</span>) &gt;&gt; <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">check</span>(mid)) &#123;
             l = mid;
         &#125;
-        else &#123;
-            r = mid - 1;
+        <span class="hljs-keyword">else</span> &#123;
+            r = mid - <span class="hljs-number">1</span>;
         &#125;
     &#125;
 
-    int p = r + 1, ans = 0;
-    for (int i = 0; i &lt; n; ++i) &#123;
-        int tim = max(0ll, (a[i] - p) / b[i] + (a[i] &gt;= p ? 1 : 0));
+    <span class="hljs-type">int</span> p = r + <span class="hljs-number">1</span>, ans = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i) &#123;
+        <span class="hljs-type">int</span> tim = <span class="hljs-built_in">max</span>(<span class="hljs-number">0ll</span>, (a[i] - p) / b[i] + (a[i] &gt;= p ? <span class="hljs-number">1</span> : <span class="hljs-number">0</span>));
         k -= tim;
-        if (tim)ans += a[i] * tim - (tim - 1) * tim / 2 * b[i];
+        <span class="hljs-keyword">if</span> (tim)ans += a[i] * tim - (tim - <span class="hljs-number">1</span>) * tim / <span class="hljs-number">2</span> * b[i];
     &#125;
     ans += k * r;
-    return ans;
-&#125;
-</code></pre>
+    <span class="hljs-keyword">return</span> ans;
+&#125;</code></pre></div>
 
                 
               </div>
@@ -671,10 +663,6 @@ int solve(int _) &#123;
   <script  src="/js/local-search.js" ></script>
 
 
-
-
-  
-<script src="/js/blog-enhancements.js"></script>
 
 
 

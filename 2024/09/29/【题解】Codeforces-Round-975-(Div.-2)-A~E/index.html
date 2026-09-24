@@ -16,12 +16,12 @@
   <meta name="author" content="TauLee">
   <meta name="keywords" content="">
   
-    <meta name="description" content="A. Max Plus Size 分别假设答案为取第偶数位的最大值和取第奇数位的最大值两种情况, 取更优解. 取偶数位的最大值时, 把所有其他都偶数位都取上. 奇数同理. code: int solve(int _) &#123;     int n;     cin &gt;&gt; n;     vector&lt;int&gt;a(n + 1);     int Maxj &#x3D; 0, Max">
+    <meta name="description" content="A. Max Plus Size 分别假设答案为取第偶数位的最大值和取第奇数位的最大值两种情况, 取更优解. 取偶数位的最大值时, 把所有其他都偶数位都取上. 奇数同理. code: int solve(int _) &#123;     int n;     cin &gt;&gt; n;     vector&lt;int&gt;a(n + 1);     int Maxj &#x3D; 0, Maxo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【题解】Codeforces Round 975 (Div. 2) A~E">
 <meta property="og:url" content="https://taulee.github.io/2024/09/29/%E3%80%90%E9%A2%98%E8%A7%A3%E3%80%91Codeforces-Round-975-(Div.-2)-A~E/index.html">
 <meta property="og:site_name" content="TauLee&#39;s Blog">
-<meta property="og:description" content="A. Max Plus Size 分别假设答案为取第偶数位的最大值和取第奇数位的最大值两种情况, 取更优解. 取偶数位的最大值时, 把所有其他都偶数位都取上. 奇数同理. code: int solve(int _) &#123;     int n;     cin &gt;&gt; n;     vector&lt;int&gt;a(n + 1);     int Maxj &#x3D; 0, Max">
+<meta property="og:description" content="A. Max Plus Size 分别假设答案为取第偶数位的最大值和取第奇数位的最大值两种情况, 取更优解. 取偶数位的最大值时, 把所有其他都偶数位都取上. 奇数同理. code: int solve(int _) &#123;     int n;     cin &gt;&gt; n;     vector&lt;int&gt;a(n + 1);     int Maxj &#x3D; 0, Maxo">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-09-29T08:54:00.000Z">
 <meta property="article:modified_time" content="2024-09-29T08:54:00.000Z">
@@ -273,252 +273,241 @@
             
               <div class="markdown-body">
                 
-                
-<p><strong>A. Max Plus Size</strong></p>
+                <p><strong>A. Max Plus Size</strong></p>
 <p>分别假设答案为取第偶数位的最大值和取第奇数位的最大值两种情况, 取更优解.</p>
 <p>取偶数位的最大值时, 把所有其他都偶数位都取上. 奇数同理.</p>
 <p>code:</p>
-<pre><code class="language-cpp">int solve(int _) &#123;
-    int n;
+<div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">solve</span><span class="hljs-params">(<span class="hljs-type">int</span> _)</span> </span>&#123;
+    <span class="hljs-type">int</span> n;
     cin &gt;&gt; n;
-    vector&lt;int&gt;a(n + 1);
-    int Maxj = 0, Maxo = 0;
-    for (int i = 1; i &lt;= n; ++i) &#123;
+    vector&lt;<span class="hljs-type">int</span>&gt;<span class="hljs-built_in">a</span>(n + <span class="hljs-number">1</span>);
+    <span class="hljs-type">int</span> Maxj = <span class="hljs-number">0</span>, Maxo = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) &#123;
         cin &gt;&gt; a[i];
-        if (i % 2)Maxj = max(Maxj, a[i]);
-        else Maxo = max(Maxo, a[i]);
+        <span class="hljs-keyword">if</span> (i % <span class="hljs-number">2</span>)Maxj = <span class="hljs-built_in">max</span>(Maxj, a[i]);
+        <span class="hljs-keyword">else</span> Maxo = <span class="hljs-built_in">max</span>(Maxo, a[i]);
     &#125;
-    int ans2 = n / 2;
-    int ans1 = n / 2 + n % 2;
+    <span class="hljs-type">int</span> ans2 = n / <span class="hljs-number">2</span>;
+    <span class="hljs-type">int</span> ans1 = n / <span class="hljs-number">2</span> + n % <span class="hljs-number">2</span>;
 
 
-    return max(ans1 + Maxj, ans2 + Maxo);
-&#125;
-</code></pre>
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">max</span>(ans1 + Maxj, ans2 + Maxo);
+&#125;</code></pre></div>
+
 <p><strong>B. All Pairs Segments</strong></p>
 <p>先把输入的 a数组sort 一下.</p>
-<p>对于每个 $a_i$ 分别由有 $a_{i+1}$ ~ $a_n$ ,   共 $n-i$ 个区间有贡献, 只用从前往后遍历每个 $a$ , 实时更新当前有多少个区间在做贡献.</p>
+<p>对于每个 $a_i$ 分别由有 $a_{i+1}$ ~ $a_n$ , 共 $n-i$ 个区间有贡献, 只用从前往后遍历每个 $a$ , 实时更新当前有多少个区间在做贡献.</p>
 <p>当前的总有效区间为 $now$ 个, 加入第 $i$ 个节点时.</p>
 <ol>
-<li>
-<p>新增了以他为左端点的 $n-i$ 个区间, $now+=n-i$ .
-所以 $a[i]$ 这个点被 $now$ 个区间覆盖.</p>
+<li><p>新增了以他为左端点的 $n-i$ 个区间, $now+&#x3D;n-i$ . 所以 $a[i]$ 这个点被 $now$ 个区间覆盖.</p>
 </li>
-<li>
-<p>减少了以他为右端点的 $i-1$ 个区间, $now-=i-1$ .
-所以 $a[i]+1$ ~ $a[i+1]-1$ 被 $now$ 个区间覆盖.</p>
+<li><p>减少了以他为右端点的 $i-1$ 个区间, $now-&#x3D;i-1$ . 所以 $a[i]+1$ ~ $a[i+1]-1$ 被 $now$ 个区间覆盖.</p>
 </li>
 </ol>
 <p>注意, a[n] 是一个特例.</p>
 <p>code:</p>
-<pre><code class="language-cpp">#define int long long
-void solve(int _) &#123;
-    int n, q;
+<div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> int long long</span>
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">solve</span><span class="hljs-params">(<span class="hljs-type">int</span> _)</span> </span>&#123;
+    <span class="hljs-type">int</span> n, q;
     cin &gt;&gt; n &gt;&gt; q;
-    vector&lt;int&gt;a(n + 1);
-    for (int i = 1; i &lt;= n; ++i) &#123;
+    vector&lt;<span class="hljs-type">int</span>&gt;<span class="hljs-built_in">a</span>(n + <span class="hljs-number">1</span>);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) &#123;
         cin &gt;&gt; a[i];
     &#125;
-    map&lt;int, int&gt;ma;
-    sort(1 + a.begin(), a.end());
-    int now = 0;
-    for (int i = 1; i &lt;= n; ++i) &#123;
+    map&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt;ma;
+    <span class="hljs-built_in">sort</span>(<span class="hljs-number">1</span> + a.<span class="hljs-built_in">begin</span>(), a.<span class="hljs-built_in">end</span>());
+    <span class="hljs-type">int</span> now = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) &#123;
         now += n - i;
         ma[now]++;
-        now -= i - 1;
-        if (i != n)
-            ma[now] += a[i + 1] - a[i] - 1;
+        now -= i - <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">if</span> (i != n)
+            ma[now] += a[i + <span class="hljs-number">1</span>] - a[i] - <span class="hljs-number">1</span>;
     &#125;
 
-    while (q--) &#123;
+    <span class="hljs-keyword">while</span> (q--) &#123;
         cin &gt;&gt; n;
-        cout &lt;&lt; ma[n] &lt;&lt; " ";
+        cout &lt;&lt; ma[n] &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;
     &#125;
     cout &lt;&lt; endl;
-&#125;
-</code></pre>
+&#125;</code></pre></div>
+
 <p><strong>C. Cards Partition</strong></p>
-<p>**	答案没有二分性**, fk, 赛时写了一个小时的二分.</p>
+<p>** 答案没有二分性**, fk, 赛时写了一个小时的二分.</p>
 <p>答案的范围为 $[1-n]$ , 只用枚举每个答案, 然后 $O(1)$ 做check.</p>
 <p>check:</p>
 <p>对于答案 $x$ , 也就是这些牌要排成 $x$ 行.</p>
 <p>先求至少要多少列 $clm$ ;</p>
 <ol>
-<li>
-<p>$clm &gt; 最多元素的个数$ , 因为这些不能在同一列.</p>
+<li><p>$clm &gt; 最多元素的个数$ , 因为这些不能在同一列.</p>
 </li>
-<li>
-<p>如果 $Max_element * X &gt; sum_of_all_element$ , 那就是所有牌摆 $Maxelement$ 列用不完, 还要加新列, 此时 <code>i128 clm = max(Max, sum / i + !!(sum % i));</code></p>
+<li><p>如果 $Max_element * X &gt; sum_of_all_element$ , 那就是所有牌摆 $Maxelement$ 列用不完, 还要加新列, 此时 <code>i128 clm = max(Max, sum / i + !!(sum % i));</code></p>
 </li>
 </ol>
 <p>$clm$ 求出来了, 检查空的位置是否小于 $k$ 就好, 只要有解且 $k$ 够用, 就一定能填出来.</p>
 <p>code:</p>
-<pre><code class="language-cpp">#define int long long
-#define i128 __int128
-int solve(int _) &#123;
-    int n, k;
+<div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> int long long</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> i128 __int128</span>
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">solve</span><span class="hljs-params">(<span class="hljs-type">int</span> _)</span> </span>&#123;
+    <span class="hljs-type">int</span> n, k;
     cin &gt;&gt; n &gt;&gt; k;
-    vector&lt;int&gt;a(n + 1);
-    i128 sum = 0;
-    int Max = 0;
-    for (int i = 1; i &lt;= n; ++i) &#123;
+    vector&lt;<span class="hljs-type">int</span>&gt;<span class="hljs-built_in">a</span>(n + <span class="hljs-number">1</span>);
+    i128 sum = <span class="hljs-number">0</span>;
+    <span class="hljs-type">int</span> Max = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) &#123;
         cin &gt;&gt; a[i];
-        Max = max(Max, a[i]);
+        Max = <span class="hljs-built_in">max</span>(Max, a[i]);
         sum += a[i];
     &#125;
-    sort(1 + a.begin(), a.end());
+    <span class="hljs-built_in">sort</span>(<span class="hljs-number">1</span> + a.<span class="hljs-built_in">begin</span>(), a.<span class="hljs-built_in">end</span>());
 
-    int ans = 0;
-    for (int i = 1; i &lt;= n; ++i) &#123;
-        i128 clm = max(Max, sum / i + !!(sum % i));
-        if (clm * i - sum &lt;= k)ans = i;
+    <span class="hljs-type">int</span> ans = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) &#123;
+        i128 clm = <span class="hljs-built_in">max</span>(Max, sum / i + !!(sum % i));
+        <span class="hljs-keyword">if</span> (clm * i - sum &lt;= k)ans = i;
     &#125;
-    return ans;
-&#125;
-</code></pre>
+    <span class="hljs-keyword">return</span> ans;
+&#125;</code></pre></div>
+
 <p><strong>D. Speedbreaker</strong></p>
 <p>注意到: 所有小于 $t$ 的数都包含在一个长度不大于 $t$ 的区间内时, 对于这个区间, 一定有解 ( 可以从这个区间的最小值开始往两边扩散, 哪边吉往哪边去).</p>
-<p>那么对于所有的 $t=i$ 都可以维护一个上述区间. 遍历每一个区间: 此时对于这个区间 $[l,r]$ , 可行的答案是 $[max(1,r-t+1),min(n,l+t-1)]$ ( 分别从区间两头往另一头走长度为 $t$ 的区间).</p>
+<p>那么对于所有的 $t&#x3D;i$ 都可以维护一个上述区间. 遍历每一个区间: 此时对于这个区间 $[l,r]$ , 可行的答案是 $[max(1,r-t+1),min(n,l+t-1)]$ ( 分别从区间两头往另一头走长度为 $t$ 的区间).</p>
 <p>对于所有区间求并集即可. 注意到如果数组中没有小于等于 t 的数, 那它对应的区间就是全部.</p>
 <p>code:</p>
-<pre><code class="language-cpp">int n, a[200010];
-int solve(int _) &#123;
+<div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-type">int</span> n, a[<span class="hljs-number">200010</span>];
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">solve</span><span class="hljs-params">(<span class="hljs-type">int</span> _)</span> </span>&#123;
     cin &gt;&gt; n;
-    for (int i = 1; i &lt;= n; ++i) &#123;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) &#123;
         cin &gt;&gt; a[i];
     &#125;
 
-    vector&lt;pair&lt;int, int&gt;&gt;tle(n + 1);
-    tle[n] = &#123;1, n&#125;;
+    vector&lt;pair&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt;&gt;<span class="hljs-built_in">tle</span>(n + <span class="hljs-number">1</span>);
+    tle[n] = &#123;<span class="hljs-number">1</span>, n&#125;;
 
-    for (int i = n - 1; i &gt;= 1; --i) &#123;
-        auto [l, r] = tle[i + 1];
-        while (l &lt;= r &amp;&amp; a[l] &gt; i)l++;
-        while (r &gt;= l &amp;&amp; a[r] &gt; i)r--;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = n - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">1</span>; --i) &#123;
+        <span class="hljs-keyword">auto</span> [l, r] = tle[i + <span class="hljs-number">1</span>];
+        <span class="hljs-keyword">while</span> (l &lt;= r &amp;&amp; a[l] &gt; i)l++;
+        <span class="hljs-keyword">while</span> (r &gt;= l &amp;&amp; a[r] &gt; i)r--;
         tle[i] = &#123;l, r&#125;;
-        if (r - l + 1 &gt; i)return 0;
+        <span class="hljs-keyword">if</span> (r - l + <span class="hljs-number">1</span> &gt; i)<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
     &#125;
 
-    vector&lt;int&gt;pre(n + 2, 0);
-    int cnt = 0;
-    for (int i = 1; i &lt;= n; ++i) &#123;
-        auto [l, r] = tle[i];
-        if (l &lt;= r) &#123;
+    vector&lt;<span class="hljs-type">int</span>&gt;<span class="hljs-built_in">pre</span>(n + <span class="hljs-number">2</span>, <span class="hljs-number">0</span>);
+    <span class="hljs-type">int</span> cnt = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) &#123;
+        <span class="hljs-keyword">auto</span> [l, r] = tle[i];
+        <span class="hljs-keyword">if</span> (l &lt;= r) &#123;
             cnt++;
-            int ll = min(l, max(1, r - i + 1));
-            int rr = max(r, min(n, l + i - 1));
+            <span class="hljs-type">int</span> ll = <span class="hljs-built_in">min</span>(l, <span class="hljs-built_in">max</span>(<span class="hljs-number">1</span>, r - i + <span class="hljs-number">1</span>));
+            <span class="hljs-type">int</span> rr = <span class="hljs-built_in">max</span>(r, <span class="hljs-built_in">min</span>(n, l + i - <span class="hljs-number">1</span>));
             pre[ll]++;
-            pre[rr + 1]--;
+            pre[rr + <span class="hljs-number">1</span>]--;
         &#125;
     &#125;
-    int ans = 0;
-    for (int i = 1; i &lt;= n; ++i) &#123;
-        pre[i] += pre[i - 1];
-        if (pre[i] == cnt)ans++;
+    <span class="hljs-type">int</span> ans = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) &#123;
+        pre[i] += pre[i - <span class="hljs-number">1</span>];
+        <span class="hljs-keyword">if</span> (pre[i] == cnt)ans++;
     &#125;
-    return ans;
-&#125;
-</code></pre>
+    <span class="hljs-keyword">return</span> ans;
+&#125;</code></pre></div>
+
 <p><strong>E. Tree Pruning</strong></p>
-<p>所有叶子与根的距离 &lt;=&gt; 保留所有 $deep$ 相同的节点. 于是可以对这个树跑一个层次bfs, 对每层的答案取 $min$ .</p>
+<p>所有叶子与根的距离 &lt;&#x3D;&gt; 保留所有 $deep$ 相同的节点. 于是可以对这个树跑一个层次bfs, 对每层的答案取 $min$ .</p>
 <p>在每层:</p>
 <ol>
-<li>
-<p>维护去除高于它的点, 要删除多少边:
-即对每一个高于它的点 x,从 x 往上回溯, 直到到 x 的某个祖先, 且这个祖先有一个深于 x 的孙子, 停止. 同时个每个边打个 id, 回溯到已删除的 边也要停止.</p>
+<li><p>维护去除高于它的点, 要删除多少边: 即对每一个高于它的点 x,从 x 往上回溯, 直到到 x 的某个祖先, 且这个祖先有一个深于 x 的孙子, 停止. 同时个每个边打个 id, 回溯到已删除的 边也要停止.</p>
 </li>
-<li>
-<p>低于它要删除多少边: 就是这层所有节点的 son 的数量.</p>
+<li><p>低于它要删除多少边: 就是这层所有节点的 son 的数量.</p>
 </li>
 </ol>
 <p>code:</p>
-<pre><code class="language-cpp">#define int long long
-#define id(a,b) ((a)*1000000+(b))
-const int Maxn = 5e5 + 10;
+<div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> int long long</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> id(a,b) ((a)*1000000+(b))</span>
+<span class="hljs-type">const</span> <span class="hljs-type">int</span> Maxn = <span class="hljs-number">5e5</span> + <span class="hljs-number">10</span>;
 
-int n, v, u;
-int dep[Maxn], son[Maxn], ans[Maxn], fa[Maxn], Maxdep[Maxn];
-vector&lt;int&gt;eg[Maxn];
-set&lt;int&gt;se;
-void getdep(int x, int deep) &#123;
+<span class="hljs-type">int</span> n, v, u;
+<span class="hljs-type">int</span> dep[Maxn], son[Maxn], ans[Maxn], fa[Maxn], Maxdep[Maxn];
+vector&lt;<span class="hljs-type">int</span>&gt;eg[Maxn];
+set&lt;<span class="hljs-type">int</span>&gt;se;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">getdep</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> deep)</span> </span>&#123;
     dep[x] = deep;
     Maxdep[x] = deep;
-    for (auto c : eg[x]) &#123;
-        if (c == fa[x])continue;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> c : eg[x]) &#123;
+        <span class="hljs-keyword">if</span> (c == fa[x])<span class="hljs-keyword">continue</span>;
         fa[c] = x;
-        getdep(c, deep + 1);
-        Maxdep[x] = max(Maxdep[x], Maxdep[c]);
+        <span class="hljs-built_in">getdep</span>(c, deep + <span class="hljs-number">1</span>);
+        Maxdep[x] = <span class="hljs-built_in">max</span>(Maxdep[x], Maxdep[c]);
     &#125;
 &#125;
-int getson(int x) &#123;
-    son[x] = 0;
-    for (auto c : eg[x]) &#123;
-        if (c == fa[x])continue;
-        son[x] += getson(c);
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">getson</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>&#123;
+    son[x] = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> c : eg[x]) &#123;
+        <span class="hljs-keyword">if</span> (c == fa[x])<span class="hljs-keyword">continue</span>;
+        son[x] += <span class="hljs-built_in">getson</span>(c);
     &#125;
-    return son[x] + 1;
+    <span class="hljs-keyword">return</span> son[x] + <span class="hljs-number">1</span>;
 &#125;
-int done(int x, int fromdep) &#123;
-    if (x == 1)return 0;
-    if (fromdep &lt; Maxdep[x])return 0;
-    if (se.count(id(x, fa[x])))return 0;
-    se.emplace(id(x, fa[x]));
-    return done(fa[x], fromdep) + 1;
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">done</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> fromdep)</span> </span>&#123;
+    <span class="hljs-keyword">if</span> (x == <span class="hljs-number">1</span>)<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">if</span> (fromdep &lt; Maxdep[x])<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">if</span> (se.<span class="hljs-built_in">count</span>(<span class="hljs-built_in">id</span>(x, fa[x])))<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    se.<span class="hljs-built_in">emplace</span>(<span class="hljs-built_in">id</span>(x, fa[x]));
+    <span class="hljs-keyword">return</span> done(fa[x], fromdep) + <span class="hljs-number">1</span>;
 &#125;
-int solve(int _) &#123;
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">solve</span><span class="hljs-params">(<span class="hljs-type">int</span> _)</span> </span>&#123;
     cin &gt;&gt; n;
-    se.clear();
-    for (int i = 1; i &lt;= n; ++i) &#123;
-        eg[i].clear();
-        Maxdep[i] = 0;
+    se.<span class="hljs-built_in">clear</span>();
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) &#123;
+        eg[i].<span class="hljs-built_in">clear</span>();
+        Maxdep[i] = <span class="hljs-number">0</span>;
     &#125;
-    for (int i = 1; i &lt; n; ++i) &#123;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; n; ++i) &#123;
         cin &gt;&gt; v &gt;&gt; u;
-        eg[u].emplace_back(v);
-        eg[v].emplace_back(u);
+        eg[u].<span class="hljs-built_in">emplace_back</span>(v);
+        eg[v].<span class="hljs-built_in">emplace_back</span>(u);
     &#125;
 
-    int ans = n - 1;
+    <span class="hljs-type">int</span> ans = n - <span class="hljs-number">1</span>;
 
-    getdep(1, 1);
-    getson(1);
-    for (int i = 1; i &lt;= n; ++i) &#123;
-        debug(i, fa[i], son[i])
+    <span class="hljs-built_in">getdep</span>(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>);
+    <span class="hljs-built_in">getson</span>(<span class="hljs-number">1</span>);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) &#123;
+        <span class="hljs-built_in">debug</span>(i, fa[i], son[i])
     &#125;
 
-    int last = 1, now = 0, ended = 0, pre_ended = 0;
-    deque&lt;int&gt;q;
-    q.emplace_back(1);
-    while (!q.empty()) &#123;
-        int tis = q.front();
-        q.pop_front();
+    <span class="hljs-type">int</span> last = <span class="hljs-number">1</span>, now = <span class="hljs-number">0</span>, ended = <span class="hljs-number">0</span>, pre_ended = <span class="hljs-number">0</span>;
+    deque&lt;<span class="hljs-type">int</span>&gt;q;
+    q.<span class="hljs-built_in">emplace_back</span>(<span class="hljs-number">1</span>);
+    <span class="hljs-keyword">while</span> (!q.<span class="hljs-built_in">empty</span>()) &#123;
+        <span class="hljs-type">int</span> tis = q.<span class="hljs-built_in">front</span>();
+        q.<span class="hljs-built_in">pop_front</span>();
 
-        if (dep[tis] != last) &#123; // 上一层删除完了,
-            ans = min(ans, ended + now);
-            debug(last, ended, now)
-            now = 0;
+        <span class="hljs-keyword">if</span> (dep[tis] != last) &#123; <span class="hljs-comment">// 上一层删除完了,</span>
+            ans = <span class="hljs-built_in">min</span>(ans, ended + now);
+            <span class="hljs-built_in">debug</span>(last, ended, now)
+            now = <span class="hljs-number">0</span>;
             ended += pre_ended;
-            pre_ended = 0;
+            pre_ended = <span class="hljs-number">0</span>;
             last = dep[tis];
         &#125;
 
         now += son[tis];
-        if (eg[tis].size() == 1) &#123;
-            int tp = done(tis, dep[tis]);
-            debug(tis, tp);
+        <span class="hljs-keyword">if</span> (eg[tis].<span class="hljs-built_in">size</span>() == <span class="hljs-number">1</span>) &#123;
+            <span class="hljs-type">int</span> tp = done(tis, dep[tis]);
+            <span class="hljs-built_in">debug</span>(tis, tp);
             pre_ended += tp;
         &#125;
 
-        for (auto c : eg[tis]) &#123;
-            if (fa[tis] == c)continue;
-            q.emplace_back(c);
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> c : eg[tis]) &#123;
+            <span class="hljs-keyword">if</span> (fa[tis] == c)<span class="hljs-keyword">continue</span>;
+            q.<span class="hljs-built_in">emplace_back</span>(c);
         &#125;
     &#125;
-    ans = min(ans, ended + now);
+    ans = <span class="hljs-built_in">min</span>(ans, ended + now);
 
-    return ans;
-&#125;
-</code></pre>
+    <span class="hljs-keyword">return</span> ans;
+&#125;</code></pre></div>
 
                 
               </div>
@@ -854,10 +843,6 @@ int solve(int _) &#123;
   <script  src="/js/local-search.js" ></script>
 
 
-
-
-  
-<script src="/js/blog-enhancements.js"></script>
 
 
 

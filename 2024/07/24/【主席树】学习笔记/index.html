@@ -16,12 +16,12 @@
   <meta name="author" content="TauLee">
   <meta name="keywords" content="">
   
-    <meta name="description" content="以处理求区间第 k 小为例. 先把节点离散化. 用法类似权值线段树. 普通线段树每次插入一个元素 x 时, 途径的 $deep[x]$ 个节点都会加 1, 要查询区间第 k 小时, 就要用树的 $Version_R$ 减去 $Version_{L-1}$ , 得到的就是 l 到 r 区间所有元素的组成的权值线段树, 然后操作就和权值线段树找第 k 小一样了. 可持续化线段树的就用来保存树的不同版">
+    <meta name="description" content="以处理求区间第 k 小为例. 先把节点离散化. 用法类似权值线段树. 普通线段树每次插入一个元素 x 时, 途径的 $deep[x]$ 个节点都会加 1, 要查询区间第 k 小时, 就要用树的 $Version_R$ 减去 $Version_{L-1}$ , 得到的就是 l 到 r 区间所有元素的组成的权值线段树, 然后操作就和权值线段树找第 k 小一样了. 可持续化线段树的就用来保存树的不同版本">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【主席树】学习笔记">
 <meta property="og:url" content="https://taulee.github.io/2024/07/24/%E3%80%90%E4%B8%BB%E5%B8%AD%E6%A0%91%E3%80%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="TauLee&#39;s Blog">
-<meta property="og:description" content="以处理求区间第 k 小为例. 先把节点离散化. 用法类似权值线段树. 普通线段树每次插入一个元素 x 时, 途径的 $deep[x]$ 个节点都会加 1, 要查询区间第 k 小时, 就要用树的 $Version_R$ 减去 $Version_{L-1}$ , 得到的就是 l 到 r 区间所有元素的组成的权值线段树, 然后操作就和权值线段树找第 k 小一样了. 可持续化线段树的就用来保存树的不同版">
+<meta property="og:description" content="以处理求区间第 k 小为例. 先把节点离散化. 用法类似权值线段树. 普通线段树每次插入一个元素 x 时, 途径的 $deep[x]$ 个节点都会加 1, 要查询区间第 k 小时, 就要用树的 $Version_R$ 减去 $Version_{L-1}$ , 得到的就是 l 到 r 区间所有元素的组成的权值线段树, 然后操作就和权值线段树找第 k 小一样了. 可持续化线段树的就用来保存树的不同版本">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://taulee.github.io/img/posts/2024-07-24-140668827/persistent-segment-tree-version-1.png">
 <meta property="og:image" content="https://taulee.github.io/img/posts/2024-07-24-140668827/persistent-segment-tree-version-2.png">
@@ -279,117 +279,108 @@
             
               <div class="markdown-body">
                 
-                
-<p>以处理求区间第 k 小为例.</p>
+                <p>以处理求区间第 k 小为例.</p>
 <p>先把节点离散化. 用法类似权值线段树.</p>
 <p>普通线段树每次插入一个元素 x 时, 途径的 $deep[x]$ 个节点都会加 1, 要查询区间第 k 小时, 就要用树的 $Version_R$ 减去 $Version_{L-1}$ , 得到的就是 l 到 r 区间所有元素的组成的权值线段树, 然后操作就和权值线段树找第 k 小一样了. 可持续化线段树的就用来保存树的不同版本Version. 本质就是前缀和操作, 每个 <code>pre[i]</code> 都是一棵树. 其实如果时间空间允许, 完全可以每插入一个点, 就把原树复制一份, 执行前缀和的 <code>pre[i]=pre[i-1]+a[i]</code> .</p>
 <ol>
-<li>
-<p>空树(相当于 <code>pre[0]</code> )
-<img alt="主席树第一版本的节点结构" src="/img/posts/2024-07-24-140668827/persistent-segment-tree-version-1.png" srcset="/img/loading.gif" lazyload/></p>
+<li><p>空树(相当于 <code>pre[0]</code> ) <img src="/img/posts/2024-07-24-140668827/persistent-segment-tree-version-1.png" srcset="/img/loading.gif" lazyload alt="主席树第一版本的节点结构"></p>
 </li>
-<li>
-<p>Version-1(插入数 1 )
-<img alt="主席树第二版本的节点结构" src="/img/posts/2024-07-24-140668827/persistent-segment-tree-version-2.png" srcset="/img/loading.gif" lazyload/></p>
+<li><p>Version-1(插入数 1 ) <img src="/img/posts/2024-07-24-140668827/persistent-segment-tree-version-2.png" srcset="/img/loading.gif" lazyload alt="主席树第二版本的节点结构"></p>
 </li>
-<li>
-<p>Version-2(插入数 5 )
-<img alt="主席树第三版本的节点结构" src="/img/posts/2024-07-24-140668827/persistent-segment-tree-version-3.png" srcset="/img/loading.gif" lazyload/></p>
+<li><p>Version-2(插入数 5 ) <img src="/img/posts/2024-07-24-140668827/persistent-segment-tree-version-3.png" srcset="/img/loading.gif" lazyload alt="主席树第三版本的节点结构"></p>
 </li>
-<li>
-<p>Version-3( 插入数 2 )
-<img alt="主席树第四版本的节点结构" src="/img/posts/2024-07-24-140668827/persistent-segment-tree-version-4.png" srcset="/img/loading.gif" lazyload/></p>
+<li><p>Version-3( 插入数 2 ) <img src="/img/posts/2024-07-24-140668827/persistent-segment-tree-version-4.png" srcset="/img/loading.gif" lazyload alt="主席树第四版本的节点结构"></p>
 </li>
 </ol>
 <p>接下来做树的持续化:</p>
-<p><img alt="主席树区间查询路径示意图" src="/img/posts/2024-07-24-140668827/persistent-segment-tree-query-path.png" srcset="/img/loading.gif" lazyload/></p>
+<p><img src="/img/posts/2024-07-24-140668827/persistent-segment-tree-query-path.png" srcset="/img/loading.gif" lazyload alt="主席树区间查询路径示意图"></p>
 <p>注意到每次插入一个节点只有对应路径上的 $deep[x]$ 个元素被改变, 而且根是一定会改变的, 我们就可以对每次更改, 执行如上图的更改, 新建 $deep[x]$ 个节点, 并连上未被更改的节点, 且保存这个新根, 注意到, 访问不同的根就相当于访问了不同版本的树.</p>
 <p>这样更改就不能用 <code>rot&lt;&lt;1</code> , <code>rot&lt;&lt;1|1</code> 访问左右儿子了, 要动态开点.</p>
-<pre><code class="language-cpp">//AC https://www.luogu.com.cn/problem/SP3946
-const int Maxn = 100010, LOG = 20;
-//一般我们用20倍空间来保存（防止溢出）
-int tot = 0; // tot就是时间戳（每个节点的编号）
-int ver[Maxn]; // 保存每个版本的根节点编号
-struct node &#123;
-    int val, lson, rson;
+<div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-comment">//AC https://www.luogu.com.cn/problem/SP3946</span>
+<span class="hljs-type">const</span> <span class="hljs-type">int</span> Maxn = <span class="hljs-number">100010</span>, LOG = <span class="hljs-number">20</span>;
+<span class="hljs-comment">//一般我们用20倍空间来保存（防止溢出）</span>
+<span class="hljs-type">int</span> tot = <span class="hljs-number">0</span>; <span class="hljs-comment">// tot就是时间戳（每个节点的编号）</span>
+<span class="hljs-type">int</span> ver[Maxn]; <span class="hljs-comment">// 保存每个版本的根节点编号</span>
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">node</span> &#123;
+    <span class="hljs-type">int</span> val, lson, rson;
 &#125; tr[Maxn * LOG];
 
-//建空树
-int build(int l, int r) &#123;
-    int rt = ++ tot;
-    int mid = l + r &gt;&gt; 1;
-    if (l &lt; r) &#123;
-        tr[rt].lson = build(l, mid);
-        tr[rt].rson = build(mid + 1, r);
+<span class="hljs-comment">//建空树</span>
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">build</span><span class="hljs-params">(<span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span> </span>&#123;
+    <span class="hljs-type">int</span> rt = ++ tot;
+    <span class="hljs-type">int</span> mid = l + r &gt;&gt; <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">if</span> (l &lt; r) &#123;
+        tr[rt].lson = <span class="hljs-built_in">build</span>(l, mid);
+        tr[rt].rson = <span class="hljs-built_in">build</span>(mid + <span class="hljs-number">1</span>, r);
     &#125;
-    return rt;
+    <span class="hljs-keyword">return</span> rt;
 &#125;
 
-//更新
-int update(int pre/*前一个版本节点*/, int l, int r, int id) &#123;
-    int rt = ++ tot;
-    tr[rt].val = tr[pre].val + 1; // 新开的链, 链上每个val都加一
-    if (l &lt; r) &#123;
-        int mid = l + r &gt;&gt; 1;
-        if (id &lt;= mid) &#123;
-            tr[rt].lson = update(tr[pre].lson, l, mid, id);
+<span class="hljs-comment">//更新</span>
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">update</span><span class="hljs-params">(<span class="hljs-type">int</span> pre<span class="hljs-comment">/*前一个版本节点*/</span>, <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r, <span class="hljs-type">int</span> id)</span> </span>&#123;
+    <span class="hljs-type">int</span> rt = ++ tot;
+    tr[rt].val = tr[pre].val + <span class="hljs-number">1</span>; <span class="hljs-comment">// 新开的链, 链上每个val都加一</span>
+    <span class="hljs-keyword">if</span> (l &lt; r) &#123;
+        <span class="hljs-type">int</span> mid = l + r &gt;&gt; <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">if</span> (id &lt;= mid) &#123;
+            tr[rt].lson = <span class="hljs-built_in">update</span>(tr[pre].lson, l, mid, id);
             tr[rt].rson = tr[pre].rson;
         &#125;
-        else &#123;
-            tr[rt].rson = update(tr[pre].rson, mid + 1, r, id);
+        <span class="hljs-keyword">else</span> &#123;
+            tr[rt].rson = <span class="hljs-built_in">update</span>(tr[pre].rson, mid + <span class="hljs-number">1</span>, r, id);
             tr[rt].lson = tr[pre].lson;
         &#125;
-        //左右儿子断开其中一个形成新的链
+        <span class="hljs-comment">//左右儿子断开其中一个形成新的链</span>
     &#125;
-    return rt;
+    <span class="hljs-keyword">return</span> rt;
 &#125;
 
-// 查询操作
-int query(int u, int v, int l, int r, int k) &#123;
-    if (l == r) return l;
-    int LsonVal = tr[tr[v].lson].val - tr[tr[u].lson].val;
-    //两个历史版本的树相减, LsonVal就是左子树的大小
-    int mid = l + r &gt;&gt; 1;
-    if (LsonVal &gt;= k) return query(tr[u].lson, tr[v].lson, l, mid, k);
-    else return query(tr[u].rson, tr[v].rson, mid + 1, r, k - LsonVal);
+<span class="hljs-comment">// 查询操作</span>
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">query</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> v, <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r, <span class="hljs-type">int</span> k)</span> </span>&#123;
+    <span class="hljs-keyword">if</span> (l == r) <span class="hljs-keyword">return</span> l;
+    <span class="hljs-type">int</span> LsonVal = tr[tr[v].lson].val - tr[tr[u].lson].val;
+    <span class="hljs-comment">//两个历史版本的树相减, LsonVal就是左子树的大小</span>
+    <span class="hljs-type">int</span> mid = l + r &gt;&gt; <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">if</span> (LsonVal &gt;= k) <span class="hljs-keyword">return</span> <span class="hljs-built_in">query</span>(tr[u].lson, tr[v].lson, l, mid, k);
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-built_in">query</span>(tr[u].rson, tr[v].rson, mid + <span class="hljs-number">1</span>, r, k - LsonVal);
 &#125;
 
-signed main() &#123;
-    tot = 0;
-    //多组输入初始化
-    // memset(ver, 0, sizeof ver);
-    // memset(sum, 0, sizeof sum);
-    // memset(L, 0, sizeof L);
-    // memset(R, 0, sizeof R);
-    int n, q;
+<span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+    tot = <span class="hljs-number">0</span>;
+    <span class="hljs-comment">//多组输入初始化</span>
+    <span class="hljs-comment">// memset(ver, 0, sizeof ver);</span>
+    <span class="hljs-comment">// memset(sum, 0, sizeof sum);</span>
+    <span class="hljs-comment">// memset(L, 0, sizeof L);</span>
+    <span class="hljs-comment">// memset(R, 0, sizeof R);</span>
+    <span class="hljs-type">int</span> n, q;
     cin &gt;&gt; n &gt;&gt; q;
-    vector&lt;int&gt;a(n), b(n);
-    for (int i = 0; i &lt; n; i++) &#123;
+    vector&lt;<span class="hljs-type">int</span>&gt;<span class="hljs-built_in">a</span>(n), <span class="hljs-built_in">b</span>(n);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;
         cin &gt;&gt; a[i];
         b[i] = a[i];
     &#125;
 
-    // 离散化 a[i]
-    sort(b.begin(), b.end());
-    int MaxR = unique(b.begin(), b.end()) - b.begin();
-    for (int i = 0; i &lt; n; ++i) &#123;
-        a[i] = lower_bound(b.begin(), b.end(), a[i]) - b.begin();
+    <span class="hljs-comment">// 离散化 a[i]</span>
+    <span class="hljs-built_in">sort</span>(b.<span class="hljs-built_in">begin</span>(), b.<span class="hljs-built_in">end</span>());
+    <span class="hljs-type">int</span> MaxR = <span class="hljs-built_in">unique</span>(b.<span class="hljs-built_in">begin</span>(), b.<span class="hljs-built_in">end</span>()) - b.<span class="hljs-built_in">begin</span>();
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i) &#123;
+        a[i] = <span class="hljs-built_in">lower_bound</span>(b.<span class="hljs-built_in">begin</span>(), b.<span class="hljs-built_in">end</span>(), a[i]) - b.<span class="hljs-built_in">begin</span>();
     &#125;
 
 
-    ver[0] = build(0, MaxR); // 初始的空树, 相当于 pre[0], 不能缺
-    for (int i = 0; i &lt; n; i++) &#123;
-        ver[i + 1] = update(ver[i], 0, MaxR, a[i]);
-        //ver[i] 不同历史版本
+    ver[<span class="hljs-number">0</span>] = <span class="hljs-built_in">build</span>(<span class="hljs-number">0</span>, MaxR); <span class="hljs-comment">// 初始的空树, 相当于 pre[0], 不能缺</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;
+        ver[i + <span class="hljs-number">1</span>] = <span class="hljs-built_in">update</span>(ver[i], <span class="hljs-number">0</span>, MaxR, a[i]);
+        <span class="hljs-comment">//ver[i] 不同历史版本</span>
     &#125;
-    while (q --) &#123;
-        int l, r, x;
+    <span class="hljs-keyword">while</span> (q --) &#123;
+        <span class="hljs-type">int</span> l, r, x;
         cin &gt;&gt; l &gt;&gt; r &gt;&gt; x;
-        int id = query(ver[l - 1], ver[r], 0, MaxR, x);
+        <span class="hljs-type">int</span> id = <span class="hljs-built_in">query</span>(ver[l - <span class="hljs-number">1</span>], ver[r], <span class="hljs-number">0</span>, MaxR, x);
         cout &lt;&lt; b[id] &lt;&lt; endl;
     &#125;
-&#125;
-</code></pre>
+&#125;</code></pre></div>
+
 <p>eg: 图片来自 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/fallingdust/p/14333402.html">链接</a> 和 oi wiki</p>
 
                 
@@ -726,10 +717,6 @@ signed main() &#123;
   <script  src="/js/local-search.js" ></script>
 
 
-
-
-  
-<script src="/js/blog-enhancements.js"></script>
 
 
 

@@ -16,12 +16,12 @@
   <meta name="author" content="TauLee">
   <meta name="keywords" content="">
   
-    <meta name="description" content="原题链接 ! ! ! 组合数的推导部分不讲, 想看这部分的可以转战了. 主要记录一下这题的前缀和部分, 和之前见过的不太一样. 题意 平面直角坐标系上有 n 个矩形，其中第 i 个的左上角坐标为 ( $x_{i1},y_{i1}$ )，右下角坐标为 ( $x_{i2},y_{i2}$ )。 对于 $k∈[1,n]$ ，求解在 $n$ 个矩形中随机选取 $k$ 个不同的矩形，其所有覆盖部分的并集的">
+    <meta name="description" content="原题链接 ! ! ! 组合数的推导部分不讲, 想看这部分的可以转战了. 主要记录一下这题的前缀和部分, 和之前见过的不太一样. 题意平面直角坐标系上有 n 个矩形，其中第 i 个的左上角坐标为 ( $x_{i1},y_{i1}$ )，右下角坐标为 ( $x_{i2},y_{i2}$ )。 对于 $k∈[1,n]$ ，求解在 $n$ 个矩形中随机选取 $k$ 个不同的矩形，其所有覆盖部分的并集的面积">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2024HDU暑假多校1012(hduoj 7444) --并 题解">
 <meta property="og:url" content="https://taulee.github.io/2024/07/27/2024HDU%E6%9A%91%E5%81%87%E5%A4%9A%E6%A0%A11012(hduoj-7444)---%E5%B9%B6-%E9%A2%98%E8%A7%A3/index.html">
 <meta property="og:site_name" content="TauLee&#39;s Blog">
-<meta property="og:description" content="原题链接 ! ! ! 组合数的推导部分不讲, 想看这部分的可以转战了. 主要记录一下这题的前缀和部分, 和之前见过的不太一样. 题意 平面直角坐标系上有 n 个矩形，其中第 i 个的左上角坐标为 ( $x_{i1},y_{i1}$ )，右下角坐标为 ( $x_{i2},y_{i2}$ )。 对于 $k∈[1,n]$ ，求解在 $n$ 个矩形中随机选取 $k$ 个不同的矩形，其所有覆盖部分的并集的">
+<meta property="og:description" content="原题链接 ! ! ! 组合数的推导部分不讲, 想看这部分的可以转战了. 主要记录一下这题的前缀和部分, 和之前见过的不太一样. 题意平面直角坐标系上有 n 个矩形，其中第 i 个的左上角坐标为 ( $x_{i1},y_{i1}$ )，右下角坐标为 ( $x_{i2},y_{i2}$ )。 对于 $k∈[1,n]$ ，求解在 $n$ 个矩形中随机选取 $k$ 个不同的矩形，其所有覆盖部分的并集的面积">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://taulee.github.io/img/posts/2024-07-27-140569246/hdu-7444-combinatorial-sum.png">
 <meta property="og:image" content="https://taulee.github.io/img/posts/2024-07-27-140569246/hdu-7444-prefix-sum-grid.png">
@@ -276,299 +276,292 @@
             
               <div class="markdown-body">
                 
-                
-<p><a target="_blank" rel="noopener" href="https://acm.hdu.edu.cn/showproblem.php?pid=7444">原题链接</a></p>
+                <p><a target="_blank" rel="noopener" href="https://acm.hdu.edu.cn/showproblem.php?pid=7444">原题链接</a></p>
 <p>! ! ! 组合数的推导部分不讲, 想看这部分的可以转战了. 主要记录一下这题的前缀和部分, 和之前见过的不太一样.</p>
-<h3>题意</h3>
-<p>平面直角坐标系上有 n 个矩形，其中第 i 个的左上角坐标为 ( $x_{i1},y_{i1}$ )，右下角坐标为 ( $x_{i2},y_{i2}$ )。</p>
+<h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><p>平面直角坐标系上有 n 个矩形，其中第 i 个的左上角坐标为 ( $x_{i1},y_{i1}$ )，右下角坐标为 ( $x_{i2},y_{i2}$ )。</p>
 <p>对于 $k∈[1,n]$ ，求解在 $n$ 个矩形中随机选取 $k$ 个不同的矩形，其所有覆盖部分的并集的面积的期望值，答案对 $998244353$ 取模。</p>
-<h3>思路</h3>
-<p>根据题解 ( 嘿嘿 ) , 有公式( 其中 $g_i$ 表示被 $c$ 个矩形覆盖的面积和 ):
-<img alt="组合数求和公式示意图" src="/img/posts/2024-07-27-140569246/hdu-7444-combinatorial-sum.png" srcset="/img/loading.gif" lazyload/></p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>根据题解 ( 嘿嘿 ) , 有公式( 其中 $g_i$ 表示被 $c$ 个矩形覆盖的面积和 ): <img src="/img/posts/2024-07-27-140569246/hdu-7444-combinatorial-sum.png" srcset="/img/loading.gif" lazyload alt="组合数求和公式示意图"></p>
 <p>那么我们就要用前缀和维护出来 $g_i$ , 然后套公式.</p>
-<h3>维护前缀和</h3>
-<p>首先离散化是肯定的 ,很板的离散化, 看代码就好.</p>
+<h3 id="维护前缀和"><a href="#维护前缀和" class="headerlink" title="维护前缀和"></a>维护前缀和</h3><p>首先离散化是肯定的 ,很板的离散化, 看代码就好.</p>
 <p>假设这题没有离散化, 我们就要维护出来每个点被多少矩形覆盖. 题目给出的是矩形的左上角和右下角坐标. 不妨:</p>
-<pre><code class="language-cpp">    for (int i = 0; i &lt; n; ++i) &#123;//左上坐标为x[i],y[i];右下坐标为xx[i],yy[i]
-        f[x[i]][y[i]] += 1;
-        f[xx[i]][y[i]] -= 1;
-        f[x[i]][yy[i]] -= 1;
-        f[xx[i]][yy[i]] += 1;
-    &#125;
-</code></pre>
+<div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i) &#123;<span class="hljs-comment">//左上坐标为x[i],y[i];右下坐标为xx[i],yy[i]</span>
+    f[x[i]][y[i]] += <span class="hljs-number">1</span>;
+    f[xx[i]][y[i]] -= <span class="hljs-number">1</span>;
+    f[x[i]][yy[i]] -= <span class="hljs-number">1</span>;
+    f[xx[i]][yy[i]] += <span class="hljs-number">1</span>;
+&#125;</code></pre></div>
+
 <p>就相当于在 x 和 y 轴同时开了两个差分数组. 但是为什么有 <code>f[xx[i]][yy[i]] += 1;</code> 呢?</p>
 <p>当我们执行这个差分数组的求和操作时:</p>
-<pre><code class="language-cpp">    for (int i = 1; i &lt;= xs; ++i) &#123;
-        for (int j = 1; j &lt;= ys; ++j) &#123;
-            f[i][j] += f[i][j - 1];
-        &#125;
+<div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= xs; ++i) &#123;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= ys; ++j) &#123;
+        f[i][j] += f[i][j - <span class="hljs-number">1</span>];
     &#125;
-    for (int i = 1; i &lt;= xs; ++i) &#123;
-        for (int j = 1; j &lt;= ys; ++j) &#123;
-            f[i][j] += f[i - 1][j];
-        &#125;
+&#125;
+<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= xs; ++i) &#123;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= ys; ++j) &#123;
+        f[i][j] += f[i - <span class="hljs-number">1</span>][j];
     &#125;
-</code></pre>
-<p>可以看到每个点都会向以它为顶点的右下方矩形提供贡献, 两个 -1 的贡献在 2 号区域重叠. 故要给 2 号区域加上 1.
-<img alt="二维前缀和矩阵示意图" src="/img/posts/2024-07-27-140569246/hdu-7444-prefix-sum-grid.png" srcset="/img/loading.gif" lazyload/></p>
+&#125;</code></pre></div>
+
+<p>可以看到每个点都会向以它为顶点的右下方矩形提供贡献, 两个 -1 的贡献在 2 号区域重叠. 故要给 2 号区域加上 1. <img src="/img/posts/2024-07-27-140569246/hdu-7444-prefix-sum-grid.png" srcset="/img/loading.gif" lazyload alt="二维前缀和矩阵示意图"></p>
 <p>求和完成后 <code>f[i][j]</code> 就代表了 <code>[i][j]</code> 这点被多少矩形覆盖了.</p>
 <p>那换回离散前, 他是上什么?</p>
 <p>在离散数组 <code>xSort[],ySort[]</code> 里, <code>[i][j]</code> 和它前一个值之间是没有矩形的顶点落进去的, 也就是说在以 <code>(i,j)</code> 为右下角, 以 <code>(i,j)</code> 在离散数组中前一个点为左上角的矩形中, 所有点被覆盖的矩形个数都是一样的, 那 <code>f[i][j]</code> 乘上这个矩形的面积, 就是这些点的贡献.</p>
-<pre><code class="language-cpp">num[f[i][j]] += Z(xSort[i] - xSort[i - 1]) * (ySort[j] - ySort[j - 1]);
-</code></pre>
+<div class="code-wrapper"><pre><code class="hljs cpp">num[f[i][j]] += <span class="hljs-built_in">Z</span>(xSort[i] - xSort[i - <span class="hljs-number">1</span>]) * (ySort[j] - ySort[j - <span class="hljs-number">1</span>]);</code></pre></div>
+
 <p>完整代码:</p>
-<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-#ifdef LOCAL
-#include "D:\Users\TauLee\OneDrive\Mine\c++\debug.h"
-#else
-#define debug(...) 42;
-#define endl '\n'
-#endif
-//------取模机------//
-using i64 = long long;
-template&lt;class T&gt;
-constexpr T power(T a, i64 b) &#123;
-    T res &#123;1&#125;;
-    for (; b; b /= 2, a *= a) &#123;
-        if (b % 2) &#123;
+<div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+<span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> LOCAL</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;D:\Users\TauLee\OneDrive\Mine\c++\debug.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">else</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> debug(...) 42;</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> endl <span class="hljs-string">&#x27;\n&#x27;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">endif</span></span>
+<span class="hljs-comment">//------取模机------//</span>
+<span class="hljs-keyword">using</span> i64 = <span class="hljs-type">long</span> <span class="hljs-type">long</span>;
+<span class="hljs-function"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">class</span> T&gt;</span>
+<span class="hljs-function"><span class="hljs-keyword">constexpr</span> T <span class="hljs-title">power</span><span class="hljs-params">(T a, i64 b)</span> </span>&#123;
+    T res &#123;<span class="hljs-number">1</span>&#125;;
+    <span class="hljs-keyword">for</span> (; b; b /= <span class="hljs-number">2</span>, a *= a) &#123;
+        <span class="hljs-keyword">if</span> (b % <span class="hljs-number">2</span>) &#123;
             res *= a;
         &#125;
     &#125;
-    return res;
-&#125; // 快速幂
+    <span class="hljs-keyword">return</span> res;
+&#125; <span class="hljs-comment">// 快速幂</span>
 
-constexpr i64 mul(i64 a, i64 b, i64 p) &#123;
-    i64 res = a * b - i64(1.L * a * b / p) * p;
+<span class="hljs-function"><span class="hljs-keyword">constexpr</span> i64 <span class="hljs-title">mul</span><span class="hljs-params">(i64 a, i64 b, i64 p)</span> </span>&#123;
+    i64 res = a * b - <span class="hljs-built_in">i64</span>(<span class="hljs-number">1.L</span> * a * b / p) * p;
     res %= p;
-    if (res &lt; 0) &#123;
+    <span class="hljs-keyword">if</span> (res &lt; <span class="hljs-number">0</span>) &#123;
         res += p;
     &#125;
-    return res;
-&#125; // 取模乘
+    <span class="hljs-keyword">return</span> res;
+&#125; <span class="hljs-comment">// 取模乘</span>
 
-template&lt;i64 P&gt;
-struct MInt &#123;
+<span class="hljs-keyword">template</span>&lt;i64 P&gt;
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">MInt</span> &#123;
     i64 x;
-    constexpr MInt() : x &#123;0&#125; &#123;&#125;
-    constexpr MInt(i64 x) : x &#123;norm(x % getMod())&#125; &#123;&#125;
+    <span class="hljs-function"><span class="hljs-keyword">constexpr</span> <span class="hljs-title">MInt</span><span class="hljs-params">()</span> : x &#123;</span><span class="hljs-number">0</span>&#125; &#123;&#125;
+    <span class="hljs-function"><span class="hljs-keyword">constexpr</span> <span class="hljs-title">MInt</span><span class="hljs-params">(i64 x)</span> : x &#123;</span><span class="hljs-built_in">norm</span>(x % <span class="hljs-built_in">getMod</span>())&#125; &#123;&#125;
 
-    static i64 Mod;
-    constexpr static i64 getMod() &#123;
-        if (P &gt; 0) &#123;
-            return P;
-        &#125; else &#123;
-            return Mod;
+    <span class="hljs-type">static</span> i64 Mod;
+    <span class="hljs-function"><span class="hljs-keyword">constexpr</span> <span class="hljs-type">static</span> i64 <span class="hljs-title">getMod</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (P &gt; <span class="hljs-number">0</span>) &#123;
+            <span class="hljs-keyword">return</span> P;
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            <span class="hljs-keyword">return</span> Mod;
         &#125;
     &#125;
-    constexpr static void setMod(i64 Mod_) &#123;
+    <span class="hljs-function"><span class="hljs-keyword">constexpr</span> <span class="hljs-type">static</span> <span class="hljs-type">void</span> <span class="hljs-title">setMod</span><span class="hljs-params">(i64 Mod_)</span> </span>&#123;
         Mod = Mod_;
-    &#125;//只有P&lt;=0, setMod才生效
-    constexpr i64 norm(i64 x) const &#123;
-        if (x &lt; 0) &#123;
-            x += getMod();
+    &#125;<span class="hljs-comment">//只有P&lt;=0, setMod才生效</span>
+    <span class="hljs-function"><span class="hljs-keyword">constexpr</span> i64 <span class="hljs-title">norm</span><span class="hljs-params">(i64 x)</span> <span class="hljs-type">const</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (x &lt; <span class="hljs-number">0</span>) &#123;
+            x += <span class="hljs-built_in">getMod</span>();
         &#125;
-        if (x &gt;= getMod()) &#123;
-            x -= getMod();
+        <span class="hljs-keyword">if</span> (x &gt;= <span class="hljs-built_in">getMod</span>()) &#123;
+            x -= <span class="hljs-built_in">getMod</span>();
         &#125;
-        return x;
+        <span class="hljs-keyword">return</span> x;
     &#125;
-    constexpr i64 val() const &#123;
-        return x;
+    <span class="hljs-function"><span class="hljs-keyword">constexpr</span> i64 <span class="hljs-title">val</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span>&#123;
+        <span class="hljs-keyword">return</span> x;
     &#125;
-    constexpr MInt operator-() const &#123;
+    <span class="hljs-keyword">constexpr</span> MInt <span class="hljs-keyword">operator</span>-() <span class="hljs-type">const</span> &#123;
         MInt res;
-        res.x = norm(getMod() - x);
-        return res;
+        res.x = <span class="hljs-built_in">norm</span>(<span class="hljs-built_in">getMod</span>() - x);
+        <span class="hljs-keyword">return</span> res;
     &#125;
-    constexpr MInt inv() const &#123;
-        return power(*this, getMod() - 2);
+    <span class="hljs-function"><span class="hljs-keyword">constexpr</span> MInt <span class="hljs-title">inv</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">power</span>(*<span class="hljs-keyword">this</span>, <span class="hljs-built_in">getMod</span>() - <span class="hljs-number">2</span>);
     &#125;
-    constexpr MInt &amp;operator*=(MInt rhs) &amp; &#123;
-        if (getMod() &lt; (1ULL &lt;&lt; 31)) &#123;
-            x = x * rhs.x % int(getMod());
-        &#125; else &#123;
-            x = mul(x, rhs.x, getMod());
+    <span class="hljs-keyword">constexpr</span> MInt &amp;<span class="hljs-keyword">operator</span>*=(MInt rhs) &amp; &#123;
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">getMod</span>() &lt; (<span class="hljs-number">1ULL</span> &lt;&lt; <span class="hljs-number">31</span>)) &#123;
+            x = x * rhs.x % <span class="hljs-built_in">int</span>(<span class="hljs-built_in">getMod</span>());
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            x = <span class="hljs-built_in">mul</span>(x, rhs.x, <span class="hljs-built_in">getMod</span>());
         &#125;
-        return *this;
+        <span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;
     &#125;
-    constexpr MInt &amp;operator+=(MInt rhs) &amp; &#123;
-        x = norm(x + rhs.x);
-        return *this;
+    <span class="hljs-keyword">constexpr</span> MInt &amp;<span class="hljs-keyword">operator</span>+=(MInt rhs) &amp; &#123;
+        x = <span class="hljs-built_in">norm</span>(x + rhs.x);
+        <span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;
     &#125;
-    constexpr MInt &amp;operator-=(MInt rhs) &amp; &#123;
-        x = norm(x - rhs.x);
-        return *this;
+    <span class="hljs-keyword">constexpr</span> MInt &amp;<span class="hljs-keyword">operator</span>-=(MInt rhs) &amp; &#123;
+        x = <span class="hljs-built_in">norm</span>(x - rhs.x);
+        <span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;
     &#125;
-    constexpr MInt &amp;operator/=(MInt rhs) &amp; &#123;
-        return *this *= rhs.inv();
+    <span class="hljs-keyword">constexpr</span> MInt &amp;<span class="hljs-keyword">operator</span>/=(MInt rhs) &amp; &#123;
+        <span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span> *= rhs.<span class="hljs-built_in">inv</span>();
     &#125;
-    friend constexpr MInt operator*(MInt lhs, MInt rhs) &#123;
+    <span class="hljs-keyword">friend</span> <span class="hljs-keyword">constexpr</span> MInt <span class="hljs-keyword">operator</span>*(MInt lhs, MInt rhs) &#123;
         MInt res = lhs;
         res *= rhs;
-        return res;
+        <span class="hljs-keyword">return</span> res;
     &#125;
-    friend constexpr MInt operator+(MInt lhs, MInt rhs) &#123;
+    <span class="hljs-keyword">friend</span> <span class="hljs-keyword">constexpr</span> MInt <span class="hljs-keyword">operator</span>+(MInt lhs, MInt rhs) &#123;
         MInt res = lhs;
         res += rhs;
-        return res;
+        <span class="hljs-keyword">return</span> res;
     &#125;
-    friend constexpr MInt operator-(MInt lhs, MInt rhs) &#123;
+    <span class="hljs-keyword">friend</span> <span class="hljs-keyword">constexpr</span> MInt <span class="hljs-keyword">operator</span>-(MInt lhs, MInt rhs) &#123;
         MInt res = lhs;
         res -= rhs;
-        return res;
+        <span class="hljs-keyword">return</span> res;
     &#125;
-    friend constexpr MInt operator/(MInt lhs, MInt rhs) &#123;
+    <span class="hljs-keyword">friend</span> <span class="hljs-keyword">constexpr</span> MInt <span class="hljs-keyword">operator</span>/(MInt lhs, MInt rhs) &#123;
         MInt res = lhs;
         res /= rhs;
-        return res;
+        <span class="hljs-keyword">return</span> res;
     &#125;
-    friend constexpr std::istream &amp;operator&gt;&gt;(std::istream &amp;is, MInt &amp;a) &#123;
+    <span class="hljs-keyword">friend</span> <span class="hljs-keyword">constexpr</span> std::istream &amp;<span class="hljs-keyword">operator</span>&gt;&gt;(std::istream &amp;is, MInt &amp;a) &#123;
         i64 v;
         is &gt;&gt; v;
-        a = MInt(v);
-        return is;
+        a = <span class="hljs-built_in">MInt</span>(v);
+        <span class="hljs-keyword">return</span> is;
     &#125;
-    friend constexpr std::ostream &amp;operator&lt;&lt;(std::ostream &amp;os, const MInt &amp;a) &#123;
-        return os &lt;&lt; a.val();
+    <span class="hljs-keyword">friend</span> <span class="hljs-keyword">constexpr</span> std::ostream &amp;<span class="hljs-keyword">operator</span>&lt;&lt;(std::ostream &amp;os, <span class="hljs-type">const</span> MInt &amp;a) &#123;
+        <span class="hljs-keyword">return</span> os &lt;&lt; a.<span class="hljs-built_in">val</span>();
     &#125;
-    friend constexpr bool operator==(MInt lhs, MInt rhs) &#123;
-        return lhs.val() == rhs.val();
+    <span class="hljs-keyword">friend</span> <span class="hljs-keyword">constexpr</span> <span class="hljs-type">bool</span> <span class="hljs-keyword">operator</span>==(MInt lhs, MInt rhs) &#123;
+        <span class="hljs-keyword">return</span> lhs.<span class="hljs-built_in">val</span>() == rhs.<span class="hljs-built_in">val</span>();
     &#125;
-    friend constexpr bool operator!=(MInt lhs, MInt rhs) &#123;
-        return lhs.val() != rhs.val();
+    <span class="hljs-keyword">friend</span> <span class="hljs-keyword">constexpr</span> <span class="hljs-type">bool</span> <span class="hljs-keyword">operator</span>!=(MInt lhs, MInt rhs) &#123;
+        <span class="hljs-keyword">return</span> lhs.<span class="hljs-built_in">val</span>() != rhs.<span class="hljs-built_in">val</span>();
     &#125;
-    friend constexpr bool operator&lt;(MInt lhs, MInt rhs) &#123;
-        return lhs.val() &lt; rhs.val();
+    <span class="hljs-keyword">friend</span> <span class="hljs-keyword">constexpr</span> <span class="hljs-type">bool</span> <span class="hljs-keyword">operator</span>&lt;(MInt lhs, MInt rhs) &#123;
+        <span class="hljs-keyword">return</span> lhs.<span class="hljs-built_in">val</span>() &lt; rhs.<span class="hljs-built_in">val</span>();
     &#125;
 &#125;;
 
-template&lt;&gt;
-i64 MInt&lt;0&gt;::Mod = 998244353; //只有P&lt;=0, Mod才生效
+<span class="hljs-keyword">template</span>&lt;&gt;
+i64 MInt&lt;<span class="hljs-number">0</span>&gt;::Mod = <span class="hljs-number">998244353</span>; <span class="hljs-comment">//只有P&lt;=0, Mod才生效</span>
 
-constexpr int P = 998244353; //在这设置要用的模数
-using Z = MInt&lt;P&gt;;
-//------取模机------//
+<span class="hljs-keyword">constexpr</span> <span class="hljs-type">int</span> P = <span class="hljs-number">998244353</span>; <span class="hljs-comment">//在这设置要用的模数</span>
+<span class="hljs-keyword">using</span> Z = MInt&lt;P&gt;;
+<span class="hljs-comment">//------取模机------//</span>
 
-//----计算组合数----//
-struct Comb &#123;
-    int n;
-    std::vector&lt;Z&gt; _fac; //阶乘
-    std::vector&lt;Z&gt; _invfac; //阶乘的逆元
-    std::vector&lt;Z&gt; _inv; //数字的逆元
+<span class="hljs-comment">//----计算组合数----//</span>
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">Comb</span> &#123;
+    <span class="hljs-type">int</span> n;
+    std::vector&lt;Z&gt; _fac; <span class="hljs-comment">//阶乘</span>
+    std::vector&lt;Z&gt; _invfac; <span class="hljs-comment">//阶乘的逆元</span>
+    std::vector&lt;Z&gt; _inv; <span class="hljs-comment">//数字的逆元</span>
 
-    Comb() : n&#123;0&#125;, _fac&#123;1&#125;, _invfac&#123;1&#125;, _inv&#123;0&#125; &#123;&#125;
-    Comb(int n) : Comb() &#123;
-        init(n);
+    <span class="hljs-built_in">Comb</span>() : n&#123;<span class="hljs-number">0</span>&#125;, _fac&#123;<span class="hljs-number">1</span>&#125;, _invfac&#123;<span class="hljs-number">1</span>&#125;, _inv&#123;<span class="hljs-number">0</span>&#125; &#123;&#125;
+    <span class="hljs-built_in">Comb</span>(<span class="hljs-type">int</span> n) : <span class="hljs-built_in">Comb</span>() &#123;
+        <span class="hljs-built_in">init</span>(n);
     &#125;
 
-    void init(int m) &#123;
-        m = std::min&lt;i64&gt;(m, Z::getMod() - 1);
-        if (m &lt;= n) return;
-        _fac.resize(m + 1);
-        _invfac.resize(m + 1);
-        _inv.resize(m + 1);
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">init</span><span class="hljs-params">(<span class="hljs-type">int</span> m)</span> </span>&#123;
+        m = std::<span class="hljs-built_in">min</span>&lt;i64&gt;(m, Z::<span class="hljs-built_in">getMod</span>() - <span class="hljs-number">1</span>);
+        <span class="hljs-keyword">if</span> (m &lt;= n) <span class="hljs-keyword">return</span>;
+        _fac.<span class="hljs-built_in">resize</span>(m + <span class="hljs-number">1</span>);
+        _invfac.<span class="hljs-built_in">resize</span>(m + <span class="hljs-number">1</span>);
+        _inv.<span class="hljs-built_in">resize</span>(m + <span class="hljs-number">1</span>);
 
-        for (int i = n + 1; i &lt;= m; i++) &#123;
-            _fac[i] = _fac[i - 1] * i;
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = n + <span class="hljs-number">1</span>; i &lt;= m; i++) &#123;
+            _fac[i] = _fac[i - <span class="hljs-number">1</span>] * i;
         &#125;
-        _invfac[m] = _fac[m].inv();
-        for (int i = m; i &gt; n; i--) &#123;
-            _invfac[i - 1] = _invfac[i] * i;
-            _inv[i] = _invfac[i] * _fac[i - 1];
+        _invfac[m] = _fac[m].<span class="hljs-built_in">inv</span>();
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = m; i &gt; n; i--) &#123;
+            _invfac[i - <span class="hljs-number">1</span>] = _invfac[i] * i;
+            _inv[i] = _invfac[i] * _fac[i - <span class="hljs-number">1</span>];
         &#125;
         n = m;
     &#125;
 
-    Z fac(int m) &#123;
-        if (m &gt; n) init(2 * m);
-        return _fac[m];
+    <span class="hljs-function">Z <span class="hljs-title">fac</span><span class="hljs-params">(<span class="hljs-type">int</span> m)</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (m &gt; n) <span class="hljs-built_in">init</span>(<span class="hljs-number">2</span> * m);
+        <span class="hljs-keyword">return</span> _fac[m];
     &#125;
-    Z invfac(int m) &#123;
-        if (m &gt; n) init(2 * m);
-        return _invfac[m];
+    <span class="hljs-function">Z <span class="hljs-title">invfac</span><span class="hljs-params">(<span class="hljs-type">int</span> m)</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (m &gt; n) <span class="hljs-built_in">init</span>(<span class="hljs-number">2</span> * m);
+        <span class="hljs-keyword">return</span> _invfac[m];
     &#125;
-    Z inv(int m) &#123;
-        if (m &gt; n) init(2 * m);
-        return _inv[m];
+    <span class="hljs-function">Z <span class="hljs-title">inv</span><span class="hljs-params">(<span class="hljs-type">int</span> m)</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (m &gt; n) <span class="hljs-built_in">init</span>(<span class="hljs-number">2</span> * m);
+        <span class="hljs-keyword">return</span> _inv[m];
     &#125;
-    Z C(int n, int m) &#123;
-        if (n &lt; m || m &lt; 0) return 0;
-        return fac(n) * invfac(m) * invfac(n - m);
+    <span class="hljs-function">Z <span class="hljs-title">C</span><span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span> m)</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (n &lt; m || m &lt; <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">fac</span>(n) * <span class="hljs-built_in">invfac</span>(m) * <span class="hljs-built_in">invfac</span>(n - m);
     &#125;
-    Z A(int n, int m) &#123;
-        if (n &lt; m || m &lt; 0 ) return 0;
-        return fac(n) * invfac(m);
+    <span class="hljs-function">Z <span class="hljs-title">A</span><span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span> m)</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (n &lt; m || m &lt; <span class="hljs-number">0</span> ) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">fac</span>(n) * <span class="hljs-built_in">invfac</span>(m);
     &#125;
 &#125; comb;
-//----计算组合数----//
+<span class="hljs-comment">//----计算组合数----//</span>
 
-#define int long long
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> int long long</span>
 
-signed main()
-&#123;
-    ios::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
-    int n;
+<span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+    ios::<span class="hljs-built_in">sync_with_stdio</span>(<span class="hljs-literal">false</span>); cin.<span class="hljs-built_in">tie</span>(<span class="hljs-literal">nullptr</span>); cout.<span class="hljs-built_in">tie</span>(<span class="hljs-literal">nullptr</span>);
+    <span class="hljs-type">int</span> n;
     cin &gt;&gt; n;
 
-    vector&lt;int&gt;x(n), y(n), xx(n), yy(n);//一维权值, 二维离散后的坐标.
-    vector&lt;int&gt;xSort, ySort;
-    for (int i = 0; i &lt; n; ++i) &#123;
+    vector&lt;<span class="hljs-type">int</span>&gt;<span class="hljs-built_in">x</span>(n), <span class="hljs-built_in">y</span>(n), <span class="hljs-built_in">xx</span>(n), <span class="hljs-built_in">yy</span>(n);<span class="hljs-comment">//一维权值, 二维离散后的坐标.</span>
+    vector&lt;<span class="hljs-type">int</span>&gt;xSort, ySort;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i) &#123;
         cin &gt;&gt; x[i] &gt;&gt; y[i] &gt;&gt; xx[i] &gt;&gt; yy[i];
-        xSort.emplace_back(x[i]);
-        ySort.emplace_back(y[i]);
-        xSort.emplace_back(xx[i]);
-        ySort.emplace_back(yy[i]);
+        xSort.<span class="hljs-built_in">emplace_back</span>(x[i]);
+        ySort.<span class="hljs-built_in">emplace_back</span>(y[i]);
+        xSort.<span class="hljs-built_in">emplace_back</span>(xx[i]);
+        ySort.<span class="hljs-built_in">emplace_back</span>(yy[i]);
     &#125;
 
-    sort(xSort.begin(), xSort.end());
-    sort(ySort.begin(), ySort.end());
-    int xs = unique(xSort.begin(), xSort.end()) - xSort.begin();
-    int ys = unique(ySort.begin(), ySort.end()) - ySort.begin();
-    xSort.resize(xs);
-    ySort.resize(ys);
-    for (int i = 0; i &lt; n; ++i) &#123;
-        x[i] = lower_bound(xSort.begin(), xSort.end(), x[i]) - xSort.begin() + 1;
-        y[i] = lower_bound(ySort.begin(), ySort.end(), y[i]) - ySort.begin() + 1;
-        xx[i] = lower_bound(xSort.begin(), xSort.end(), xx[i]) - xSort.begin() + 1;
-        yy[i] = lower_bound(ySort.begin(), ySort.end(), yy[i]) - ySort.begin() + 1;
+    <span class="hljs-built_in">sort</span>(xSort.<span class="hljs-built_in">begin</span>(), xSort.<span class="hljs-built_in">end</span>());
+    <span class="hljs-built_in">sort</span>(ySort.<span class="hljs-built_in">begin</span>(), ySort.<span class="hljs-built_in">end</span>());
+    <span class="hljs-type">int</span> xs = <span class="hljs-built_in">unique</span>(xSort.<span class="hljs-built_in">begin</span>(), xSort.<span class="hljs-built_in">end</span>()) - xSort.<span class="hljs-built_in">begin</span>();
+    <span class="hljs-type">int</span> ys = <span class="hljs-built_in">unique</span>(ySort.<span class="hljs-built_in">begin</span>(), ySort.<span class="hljs-built_in">end</span>()) - ySort.<span class="hljs-built_in">begin</span>();
+    xSort.<span class="hljs-built_in">resize</span>(xs);
+    ySort.<span class="hljs-built_in">resize</span>(ys);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i) &#123;
+        x[i] = <span class="hljs-built_in">lower_bound</span>(xSort.<span class="hljs-built_in">begin</span>(), xSort.<span class="hljs-built_in">end</span>(), x[i]) - xSort.<span class="hljs-built_in">begin</span>() + <span class="hljs-number">1</span>;
+        y[i] = <span class="hljs-built_in">lower_bound</span>(ySort.<span class="hljs-built_in">begin</span>(), ySort.<span class="hljs-built_in">end</span>(), y[i]) - ySort.<span class="hljs-built_in">begin</span>() + <span class="hljs-number">1</span>;
+        xx[i] = <span class="hljs-built_in">lower_bound</span>(xSort.<span class="hljs-built_in">begin</span>(), xSort.<span class="hljs-built_in">end</span>(), xx[i]) - xSort.<span class="hljs-built_in">begin</span>() + <span class="hljs-number">1</span>;
+        yy[i] = <span class="hljs-built_in">lower_bound</span>(ySort.<span class="hljs-built_in">begin</span>(), ySort.<span class="hljs-built_in">end</span>(), yy[i]) - ySort.<span class="hljs-built_in">begin</span>() + <span class="hljs-number">1</span>;
     &#125;
 
-    vector&lt;vector&lt;int&gt;&gt;f(xs + 1, vector&lt;int&gt;(ys + 1, 0));
-    for (int i = 0; i &lt; n; ++i) &#123;
-        f[x[i]][y[i]] += 1;
-        f[xx[i]][y[i]] -= 1;
-        f[x[i]][yy[i]] -= 1;
-        f[xx[i]][yy[i]] += 1;
+    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt;<span class="hljs-built_in">f</span>(xs + <span class="hljs-number">1</span>, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(ys + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>));
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i) &#123;
+        f[x[i]][y[i]] += <span class="hljs-number">1</span>;
+        f[xx[i]][y[i]] -= <span class="hljs-number">1</span>;
+        f[x[i]][yy[i]] -= <span class="hljs-number">1</span>;
+        f[xx[i]][yy[i]] += <span class="hljs-number">1</span>;
     &#125;
-    for (int i = 1; i &lt;= xs; ++i) &#123;
-        for (int j = 1; j &lt;= ys; ++j) &#123;
-            f[i][j] += f[i][j - 1];
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= xs; ++i) &#123;
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= ys; ++j) &#123;
+            f[i][j] += f[i][j - <span class="hljs-number">1</span>];
         &#125;
     &#125;
-    for (int i = 1; i &lt;= xs; ++i) &#123;
-        for (int j = 1; j &lt;= ys; ++j) &#123;
-            f[i][j] += f[i - 1][j];
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= xs; ++i) &#123;
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= ys; ++j) &#123;
+            f[i][j] += f[i - <span class="hljs-number">1</span>][j];
         &#125;
-    &#125; // 统计每个点被覆盖多少次
+    &#125; <span class="hljs-comment">// 统计每个点被覆盖多少次</span>
 
-    vector&lt;Z&gt;num(n + 1); // 被覆盖i次的有多少个
-    for (int i = 1; i &lt;= xs; ++i) &#123;
-        for (int j = 1; j &lt;= ys; ++j) &#123;
-            num[f[i][j]] += Z(xSort[i] - xSort[i - 1]) * (ySort[j] - ySort[j - 1]);
+    vector&lt;Z&gt;<span class="hljs-built_in">num</span>(n + <span class="hljs-number">1</span>); <span class="hljs-comment">// 被覆盖i次的有多少个</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= xs; ++i) &#123;
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= ys; ++j) &#123;
+            num[f[i][j]] += <span class="hljs-built_in">Z</span>(xSort[i] - xSort[i - <span class="hljs-number">1</span>]) * (ySort[j] - ySort[j - <span class="hljs-number">1</span>]);
         &#125;
     &#125;
 
-    for (int k = 1; k &lt;= n; k++) &#123;
-        Z ans = 0;
-        for (int i = 0; i &lt;= n; i++) &#123;
-            ans += (comb.C(n, k) - comb.C(n - i, k)) * num[i];
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> k = <span class="hljs-number">1</span>; k &lt;= n; k++) &#123;
+        Z ans = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt;= n; i++) &#123;
+            ans += (comb.<span class="hljs-built_in">C</span>(n, k) - comb.<span class="hljs-built_in">C</span>(n - i, k)) * num[i];
         &#125;
-        ans /= comb.C(n, k);
-        cout &lt;&lt; ans &lt;&lt; "\n";
+        ans /= comb.<span class="hljs-built_in">C</span>(n, k);
+        cout &lt;&lt; ans &lt;&lt; <span class="hljs-string">&quot;\n&quot;</span>;
     &#125;
-&#125;
-</code></pre>
+&#125;</code></pre></div>
 
                 
               </div>
@@ -904,10 +897,6 @@ signed main()
   <script  src="/js/local-search.js" ></script>
 
 
-
-
-  
-<script src="/js/blog-enhancements.js"></script>
 
 
 

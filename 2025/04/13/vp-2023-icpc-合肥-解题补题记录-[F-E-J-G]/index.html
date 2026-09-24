@@ -16,12 +16,12 @@
   <meta name="author" content="TauLee">
   <meta name="keywords" content="">
   
-    <meta name="description" content="gym链接: https:&#x2F;&#x2F;codeforces.com&#x2F;gym&#x2F;104857 F. Colorful Balloons 血签, 用map存一下每个颜色气球出现的次数, 找出出现次数大于一半的颜色. #include&lt;bits&#x2F;stdc++.h&gt; using namespace std;  #define int long long #define endl &#39;\n&#39;  signe">
+    <meta name="description" content="gym链接: https:&#x2F;&#x2F;codeforces.com&#x2F;gym&#x2F;104857 F. Colorful Balloons 血签, 用map存一下每个颜色气球出现的次数, 找出出现次数大于一半的颜色. #include&lt;bits&#x2F;stdc++.h&gt; using namespace std;  #define int long long #define endl &#x27;\n&amp;#x2">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vp 2023 icpc 合肥 解题补题记录 [F E J G]">
 <meta property="og:url" content="https://taulee.github.io/2025/04/13/vp-2023-icpc-%E5%90%88%E8%82%A5-%E8%A7%A3%E9%A2%98%E8%A1%A5%E9%A2%98%E8%AE%B0%E5%BD%95-[F-E-J-G]/index.html">
 <meta property="og:site_name" content="TauLee&#39;s Blog">
-<meta property="og:description" content="gym链接: https:&#x2F;&#x2F;codeforces.com&#x2F;gym&#x2F;104857 F. Colorful Balloons 血签, 用map存一下每个颜色气球出现的次数, 找出出现次数大于一半的颜色. #include&lt;bits&#x2F;stdc++.h&gt; using namespace std;  #define int long long #define endl &#39;\n&#39;  signe">
+<meta property="og:description" content="gym链接: https:&#x2F;&#x2F;codeforces.com&#x2F;gym&#x2F;104857 F. Colorful Balloons 血签, 用map存一下每个颜色气球出现的次数, 找出出现次数大于一半的颜色. #include&lt;bits&#x2F;stdc++.h&gt; using namespace std;  #define int long long #define endl &#x27;\n&amp;#x2">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-04-13T12:00:00.000Z">
 <meta property="article:modified_time" content="2025-04-13T12:00:00.000Z">
@@ -207,7 +207,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1k 字
+          1.1k 字
         
       </span>
     
@@ -273,209 +273,207 @@
             
               <div class="markdown-body">
                 
-                
-<p>gym链接: https://codeforces.com/gym/104857</p>
+                <p>gym链接: <a target="_blank" rel="noopener" href="https://codeforces.com/gym/104857">https://codeforces.com/gym/104857</a></p>
 <p><strong>F. Colorful Balloons</strong></p>
 <p>血签, 用map存一下每个颜色气球出现的次数, 找出出现次数大于一半的颜色.</p>
-<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
-using namespace std;
+<div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
 
-#define int long long
-#define endl '\n'
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> int long long</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> endl <span class="hljs-string">&#x27;\n&#x27;</span></span>
 
-signed main() &#123;
-    int n;
+<span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-type">int</span> n;
     cin &gt;&gt; n;
     string s;
-    map&lt;string, int&gt;ma;
-    for (int i = 1; i &lt;= n; i++) &#123;
+    map&lt;string, <span class="hljs-type">int</span>&gt;ma;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;
         cin &gt;&gt; s;
         ma[s]++;
     &#125;
-    for (auto c : ma) &#123;
-        if (c.second * 2 &gt; n) &#123;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> c : ma) &#123;
+        <span class="hljs-keyword">if</span> (c.second * <span class="hljs-number">2</span> &gt; n) &#123;
             cout &lt;&lt; c.first &lt;&lt; endl;
-            return 0;
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
         &#125;
     &#125;
 
-    cout &lt;&lt; "uh-oh" &lt;&lt; endl;
-&#125;
-</code></pre>
+    cout &lt;&lt; <span class="hljs-string">&quot;uh-oh&quot;</span> &lt;&lt; endl;
+&#125;</code></pre></div>
+
 <p><strong>E. Matrix Distances</strong></p>
 <p>把每个颜色的坐标存到一个集合里, 在把 x, y 轴分开存, 打一个前缀和, 就能快速求所有的曼哈顿距离</p>
-<pre><code class="language-cpp">#define rep(i,a,b) for (int i = a; i &lt;= b; ++i)
-#define per(i,a,b) for (int i = a; i &lt;= b; --i)
+<div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> rep(i,a,b) for (int i = a; i &lt;= b; ++i)</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> per(i,a,b) for (int i = a; i &lt;= b; --i)</span>
 
-int n, m, c;
-unordered_map&lt;int, vector&lt;int&gt; &gt;xma, yma;
-signed main() &#123;
-    ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+<span class="hljs-type">int</span> n, m, c;
+unordered_map&lt;<span class="hljs-type">int</span>, vector&lt;<span class="hljs-type">int</span>&gt; &gt;xma, yma;
+<span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+    ios::<span class="hljs-built_in">sync_with_stdio</span>(<span class="hljs-number">0</span>); cin.<span class="hljs-built_in">tie</span>(<span class="hljs-number">0</span>); cout.<span class="hljs-built_in">tie</span>(<span class="hljs-number">0</span>);
     cin &gt;&gt; n &gt;&gt; m;
 
-    rep(i, 1, n) &#123;
-        rep(j, 1, m) &#123;
+    <span class="hljs-built_in">rep</span>(i, <span class="hljs-number">1</span>, n) &#123;
+        <span class="hljs-built_in">rep</span>(j, <span class="hljs-number">1</span>, m) &#123;
             cin &gt;&gt; c;
-            xma[c].emplace_back(i);
-            yma[c].emplace_back(j);
+            xma[c].<span class="hljs-built_in">emplace_back</span>(i);
+            yma[c].<span class="hljs-built_in">emplace_back</span>(j);
         &#125;
     &#125;
 
-    for (auto &amp;[clo, v] : xma)sort(v.begin(), v.end());
-    for (auto &amp;[clo, v] : yma)sort(v.begin(), v.end());
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> &amp;[clo, v] : xma)<span class="hljs-built_in">sort</span>(v.<span class="hljs-built_in">begin</span>(), v.<span class="hljs-built_in">end</span>());
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> &amp;[clo, v] : yma)<span class="hljs-built_in">sort</span>(v.<span class="hljs-built_in">begin</span>(), v.<span class="hljs-built_in">end</span>());
 
-    long long ans = 0;
-    for (auto &amp;[clo, v] : xma) &#123;
-        long long pre = 0, cnt = 0;
-        for (auto &amp;c : v) &#123;
+    <span class="hljs-type">long</span> <span class="hljs-type">long</span> ans = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> &amp;[clo, v] : xma) &#123;
+        <span class="hljs-type">long</span> <span class="hljs-type">long</span> pre = <span class="hljs-number">0</span>, cnt = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> &amp;c : v) &#123;
             cnt++;
             pre += c;
             ans += cnt * c - pre;
         &#125;
     &#125;
-    for (auto &amp;[clo, v] : yma) &#123;
-        long long pre = 0, cnt = 0;
-        for (auto &amp;c : v) &#123;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> &amp;[clo, v] : yma) &#123;
+        <span class="hljs-type">long</span> <span class="hljs-type">long</span> pre = <span class="hljs-number">0</span>, cnt = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> &amp;c : v) &#123;
             cnt++;
             pre += c;
             ans += cnt * c - pre;
         &#125;
     &#125;
 
-    cout &lt;&lt; ans * 2 &lt;&lt; endl;
-&#125;
-</code></pre>
+    cout &lt;&lt; ans * <span class="hljs-number">2</span> &lt;&lt; endl;
+&#125;</code></pre></div>
+
 <p><strong>J. Takeout Delivering</strong></p>
 <p>先用 djs 跑出来 1 到每个点路径上最大边的最小值, 再跑一下 n 到每个点路径上最大边的最小值.</p>
 <p>再枚举每个边作为 1 到 n 路径上的最大边, 往两边看, 次大边是否符合, 并更新答案.</p>
-<pre><code class="language-cpp">#define rep(i,a,b) for (int i = a; i &lt;= b; ++i)
-#define per(i,a,b) for (int i = a; i &lt;= b; --i)
-#define pii pair&lt;int,int&gt;
+<div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> rep(i,a,b) for (int i = a; i &lt;= b; ++i)</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> per(i,a,b) for (int i = a; i &lt;= b; --i)</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> pii pair&lt;int,int&gt;</span>
 
-const int Maxn = 3e5 + 10;
+<span class="hljs-type">const</span> <span class="hljs-type">int</span> Maxn = <span class="hljs-number">3e5</span> + <span class="hljs-number">10</span>;
 
 vector&lt;pii&gt;eg[Maxn];
-int Maxeg1[Maxn], Maxeg2[Maxn];
-int n, m, v, u, w, vis[Maxn];
-signed main() &#123;
-    ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+<span class="hljs-type">int</span> Maxeg1[Maxn], Maxeg2[Maxn];
+<span class="hljs-type">int</span> n, m, v, u, w, vis[Maxn];
+<span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+    ios::<span class="hljs-built_in">sync_with_stdio</span>(<span class="hljs-number">0</span>); cin.<span class="hljs-built_in">tie</span>(<span class="hljs-number">0</span>); cout.<span class="hljs-built_in">tie</span>(<span class="hljs-number">0</span>);
     cin &gt;&gt; n &gt;&gt; m;
 
-    rep(i, 1, m) &#123;
+    <span class="hljs-built_in">rep</span>(i, <span class="hljs-number">1</span>, m) &#123;
         cin &gt;&gt; v &gt;&gt; u &gt;&gt; w;
-        eg[v].emplace_back(u, w);
-        eg[u].emplace_back(v, w);
+        eg[v].<span class="hljs-built_in">emplace_back</span>(u, w);
+        eg[u].<span class="hljs-built_in">emplace_back</span>(v, w);
     &#125;
 
-    rep(i, 2, n) Maxeg1[i] = INT_MAX;
-    rep(i, 1, n - 1) Maxeg2[i] = INT_MAX;
+    <span class="hljs-built_in">rep</span>(i, <span class="hljs-number">2</span>, n) Maxeg1[i] = INT_MAX;
+    <span class="hljs-built_in">rep</span>(i, <span class="hljs-number">1</span>, n - <span class="hljs-number">1</span>) Maxeg2[i] = INT_MAX;
 
     priority_queue&lt;pii,vector&lt;pii&gt;, greater&lt;pii&gt; &gt;q;
-    q.emplace(0, 1);
-    while (!q.empty()) &#123;
-        auto [Maxeg, tis] = q.top();
-        q.pop();
+    q.<span class="hljs-built_in">emplace</span>(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>);
+    <span class="hljs-keyword">while</span> (!q.<span class="hljs-built_in">empty</span>()) &#123;
+        <span class="hljs-keyword">auto</span> [Maxeg, tis] = q.<span class="hljs-built_in">top</span>();
+        q.<span class="hljs-built_in">pop</span>();
 
-        if (vis[tis])continue;
-        vis[tis] = 1;
+        <span class="hljs-keyword">if</span> (vis[tis])<span class="hljs-keyword">continue</span>;
+        vis[tis] = <span class="hljs-number">1</span>;
 
         Maxeg = Maxeg1[tis];
-        for (auto [to, w] : eg[tis]) &#123;
-            if (max(w, Maxeg) &lt; Maxeg1[to]) &#123;
-                Maxeg1[to] = max(w, Maxeg);
-                q.emplace(Maxeg1[to], to);
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> [to, w] : eg[tis]) &#123;
+            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">max</span>(w, Maxeg) &lt; Maxeg1[to]) &#123;
+                Maxeg1[to] = <span class="hljs-built_in">max</span>(w, Maxeg);
+                q.<span class="hljs-built_in">emplace</span>(Maxeg1[to], to);
             &#125;
         &#125;
     &#125;
 
     q = priority_queue&lt;pii,vector&lt;pii&gt;, greater&lt;pii&gt; &gt;();
-    q.emplace(0, n);
-    rep(i, 1, n)vis[i] = 0;
-    while (!q.empty()) &#123;
-        auto [Maxeg, tis] = q.top();
-        q.pop();
+    q.<span class="hljs-built_in">emplace</span>(<span class="hljs-number">0</span>, n);
+    <span class="hljs-built_in">rep</span>(i, <span class="hljs-number">1</span>, n)vis[i] = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span> (!q.<span class="hljs-built_in">empty</span>()) &#123;
+        <span class="hljs-keyword">auto</span> [Maxeg, tis] = q.<span class="hljs-built_in">top</span>();
+        q.<span class="hljs-built_in">pop</span>();
 
-        if (vis[tis])continue;
-        vis[tis] = 1;
+        <span class="hljs-keyword">if</span> (vis[tis])<span class="hljs-keyword">continue</span>;
+        vis[tis] = <span class="hljs-number">1</span>;
 
         Maxeg = Maxeg2[tis];
-        for (auto [to, w] : eg[tis]) &#123;
-            if (max(w, Maxeg) &lt; Maxeg2[to]) &#123;
-                Maxeg2[to] = max(w, Maxeg);
-                q.emplace(Maxeg2[to], to);
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> [to, w] : eg[tis]) &#123;
+            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">max</span>(w, Maxeg) &lt; Maxeg2[to]) &#123;
+                Maxeg2[to] = <span class="hljs-built_in">max</span>(w, Maxeg);
+                q.<span class="hljs-built_in">emplace</span>(Maxeg2[to], to);
             &#125;
         &#125;
     &#125;
 
-    int ans = INT_MAX;
-    rep(i, 1, n) &#123;
-        for (auto [to, w] : eg[i]) &#123;
-            if (Maxeg1[i] &gt; w || Maxeg2[to] &gt; w)continue;
-            ans = min(ans, w + max(Maxeg1[i], Maxeg2[to]));
+    <span class="hljs-type">int</span> ans = INT_MAX;
+    <span class="hljs-built_in">rep</span>(i, <span class="hljs-number">1</span>, n) &#123;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> [to, w] : eg[i]) &#123;
+            <span class="hljs-keyword">if</span> (Maxeg1[i] &gt; w || Maxeg2[to] &gt; w)<span class="hljs-keyword">continue</span>;
+            ans = <span class="hljs-built_in">min</span>(ans, w + <span class="hljs-built_in">max</span>(Maxeg1[i], Maxeg2[to]));
         &#125;
     &#125;
 
     cout &lt;&lt; ans &lt;&lt; endl;
-&#125;
-</code></pre>
+&#125;</code></pre></div>
+
 <p><strong>G. Streak Manipulation</strong></p>
 <p>二分答案找第 k 长的串的最大长度,check函数内用 dp.</p>
-<p>DP思路: 对于当前的 $mid$ , 设 $dp[i][j][0/1]$ 为前 $i$ 个字符，有 $j$ 段长度大于等于 $mid$ 的连续 $1$ 串，且当前字符是否位于第 $j$ 段连续 $1$ 串的末尾（0为假1为真）所需的最少操作次数. 转移方式见代码.</p>
-<pre><code class="language-cpp">int dp[200020][10][2], n, m, k, pre[200010];
-signed main()
-&#123;
-    ios::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+<p>DP思路: 对于当前的 $mid$ , 设 $dp[i][j][0&#x2F;1]$ 为前 $i$ 个字符，有 $j$ 段长度大于等于 $mid$ 的连续 $1$ 串，且当前字符是否位于第 $j$ 段连续 $1$ 串的末尾（0为假1为真）所需的最少操作次数. 转移方式见代码.</p>
+<div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-type">int</span> dp[<span class="hljs-number">200020</span>][<span class="hljs-number">10</span>][<span class="hljs-number">2</span>], n, m, k, pre[<span class="hljs-number">200010</span>];
+<span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+    ios::<span class="hljs-built_in">sync_with_stdio</span>(<span class="hljs-literal">false</span>); cin.<span class="hljs-built_in">tie</span>(<span class="hljs-literal">nullptr</span>); cout.<span class="hljs-built_in">tie</span>(<span class="hljs-literal">nullptr</span>);
     cin &gt;&gt; n &gt;&gt; m &gt;&gt; k;
     string s;
     cin &gt;&gt; s;
-    s = ' ' + s;
+    s = <span class="hljs-string">&#x27; &#x27;</span> + s;
 
-    for (int i = 1; i &lt;= n; ++i) &#123;
-        pre[i] = pre[i - 1];
-        if (s[i] == '0')pre[i]++;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) &#123;
+        pre[i] = pre[i - <span class="hljs-number">1</span>];
+        <span class="hljs-keyword">if</span> (s[i] == <span class="hljs-string">&#x27;0&#x27;</span>)pre[i]++;
     &#125;
 
-    auto check = [&amp;](int len) -&gt; bool&#123;
-        for (int i = 0; i &lt;= n; ++i) &#123;
-            for (int j = 0; j &lt;= k; ++j) &#123;
-                dp[i][j][0] = INT_MAX / 2;
-                dp[i][j][1] = INT_MAX / 2;
+    <span class="hljs-keyword">auto</span> check = [&amp;](<span class="hljs-type">int</span> len) -&gt; <span class="hljs-type">bool</span>&#123;
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt;= n; ++i) &#123;
+            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt;= k; ++j) &#123;
+                dp[i][j][<span class="hljs-number">0</span>] = INT_MAX / <span class="hljs-number">2</span>;
+                dp[i][j][<span class="hljs-number">1</span>] = INT_MAX / <span class="hljs-number">2</span>;
             &#125;
         &#125;
-        dp[0][0][0] = 0;
-        for (int i = 1; i &lt;= n; ++i) &#123;
-            for (int j = 0; j &lt;= k; ++j) &#123;
-                if (s[i] == '0') &#123;
-                    dp[i][j][0] = min(dp[i][j][0], min(dp[i - 1][j][0], dp[i - 1][j][1]));
-                    dp[i][j][1] = min(dp[i][j][1], dp[i - 1][j][1] + 1);
+        dp[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) &#123;
+            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt;= k; ++j) &#123;
+                <span class="hljs-keyword">if</span> (s[i] == <span class="hljs-string">&#x27;0&#x27;</span>) &#123;
+                    dp[i][j][<span class="hljs-number">0</span>] = <span class="hljs-built_in">min</span>(dp[i][j][<span class="hljs-number">0</span>], <span class="hljs-built_in">min</span>(dp[i - <span class="hljs-number">1</span>][j][<span class="hljs-number">0</span>], dp[i - <span class="hljs-number">1</span>][j][<span class="hljs-number">1</span>]));
+                    dp[i][j][<span class="hljs-number">1</span>] = <span class="hljs-built_in">min</span>(dp[i][j][<span class="hljs-number">1</span>], dp[i - <span class="hljs-number">1</span>][j][<span class="hljs-number">1</span>] + <span class="hljs-number">1</span>);
                 &#125;
-                else &#123;
-                    dp[i][j][0] = min(dp[i][j][0], dp[i - 1][j][0]);
-                    dp[i][j][1] = min(dp[i][j][1], dp[i - 1][j][1]);
+                <span class="hljs-keyword">else</span> &#123;
+                    dp[i][j][<span class="hljs-number">0</span>] = <span class="hljs-built_in">min</span>(dp[i][j][<span class="hljs-number">0</span>], dp[i - <span class="hljs-number">1</span>][j][<span class="hljs-number">0</span>]);
+                    dp[i][j][<span class="hljs-number">1</span>] = <span class="hljs-built_in">min</span>(dp[i][j][<span class="hljs-number">1</span>], dp[i - <span class="hljs-number">1</span>][j][<span class="hljs-number">1</span>]);
                 &#125;
-                if (i &gt;= len &amp;&amp; j &gt; 0) &#123;
-                    dp[i][j][1] = min(dp[i][j][1], dp[i - len][j - 1][0] + pre[i] - pre[i - len]);
+                <span class="hljs-keyword">if</span> (i &gt;= len &amp;&amp; j &gt; <span class="hljs-number">0</span>) &#123;
+                    dp[i][j][<span class="hljs-number">1</span>] = <span class="hljs-built_in">min</span>(dp[i][j][<span class="hljs-number">1</span>], dp[i - len][j - <span class="hljs-number">1</span>][<span class="hljs-number">0</span>] + pre[i] - pre[i - len]);
                 &#125;
             &#125;
         &#125;
-        return  min(dp[n][k][0], dp[n][k][1]) &lt;= m;
+        <span class="hljs-keyword">return</span>  <span class="hljs-built_in">min</span>(dp[n][k][<span class="hljs-number">0</span>], dp[n][k][<span class="hljs-number">1</span>]) &lt;= m;
     &#125;;
 
-    int l = 0, r = n;
-    while (l &lt; r) &#123;
-        int mid = (l + r + 1) &gt;&gt; 1;
-        if (check(mid)) &#123;
+    <span class="hljs-type">int</span> l = <span class="hljs-number">0</span>, r = n;
+    <span class="hljs-keyword">while</span> (l &lt; r) &#123;
+        <span class="hljs-type">int</span> mid = (l + r + <span class="hljs-number">1</span>) &gt;&gt; <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">check</span>(mid)) &#123;
             l = mid;
         &#125;
-        else &#123;
-            r = mid - 1;
+        <span class="hljs-keyword">else</span> &#123;
+            r = mid - <span class="hljs-number">1</span>;
         &#125;
     &#125;
 
-    if (!l)l = -1;
+    <span class="hljs-keyword">if</span> (!l)l = <span class="hljs-number">-1</span>;
     cout &lt;&lt; l &lt;&lt; endl;
-&#125;
-</code></pre>
+&#125;</code></pre></div>
 
                 
               </div>
@@ -811,10 +809,6 @@ signed main()
   <script  src="/js/local-search.js" ></script>
 
 
-
-
-  
-<script src="/js/blog-enhancements.js"></script>
 
 
 
