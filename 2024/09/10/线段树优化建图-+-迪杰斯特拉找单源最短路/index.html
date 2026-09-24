@@ -1,0 +1,832 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon_blog.png">
+  <link rel="icon" href="/img/icon_blog.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="TauLee">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content=" 线段树优化建图通常用于处理: 
+ 
+ 
+ 给出一个点的区间, 都与某个点有单向边. 
+ 
+ 
+ 给出一个点, 于一个连续区间都有单向边. 
+ 
+ 
+ 注意到, 如果暴力建图, 会达到 $n^2$ 个边, 显然无法接受. 
+ 考虑用到线段树来维护区间, 那么我们就要维护两个东西. 
+ 对于线段树的一个节点node{l, r}: 
+ 
+ 
+ 哪个节点到 l 到 r 节点都有单向边… 
+ 
+ 
+ 节点 l 到 r 到哪个节点有单向边. 
+ 
+ 
+ 先看 1, 我们可以用一个点连到线段树的节点 node {l, r} 来">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线段树优化建图 + 迪杰斯特拉找单源最短路">
+<meta property="og:url" content="https://taulee.github.io/2024/09/10/%E7%BA%BF%E6%AE%B5%E6%A0%91%E4%BC%98%E5%8C%96%E5%BB%BA%E5%9B%BE-%2B-%E8%BF%AA%E6%9D%B0%E6%96%AF%E7%89%B9%E6%8B%89%E6%89%BE%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF/">
+<meta property="og:site_name" content="TauLee&#39;s Blog">
+<meta property="og:description" content=" 线段树优化建图通常用于处理: 
+ 
+ 
+ 给出一个点的区间, 都与某个点有单向边. 
+ 
+ 
+ 给出一个点, 于一个连续区间都有单向边. 
+ 
+ 
+ 注意到, 如果暴力建图, 会达到 $n^2$ 个边, 显然无法接受. 
+ 考虑用到线段树来维护区间, 那么我们就要维护两个东西. 
+ 对于线段树的一个节点node{l, r}: 
+ 
+ 
+ 哪个节点到 l 到 r 节点都有单向边… 
+ 
+ 
+ 节点 l 到 r 到哪个节点有单向边. 
+ 
+ 
+ 先看 1, 我们可以用一个点连到线段树的节点 node {l, r} 来">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-09-10T12:27:07.000Z">
+<meta property="article:modified_time" content="2024-09-10T12:27:07.000Z">
+<meta property="article:author" content="TauLee">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>线段树优化建图 + 迪杰斯特拉找单源最短路 - TauLee&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":55,"cursorChar":"","loop":false,"scope":["home",404]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"C++"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>TauLee&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle">线段树优化建图 + 迪杰斯特拉找单源最短路</span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        TauLee
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-09-10 20:27" pubdate>
+          2024年9月10日
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        677 字
+        
+      </span>
+    
+
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">线段树优化建图 + 迪杰斯特拉找单源最短路</h1>
+            
+            
+              <div class="markdown-body">
+<p>线段树优化建图通常用于处理:</p>
+<ol>
+<li>
+<p>给出一个点的区间, 都与某个点有单向边.</p>
+</li>
+<li>
+<p>给出一个点, 于一个连续区间都有单向边.</p>
+</li>
+</ol>
+<p>注意到, 如果暴力建图, 会达到 $n^2$ 个边, 显然无法接受.</p>
+<p>考虑用到线段树来维护区间, 那么我们就要维护两个东西.</p>
+<p>对于线段树的一个节点node{l, r}:</p>
+<ol>
+<li>
+<p>哪个节点到 l 到 r 节点都有单向边…</p>
+</li>
+<li>
+<p>节点 l 到 r 到哪个节点有单向边.</p>
+</li>
+</ol>
+<p>先看 1, 我们可以用一个点连到线段树的节点 node {l, r} 来表示这个点到 {l, r} 各有一条单向边(橙色). 此时显然: 大区间向被包含的小区间可以有权值为 0 的单向边(绿色). 因为一个点可以到上面的大区间, 一定可以到达被包含的小区间的任意一个点.</p>
+<p>注意到, 由有向边组成的路径能到达第 i 个叶子节点, 也就等价于能到达节点 i. 于是, 叶子节点就是未建树前的实际节点.</p>
+<p><img src="/img/posts/2024-09-10-142108171/segment-tree-graph-range-edges-1.webp" alt="线段树优化建图的区间连边示意图一" /></p>
+<p>对于 2, 一切同理, 有树:</p>
+<p><img src="/img/posts/2024-09-10-142108171/segment-tree-graph-range-edges-2.webp" alt="线段树优化建图的区间连边示意图二" /></p>
+<p>显然, 这两个树是不共存的, 不能公用一个树. 就要用一定形式把这两个树连到一起. 于是…</p>
+<p>按照如下建边:</p>
+<ol>
+<li>
+<p>双向连接两个树的叶子节点, 边权为 0 (二者等价).</p>
+</li>
+<li>
+<p>单向连接树边, 边权为 0 :</p>
+<ol>
+<li>
+<p>树 1 表示一个点向一个区间有单向边, 那这个点向更小的被包含的区间一定有边.</p>
+</li>
+<li>
+<p>树 2 表示一个区间向一个点有单向边, 那被包含的更小区间一定也向这个点有单向边.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>有一个点到一个区间的单向边:</p>
+<p>从树 2 的对应叶子向到树 1 的对应区间连边 ( 橙色 ).</p>
+</li>
+<li>
+<p>有一个区间到一个点的单向边:</p>
+<p>从树 2 的对应区间向树 1 的对应叶子连边 ( 粉色 ).</p>
+</li>
+</ol>
+<p>这样就可以把暴力的每次要建 O(r-l) 条边, 优化到建 O(logr-l) 条边</p>
+<p>建完图后直接把第一颗树的叶子节点当作原先的节点正常使用即可.</p>
+<p>如果要实现类似线段树的 lazy 优化也是可以的. 即到达了这个线段树节点, 就是可以到这个节点所代表的区间内的所有点.</p>
+<p><img src="/img/posts/2024-09-10-142108171/segment-tree-graph-shortest-path.webp" alt="线段树优化建图的最短路示意图" /></p>
+<p>以题目 <a href="https://codeforces.com/problemset/problem/786/B">786B - Legacy</a> 为例, 要求线段树建完图后的单源最短路, 直接看代码:</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+#ifdef LOCAL
+#include &quot;D:\Users\TauLee\OneDrive\Mine\c++\debug.h&quot;
+#else
+#define debug(...) 42;
+#define endl '\n'
+#endif
+
+#define int long long
+
+//----线段树优化建图----//
+#define pii pair&lt;int,int&gt;
+const int Maxn = 1e5 + 10;
+
+struct node {
+    int l, r;
+} tr[Maxn &lt;&lt; 3];
+const int D = Maxn &lt;&lt; 2; // tr 偏移 D 作为第二棵树.
+int leaf[Maxn]; // 每个节点对应的叶子节点;
+vector&lt;pii&gt;eg[Maxn &lt;&lt; 3]; // 树上的虚拟边
+
+void build(int rt/*=1*/, int l, int r) {
+    tr[rt].l = l;
+    tr[rt].r = r;
+    if (l == r) {
+        leaf[l] = rt;
+        return ;
+    }
+    eg[rt].emplace_back(pii(rt &lt;&lt; 1, 0));
+    eg[rt].emplace_back(pii(rt &lt;&lt; 1 | 1, 0)); // 建立第一棵树的边
+    eg[(rt &lt;&lt; 1) + D].emplace_back(pii(rt + D, 0));
+    eg[(rt &lt;&lt; 1 | 1) + D].emplace_back(pii(rt + D, 0)); // 建立第二棵树的边
+    int mid = (r + l) &gt;&gt; 1;
+    build(rt &lt;&lt; 1, l, mid);
+    build(rt &lt;&lt; 1 | 1, mid + 1, r);
+}
+
+void init(int &amp;n) { // 初始化
+    build(1, 1, n); // 建立树边
+    for (int i = 1; i &lt;= n; ++i) { // 建立两棵树叶子之间的边
+        eg[leaf[i] + D].emplace_back(pii(leaf[i], 0));
+        eg[leaf[i]].emplace_back(pii(leaf[i] + D, 0));
+    }
+}
+
+void addeg(int u, int v, int w) {
+    eg[leaf[u]].emplace_back(pii(leaf[v], w));
+}
+void addeg(int rt/*=1*/, int v, int l, int r, int w, int opt) {
+    // opt==0, 点连区间
+    // opt==1, 区间连点
+    if (l &gt; tr[rt].r || r &lt; tr[rt].l)return;
+    if (l &lt;= tr[rt].l &amp;&amp; tr[rt].r &lt;= r) {
+        if (opt)
+            eg[rt + D].emplace_back(pii(leaf[v], w));
+        else
+            eg[leaf[v] + D].emplace_back(pii(rt, w));
+        return;
+    }
+    addeg(rt &lt;&lt; 1, v, l, r, w, opt);
+    addeg(rt &lt;&lt; 1 | 1, v, l, r, w, opt);
+}
+//----线段树优化建图----//
+
+int n, q, s, opt, v, u, w, l, r, dist[Maxn &lt;&lt; 3];
+signed main()
+{
+    ios::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+    cin &gt;&gt; n &gt;&gt; q &gt;&gt; s;
+    init(n);
+    for (int i = 1; i &lt;= q; ++i) {
+        cin &gt;&gt; opt;
+        if (opt == 1) {
+            cin &gt;&gt; v &gt;&gt; u &gt;&gt; w;
+            addeg(v, u, w);
+        }
+        else if (opt == 2) {
+            cin &gt;&gt; v &gt;&gt; l &gt;&gt; r &gt;&gt; w;
+            addeg(1, v, l, r, w, 0);
+        }
+        else {
+            cin &gt;&gt; v &gt;&gt; l &gt;&gt; r &gt;&gt; w;
+            addeg(1, v, l, r, w, 1);
+        }
+    }
+
+    priority_queue&lt;pii, vector&lt;pii&gt;, greater&lt;pii&gt; &gt;q;
+    debug(s)
+    for (int i = 1; i &lt; (Maxn &lt;&lt; 3); ++i) {
+        dist[i] = LLONG_MAX;
+    }
+    dist[leaf[s]] = 0;
+    q.emplace(pii(0, leaf[s])); // 权值, 终点反过来
+    while (!q.empty()) {
+        auto [w, s] = q.top();
+        q.pop();
+        if (dist[s] &lt; w)continue;
+        for (auto [t, ww] : eg[s]) {
+            if (w + ww &lt; dist[t]) {
+                dist[t] = w + ww;
+                q.emplace(pii(dist[t], t));
+            }
+        }
+    }
+
+    for (int i = 1; i &lt;= n; ++i) {
+        if (dist[leaf[i]] == LLONG_MAX)cout &lt;&lt; -1 &lt;&lt; &quot; &quot;;
+        else cout &lt;&lt; dist[leaf[i]] &lt;&lt; &quot; &quot;;
+    }
+    cout &lt;&lt; endl;
+}
+</code></pre>
+<p>图片来自 <a href="https://www.cnblogs.com/tzcwk/p/13474034.html">博客</a> , 懒癌, 懒着画图, 而且他讲的也很不错.</p>
+
+<p class="csdn-source">原文发布于 2024-09-10 20:27:07（CSDN）：<a href="https://blog.csdn.net/qq_72715438/article/details/142108171" rel="external">https://blog.csdn.net/qq_72715438/article/details/142108171</a></p>
+</div>
+            
+            <hr/>
+            <div>
+              
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>线段树优化建图 + 迪杰斯特拉找单源最短路</div>
+      <div>https://taulee.github.io/2024/09/10/%E7%BA%BF%E6%AE%B5%E6%A0%91%E4%BC%98%E5%8C%96%E5%BB%BA%E5%9B%BE-%2B-%E8%BF%AA%E6%9D%B0%E6%96%AF%E7%89%B9%E6%8B%89%E6%89%BE%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>TauLee</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年9月10日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年9月10日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-left: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

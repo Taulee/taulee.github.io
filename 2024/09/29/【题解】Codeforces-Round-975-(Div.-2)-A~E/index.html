@@ -1,0 +1,887 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon_blog.png">
+  <link rel="icon" href="/img/icon_blog.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="TauLee">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="  A. Max Plus Size  
+ 分别假设答案为取第偶数位的最大值和取第奇数位的最大值两种情况, 取更优解. 
+ 取偶数位的最大值时, 把所有其他都偶数位都取上. 奇数同理. 
+ code: 
+  int solve(int _) {
+    int n;
+    cin &amp;gt;&amp;gt; n;
+    vector&amp;lt;int&amp;gt;a(n + 1);
+    int Maxj = 0, Maxo = 0;
+    for (int i = 1; i &amp;lt;= n; ++i) {
+        c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【题解】Codeforces Round 975 (Div. 2) A~E">
+<meta property="og:url" content="https://taulee.github.io/2024/09/29/%E3%80%90%E9%A2%98%E8%A7%A3%E3%80%91Codeforces-Round-975-%28Div.-2%29-A~E/">
+<meta property="og:site_name" content="TauLee&#39;s Blog">
+<meta property="og:description" content="  A. Max Plus Size  
+ 分别假设答案为取第偶数位的最大值和取第奇数位的最大值两种情况, 取更优解. 
+ 取偶数位的最大值时, 把所有其他都偶数位都取上. 奇数同理. 
+ code: 
+  int solve(int _) {
+    int n;
+    cin &amp;gt;&amp;gt; n;
+    vector&amp;lt;int&amp;gt;a(n + 1);
+    int Maxj = 0, Maxo = 0;
+    for (int i = 1; i &amp;lt;= n; ++i) {
+        c">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-09-29T08:54:37.000Z">
+<meta property="article:modified_time" content="2024-09-29T08:54:37.000Z">
+<meta property="article:author" content="TauLee">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>【题解】Codeforces Round 975 (Div. 2) A~E - TauLee&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":55,"cursorChar":"","loop":false,"scope":["home",404]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"C++"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>TauLee&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle">【题解】Codeforces Round 975 (Div. 2) A~E</span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        TauLee
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-09-29 16:54" pubdate>
+          2024年9月29日
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        937 字
+        
+      </span>
+    
+
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">【题解】Codeforces Round 975 (Div. 2) A~E</h1>
+            
+            
+              <div class="markdown-body">
+<p><strong>A. Max Plus Size</strong></p>
+<p>分别假设答案为取第偶数位的最大值和取第奇数位的最大值两种情况, 取更优解.</p>
+<p>取偶数位的最大值时, 把所有其他都偶数位都取上. 奇数同理.</p>
+<p>code:</p>
+<pre><code class="language-cpp">int solve(int _) {
+    int n;
+    cin &gt;&gt; n;
+    vector&lt;int&gt;a(n + 1);
+    int Maxj = 0, Maxo = 0;
+    for (int i = 1; i &lt;= n; ++i) {
+        cin &gt;&gt; a[i];
+        if (i % 2)Maxj = max(Maxj, a[i]);
+        else Maxo = max(Maxo, a[i]);
+    }
+    int ans2 = n / 2;
+    int ans1 = n / 2 + n % 2;
+
+
+    return max(ans1 + Maxj, ans2 + Maxo);
+}
+</code></pre>
+<p><strong>B. All Pairs Segments</strong></p>
+<p>先把输入的 a数组sort 一下.</p>
+<p>对于每个 $a_i$ 分别由有 $a_{i+1}$ ~ $a_n$ ,   共 $n-i$ 个区间有贡献, 只用从前往后遍历每个 $a$ , 实时更新当前有多少个区间在做贡献.</p>
+<p>当前的总有效区间为 $now$ 个, 加入第 $i$ 个节点时.</p>
+<ol>
+<li>
+<p>新增了以他为左端点的 $n-i$ 个区间, $now+=n-i$ .
+所以 $a[i]$ 这个点被 $now$ 个区间覆盖.</p>
+</li>
+<li>
+<p>减少了以他为右端点的 $i-1$ 个区间, $now-=i-1$ .
+所以 $a[i]+1$ ~ $a[i+1]-1$ 被 $now$ 个区间覆盖.</p>
+</li>
+</ol>
+<p>注意, a[n] 是一个特例.</p>
+<p>code:</p>
+<pre><code class="language-cpp">#define int long long
+void solve(int _) {
+    int n, q;
+    cin &gt;&gt; n &gt;&gt; q;
+    vector&lt;int&gt;a(n + 1);
+    for (int i = 1; i &lt;= n; ++i) {
+        cin &gt;&gt; a[i];
+    }
+    map&lt;int, int&gt;ma;
+    sort(1 + a.begin(), a.end());
+    int now = 0;
+    for (int i = 1; i &lt;= n; ++i) {
+        now += n - i;
+        ma[now]++;
+        now -= i - 1;
+        if (i != n)
+            ma[now] += a[i + 1] - a[i] - 1;
+    }
+
+    while (q--) {
+        cin &gt;&gt; n;
+        cout &lt;&lt; ma[n] &lt;&lt; &quot; &quot;;
+    }
+    cout &lt;&lt; endl;
+}
+</code></pre>
+<p><strong>C. Cards Partition</strong></p>
+<p>**	答案没有二分性**, fk, 赛时写了一个小时的二分.</p>
+<p>答案的范围为 $[1-n]$ , 只用枚举每个答案, 然后 $O(1)$ 做check.</p>
+<p>check:</p>
+<p>对于答案 $x$ , 也就是这些牌要排成 $x$ 行.</p>
+<p>先求至少要多少列 $clm$ ;</p>
+<ol>
+<li>
+<p>$clm &gt; 最多元素的个数$ , 因为这些不能在同一列.</p>
+</li>
+<li>
+<p>如果 $Max_element * X &gt; sum_of_all_element$ , 那就是所有牌摆 $Maxelement$ 列用不完, 还要加新列, 此时 <code>i128 clm = max(Max, sum / i + !!(sum % i));</code></p>
+</li>
+</ol>
+<p>$clm$ 求出来了, 检查空的位置是否小于 $k$ 就好, 只要有解且 $k$ 够用, 就一定能填出来.</p>
+<p>code:</p>
+<pre><code class="language-cpp">#define int long long
+#define i128 __int128
+int solve(int _) {
+    int n, k;
+    cin &gt;&gt; n &gt;&gt; k;
+    vector&lt;int&gt;a(n + 1);
+    i128 sum = 0;
+    int Max = 0;
+    for (int i = 1; i &lt;= n; ++i) {
+        cin &gt;&gt; a[i];
+        Max = max(Max, a[i]);
+        sum += a[i];
+    }
+    sort(1 + a.begin(), a.end());
+
+    int ans = 0;
+    for (int i = 1; i &lt;= n; ++i) {
+        i128 clm = max(Max, sum / i + !!(sum % i));
+        if (clm * i - sum &lt;= k)ans = i;
+    }
+    return ans;
+}
+</code></pre>
+<p><strong>D. Speedbreaker</strong></p>
+<p>注意到: 所有小于 $t$ 的数都包含在一个长度不大于 $t$ 的区间内时, 对于这个区间, 一定有解 ( 可以从这个区间的最小值开始往两边扩散, 哪边吉往哪边去).</p>
+<p>那么对于所有的 $t=i$ 都可以维护一个上述区间. 遍历每一个区间: 此时对于这个区间 $[l,r]$ , 可行的答案是 $[max(1,r-t+1),min(n,l+t-1)]$ ( 分别从区间两头往另一头走长度为 $t$ 的区间).</p>
+<p>对于所有区间求并集即可. 注意到如果数组中没有小于等于 t 的数, 那它对应的区间就是全部.</p>
+<p>code:</p>
+<pre><code class="language-cpp">int n, a[200010];
+int solve(int _) {
+    cin &gt;&gt; n;
+    for (int i = 1; i &lt;= n; ++i) {
+        cin &gt;&gt; a[i];
+    }
+
+    vector&lt;pair&lt;int, int&gt;&gt;tle(n + 1);
+    tle[n] = {1, n};
+
+    for (int i = n - 1; i &gt;= 1; --i) {
+        auto [l, r] = tle[i + 1];
+        while (l &lt;= r &amp;&amp; a[l] &gt; i)l++;
+        while (r &gt;= l &amp;&amp; a[r] &gt; i)r--;
+        tle[i] = {l, r};
+        if (r - l + 1 &gt; i)return 0;
+    }
+
+    vector&lt;int&gt;pre(n + 2, 0);
+    int cnt = 0;
+    for (int i = 1; i &lt;= n; ++i) {
+        auto [l, r] = tle[i];
+        if (l &lt;= r) {
+            cnt++;
+            int ll = min(l, max(1, r - i + 1));
+            int rr = max(r, min(n, l + i - 1));
+            pre[ll]++;
+            pre[rr + 1]--;
+        }
+    }
+    int ans = 0;
+    for (int i = 1; i &lt;= n; ++i) {
+        pre[i] += pre[i - 1];
+        if (pre[i] == cnt)ans++;
+    }
+    return ans;
+}
+</code></pre>
+<p><strong>E. Tree Pruning</strong></p>
+<p>所有叶子与根的距离 &lt;=&gt; 保留所有 $deep$ 相同的节点. 于是可以对这个树跑一个层次bfs, 对每层的答案取 $min$ .</p>
+<p>在每层:</p>
+<ol>
+<li>
+<p>维护去除高于它的点, 要删除多少边:
+即对每一个高于它的点 x,从 x 往上回溯, 直到到 x 的某个祖先, 且这个祖先有一个深于 x 的孙子, 停止. 同时个每个边打个 id, 回溯到已删除的 边也要停止.</p>
+</li>
+<li>
+<p>低于它要删除多少边: 就是这层所有节点的 son 的数量.</p>
+</li>
+</ol>
+<p>code:</p>
+<pre><code class="language-cpp">#define int long long
+#define id(a,b) ((a)*1000000+(b))
+const int Maxn = 5e5 + 10;
+
+int n, v, u;
+int dep[Maxn], son[Maxn], ans[Maxn], fa[Maxn], Maxdep[Maxn];
+vector&lt;int&gt;eg[Maxn];
+set&lt;int&gt;se;
+void getdep(int x, int deep) {
+    dep[x] = deep;
+    Maxdep[x] = deep;
+    for (auto c : eg[x]) {
+        if (c == fa[x])continue;
+        fa[c] = x;
+        getdep(c, deep + 1);
+        Maxdep[x] = max(Maxdep[x], Maxdep[c]);
+    }
+}
+int getson(int x) {
+    son[x] = 0;
+    for (auto c : eg[x]) {
+        if (c == fa[x])continue;
+        son[x] += getson(c);
+    }
+    return son[x] + 1;
+}
+int done(int x, int fromdep) {
+    if (x == 1)return 0;
+    if (fromdep &lt; Maxdep[x])return 0;
+    if (se.count(id(x, fa[x])))return 0;
+    se.emplace(id(x, fa[x]));
+    return done(fa[x], fromdep) + 1;
+}
+int solve(int _) {
+    cin &gt;&gt; n;
+    se.clear();
+    for (int i = 1; i &lt;= n; ++i) {
+        eg[i].clear();
+        Maxdep[i] = 0;
+    }
+    for (int i = 1; i &lt; n; ++i) {
+        cin &gt;&gt; v &gt;&gt; u;
+        eg[u].emplace_back(v);
+        eg[v].emplace_back(u);
+    }
+
+    int ans = n - 1;
+
+    getdep(1, 1);
+    getson(1);
+    for (int i = 1; i &lt;= n; ++i) {
+        debug(i, fa[i], son[i])
+    }
+
+    int last = 1, now = 0, ended = 0, pre_ended = 0;
+    deque&lt;int&gt;q;
+    q.emplace_back(1);
+    while (!q.empty()) {
+        int tis = q.front();
+        q.pop_front();
+
+        if (dep[tis] != last) { // 上一层删除完了,
+            ans = min(ans, ended + now);
+            debug(last, ended, now)
+            now = 0;
+            ended += pre_ended;
+            pre_ended = 0;
+            last = dep[tis];
+        }
+
+        now += son[tis];
+        if (eg[tis].size() == 1) {
+            int tp = done(tis, dep[tis]);
+            debug(tis, tp);
+            pre_ended += tp;
+        }
+
+        for (auto c : eg[tis]) {
+            if (fa[tis] == c)continue;
+            q.emplace_back(c);
+        }
+    }
+    ans = min(ans, ended + now);
+
+    return ans;
+}
+</code></pre>
+
+<p class="csdn-source">原文发布于 2024-09-29 16:54:37（CSDN）：<a href="https://blog.csdn.net/qq_72715438/article/details/142638116" rel="external">https://blog.csdn.net/qq_72715438/article/details/142638116</a></p>
+</div>
+            
+            <hr/>
+            <div>
+              
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>【题解】Codeforces Round 975 (Div. 2) A~E</div>
+      <div>https://taulee.github.io/2024/09/29/%E3%80%90%E9%A2%98%E8%A7%A3%E3%80%91Codeforces-Round-975-%28Div.-2%29-A~E/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>TauLee</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年9月29日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年9月29日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-left: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

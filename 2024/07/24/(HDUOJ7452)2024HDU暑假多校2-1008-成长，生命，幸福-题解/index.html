@@ -1,0 +1,722 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon_blog.png">
+  <link rel="icon" href="/img/icon_blog.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="TauLee">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="  原题链接  
+ 首先可以知道如果一个点在最后答案的路径里, 对其进行成长后, 多的那些点也全部会在答案的路径上的. 我们可以通过总是选择断开原来图中就有的边, 而让路径在新生长的这个圈中绕一圈来做到. 也就是说, 如果一个点在答案的路径上, 那么它成长 M 次后的总点数就是他的贡献. 
+ 考虑如何快速算出成⻓后的点数, 可以发现, 在进行一次成⻓后的树度数最大为3, 对于一个 2 度点, 成⻓一次变为 2 个 2 度点, 对于一个 3 度点, 成⻓一次边为 2 个 2 度点和 1 个 3 度点,对于一个 d 度">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(HDUOJ7452)2024HDU暑假多校2-1008-成长，生命，幸福 题解">
+<meta property="og:url" content="https://taulee.github.io/2024/07/24/%28HDUOJ7452%292024HDU%E6%9A%91%E5%81%87%E5%A4%9A%E6%A0%A12-1008-%E6%88%90%E9%95%BF%EF%BC%8C%E7%94%9F%E5%91%BD%EF%BC%8C%E5%B9%B8%E7%A6%8F-%E9%A2%98%E8%A7%A3/">
+<meta property="og:site_name" content="TauLee&#39;s Blog">
+<meta property="og:description" content="  原题链接  
+ 首先可以知道如果一个点在最后答案的路径里, 对其进行成长后, 多的那些点也全部会在答案的路径上的. 我们可以通过总是选择断开原来图中就有的边, 而让路径在新生长的这个圈中绕一圈来做到. 也就是说, 如果一个点在答案的路径上, 那么它成长 M 次后的总点数就是他的贡献. 
+ 考虑如何快速算出成⻓后的点数, 可以发现, 在进行一次成⻓后的树度数最大为3, 对于一个 2 度点, 成⻓一次变为 2 个 2 度点, 对于一个 3 度点, 成⻓一次边为 2 个 2 度点和 1 个 3 度点,对于一个 d 度">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-07-24T09:38:41.000Z">
+<meta property="article:modified_time" content="2024-07-24T09:38:41.000Z">
+<meta property="article:author" content="TauLee">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>(HDUOJ7452)2024HDU暑假多校2-1008-成长，生命，幸福 题解 - TauLee&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":55,"cursorChar":"","loop":false,"scope":["home",404]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"C++"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>TauLee&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle">(HDUOJ7452)2024HDU暑假多校2-1008-成长，生命，幸福 题解</span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        TauLee
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-07-24 17:38" pubdate>
+          2024年7月24日
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        570 字
+        
+      </span>
+    
+
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">(HDUOJ7452)2024HDU暑假多校2-1008-成长，生命，幸福 题解</h1>
+            
+            
+              <div class="markdown-body">
+<p><a href="https://acm.hdu.edu.cn/showproblem.php?pid=7452">原题链接</a></p>
+<p>首先可以知道如果一个点在最后答案的路径里, 对其进行成长后, 多的那些点也全部会在答案的路径上的. 我们可以通过总是选择断开原来图中就有的边, 而让路径在新生长的这个圈中绕一圈来做到. 也就是说, 如果一个点在答案的路径上, 那么它成长 M 次后的总点数就是他的贡献.</p>
+<p>考虑如何快速算出成⻓后的点数, 可以发现, 在进行一次成⻓后的树度数最大为3, 对于一个 2 度点, 成⻓一次变为 2 个 2 度点, 对于一个 3 度点, 成⻓一次边为 2 个 2 度点和 1 个 3 度点,对于一个 d 度点, 成⻓一次为 2 个 2 度点和 $d-2$ 个 3 度点. 最后推出一个度数为 x 的点成长 m 次后会变成 $(x-1)*(2^m-1)+1$ 个点.(补题时总是不想计算这些推理的, 所有我没推这玩意 )</p>
+<p>接下来就考虑用这个式子作为每个点的权值, 来计算树中的最长路( 权值和最大的路径 ).</p>
+<ol>
+<li>当 m 很小时, 运算结果不会超过 $1e9+7$ , 我们可以直接计算出每个点的贡献来找最长路, 代码用的是找树的直径的 DP 算法, 也可以两遍 dfs 做, 详细讲解看 oi wiki.</li>
+</ol>
+<pre><code class="language-cpp"> int Max = 0;//要的答案
+ vector&lt;int&gt;ans(n + 1, 0); // 子树中从子树的根到某个叶子的最长路
+ auto dfs = [&amp;](auto self, int x, int fa) -&gt;void {
+     for (auto c : eg[x]) {
+         if (c == fa)continue;
+         self(self, c, x);
+         Max = max(Max, ans[x] + ans[c] + (du[x] - 1) * (ksm(2, m) - 1) + 1);
+         ans[x] = max(ans[x], ans[c]);
+     }
+     ans[x] += (du[x] - 1) * (ksm(2, m) - 1) + 1;
+ };
+ dfs(dfs, 1, 1);
+ return Max;
+</code></pre>
+<ol>
+<li>当 m 很大时, 由于取模, 求得的结果就不具备可比大小的性质了.
+但是观察 $w=(x-1)*(2^m-1)+1$ 这个式子, 会发现: 当 $m&gt;20$ 时, $2^m$ 为 1e6 级别, 而后面的 1 在对所有点的贡献提取公因式后最大不会超过点的个数 1e5.
+也就是说: 度数 x 每增大 1, 后面的常数变再大也影响不到最终答案是不是 Max. 就可以用 $(2^m-1)$ 的系数 =&gt; (路径的度数和减去路径的点数) 为第一关键字, 点的个数(也就是公式中常数 1 的个数 ) 为第二关键字, 作为权值, 就最长路, 最后再算答案. 为什么 m 较小时不可以这样做呢? 因为 Max 的度数和比较小者大 1,但较小者可能由很多点组成, 也就是最后的常数非常大, $2^m-1&lt;n$ 时, 不能保证结果不会被影响.</li>
+</ol>
+<p>eg: 第一关键字的&quot;减去路径的点数&quot;不能拿掉, 因为它使得第一关键字的大小受点的个数影响, 而有相同度数和的路径可能具有不用的点个数.</p>
+<p>全部代码:</p>
+<pre><code class="language-cpp">#define int long long
+const int M = 1e9 + 7;
+int ksm(int a, int n) {
+    int ans = 1;
+    while (n) {
+        if (n % 2)ans = ans * a % M;
+        a = a * a % M;
+        n /= 2;
+    }
+    return ans;
+}
+
+int solve(int _) {
+    int n, m, v, u;
+    cin &gt;&gt; n &gt;&gt; m;
+    vector&lt;int&gt;du(n + 1, 0);
+    vector&lt;vector&lt;int&gt;&gt;eg(n + 1);
+    for (int i = 1; i &lt; n; ++i) {
+        cin &gt;&gt; v &gt;&gt; u;
+        eg[u].emplace_back(v);
+        eg[v].emplace_back(u);
+        du[u]++;
+        du[v]++;
+    }
+    if (m &lt; 20) {
+        int Max = 0; //一位度数-数量, 二维数量
+        vector&lt;int&gt;ans(n + 1, 0);
+        auto dfs = [&amp;](auto self, int x, int fa) -&gt;void {
+            for (auto c : eg[x]) {
+                if (c == fa)continue;
+                self(self, c, x);
+                Max = max(Max, ans[x] + ans[c] + (du[x] - 1) * (ksm(2, m) - 1) + 1);
+                ans[x] = max(ans[x], ans[c]);
+            }
+            ans[x] += (du[x] - 1) * (ksm(2, m) - 1) + 1;
+        };
+        dfs(dfs, 1, 1);
+        return Max;
+    }
+    else {
+        pair&lt;int, int&gt;Max;//一位度数-数量, 二维数量
+        vector&lt;pair&lt;int, int&gt;&gt;dep(n + 1, {0, 0});
+        auto dfs = [&amp;](auto self, int x, int fa) -&gt; pair&lt;int, int&gt; {
+            for (auto c : eg[x]) {
+                if (c == fa)continue;
+                auto tp = self(self, c, x);
+                Max = max(Max, {dep[x].first + tp.first + du[x] - 1, dep[x].second + 1 + tp.second});
+                dep[x] = max(dep[x], tp);
+            }
+            dep[x].first += du[x] - 1;
+            dep[x].second++;
+            return dep[x];
+        };
+        dfs(dfs, 1, 1);
+        return (Max.first * (ksm(2, m) - 1 + M) % M + Max.second) % M;
+    }
+}
+signed main()
+{
+    // freopen(&quot;input.txt&quot;, &quot;r&quot;, stdin);
+    ios::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+    int _ = 1;
+    cin &gt;&gt; _;
+    while (_--) {
+        cout &lt;&lt; solve(_) &lt;&lt; endl;
+    }
+}
+</code></pre>
+
+<p class="csdn-source">原文发布于 2024-07-24 17:38:41（CSDN）：<a href="https://blog.csdn.net/qq_72715438/article/details/140620765" rel="external">https://blog.csdn.net/qq_72715438/article/details/140620765</a></p>
+</div>
+            
+            <hr/>
+            <div>
+              
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>(HDUOJ7452)2024HDU暑假多校2-1008-成长，生命，幸福 题解</div>
+      <div>https://taulee.github.io/2024/07/24/%28HDUOJ7452%292024HDU%E6%9A%91%E5%81%87%E5%A4%9A%E6%A0%A12-1008-%E6%88%90%E9%95%BF%EF%BC%8C%E7%94%9F%E5%91%BD%EF%BC%8C%E5%B9%B8%E7%A6%8F-%E9%A2%98%E8%A7%A3/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>TauLee</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年7月24日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年7月24日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-left: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
