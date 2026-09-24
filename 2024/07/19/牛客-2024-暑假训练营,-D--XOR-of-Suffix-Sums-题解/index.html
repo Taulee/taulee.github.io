@@ -355,10 +355,10 @@ $
 </li>
 <li>
 <p>那么问题来了, x 的范围是多少?
-注意到, 式子中的 pre[n] 和 x 都是在模 $2^{d+1}$ 环境下的, 不大于模数. 故二者和的范围为 $0~到~2<em>2^{d+1}
+注意到, 式子中的 pre[n] 和 x 都是在模 $2^{d+1}$ 环境下的, 不大于模数. 故二者和的范围为 $0~到~2\cdot 2^{d+1}
 $ .
 那么满足 $&gt;=2^d$ 的范围就很明了了.
-$2^d&lt;=pre[n]+x&lt;2^{d+1}$ 或 $2^{d+1}+2^d&lt;=pre[n]+x&lt;2</em>2^{d+1}$
+$2^d&lt;=pre[n]+x&lt;2^{d+1}$ 或 $2^{d+1}+2^d&lt;=pre[n]+x&lt;2\cdot 2^{d+1}$
 就可以在树状数组中维护这两个范围内 x 的个数, 就是这 Bit 位上 1 的个数, 就得到了这 Bit 位上的异或答案. 这样维护 21 颗树状数组, 就得到了答案.</p>
 </li>
 </ol>
@@ -732,6 +732,9 @@ signed main()
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  <script src="/js/math-config.js?v=1"></script>
+  <script defer src="/js/mathjax/tex-svg.js?v=1"></script>
 
   <script  src="/js/local-search.js" ></script>
 

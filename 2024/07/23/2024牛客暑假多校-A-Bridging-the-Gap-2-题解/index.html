@@ -316,7 +316,7 @@
 <h3>题意</h3>
 <p>有一艘船, n 个人想要渡船到河对岸, 船至少要 L 个人开动, 最多可以载 R 个人. 每个人渡过一次船体力 $h_i$ 就会减少 1. 体力不能减为 0.</p>
 <h3>思路</h3>
-<p>返回时至少要回去 L 个人, 所以每次返回接人, 就相当于上次最多能运 $R-L$ 个人, 问题就是要运算最多可以返回多少次. 考虑往返一次, 回去接人的人要付出两点体力, 一共需要 L 个人. 返回 x 次, 付出的体力总数是 $2<em>x</em>L$ , 但是每个人对其的贡献不能超过 $2x$ , 因为 x 次返回, 同一个人最多往返 x 次. 就可以二分答案找最多的返回次数.</p>
+<p>返回时至少要回去 L 个人, 所以每次返回接人, 就相当于上次最多能运 $R-L$ 个人, 问题就是要运算最多可以返回多少次. 考虑往返一次, 回去接人的人要付出两点体力, 一共需要 L 个人. 返回 x 次, 付出的体力总数是 $2\cdot x\cdot L$ , 但是每个人对其的贡献不能超过 $2x$ , 因为 x 次返回, 同一个人最多往返 x 次. 就可以二分答案找最多的返回次数.</p>
 <p>check函数如下: <code>h[i]</code> 预处理成了每个人最多可以返回多少次. 查看总贡献能不能满足 $2xL$ .</p>
 <pre><code class="language-cpp">    for (int i = 0; i &lt; n; ++i) {
         cin &gt;&gt; h[i];
@@ -668,6 +668,9 @@ signed main()
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  <script src="/js/math-config.js?v=1"></script>
+  <script defer src="/js/mathjax/tex-svg.js?v=1"></script>
 
   <script  src="/js/local-search.js" ></script>
 
