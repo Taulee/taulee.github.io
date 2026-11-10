@@ -213,14 +213,14 @@
       <h2 class="index-header">
         
         <a href="/2026/11/10/ssh-config/" target="_self">
-          我的 SSH 配置：跳板免输密码，反向代理只开一条
+          SSH 配置：跳板机自动输入密码，反向代理复用
         </a>
       </h2>
 
       
       <a class="index-excerpt index-excerpt__noimg" href="/2026/11/10/ssh-config/" target="_self">
         <div>
-          我在 Mac 上经常从终端和 Codex 连同一台 GPU 服务器。跳板只接受密码，目标机可以用密钥。目标机装依赖时还要借用 Mac 上的代理，所以两边都连着的时候，远端应该只有一个代理端口，关掉其中一边也还能用。 下面用 gpu 和 gpu-gateway 作示例。地址、账号和 SSH 端口都换过。 跳板密码交给钥匙串我需要省掉的是跳板的密码提示。在 macOS 上，可以让 OpenSSH 通过
+          我在 Mac 上用终端、vscode 和 Codex 等连同一台 GPU 服务器。跳板机只接受密码，目标机用 SSH 密钥。 本来用的 ssh 复用加反向代理很舒服，codex 突然来个强制不使用复用 ssh，很难受。于是倒腾下面这些东西。 跳板机用 sshpass 配置自动输入密码~/.ssh/config 如下。ProxyCommand 写在一行。 Host gpu     HostName
         </div>
       </a>
 
