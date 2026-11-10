@@ -16,12 +16,12 @@
   <meta name="author" content="TauLee">
   <meta name="keywords" content="">
   
-    <meta name="description" content="线段树优化建图通常用于处理:  给出一个点的区间, 都与某个点有单向边.  给出一个点, 于一个连续区间都有单向边.   注意到, 如果暴力建图, 会达到 $n^2$ 个边, 显然无法接受. 考虑用到线段树来维护区间, 那么我们就要维护两个东西. 对于线段树的一个节点node{l, r}:  哪个节点到 l 到 r 节点都有单向边…  节点 l 到 r 到哪个节点有单向边.   先看 1, 我们可">
+    <meta name="description" content="线段树优化建图通常用于处理:  给出一个点的区间, 都与某个点有单向边.  给出一个点, 与一个连续区间都有单向边.   注意到, 如果暴力建图, 会达到 $n^2$ 条边, 显然无法接受. 考虑用到线段树来维护区间, 那么我们就要维护两个东西. 对于线段树的一个节点 node&#123;l, r&#125;:  哪个节点到 l 到 r 节点都有单向边...  节点 l 到 r 到哪个节点有单向边">
 <meta property="og:type" content="article">
 <meta property="og:title" content="线段树优化建图 + 迪杰斯特拉找单源最短路">
 <meta property="og:url" content="https://taulee.github.io/2024/09/10/%E7%BA%BF%E6%AE%B5%E6%A0%91%E4%BC%98%E5%8C%96%E5%BB%BA%E5%9B%BE-+-%E8%BF%AA%E6%9D%B0%E6%96%AF%E7%89%B9%E6%8B%89%E6%89%BE%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF/index.html">
 <meta property="og:site_name" content="TauLee&#39;s Blog">
-<meta property="og:description" content="线段树优化建图通常用于处理:  给出一个点的区间, 都与某个点有单向边.  给出一个点, 于一个连续区间都有单向边.   注意到, 如果暴力建图, 会达到 $n^2$ 个边, 显然无法接受. 考虑用到线段树来维护区间, 那么我们就要维护两个东西. 对于线段树的一个节点node{l, r}:  哪个节点到 l 到 r 节点都有单向边…  节点 l 到 r 到哪个节点有单向边.   先看 1, 我们可">
+<meta property="og:description" content="线段树优化建图通常用于处理:  给出一个点的区间, 都与某个点有单向边.  给出一个点, 与一个连续区间都有单向边.   注意到, 如果暴力建图, 会达到 $n^2$ 条边, 显然无法接受. 考虑用到线段树来维护区间, 那么我们就要维护两个东西. 对于线段树的一个节点 node&#123;l, r&#125;:  哪个节点到 l 到 r 节点都有单向边...  节点 l 到 r 到哪个节点有单向边">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://taulee.github.io/img/posts/2024-09-10-142108171/segment-tree-graph-range-edges-1.webp">
 <meta property="og:image" content="https://taulee.github.io/img/posts/2024-09-10-142108171/segment-tree-graph-range-edges-2.webp">
@@ -281,29 +281,29 @@
 <ol>
 <li><p>给出一个点的区间, 都与某个点有单向边.</p>
 </li>
-<li><p>给出一个点, 于一个连续区间都有单向边.</p>
+<li><p>给出一个点, 与一个连续区间都有单向边.</p>
 </li>
 </ol>
-<p>注意到, 如果暴力建图, 会达到 $n^2$ 个边, 显然无法接受.</p>
+<p>注意到, 如果暴力建图, 会达到 $n^2$ 条边, 显然无法接受.</p>
 <p>考虑用到线段树来维护区间, 那么我们就要维护两个东西.</p>
-<p>对于线段树的一个节点node{l, r}:</p>
+<p>对于线段树的一个节点 <code>node&#123;l, r&#125;</code>:</p>
 <ol>
-<li><p>哪个节点到 l 到 r 节点都有单向边…</p>
+<li><p>哪个节点到 l 到 r 节点都有单向边...</p>
 </li>
 <li><p>节点 l 到 r 到哪个节点有单向边.</p>
 </li>
 </ol>
-<p>先看 1, 我们可以用一个点连到线段树的节点 node {l, r} 来表示这个点到 {l, r} 各有一条单向边(橙色). 此时显然: 大区间向被包含的小区间可以有权值为 0 的单向边(绿色). 因为一个点可以到上面的大区间, 一定可以到达被包含的小区间的任意一个点.</p>
+<p>先看 1, 我们可以用一个点连到线段树的节点 node {l, r} 来表示这个点到 {l, r} 各有一条单向边 (橙色). 此时显然: 大区间向被包含的小区间可以有权值为 0 的单向边 (绿色). 因为一个点可以到上面的大区间, 一定可以到达被包含的小区间的任意一个点.</p>
 <p>注意到, 由有向边组成的路径能到达第 i 个叶子节点, 也就等价于能到达节点 i. 于是, 叶子节点就是未建树前的实际节点.</p>
 <p><img src="/img/posts/2024-09-10-142108171/segment-tree-graph-range-edges-1.webp" srcset="/img/loading.gif" lazyload alt="线段树优化建图的区间连边示意图一"></p>
 <p>对于 2, 一切同理, 有树:</p>
 <p><img src="/img/posts/2024-09-10-142108171/segment-tree-graph-range-edges-2.webp" srcset="/img/loading.gif" lazyload alt="线段树优化建图的区间连边示意图二"></p>
-<p>显然, 这两个树是不共存的, 不能公用一个树. 就要用一定形式把这两个树连到一起. 于是…</p>
+<p>显然, 这两棵树是不共存的, 不能共用一棵树. 就要用一定形式把这两棵树连到一起. 于是...</p>
 <p>按照如下建边:</p>
 <ol>
-<li><p>双向连接两个树的叶子节点, 边权为 0 (二者等价).</p>
+<li><p>双向连接两棵树的叶子节点, 边权为 0 (二者等价).</p>
 </li>
-<li><p>单向连接树边, 边权为 0 :</p>
+<li><p>单向连接树边, 边权为 0:</p>
 <ol>
 <li><p>树 1 表示一个点向一个区间有单向边, 那这个点向更小的被包含的区间一定有边.</p>
 </li>
@@ -312,14 +312,14 @@
 </ol>
 </li>
 <li><p>有一个点到一个区间的单向边:</p>
-<p>从树 2 的对应叶子向到树 1 的对应区间连边 ( 橙色 ).</p>
+<p>从树 2 的对应叶子向树 1 的对应区间连边 (橙色).</p>
 </li>
 <li><p>有一个区间到一个点的单向边:</p>
-<p>从树 2 的对应区间向树 1 的对应叶子连边 ( 粉色 ).</p>
+<p>从树 2 的对应区间向树 1 的对应叶子连边 (粉色).</p>
 </li>
 </ol>
-<p>这样就可以把暴力的每次要建 O(r-l) 条边, 优化到建 O(logr-l) 条边</p>
-<p>建完图后直接把第一颗树的叶子节点当作原先的节点正常使用即可.</p>
+<p>这样就可以把暴力的每次要建 <code>O(r - l + 1)</code> 条边, 优化到建 <code>O(log(r - l + 1))</code> 条边</p>
+<p>建完图后直接把第一棵树的叶子节点当作原先的节点正常使用即可.</p>
 <p>如果要实现类似线段树的 lazy 优化也是可以的. 即到达了这个线段树节点, 就是可以到这个节点所代表的区间内的所有点.</p>
 <p><img src="/img/posts/2024-09-10-142108171/segment-tree-graph-shortest-path.webp" srcset="/img/loading.gif" lazyload alt="线段树优化建图的最短路示意图"></p>
 <p>以题目 <a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/786/B">786B - Legacy</a> 为例, 要求线段树建完图后的单源最短路, 直接看代码:</p>
@@ -436,7 +436,7 @@ vector&lt;pii&gt;eg[Maxn &lt;&lt; <span class="hljs-number">3</span>]; <span cla
     cout &lt;&lt; endl;
 &#125;</code></pre></div>
 
-<p>图片来自 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/tzcwk/p/13474034.html">博客</a> , 懒癌, 懒着画图, 而且他讲的也很不错.</p>
+<p>图片来自 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/tzcwk/p/13474034.html">博客</a>, 懒癌, 懒着画图, 而且他讲的也很不错.</p>
 
                 
               </div>
@@ -520,9 +520,9 @@ vector&lt;pii&gt;eg[Maxn &lt;&lt; <span class="hljs-number">3</span>]; <span cla
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/09/29/%E3%80%90%E9%A2%98%E8%A7%A3%E3%80%91Codeforces-Round-975-(Div.-2)-A~E/" title="【题解】Codeforces Round 975 (Div. 2) A~E">
+                      <a href="/2024/09/29/%E3%80%90%E9%A2%98%E8%A7%A3%E3%80%91Codeforces-Round-975-(Div.-2)-A~E/" title="[题解] Codeforces Round 975 (Div. 2) A~E">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">【题解】Codeforces Round 975 (Div. 2) A~E</span>
+                        <span class="hidden-mobile">[题解] Codeforces Round 975 (Div. 2) A~E</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -530,8 +530,8 @@ vector&lt;pii&gt;eg[Maxn &lt;&lt; <span class="hljs-number">3</span>]; <span cla
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/08/12/%5B%E9%A2%98%E8%A7%A3-hduoj-7521%5D-2024HDU-%E6%9A%91%E5%81%87%E5%A4%9A%E6%A0%A17---cats-%E7%9A%84%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88/" title="[题解 hduoj-7521] 2024HDU 暑假多校7 - cats 的二分答案">
-                        <span class="hidden-mobile">[题解 hduoj-7521] 2024HDU 暑假多校7 - cats 的二分答案</span>
+                      <a href="/2024/08/12/%5B%E9%A2%98%E8%A7%A3-hduoj-7521%5D-2024HDU-%E6%9A%91%E5%81%87%E5%A4%9A%E6%A0%A17---cats-%E7%9A%84%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88/" title="[题解 HDUOJ 7521] 2024 HDU 暑假多校 7: cats 的二分答案">
+                        <span class="hidden-mobile">[题解 HDUOJ 7521] 2024 HDU 暑假多校 7: cats 的二分答案</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

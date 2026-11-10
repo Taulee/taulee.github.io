@@ -16,12 +16,12 @@
   <meta name="author" content="TauLee">
   <meta name="keywords" content="">
   
-    <meta name="description" content="文章目录 0x00 序二分， 就是在有序的序列中不断对半分，从而实现 $log$ 级别的查询速度。 二分从简单的应用角度来说, 分为如下：  整数域二分  查找可行解区间的最左端点  查找可行解区间的最右端点    实数域二分   同样的, 三分就是每次选取三分之一段, 复杂度为 $log_3$ 级别. 主要用于寻找单峰函数极值. 分为凸函数和凹函数两类, 实数域和整数域上两类… 学习是开放的,">
+    <meta name="description" content="文章目录 0x00 序二分, 就是在有序的序列中不断对半分, 从而实现 $log$ 级别的查询速度. 二分从简单的应用角度来说, 分为如下:  整数域二分  查找可行解区间的最左端点  查找可行解区间的最右端点    实数域二分   同样的, 三分就是每次选取三分之一段, 复杂度为 $log_3$ 级别. 主要用于寻找单峰函数极值. 分为凸函数和凹函数两类, 实数域和整数域上两类... 学习是开放">
 <meta property="og:type" content="article">
-<meta property="og:title" content="二分三分算法详解, 模板与临界条件分析">
+<meta property="og:title" content="二分, 三分算法详解: 模板与临界条件分析">
 <meta property="og:url" content="https://taulee.github.io/2025/04/13/%E4%BA%8C%E5%88%86%E4%B8%89%E5%88%86%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3,-%E6%A8%A1%E6%9D%BF%E4%B8%8E%E4%B8%B4%E7%95%8C%E6%9D%A1%E4%BB%B6%E5%88%86%E6%9E%90/index.html">
 <meta property="og:site_name" content="TauLee&#39;s Blog">
-<meta property="og:description" content="文章目录 0x00 序二分， 就是在有序的序列中不断对半分，从而实现 $log$ 级别的查询速度。 二分从简单的应用角度来说, 分为如下：  整数域二分  查找可行解区间的最左端点  查找可行解区间的最右端点    实数域二分   同样的, 三分就是每次选取三分之一段, 复杂度为 $log_3$ 级别. 主要用于寻找单峰函数极值. 分为凸函数和凹函数两类, 实数域和整数域上两类… 学习是开放的,">
+<meta property="og:description" content="文章目录 0x00 序二分, 就是在有序的序列中不断对半分, 从而实现 $log$ 级别的查询速度. 二分从简单的应用角度来说, 分为如下:  整数域二分  查找可行解区间的最左端点  查找可行解区间的最右端点    实数域二分   同样的, 三分就是每次选取三分之一段, 复杂度为 $log_3$ 级别. 主要用于寻找单峰函数极值. 分为凸函数和凹函数两类, 实数域和整数域上两类... 学习是开放">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://taulee.github.io/img/posts/2025-04-13-147017395/binary-search-unimodal-function.png">
 <meta property="og:image" content="https://taulee.github.io/img/posts/2025-04-13-147017395/ternary-search-intervals.png">
@@ -33,7 +33,7 @@
   
   
   
-  <title>二分三分算法详解, 模板与临界条件分析 - TauLee&#39;s Blog</title>
+  <title>二分, 三分算法详解: 模板与临界条件分析 - TauLee&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
 
@@ -187,7 +187,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="二分三分算法详解, 模板与临界条件分析"></span>
+            <span id="subtitle" data-typed-text="二分, 三分算法详解: 模板与临界条件分析"></span>
           
         </div>
 
@@ -271,14 +271,14 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">二分三分算法详解, 模板与临界条件分析</h1>
+            <h1 id="seo-header">二分, 三分算法详解: 模板与临界条件分析</h1>
             
             
               <div class="markdown-body">
                 
                 <p><strong>文章目录</strong></p>
-<h3 id="0x00-序"><a href="#0x00-序" class="headerlink" title="0x00 序"></a>0x00 序</h3><p>二分， 就是在有序的序列中不断对半分，从而实现 $log$ 级别的查询速度。</p>
-<p>二分从简单的应用角度来说, 分为如下：</p>
+<h2 id="0x00-序"><a href="#0x00-序" class="headerlink" title="0x00 序"></a>0x00 序</h2><p>二分, 就是在有序的序列中不断对半分, 从而实现 $log$ 级别的查询速度.</p>
+<p>二分从简单的应用角度来说, 分为如下:</p>
 <ol>
 <li><p>整数域二分</p>
 <ol>
@@ -291,15 +291,15 @@
 <li><p>实数域二分</p>
 </li>
 </ol>
-<p>同样的, 三分就是每次选取三分之一段, 复杂度为 $log_3$ 级别. 主要用于寻找单峰函数极值. 分为凸函数和凹函数两类, 实数域和整数域上两类…</p>
-<p>学习是开放的, 推荐一个我常常跟随学习的大佬的 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/337752413">博客</a> , 可以看看. 对三分法讲的很细.</p>
-<h3 id="0x01-整数域上的二分"><a href="#0x01-整数域上的二分" class="headerlink" title="0x01 整数域上的二分"></a>0x01 整数域上的二分</h3><h4 id="0x0101-查找可行解的最左端点"><a href="#0x0101-查找可行解的最左端点" class="headerlink" title="0x0101 查找可行解的最左端点"></a>0x0101 查找可行解的最左端点</h4><p>在一个有序序列中, 如 $[0,1,2,3,4,5,6,7,8,9]$ 找到所有 $5 \leq x$ 的数中, 最左边的一个, 即找到例子中的 $a[5]$ .</p>
-<p>我们定义两个变量 <code>l = 0</code> 和 <code>r = 9</code> , 代表初始的这个数组范围, 在二分的过程中会不断缩小. 宗旨就是: 让 $[l,r]$ 代表的区间尽可能的是我们想要的区间.</p>
-<p>每次对半查询中, 定义一个 <code>mid=l+r&gt;&gt;2</code> , 然后查看 <code>a[mid]</code> 与目标值 $5$ 的关系。有以下几种情况：</p>
+<p>同样的, 三分就是每次选取三分之一段, 复杂度为 $log_3$ 级别. 主要用于寻找单峰函数极值. 分为凸函数和凹函数两类, 实数域和整数域上两类...</p>
+<p>学习是开放的, 推荐一个我常常跟随学习的大佬的 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/337752413">博客</a>, 可以看看. 对三分法讲的很细.</p>
+<h2 id="0x01-整数域上的二分"><a href="#0x01-整数域上的二分" class="headerlink" title="0x01 整数域上的二分"></a>0x01 整数域上的二分</h2><h3 id="0x0101-查找可行解的最左端点"><a href="#0x0101-查找可行解的最左端点" class="headerlink" title="0x0101 查找可行解的最左端点"></a>0x0101 查找可行解的最左端点</h3><p>在一个有序序列中, 如 $[0,1,2,3,4,5,6,7,8,9]$ 找到所有 $5 \leq x$ 的数中, 最左边的一个, 即找到例子中的 $a[5]$.</p>
+<p>我们定义两个变量 <code>l = 0</code> 和 <code>r = 9</code>, 代表初始的这个数组范围, 在二分的过程中会不断缩小. 宗旨就是: 让 $[l,r]$ 代表的区间尽可能的是我们想要的区间.</p>
+<p>每次对半查询中, 定义一个 <code>mid = l + (r - l) / 2</code>, 然后查看 <code>a[mid]</code> 与目标值 $5$ 的关系. 有以下几种情况:</p>
 <ol>
-<li><p><code>a[mid]&gt;=5</code> , <code>check</code> 返回 <code>true</code> ：这时 $mid$ 是可取的, 本着让 $[l,r]$ 代表的区间尽可能的是我们想要的区间的原则, 让 $r&#x3D;mid$ , 保证 $r$ 所在的位置一定是满足 $5 \leq a[r]$ 的.</p>
+<li><p><code>a[mid]&gt;=5</code>, <code>check</code> 返回 <code>true</code>: 这时 $mid$ 是可取的, 本着让 $[l,r]$ 代表的区间尽可能的是我们想要的区间的原则, 让 $r&#x3D;mid$, 保证 $r$ 所在的位置一定是满足 $5 \leq a[r]$ 的.</p>
 </li>
-<li><p><code>a[mid]&lt;5</code> , <code>check</code> 返回 <code>false</code> ：这时 $mid$ 是可取的, 让 $l&#x3D;mid+1$ , 因为此时 $mid$ 所在的位置一定是不满足 $5 \leq a[r]$ 的, 就要让 $l$ 再往左去一个, 让它尽可能满足.</p>
+<li><p><code>a[mid]&lt;5</code>, <code>check</code> 返回 <code>false</code>: 这时 $mid$ 不可取, 让 $l&#x3D;mid+1$, 因为此时 $mid$ 所在的位置一定是不满足 $5 \leq a[r]$ 的, 就要让 $l$ 再往右移一位, 让它尽可能满足.</p>
 </li>
 </ol>
 <p>代码如下:</p>
@@ -314,17 +314,17 @@
     <span class="hljs-keyword">return</span> l;
 &#125;</code></pre></div>
 
-<h4 id="0x0102-查找可行解的最右端点"><a href="#0x0102-查找可行解的最右端点" class="headerlink" title="0x0102 查找可行解的最右端点"></a>0x0102 查找可行解的最右端点</h4><p>在一个有序序列中, 如 $[0,1,2,3,4,5,6,7,8,9]$ 找到所有 $x &lt; 5$ 的数中, 最左边的一个, 即找到例子中的 $a[4]$ .</p>
-<p>这里有点区别, 每次对半查询中, 定义 <code>mid = (l + r + 1) &gt;&gt; 2</code> .有以下几种情况：</p>
+<h3 id="0x0102-查找可行解的最右端点"><a href="#0x0102-查找可行解的最右端点" class="headerlink" title="0x0102 查找可行解的最右端点"></a>0x0102 查找可行解的最右端点</h3><p>在一个有序序列中, 如 $[0,1,2,3,4,5,6,7,8,9]$ 找到所有 $x &lt; 5$ 的数中, 最右边的一个, 即找到例子中的 $a[4]$.</p>
+<p>这里有点区别, 每次对半查询中, 定义 <code>mid = (l + r + 1) &gt;&gt; 1</code>. 有以下几种情况:</p>
 <ol>
-<li><p><code>a[mid]&gt;=5</code> , <code>check</code> 返回 <code>false</code> ：这时 $mid$ 是不可取的, 让 $r$ 再往左去一个, 即 $r&#x3D;mid-1$ , 保证 $r$ 所在的位置尽可能是满足 $5 \leq a[r]$ 的.</p>
+<li><p><code>a[mid]&gt;=5</code>, <code>check</code> 返回 <code>false</code>: 这时 $mid$ 是不可取的, 让 $r$ 再往左去一个, 即 $r&#x3D;mid-1$, 保证 $r$ 所在的位置尽可能是满足 $5 \leq a[r]$ 的.</p>
 </li>
-<li><p><code>a[mid]&lt;5</code> , <code>check</code> 返回 <code>true</code> ：这时 $mid$ 是可取的, 让 $l&#x3D;mid$ .</p>
+<li><p><code>a[mid]&lt;5</code>, <code>check</code> 返回 <code>true</code>: 这时 $mid$ 是可取的, 让 $l&#x3D;mid$.</p>
 </li>
 </ol>
-<p>具体为什么要在 定义 $mid$ 时加一呢?</p>
+<p>具体为什么要在定义 $mid$ 时加一呢?</p>
 <p>讨论一个临界条件:</p>
-<p>当 $l&#x3D;4, r&#x3D;5$ , 如果不加一, $mid&#x3D;4$ , <code>check</code> 返回 <code>true</code> -&gt; <code>l = mid = 4</code> , 发现会进入死循环. 让 $mid$ 往上偏一位, 就是为了避免这种死循环. 同时让两种情况的推出条件统一成了 <code>while(l &lt; r)</code> , 退出时 $l$ 就是要找的答案.</p>
+<p>当 $l&#x3D;4, r&#x3D;5$, 如果不加一, $mid&#x3D;4$, <code>check</code> 返回 <code>true</code> → <code>l = mid = 4</code>, 发现会进入死循环. 让 $mid$ 往上偏一位, 就是为了避免这种死循环. 同时让两种情况的退出条件统一成了 <code>while(l &lt; r)</code>, 退出时 $l$ 就是要找的答案.</p>
 <p>代码如下:</p>
 <div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">bsearch_2</span><span class="hljs-params">(<span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span><span class="hljs-comment">//求满足要求的最大值,求右端点</span></span>
 <span class="hljs-function"></span>&#123;
@@ -337,7 +337,7 @@
     <span class="hljs-keyword">return</span> l;
 &#125;</code></pre></div>
 
-<h3 id="0x02-实数域上的二分"><a href="#0x02-实数域上的二分" class="headerlink" title="0x02 实数域上的二分"></a>0x02 实数域上的二分</h3><p>实数域上的二分, 相对就比较简单, 如果选取上面的模板, 只需要改退出条件为 <code>while(r - l &lt; eps)</code> , $eps$ 为定义的最小值, 一般为 $1e-7$ , 视题目误差要求而定. 对 $mid$ 的选择和 $l,r$ 的赋值就更为宽松, 因为没有了临界条件的考虑.</p>
+<h2 id="0x02-实数域上的二分"><a href="#0x02-实数域上的二分" class="headerlink" title="0x02 实数域上的二分"></a>0x02 实数域上的二分</h2><p>实数域上的二分, 相对就比较简单, 如果选取上面的模板, 只需要改退出条件为 <code>while (r - l &gt; eps)</code>, $eps$ 为定义的最小值, 一般为 $1e-7$, 视题目误差要求而定. 对 $mid$ 的选择和 $l,r$ 的赋值就更为宽松, 因为没有了临界条件的考虑.</p>
 <div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-type">const</span> <span class="hljs-type">double</span> eps =<span class="hljs-number">1e-7</span>;        <span class="hljs-comment">//精度。</span>
 <span class="hljs-keyword">while</span>(r - l &gt; eps)&#123;
       <span class="hljs-type">double</span> mid = l + (r - l) / <span class="hljs-number">2</span>;
@@ -353,11 +353,11 @@
       <span class="hljs-keyword">else</span>  l  = mid;
 &#125;</code></pre></div>
 
-<h3 id="0x03-三分"><a href="#0x03-三分" class="headerlink" title="0x03 三分"></a>0x03 三分</h3><h4 id="0x0310-实数域上三分"><a href="#0x0310-实数域上三分" class="headerlink" title="0x0310 实数域上三分"></a>0x0310 实数域上三分</h4><p>以凸函数为例子, 凹函数改一下check就行.</p>
-<p>对于一个单峰函数 (例如: $y&#x3D;-x^2$ ), 如果想要找到它的顶点 (当然, 已知在 $x&#x3D;0$ ), 可以先定义 $l&#x3D;-inf, r&#x3D;inf$ , $inf$ 只要确保包含了答案就行.</p>
-<p>每次取两个三等分点 $midl$ 和 $midr$ , 当函数值 $f(midl) &lt; f(midr)$ 的时候, 就可以判断极值在 $[l,midr]$ 这个区间内, 画个图就能看出来了. 更具体的, 大家可以手玩一下 !</p>
+<h2 id="0x03-三分"><a href="#0x03-三分" class="headerlink" title="0x03 三分"></a>0x03 三分</h2><h3 id="0x0301-实数域上三分"><a href="#0x0301-实数域上三分" class="headerlink" title="0x0301 实数域上三分"></a>0x0301 实数域上三分</h3><p>以凸函数为例子, 凹函数改一下check就行.</p>
+<p>对于一个单峰函数 (例如: $y&#x3D;-x^2$), 如果想要找到它的顶点 (当然, 已知在 $x&#x3D;0$), 可以先定义 $l&#x3D;-inf, r&#x3D;inf$, $inf$ 只要确保包含了答案就行.</p>
+<p>每次取两个三等分点 $midl$ 和 $midr$, 当函数值 $f(midl) &lt; f(midr)$ 的时候, 就可以判断极值在 $[l,midr]$ 这个区间内, 画个图就能看出来了. 更具体的, 大家可以手玩一下!</p>
 <p><img src="/img/posts/2025-04-13-147017395/binary-search-unimodal-function.png" srcset="/img/loading.gif" lazyload alt="二分查找单峰函数示意图"></p>
-<p>当然, 既然在实数域上了, 当然也是可以直接暴力循环一千次的. 代码就不贴了, 一定不是我懒着写.</p>
+<p>当然, 既然在实数域上了, 当然也是可以直接暴力循环一千次的. 代码就不贴了, 一定不是我懒得写.</p>
 <p>想一想, 这份代码好像能通用地处理当区间 $[l,r]$ 为单调的, 即极值在两端. 主要是因为你不用真的找到两端, 只要找到两端加减 $eps$ 就行. 接下来的整数域就不行, 因为 $eps$ 的概念在整数域不存在, 你就要找到准确的那个数.</p>
 <div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-comment">//以凸函数为例子, 凹函数改一下 check 中的  小于号 -&gt; 大于号</span>
 <span class="hljs-keyword">while</span> (r - l &gt; eps) &#123;
@@ -380,7 +380,7 @@
         l = mid;
 &#125;</code></pre></div>
 
-<h4 id="0x0302-整数域上三分"><a href="#0x0302-整数域上三分" class="headerlink" title="0x0302 整数域上三分"></a>0x0302 整数域上三分</h4><p>直接贴代码, 思想是一样的, 主要是特殊处理两端. 注意 <code>while</code> 里面条件的变化.</p>
+<h3 id="0x0302-整数域上三分"><a href="#0x0302-整数域上三分" class="headerlink" title="0x0302 整数域上三分"></a>0x0302 整数域上三分</h3><p>直接贴代码, 思想是一样的, 主要是特殊处理两端. 注意 <code>while</code> 里面条件的变化.</p>
 <div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">bin3</span><span class="hljs-params">(<span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span></span>
 <span class="hljs-function"></span>&#123;
     <span class="hljs-keyword">if</span> (l &gt; r) <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
@@ -395,9 +395,9 @@
     <span class="hljs-keyword">return</span> res;
 &#125;</code></pre></div>
 
-<h4 id="0x0303-三分套三分"><a href="#0x0303-三分套三分" class="headerlink" title="0x0303 三分套三分"></a>0x0303 三分套三分</h4><p>主要处理这种问题(如图), 找它的极值点.</p>
+<h3 id="0x0303-三分套三分"><a href="#0x0303-三分套三分" class="headerlink" title="0x0303 三分套三分"></a>0x0303 三分套三分</h3><p>主要处理这种问题 (如图), 找它的极值点.</p>
 <p><img src="/img/posts/2025-04-13-147017395/ternary-search-intervals.png" srcset="/img/loading.gif" lazyload alt="三分法区间缩小示意图"></p>
-<p>对于两个变量的凹 &#x2F; 凸函数(一个圆锥形), 先固定 $x$ 三分 $y$ , 再三分 $x$ . 因为对于其的任意切片, 一定是一个凹 &#x2F; 凸函数, 且极值点和三维状态一样.</p>
+<p>对于两个变量的凹 &#x2F; 凸函数 (一个圆锥形), 先固定 $x$ 三分 $y$, 再三分 $x$. 因为对于它的任意切片, 一定是一个凹 &#x2F; 凸函数, 且极值点和三维状态一样.</p>
 <div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">run</span><span class="hljs-params">(<span class="hljs-type">double</span> x)</span> <span class="hljs-comment">// 固定x，三分y</span></span>
 <span class="hljs-function"></span>&#123;
     ....
@@ -462,7 +462,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>二分三分算法详解, 模板与临界条件分析</div>
+      <div>二分, 三分算法详解: 模板与临界条件分析</div>
       <div>https://taulee.github.io/2025/04/13/二分三分算法详解,-模板与临界条件分析/</div>
     </div>
     <div class="license-meta">
@@ -507,9 +507,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/10/03/%E5%9C%A8%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E9%83%A8%E7%BD%B2%E7%A7%81%E4%BA%BA%E9%A5%A5%E8%8D%92%E8%81%94%E6%9C%BA%E7%89%88%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E5%99%A8-%5B2025.10.3%5D%5Bubuntu-24.04%5D/" title="在云服务器搭建部署私人饥荒联机版游戏服务器 [2025.10.3][ubuntu 24.04][腾讯云2核2G服务器]">
+                      <a href="/2025/10/03/%E5%9C%A8%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E9%83%A8%E7%BD%B2%E7%A7%81%E4%BA%BA%E9%A5%A5%E8%8D%92%E8%81%94%E6%9C%BA%E7%89%88%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E5%99%A8-%5B2025.10.3%5D%5Bubuntu-24.04%5D/" title="在云服务器上搭建私人饥荒联机版服务器 (2025.10.3, Ubuntu 24.04, 腾讯云 2 核 2 GB)">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">在云服务器搭建部署私人饥荒联机版游戏服务器 [2025.10.3][ubuntu 24.04][腾讯云2核2G服务器]</span>
+                        <span class="hidden-mobile">在云服务器上搭建私人饥荒联机版服务器 (2025.10.3, Ubuntu 24.04, 腾讯云 2 核 2 GB)</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -517,8 +517,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/04/13/vp-2023-icpc-%E5%90%88%E8%82%A5-%E8%A7%A3%E9%A2%98%E8%A1%A5%E9%A2%98%E8%AE%B0%E5%BD%95-%5BF-E-J-G%5D/" title="vp 2023 icpc 合肥 解题补题记录 [F E J G]">
-                        <span class="hidden-mobile">vp 2023 icpc 合肥 解题补题记录 [F E J G]</span>
+                      <a href="/2025/04/13/vp-2023-icpc-%E5%90%88%E8%82%A5-%E8%A7%A3%E9%A2%98%E8%A1%A5%E9%A2%98%E8%AE%B0%E5%BD%95-%5BF-E-J-G%5D/" title="2023 ICPC 合肥站 VP 补题记录 (F, E, J, G)">
+                        <span class="hidden-mobile">2023 ICPC 合肥站 VP 补题记录 (F, E, J, G)</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -16,12 +16,12 @@
   <meta name="author" content="TauLee">
   <meta name="keywords" content="">
   
-    <meta name="description" content="我在 Mac 上用终端、vscode 和 Codex 等连同一台 GPU 服务器。跳板机只接受密码，目标机用 SSH 密钥。 本来用的 ssh 复用加反向代理很舒服，codex 突然来个强制不使用复用 ssh，很难受。于是倒腾下面这些东西。 跳板机用 sshpass 配置自动输入密码~&#x2F;.ssh&#x2F;config 如下。ProxyCommand 写在一行。 Host gpu     HostName">
+    <meta name="description" content="我在 Mac 上用终端, VS Code 和 Codex 等连同一台 GPU 服务器. 跳板机只接受密码, 目标机用 SSH 密钥. 本来用的 SSH 复用加反向代理很舒服, Codex 突然来个强制不使用复用 SSH, 很难受. 于是倒腾下面这些东西. 跳板机用 sshpass 配置自动输入密码~&#x2F;.ssh&#x2F;config 如下. ProxyCommand 写在一行. Host gpu     H">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SSH 配置：跳板机自动输入密码，反向代理复用">
+<meta property="og:title" content="SSH 配置: 跳板机自动输入密码, 反向代理复用">
 <meta property="og:url" content="https://taulee.github.io/2026/11/10/ssh-config/index.html">
 <meta property="og:site_name" content="TauLee&#39;s Blog">
-<meta property="og:description" content="我在 Mac 上用终端、vscode 和 Codex 等连同一台 GPU 服务器。跳板机只接受密码，目标机用 SSH 密钥。 本来用的 ssh 复用加反向代理很舒服，codex 突然来个强制不使用复用 ssh，很难受。于是倒腾下面这些东西。 跳板机用 sshpass 配置自动输入密码~&#x2F;.ssh&#x2F;config 如下。ProxyCommand 写在一行。 Host gpu     HostName">
+<meta property="og:description" content="我在 Mac 上用终端, VS Code 和 Codex 等连同一台 GPU 服务器. 跳板机只接受密码, 目标机用 SSH 密钥. 本来用的 SSH 复用加反向代理很舒服, Codex 突然来个强制不使用复用 SSH, 很难受. 于是倒腾下面这些东西. 跳板机用 sshpass 配置自动输入密码~&#x2F;.ssh&#x2F;config 如下. ProxyCommand 写在一行. Host gpu     H">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-11-10T11:42:00.000Z">
 <meta property="article:modified_time" content="2026-11-10T12:05:00.000Z">
@@ -30,7 +30,7 @@
   
   
   
-  <title>SSH 配置：跳板机自动输入密码，反向代理复用 - TauLee&#39;s Blog</title>
+  <title>SSH 配置: 跳板机自动输入密码, 反向代理复用 - TauLee&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
 
@@ -184,7 +184,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="SSH 配置：跳板机自动输入密码，反向代理复用"></span>
+            <span id="subtitle" data-typed-text="SSH 配置: 跳板机自动输入密码, 反向代理复用"></span>
           
         </div>
 
@@ -268,14 +268,14 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">SSH 配置：跳板机自动输入密码，反向代理复用</h1>
+            <h1 id="seo-header">SSH 配置: 跳板机自动输入密码, 反向代理复用</h1>
             
             
               <div class="markdown-body">
                 
-                <p>我在 Mac 上用终端、vscode 和 Codex 等连同一台 GPU 服务器。跳板机只接受密码，目标机用 SSH 密钥。</p>
-<p>本来用的 ssh 复用加反向代理很舒服，codex 突然来个强制不使用复用 ssh，很难受。于是倒腾下面这些东西。</p>
-<h2 id="跳板机用-sshpass-配置自动输入密码"><a href="#跳板机用-sshpass-配置自动输入密码" class="headerlink" title="跳板机用 sshpass 配置自动输入密码"></a>跳板机用 <code>sshpass</code> 配置自动输入密码</h2><p><code>~/.ssh/config</code> 如下。<code>ProxyCommand</code> 写在一行。</p>
+                <p>我在 Mac 上用终端, VS Code 和 Codex 等连同一台 GPU 服务器. 跳板机只接受密码, 目标机用 SSH 密钥.</p>
+<p>本来用的 SSH 复用加反向代理很舒服, Codex 突然来个强制不使用复用 SSH, 很难受. 于是倒腾下面这些东西.</p>
+<h2 id="跳板机用-sshpass-配置自动输入密码"><a href="#跳板机用-sshpass-配置自动输入密码" class="headerlink" title="跳板机用 sshpass 配置自动输入密码"></a>跳板机用 <code>sshpass</code> 配置自动输入密码</h2><p><code>~/.ssh/config</code> 如下. <code>ProxyCommand</code> 写在一行.</p>
 <div class="code-wrapper"><pre><code class="hljs sshconfig">Host gpu
     HostName 127.0.0.1
     Port 2201
@@ -284,26 +284,26 @@
     IdentitiesOnly yes
     ProxyCommand /opt/homebrew/bin/sshpass -p &#x27;REPLACE_WITH_PASSWORD&#x27; /usr/bin/ssh -p 2222 -l jump -o PreferredAuthentications=password -W &quot;%h:%p&quot; -- gateway.example.com</code></pre></div>
 
-<p>执行 <code>ssh gpu</code> 时，<code>sshpass</code> 给内层 SSH 输入跳板密码。登录跳板后，<code>-W &quot;%h:%p&quot;</code> 让跳板连接它那边的 <code>127.0.0.1:2201</code>，外层 SSH 再用密钥登录目标机。</p>
-<p><code>-p</code> 会把明文密码留在配置里，也可能在进程参数中短暂暴露，见仁见智。</p>
-<h2 id="独立的反向代理-ssh-连接"><a href="#独立的反向代理-ssh-连接" class="headerlink" title="独立的反向代理 ssh 连接"></a>独立的反向代理 ssh 连接</h2><p>Codex 在 ssh 连接时会禁用 <code>ControlMaster</code>。把 <code>RemoteForward</code> 写进 <code>Host gpu</code>，终端和 Codex 就会分别申请同一个远端监听端口，后来的连接会遇到端口冲突。</p>
-<p>我把转发放到单独的 SSH 连接里。每次登录成功后，<code>LocalCommand</code> 把当前 SSH 的 PID 登记到后台。后台按主机别名管理隧道，用 macOS 的 <code>kqueue</code> 监听进程退出。第一条连接触发隧道，最后一条登记过的连接退出后释放端口。</p>
-<p>把 <a href="https://taulee.github.io/downloads/ssh-reverse-proxy.py">完整脚本</a> 保存到 <code>~/.ssh/ssh-reverse-proxy.py</code>，再把这两行加进 <code>Host gpu</code>。</p>
+<p>执行 <code>ssh gpu</code> 时, <code>sshpass</code> 给内层 SSH 输入跳板密码. 登录跳板后, <code>-W &quot;%h:%p&quot;</code> 让跳板连接它那边的 <code>127.0.0.1:2201</code>, 外层 SSH 再用密钥登录目标机.</p>
+<p><code>-p</code> 会把明文密码留在配置里, 也可能在进程参数中短暂暴露, 见仁见智.</p>
+<h2 id="独立的反向代理-SSH-连接"><a href="#独立的反向代理-SSH-连接" class="headerlink" title="独立的反向代理 SSH 连接"></a>独立的反向代理 SSH 连接</h2><p>Codex 在 SSH 连接时会禁用 <code>ControlMaster</code>. 把 <code>RemoteForward</code> 写进 <code>Host gpu</code>, 终端和 Codex 就会分别申请同一个远端监听端口, 后来的连接会遇到端口冲突.</p>
+<p>我把转发放到单独的 SSH 连接里. 每次登录成功后, <code>LocalCommand</code> 把当前 SSH 的 PID 登记到后台. 后台按主机别名管理隧道, 用 macOS 的 <code>kqueue</code> 监听进程退出. 第一条连接触发隧道, 最后一条登记过的连接退出后释放端口.</p>
+<p>把 <a href="https://taulee.github.io/downloads/ssh-reverse-proxy.py">完整脚本</a> 保存到 <code>~/.ssh/ssh-reverse-proxy.py</code>, 再把这两行加进 <code>Host gpu</code>.</p>
 <div class="code-wrapper"><pre><code class="hljs sshconfig">PermitLocalCommand yes
 LocalCommand exec /usr/bin/python3 &quot;$HOME/.ssh/ssh-reverse-proxy.py&quot; &quot;%n&quot; &quot;127.0.0.1:7898:127.0.0.1:7897&quot;</code></pre></div>
 
-<p>后台实际跑的是这条命令。</p>
+<p>后台实际跑的是这条命令.</p>
 <div class="code-wrapper"><pre><code class="hljs bash">/usr/bin/ssh -nNT -S none \
     -o BatchMode=<span class="hljs-built_in">yes</span> \
     -o PermitLocalCommand=no \
     -o ExitOnForwardFailure=<span class="hljs-built_in">yes</span> \
     -R 127.0.0.1:7898:127.0.0.1:7897 gpu</code></pre></div>
 
-<p><code>-S none</code> 禁用连接复用，<code>PermitLocalCommand=no</code> 防止隧道再次触发登记。远端的 <code>127.0.0.1:7898</code> 转发到 Mac 上的 HTTP 代理 <code>127.0.0.1:7897</code>。绑定失败时，只有专用隧道退出，登录连接可以继续用。</p>
-<p>在远端按需给命令加代理。</p>
+<p><code>-S none</code> 禁用连接复用, <code>PermitLocalCommand=no</code> 防止隧道再次触发登记. 远端的 <code>127.0.0.1:7898</code> 转发到 Mac 上的 HTTP 代理 <code>127.0.0.1:7897</code>. 绑定失败时, 只有专用隧道退出, 登录连接可以继续用.</p>
+<p>在远端按需给命令加代理.</p>
 <div class="code-wrapper"><pre><code class="hljs bash">https_proxy=http://127.0.0.1:7898 curl -I https://example.org</code></pre></div>
 
-<p>也可以直接写进 zsh 配置。</p>
+<p>也可以直接写进 zsh 配置.</p>
 
                 
               </div>
@@ -342,7 +342,7 @@ LocalCommand exec /usr/bin/python3 &quot;$HOME/.ssh/ssh-reverse-proxy.py&quot; &
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>SSH 配置：跳板机自动输入密码，反向代理复用</div>
+      <div>SSH 配置: 跳板机自动输入密码, 反向代理复用</div>
       <div>https://taulee.github.io/2026/11/10/ssh-config/</div>
     </div>
     <div class="license-meta">
@@ -391,8 +391,8 @@ LocalCommand exec /usr/bin/python3 &quot;$HOME/.ssh/ssh-reverse-proxy.py&quot; &
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/10/03/%E5%9C%A8%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E9%83%A8%E7%BD%B2%E7%A7%81%E4%BA%BA%E9%A5%A5%E8%8D%92%E8%81%94%E6%9C%BA%E7%89%88%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E5%99%A8-%5B2025.10.3%5D%5Bubuntu-24.04%5D/" title="在云服务器搭建部署私人饥荒联机版游戏服务器 [2025.10.3][ubuntu 24.04][腾讯云2核2G服务器]">
-                        <span class="hidden-mobile">在云服务器搭建部署私人饥荒联机版游戏服务器 [2025.10.3][ubuntu 24.04][腾讯云2核2G服务器]</span>
+                      <a href="/2025/10/03/%E5%9C%A8%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E9%83%A8%E7%BD%B2%E7%A7%81%E4%BA%BA%E9%A5%A5%E8%8D%92%E8%81%94%E6%9C%BA%E7%89%88%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E5%99%A8-%5B2025.10.3%5D%5Bubuntu-24.04%5D/" title="在云服务器上搭建私人饥荒联机版服务器 (2025.10.3, Ubuntu 24.04, 腾讯云 2 核 2 GB)">
+                        <span class="hidden-mobile">在云服务器上搭建私人饥荒联机版服务器 (2025.10.3, Ubuntu 24.04, 腾讯云 2 核 2 GB)</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

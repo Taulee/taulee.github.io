@@ -16,12 +16,12 @@
   <meta name="author" content="TauLee">
   <meta name="keywords" content="">
   
-    <meta name="description" content="原题链接 首先可以知道如果一个点在最后答案的路径里, 对其进行成长后, 多的那些点也全部会在答案的路径上的. 我们可以通过总是选择断开原来图中就有的边, 而让路径在新生长的这个圈中绕一圈来做到. 也就是说, 如果一个点在答案的路径上, 那么它成长 M 次后的总点数就是他的贡献. 考虑如何快速算出成⻓后的点数, 可以发现, 在进行一次成⻓后的树度数最大为3, 对于一个 2 度点, 成⻓一次变为 2">
+    <meta name="description" content="原题链接 首先可以知道如果一个点在最后答案的路径里, 对其进行成长后, 多的那些点也全部会在答案的路径上的. 我们可以通过总是选择断开原来图中就有的边, 而让路径在新生长的这个圈中绕一圈来做到. 也就是说, 如果一个点在答案的路径上, 那么它成长 M 次后的总点数就是他的贡献. 考虑如何快速算出成长后的点数, 可以发现, 在进行一次成长后的树度数最大为3, 对于一个 2 度点, 成长一次变为 2">
 <meta property="og:type" content="article">
-<meta property="og:title" content="(HDUOJ7452)2024HDU暑假多校2-1008-成长，生命，幸福 题解">
+<meta property="og:title" content="2024 HDU 暑假多校 2: 1008 成长, 生命, 幸福 (HDUOJ 7452) 题解">
 <meta property="og:url" content="https://taulee.github.io/2024/07/24/(HDUOJ7452)2024HDU%E6%9A%91%E5%81%87%E5%A4%9A%E6%A0%A12-1008-%E6%88%90%E9%95%BF%EF%BC%8C%E7%94%9F%E5%91%BD%EF%BC%8C%E5%B9%B8%E7%A6%8F-%E9%A2%98%E8%A7%A3/index.html">
 <meta property="og:site_name" content="TauLee&#39;s Blog">
-<meta property="og:description" content="原题链接 首先可以知道如果一个点在最后答案的路径里, 对其进行成长后, 多的那些点也全部会在答案的路径上的. 我们可以通过总是选择断开原来图中就有的边, 而让路径在新生长的这个圈中绕一圈来做到. 也就是说, 如果一个点在答案的路径上, 那么它成长 M 次后的总点数就是他的贡献. 考虑如何快速算出成⻓后的点数, 可以发现, 在进行一次成⻓后的树度数最大为3, 对于一个 2 度点, 成⻓一次变为 2">
+<meta property="og:description" content="原题链接 首先可以知道如果一个点在最后答案的路径里, 对其进行成长后, 多的那些点也全部会在答案的路径上的. 我们可以通过总是选择断开原来图中就有的边, 而让路径在新生长的这个圈中绕一圈来做到. 也就是说, 如果一个点在答案的路径上, 那么它成长 M 次后的总点数就是他的贡献. 考虑如何快速算出成长后的点数, 可以发现, 在进行一次成长后的树度数最大为3, 对于一个 2 度点, 成长一次变为 2">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-24T09:38:00.000Z">
 <meta property="article:modified_time" content="2024-07-24T09:38:00.000Z">
@@ -30,7 +30,7 @@
   
   
   
-  <title>(HDUOJ7452)2024HDU暑假多校2-1008-成长，生命，幸福 题解 - TauLee&#39;s Blog</title>
+  <title>2024 HDU 暑假多校 2: 1008 成长, 生命, 幸福 (HDUOJ 7452) 题解 - TauLee&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
 
@@ -184,7 +184,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="(HDUOJ7452)2024HDU暑假多校2-1008-成长，生命，幸福 题解"></span>
+            <span id="subtitle" data-typed-text="2024 HDU 暑假多校 2: 1008 成长, 生命, 幸福 (HDUOJ 7452) 题解"></span>
           
         </div>
 
@@ -268,17 +268,17 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">(HDUOJ7452)2024HDU暑假多校2-1008-成长，生命，幸福 题解</h1>
+            <h1 id="seo-header">2024 HDU 暑假多校 2: 1008 成长, 生命, 幸福 (HDUOJ 7452) 题解</h1>
             
             
               <div class="markdown-body">
                 
                 <p><a target="_blank" rel="noopener" href="https://acm.hdu.edu.cn/showproblem.php?pid=7452">原题链接</a></p>
 <p>首先可以知道如果一个点在最后答案的路径里, 对其进行成长后, 多的那些点也全部会在答案的路径上的. 我们可以通过总是选择断开原来图中就有的边, 而让路径在新生长的这个圈中绕一圈来做到. 也就是说, 如果一个点在答案的路径上, 那么它成长 M 次后的总点数就是他的贡献.</p>
-<p>考虑如何快速算出成⻓后的点数, 可以发现, 在进行一次成⻓后的树度数最大为3, 对于一个 2 度点, 成⻓一次变为 2 个 2 度点, 对于一个 3 度点, 成⻓一次边为 2 个 2 度点和 1 个 3 度点,对于一个 d 度点, 成⻓一次为 2 个 2 度点和 $d-2$ 个 3 度点. 最后推出一个度数为 x 的点成长 m 次后会变成 $(x-1)*(2^m-1)+1$ 个点.(补题时总是不想计算这些推理的, 所有我没推这玩意 )</p>
-<p>接下来就考虑用这个式子作为每个点的权值, 来计算树中的最长路( 权值和最大的路径 ).</p>
+<p>考虑如何快速算出成长后的点数, 可以发现, 在进行一次成长后的树度数最大为3, 对于一个 2 度点, 成长一次变为 2 个 2 度点, 对于一个 3 度点, 成长一次变为 2 个 2 度点和 1 个 3 度点, 对于一个 d 度点, 成长一次为 2 个 2 度点和 $d-2$ 个 3 度点. 最后推出一个度数为 x 的点成长 m 次后会变成 $(x-1)*(2^m-1)+1$ 个点.(补题时总是不想计算这些推理的, 所以我没推这玩意)</p>
+<p>接下来就考虑用这个式子作为每个点的权值, 来计算树中的最长路 (权值和最大的路径).</p>
 <ol>
-<li>当 m 很小时, 运算结果不会超过 $1e9+7$ , 我们可以直接计算出每个点的贡献来找最长路, 代码用的是找树的直径的 DP 算法, 也可以两遍 dfs 做, 详细讲解看 oi wiki.</li>
+<li>当 m 很小时, 运算结果不会超过 $1e9+7$, 我们可以直接计算出每个点的贡献来找最长路, 代码用的是找树的直径的 DP 算法, 也可以两遍 dfs 做, 详细讲解看 OI Wiki.</li>
 </ol>
 <div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-type">int</span> Max = <span class="hljs-number">0</span>;<span class="hljs-comment">//要的答案</span>
 vector&lt;<span class="hljs-type">int</span>&gt;<span class="hljs-built_in">ans</span>(n + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>); <span class="hljs-comment">// 子树中从子树的根到某个叶子的最长路</span>
@@ -294,10 +294,10 @@ vector&lt;<span class="hljs-type">int</span>&gt;<span class="hljs-built_in">ans<
 <span class="hljs-built_in">dfs</span>(dfs, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>);
 <span class="hljs-keyword">return</span> Max;</code></pre></div>
 
-<ol>
-<li>当 m 很大时, 由于取模, 求得的结果就不具备可比大小的性质了. 但是观察 $w&#x3D;(x-1)*(2^m-1)+1$ 这个式子, 会发现: 当 $m&gt;20$ 时, $2^m$ 为 1e6 级别, 而后面的 1 在对所有点的贡献提取公因式后最大不会超过点的个数 1e5. 也就是说: 度数 x 每增大 1, 后面的常数变再大也影响不到最终答案是不是 Max. 就可以用 $(2^m-1)$ 的系数 &#x3D;&gt; (路径的度数和减去路径的点数) 为第一关键字, 点的个数(也就是公式中常数 1 的个数 ) 为第二关键字, 作为权值, 就最长路, 最后再算答案. 为什么 m 较小时不可以这样做呢? 因为 Max 的度数和比较小者大 1,但较小者可能由很多点组成, 也就是最后的常数非常大, $2^m-1&lt;n$ 时, 不能保证结果不会被影响.</li>
+<ol start="2">
+<li>当 m 很大时, 由于取模, 求得的结果就不具备可比大小的性质了. 但是观察 $w&#x3D;(x-1)*(2^m-1)+1$ 这个式子, 会发现: 当 $m&gt;20$ 时, $2^m$ 为 1e6 级别, 而后面的 1 在对所有点的贡献提取公因式后最大不会超过点的个数 1e5. 也就是说: 度数 x 每增大 1, 后面的常数变再大也影响不到最终答案是不是 Max. 就可以用 $(2^m-1)$ 的系数 ⇒ (路径的度数和减去路径的点数) 为第一关键字, 点的个数 (也就是公式中常数 1 的个数) 为第二关键字, 作为权值, 求最长路, 最后再算答案. 为什么 m 较小时不可以这样做呢? 因为 Max 的度数和比较小者大 1, 但较小者可能由很多点组成, 也就是最后的常数非常大, $2^m-1&lt;n$ 时, 不能保证结果不会被影响.</li>
 </ol>
-<p>eg: 第一关键字的&quot;减去路径的点数&quot;不能拿掉, 因为它使得第一关键字的大小受点的个数影响, 而有相同度数和的路径可能具有不用的点个数.</p>
+<p>eg: 第一关键字的&quot;减去路径的点数&quot;不能拿掉, 因为它使得第一关键字的大小受点的个数影响, 而有相同度数和的路径可能具有不同的点数.</p>
 <p>全部代码:</p>
 <div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> int long long</span>
 <span class="hljs-type">const</span> <span class="hljs-type">int</span> M = <span class="hljs-number">1e9</span> + <span class="hljs-number">7</span>;
@@ -404,7 +404,7 @@ vector&lt;<span class="hljs-type">int</span>&gt;<span class="hljs-built_in">ans<
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>(HDUOJ7452)2024HDU暑假多校2-1008-成长，生命，幸福 题解</div>
+      <div>2024 HDU 暑假多校 2: 1008 成长, 生命, 幸福 (HDUOJ 7452) 题解</div>
       <div>https://taulee.github.io/2024/07/24/(HDUOJ7452)2024HDU暑假多校2-1008-成长，生命，幸福-题解/</div>
     </div>
     <div class="license-meta">
@@ -449,9 +449,9 @@ vector&lt;<span class="hljs-type">int</span>&gt;<span class="hljs-built_in">ans<
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/07/27/%E3%80%90%E9%A2%98%E8%A7%A3%E3%80%91Codeforces-Round-962-(Div.-3)-F-Bomb/" title="【题解】Codeforces Round 962 (Div. 3) F-Bomb">
+                      <a href="/2024/07/27/%E3%80%90%E9%A2%98%E8%A7%A3%E3%80%91Codeforces-Round-962-(Div.-3)-F-Bomb/" title="[题解] Codeforces Round 962 (Div. 3) F-Bomb">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">【题解】Codeforces Round 962 (Div. 3) F-Bomb</span>
+                        <span class="hidden-mobile">[题解] Codeforces Round 962 (Div. 3) F-Bomb</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -459,8 +459,8 @@ vector&lt;<span class="hljs-type">int</span>&gt;<span class="hljs-built_in">ans<
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/07/24/%E3%80%90%E4%B8%BB%E5%B8%AD%E6%A0%91%E3%80%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="【主席树】学习笔记">
-                        <span class="hidden-mobile">【主席树】学习笔记</span>
+                      <a href="/2024/07/24/%E3%80%90%E4%B8%BB%E5%B8%AD%E6%A0%91%E3%80%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="[主席树]学习笔记">
+                        <span class="hidden-mobile">[主席树]学习笔记</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

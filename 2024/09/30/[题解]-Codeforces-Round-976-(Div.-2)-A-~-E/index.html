@@ -16,12 +16,12 @@
   <meta name="author" content="TauLee">
   <meta name="keywords" content="">
   
-    <meta name="description" content="A. Find Minimum Operations 签到. void solve() &#123;     int n, k;     cin &gt;&gt; n &gt;&gt; k;     if (k &#x3D;&#x3D; 1) &#123;         cout &lt;&lt; n &lt;&lt; endl;         return;     &#125;     int ans &#x3D; 0">
+    <meta name="description" content="A. Find Minimum Operations签到. void solve() &#123;     int n, k;     cin &gt;&gt; n &gt;&gt; k;     if (k &#x3D;&#x3D; 1) &#123;         cout &lt;&lt; n &lt;&lt; endl;         return;     &#125;     int ans &#x3D; 0;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[题解] Codeforces Round 976 (Div. 2) A ~ E">
+<meta property="og:title" content="[题解] Codeforces Round 976 (Div. 2) A~E">
 <meta property="og:url" content="https://taulee.github.io/2024/09/30/[%E9%A2%98%E8%A7%A3]-Codeforces-Round-976-(Div.-2)-A-~-E/index.html">
 <meta property="og:site_name" content="TauLee&#39;s Blog">
-<meta property="og:description" content="A. Find Minimum Operations 签到. void solve() &#123;     int n, k;     cin &gt;&gt; n &gt;&gt; k;     if (k &#x3D;&#x3D; 1) &#123;         cout &lt;&lt; n &lt;&lt; endl;         return;     &#125;     int ans &#x3D; 0">
+<meta property="og:description" content="A. Find Minimum Operations签到. void solve() &#123;     int n, k;     cin &gt;&gt; n &gt;&gt; k;     if (k &#x3D;&#x3D; 1) &#123;         cout &lt;&lt; n &lt;&lt; endl;         return;     &#125;     int ans &#x3D; 0;">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://taulee.github.io/img/posts/2024-09-30-142646680/codeforces-976-bit-operation-example.jpeg">
 <meta property="article:published_time" content="2024-09-29T18:30:00.000Z">
@@ -32,7 +32,7 @@
   
   
   
-  <title>[题解] Codeforces Round 976 (Div. 2) A ~ E - TauLee&#39;s Blog</title>
+  <title>[题解] Codeforces Round 976 (Div. 2) A~E - TauLee&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
 
@@ -186,7 +186,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="[题解] Codeforces Round 976 (Div. 2) A ~ E"></span>
+            <span id="subtitle" data-typed-text="[题解] Codeforces Round 976 (Div. 2) A~E"></span>
           
         </div>
 
@@ -270,13 +270,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">[题解] Codeforces Round 976 (Div. 2) A ~ E</h1>
+            <h1 id="seo-header">[题解] Codeforces Round 976 (Div. 2) A~E</h1>
             
             
               <div class="markdown-body">
                 
-                <p><strong>A. Find Minimum Operations</strong></p>
-<p>签到.</p>
+                <h2 id="A-Find-Minimum-Operations"><a href="#A-Find-Minimum-Operations" class="headerlink" title="A. Find Minimum Operations"></a>A. Find Minimum Operations</h2><p>签到.</p>
 <div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">solve</span><span class="hljs-params">()</span> </span>&#123;
     <span class="hljs-type">int</span> n, k;
     cin &gt;&gt; n &gt;&gt; k;
@@ -292,9 +291,8 @@
     cout &lt;&lt; ans &lt;&lt; endl;
 &#125;</code></pre></div>
 
-<p><strong>B. Brightness Begins</strong></p>
-<p>打表发现, 翻转完后的序列为: 011011110111111011111111. 每组 $3,5,7,9...$ 个数.</p>
-<p>直接用等差数列公式求出前缀中 $1$ 的个数, 二分check答案</p>
+<h2 id="B-Brightness-Begins"><a href="#B-Brightness-Begins" class="headerlink" title="B. Brightness Begins"></a>B. Brightness Begins</h2><p>打表发现, 翻转完后的序列为: 011011110111111011111111. 每组 $3,5,7,9...$ 个数.</p>
+<p>直接用等差数列公式求出前缀中 $1$ 的个数, 用二分查找答案</p>
 <p>(赛时代码, 也不知道炸不炸 ll, 反正无脑套 __int128)</p>
 <div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> int long long</span>
 <span class="hljs-meta">#<span class="hljs-keyword">define</span> i128 __int128</span>
@@ -319,10 +317,9 @@
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">ff</span>(l) + k - <span class="hljs-built_in">f</span>(l) + <span class="hljs-number">1</span>;
 &#125;</code></pre></div>
 
-<p><strong>C. Bitwise Balancing</strong></p>
-<p>先列出 a, b, c, d 每 bit 位的运算结果:</p>
-<p>eg; fk, 赛时这个表画错了, 半天才发现 <img src="/img/posts/2024-09-30-142646680/codeforces-976-bit-operation-example.jpeg" srcset="/img/loading.gif" lazyload alt="Codeforces 976 位运算样例"></p>
-<p>发现, 运算结果不会有负数. 于是每位就自能顾得上自己, 只需要按位检查, 一旦有一位满足不了, 就输出 -1.</p>
+<h2 id="C-Bitwise-Balancing"><a href="#C-Bitwise-Balancing" class="headerlink" title="C. Bitwise Balancing"></a>C. Bitwise Balancing</h2><p>先列出 a, b, c, d 每 bit 位的运算结果:</p>
+<p>例: fk, 赛时这个表画错了, 半天才发现 <img src="/img/posts/2024-09-30-142646680/codeforces-976-bit-operation-example.jpeg" srcset="/img/loading.gif" lazyload alt="Codeforces 976 位运算样例"></p>
+<p>发现, 运算结果不会有负数. 于是每位就只需考虑自身, 只需要按位检查, 一旦有一位满足不了, 就输出 -1.</p>
 <div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> int long long</span>
 
 <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">aa</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> i)</span> </span>&#123;<span class="hljs-keyword">return</span> (x &gt;&gt; i) &amp; <span class="hljs-number">1</span>;&#125;
@@ -362,8 +359,7 @@
     <span class="hljs-keyword">return</span> a;
 &#125;</code></pre></div>
 
-<p><strong>D. Connect the Dots</strong></p>
-<p>首先考虑用并查集维护两个点的连通块所属关系. 但是操作太多, 会 tle.</p>
+<h2 id="D-Connect-the-Dots"><a href="#D-Connect-the-Dots" class="headerlink" title="D. Connect the Dots"></a>D. Connect the Dots</h2><p>首先考虑用并查集维护两个点的连通块所属关系. 但是操作太多, 会 TLE.</p>
 <p>d 最大为 10, 于是对于 a[i], 考虑继承前 10 个节点往后跳跃的情况, 更新到 a[i] 上, 同时继承过来的跳跃次数减一. 这样每个点只用往前跳跃最多 10 次.</p>
 <div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-type">int</span> n, m, a, d, k, fa[<span class="hljs-number">200010</span>], ma[<span class="hljs-number">200010</span>][<span class="hljs-number">15</span>];
 <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>&#123;
@@ -402,12 +398,11 @@
     <span class="hljs-keyword">return</span> se.<span class="hljs-built_in">size</span>();
 &#125;</code></pre></div>
 
-<p><strong>E. Expected Power</strong></p>
-<p>状压DP.</p>
+<h2 id="E-Expected-Power"><a href="#E-Expected-Power" class="headerlink" title="E. Expected Power"></a>E. Expected Power</h2><p>状压 DP.</p>
 <p>a 最大为 1023. 故所有数的异或结果最多 0~1023, 共 1024 种状态.</p>
-<p><code> dp[i][j]</code> 表示前 i 位选取某些异或到一起答案是 j 的概率. 就很好转移了. 见代码. 记得滚动数组优化一下空间.</p>
-<p>eg: jiangly 的取模机真好用 ! !</p>
-<p>eg: 赛后过题真痛苦, 就差几分钟…</p>
+<p><code>dp[i][j]</code> 表示前 i 位选取某些异或到一起答案是 j 的概率. 就很好转移了. 见代码. 记得滚动数组优化一下空间.</p>
+<p>eg: jiangly 的取模机真好用!</p>
+<p>eg: 赛后过题真痛苦, 就差几分钟...</p>
 <div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-comment">//------取模机------//</span>
 <span class="hljs-keyword">using</span> i64 = <span class="hljs-type">long</span> <span class="hljs-type">long</span>;
 <span class="hljs-function"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">class</span> T&gt;</span>
@@ -599,7 +594,7 @@ Z dp[<span class="hljs-number">2</span>][<span class="hljs-number">1024</span>],
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>[题解] Codeforces Round 976 (Div. 2) A ~ E</div>
+      <div>[题解] Codeforces Round 976 (Div. 2) A~E</div>
       <div>https://taulee.github.io/2024/09/30/[题解]-Codeforces-Round-976-(Div.-2)-A-~-E/</div>
     </div>
     <div class="license-meta">
@@ -644,9 +639,9 @@ Z dp[<span class="hljs-number">2</span>][<span class="hljs-number">1024</span>],
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/04/13/%5B%E9%A2%98%E8%A7%A3%5D-Educational-Codeforces-Round-168/" title="[题解] Educational Codeforces Round 168 (Rated for Div. 2) E - level up">
+                      <a href="/2025/04/13/%5B%E9%A2%98%E8%A7%A3%5D-Educational-Codeforces-Round-168/" title="[题解] Educational Codeforces Round 168 (Rated for Div. 2) E. Level Up">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">[题解] Educational Codeforces Round 168 (Rated for Div. 2) E - level up</span>
+                        <span class="hidden-mobile">[题解] Educational Codeforces Round 168 (Rated for Div. 2) E. Level Up</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -654,8 +649,8 @@ Z dp[<span class="hljs-number">2</span>][<span class="hljs-number">1024</span>],
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/09/29/%E3%80%90%E9%A2%98%E8%A7%A3%E3%80%91Codeforces-Round-975-(Div.-2)-A~E/" title="【题解】Codeforces Round 975 (Div. 2) A~E">
-                        <span class="hidden-mobile">【题解】Codeforces Round 975 (Div. 2) A~E</span>
+                      <a href="/2024/09/29/%E3%80%90%E9%A2%98%E8%A7%A3%E3%80%91Codeforces-Round-975-(Div.-2)-A~E/" title="[题解] Codeforces Round 975 (Div. 2) A~E">
+                        <span class="hidden-mobile">[题解] Codeforces Round 975 (Div. 2) A~E</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -16,12 +16,12 @@
   <meta name="author" content="TauLee">
   <meta name="keywords" content="">
   
-    <meta name="description" content="原题链接 ! ! ! 组合数的推导部分不讲, 想看这部分的可以转战了. 主要记录一下这题的前缀和部分, 和之前见过的不太一样. 题意平面直角坐标系上有 n 个矩形，其中第 i 个的左上角坐标为 ( $x_{i1},y_{i1}$ )，右下角坐标为 ( $x_{i2},y_{i2}$ )。 对于 $k∈[1,n]$ ，求解在 $n$ 个矩形中随机选取 $k$ 个不同的矩形，其所有覆盖部分的并集的面积">
+    <meta name="description" content="原题链接 注意: 组合数的推导部分不讲, 想看这部分的可以转战了. 主要记录一下这题的前缀和部分, 和之前见过的不太一样. 题意平面直角坐标系上有 n 个矩形, 其中第 i 个的左上角坐标为 ($x_{i1},y_{i1}$), 右下角坐标为 ($x_{i2},y_{i2}$). 对于 $k∈[1,n]$, 求解在 $n$ 个矩形中随机选取 $k$ 个不同的矩形, 其所有覆盖部分的并集的面积的期望">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2024HDU暑假多校1012(hduoj 7444) --并 题解">
+<meta property="og:title" content="2024 HDU 暑假多校: 1012 并 (HDUOJ 7444) 题解">
 <meta property="og:url" content="https://taulee.github.io/2024/07/27/2024HDU%E6%9A%91%E5%81%87%E5%A4%9A%E6%A0%A11012(hduoj-7444)---%E5%B9%B6-%E9%A2%98%E8%A7%A3/index.html">
 <meta property="og:site_name" content="TauLee&#39;s Blog">
-<meta property="og:description" content="原题链接 ! ! ! 组合数的推导部分不讲, 想看这部分的可以转战了. 主要记录一下这题的前缀和部分, 和之前见过的不太一样. 题意平面直角坐标系上有 n 个矩形，其中第 i 个的左上角坐标为 ( $x_{i1},y_{i1}$ )，右下角坐标为 ( $x_{i2},y_{i2}$ )。 对于 $k∈[1,n]$ ，求解在 $n$ 个矩形中随机选取 $k$ 个不同的矩形，其所有覆盖部分的并集的面积">
+<meta property="og:description" content="原题链接 注意: 组合数的推导部分不讲, 想看这部分的可以转战了. 主要记录一下这题的前缀和部分, 和之前见过的不太一样. 题意平面直角坐标系上有 n 个矩形, 其中第 i 个的左上角坐标为 ($x_{i1},y_{i1}$), 右下角坐标为 ($x_{i2},y_{i2}$). 对于 $k∈[1,n]$, 求解在 $n$ 个矩形中随机选取 $k$ 个不同的矩形, 其所有覆盖部分的并集的面积的期望">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://taulee.github.io/img/posts/2024-07-27-140569246/hdu-7444-combinatorial-sum.png">
 <meta property="og:image" content="https://taulee.github.io/img/posts/2024-07-27-140569246/hdu-7444-prefix-sum-grid.png">
@@ -33,7 +33,7 @@
   
   
   
-  <title>2024HDU暑假多校1012(hduoj 7444) --并 题解 - TauLee&#39;s Blog</title>
+  <title>2024 HDU 暑假多校: 1012 并 (HDUOJ 7444) 题解 - TauLee&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
 
@@ -187,7 +187,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="2024HDU暑假多校1012(hduoj 7444) --并 题解"></span>
+            <span id="subtitle" data-typed-text="2024 HDU 暑假多校: 1012 并 (HDUOJ 7444) 题解"></span>
           
         </div>
 
@@ -271,18 +271,18 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">2024HDU暑假多校1012(hduoj 7444) --并 题解</h1>
+            <h1 id="seo-header">2024 HDU 暑假多校: 1012 并 (HDUOJ 7444) 题解</h1>
             
             
               <div class="markdown-body">
                 
                 <p><a target="_blank" rel="noopener" href="https://acm.hdu.edu.cn/showproblem.php?pid=7444">原题链接</a></p>
-<p>! ! ! 组合数的推导部分不讲, 想看这部分的可以转战了. 主要记录一下这题的前缀和部分, 和之前见过的不太一样.</p>
-<h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><p>平面直角坐标系上有 n 个矩形，其中第 i 个的左上角坐标为 ( $x_{i1},y_{i1}$ )，右下角坐标为 ( $x_{i2},y_{i2}$ )。</p>
-<p>对于 $k∈[1,n]$ ，求解在 $n$ 个矩形中随机选取 $k$ 个不同的矩形，其所有覆盖部分的并集的面积的期望值，答案对 $998244353$ 取模。</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>根据题解 ( 嘿嘿 ) , 有公式( 其中 $g_i$ 表示被 $c$ 个矩形覆盖的面积和 ): <img src="/img/posts/2024-07-27-140569246/hdu-7444-combinatorial-sum.png" srcset="/img/loading.gif" lazyload alt="组合数求和公式示意图"></p>
-<p>那么我们就要用前缀和维护出来 $g_i$ , 然后套公式.</p>
-<h3 id="维护前缀和"><a href="#维护前缀和" class="headerlink" title="维护前缀和"></a>维护前缀和</h3><p>首先离散化是肯定的 ,很板的离散化, 看代码就好.</p>
+<p>注意: 组合数的推导部分不讲, 想看这部分的可以转战了. 主要记录一下这题的前缀和部分, 和之前见过的不太一样.</p>
+<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>平面直角坐标系上有 n 个矩形, 其中第 i 个的左上角坐标为 ($x_{i1},y_{i1}$), 右下角坐标为 ($x_{i2},y_{i2}$).</p>
+<p>对于 $k∈[1,n]$, 求解在 $n$ 个矩形中随机选取 $k$ 个不同的矩形, 其所有覆盖部分的并集的面积的期望值, 答案对 $998244353$ 取模.</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>根据题解 (嘿嘿), 有公式 (其中 $g_i$ 表示被 $c$ 个矩形覆盖的面积和): <img src="/img/posts/2024-07-27-140569246/hdu-7444-combinatorial-sum.png" srcset="/img/loading.gif" lazyload alt="组合数求和公式示意图"></p>
+<p>那么我们就要用前缀和维护出来 $g_i$, 然后套公式.</p>
+<h2 id="维护前缀和"><a href="#维护前缀和" class="headerlink" title="维护前缀和"></a>维护前缀和</h2><p>首先离散化是肯定的, 很板的离散化, 看代码就好.</p>
 <p>假设这题没有离散化, 我们就要维护出来每个点被多少矩形覆盖. 题目给出的是矩形的左上角和右下角坐标. 不妨:</p>
 <div class="code-wrapper"><pre><code class="hljs cpp"><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i) &#123;<span class="hljs-comment">//左上坐标为x[i],y[i];右下坐标为xx[i],yy[i]</span>
     f[x[i]][y[i]] += <span class="hljs-number">1</span>;
@@ -305,8 +305,8 @@
 &#125;</code></pre></div>
 
 <p>可以看到每个点都会向以它为顶点的右下方矩形提供贡献, 两个 -1 的贡献在 2 号区域重叠. 故要给 2 号区域加上 1. <img src="/img/posts/2024-07-27-140569246/hdu-7444-prefix-sum-grid.png" srcset="/img/loading.gif" lazyload alt="二维前缀和矩阵示意图"></p>
-<p>求和完成后 <code>f[i][j]</code> 就代表了 <code>[i][j]</code> 这点被多少矩形覆盖了.</p>
-<p>那换回离散前, 他是上什么?</p>
+<p>求和完成后 <code>f[i][j]</code> 就代表了 <code>[i][j]</code> 这个点被多少矩形覆盖了.</p>
+<p>那换回离散前, 它是什么?</p>
 <p>在离散数组 <code>xSort[],ySort[]</code> 里, <code>[i][j]</code> 和它前一个值之间是没有矩形的顶点落进去的, 也就是说在以 <code>(i,j)</code> 为右下角, 以 <code>(i,j)</code> 在离散数组中前一个点为左上角的矩形中, 所有点被覆盖的矩形个数都是一样的, 那 <code>f[i][j]</code> 乘上这个矩形的面积, 就是这些点的贡献.</p>
 <div class="code-wrapper"><pre><code class="hljs cpp">num[f[i][j]] += <span class="hljs-built_in">Z</span>(xSort[i] - xSort[i - <span class="hljs-number">1</span>]) * (ySort[j] - ySort[j - <span class="hljs-number">1</span>]);</code></pre></div>
 
@@ -600,7 +600,7 @@ i64 MInt&lt;<span class="hljs-number">0</span>&gt;::Mod = <span class="hljs-numb
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>2024HDU暑假多校1012(hduoj 7444) --并 题解</div>
+      <div>2024 HDU 暑假多校: 1012 并 (HDUOJ 7444) 题解</div>
       <div>https://taulee.github.io/2024/07/27/2024HDU暑假多校1012(hduoj-7444)---并-题解/</div>
     </div>
     <div class="license-meta">
@@ -645,9 +645,9 @@ i64 MInt&lt;<span class="hljs-number">0</span>&gt;::Mod = <span class="hljs-numb
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/08/02/Tarjan(-%E7%B3%BB%E5%88%974)%E6%B1%82%E7%82%B9%E5%8F%8C-%E8%BE%B9%E5%8F%8C%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F/" title="Tarjan( 系列4)求点双 / 边双连通分量">
+                      <a href="/2024/08/02/Tarjan(-%E7%B3%BB%E5%88%974)%E6%B1%82%E7%82%B9%E5%8F%8C-%E8%BE%B9%E5%8F%8C%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F/" title="Tarjan(系列 4) 求点双, 边双连通分量">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Tarjan( 系列4)求点双 / 边双连通分量</span>
+                        <span class="hidden-mobile">Tarjan(系列 4) 求点双, 边双连通分量</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -655,8 +655,8 @@ i64 MInt&lt;<span class="hljs-number">0</span>&gt;::Mod = <span class="hljs-numb
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/07/27/%E3%80%90%E9%A2%98%E8%A7%A3%E3%80%91Codeforces-Round-962-(Div.-3)-F-Bomb/" title="【题解】Codeforces Round 962 (Div. 3) F-Bomb">
-                        <span class="hidden-mobile">【题解】Codeforces Round 962 (Div. 3) F-Bomb</span>
+                      <a href="/2024/07/27/%E3%80%90%E9%A2%98%E8%A7%A3%E3%80%91Codeforces-Round-962-(Div.-3)-F-Bomb/" title="[题解] Codeforces Round 962 (Div. 3) F-Bomb">
+                        <span class="hidden-mobile">[题解] Codeforces Round 962 (Div. 3) F-Bomb</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
