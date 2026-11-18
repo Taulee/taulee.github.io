@@ -18,7 +18,7 @@
   
     <meta name="description" content="我在 Mac 上用终端, VS Code 和 Codex 等连同一台 GPU 服务器. 跳板机只接受密码, 目标机用 SSH 密钥. 本来用的 SSH 复用加反向代理很舒服, Codex 突然来个强制不使用复用 SSH. 并且学校内网的 VPN 很脑瘫, 很难受. 于是倒腾下面这些东西. 跳板机用 sshpass 配置自动输入密码~&#x2F;.ssh&#x2F;config 如下. ProxyCommand 写在一">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SSH 配置: 跳板机自动输入密码, 反向代理复用">
+<meta property="og:title" content="SSH 配置: 内外网自动切换跳板, 密码填充与反向代理复用">
 <meta property="og:url" content="https://taulee.github.io/2026/11/10/ssh-config/index.html">
 <meta property="og:site_name" content="TauLee&#39;s Blog">
 <meta property="og:description" content="我在 Mac 上用终端, VS Code 和 Codex 等连同一台 GPU 服务器. 跳板机只接受密码, 目标机用 SSH 密钥. 本来用的 SSH 复用加反向代理很舒服, Codex 突然来个强制不使用复用 SSH. 并且学校内网的 VPN 很脑瘫, 很难受. 于是倒腾下面这些东西. 跳板机用 sshpass 配置自动输入密码~&#x2F;.ssh&#x2F;config 如下. ProxyCommand 写在一">
@@ -30,7 +30,7 @@
   
   
   
-  <title>SSH 配置: 跳板机自动输入密码, 反向代理复用 - TauLee&#39;s Blog</title>
+  <title>SSH 配置: 内外网自动切换跳板, 密码填充与反向代理复用 - TauLee&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
 
@@ -184,7 +184,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="SSH 配置: 跳板机自动输入密码, 反向代理复用"></span>
+            <span id="subtitle" data-typed-text="SSH 配置: 内外网自动切换跳板, 密码填充与反向代理复用"></span>
           
         </div>
 
@@ -268,7 +268,7 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">SSH 配置: 跳板机自动输入密码, 反向代理复用</h1>
+            <h1 id="seo-header">SSH 配置: 内外网自动切换跳板, 密码填充与反向代理复用</h1>
             
             
               <div class="markdown-body">
@@ -415,7 +415,7 @@ Host pi
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>SSH 配置: 跳板机自动输入密码, 反向代理复用</div>
+      <div>SSH 配置: 内外网自动切换跳板, 密码填充与反向代理复用</div>
       <div>https://taulee.github.io/2026/11/10/ssh-config/</div>
     </div>
     <div class="license-meta">
