@@ -290,7 +290,7 @@
 <p><code>-p</code> 会把明文密码留在配置里, 也可能在进程参数中短暂暴露, 见仁见智.</p>
 <h2 id="独立的反向代理-SSH-连接"><a href="#独立的反向代理-SSH-连接" class="headerlink" title="独立的反向代理 SSH 连接"></a>独立的反向代理 SSH 连接</h2><p>Codex 在 SSH 连接时会禁用 <code>ControlMaster</code>. 把 <code>RemoteForward</code> 写进 <code>Host gpu</code>, 终端和 Codex 就会分别申请同一个远端监听端口, 后来的连接会遇到端口冲突.</p>
 <p>我把转发放到单独的 SSH 连接里. 每次登录成功后, <code>LocalCommand</code> 把当前 SSH 的 PID 登记到后台. 后台按主机别名管理隧道, 用 macOS 的 <code>kqueue</code> 监听进程退出. 第一条连接触发隧道, 最后一条登记过的连接退出后释放端口.</p>
-<p>把 <a href="https://taulee.github.io/downloads/ssh-reverse-proxy.py">完整脚本</a> 保存到 <code>~/.ssh/ssh-reverse-proxy.py</code>, 再把这两行加进 <code>Host gpu</code>.</p>
+<p>把 <a href="/downloads/ssh-reverse-proxy.py">完整脚本</a> 保存到 <code>~/.ssh/ssh-reverse-proxy.py</code>, 再把这两行加进 <code>Host gpu</code>.</p>
 <div class="code-wrapper"><pre><code class="hljs sshconfig">PermitLocalCommand yes
 LocalCommand exec /usr/bin/python3 &quot;$HOME/.ssh/ssh-reverse-proxy.py&quot; &quot;%n&quot; &quot;127.0.0.1:7898:127.0.0.1:7897&quot;</code></pre></div>
 
